@@ -57,8 +57,15 @@ export default function Contact() {
     try {
       setIsSubmitting(true);
 
-      const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-      const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+      const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN?.replace(/["']/g, '');
+      const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID?.replace(/["']/g, '');
+
+      console.log('Debug - Environment variables:', {
+        TELEGRAM_BOT_TOKEN: TELEGRAM_BOT_TOKEN ? `${TELEGRAM_BOT_TOKEN.slice(0, 5)}...` : 'Missing',
+        TELEGRAM_CHAT_ID: TELEGRAM_CHAT_ID ? `${TELEGRAM_CHAT_ID}` : 'Missing',
+        rawToken: import.meta.env.VITE_TELEGRAM_BOT_TOKEN,
+        rawChatId: import.meta.env.VITE_TELEGRAM_CHAT_ID
+      });
 
       if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
         throw new Error('Telegram configuration is missing. Please check your environment variables.');
@@ -82,31 +89,53 @@ export default function Contact() {
         `🔑 *Unique Code:* \`${escapeMarkdown(code)}\``
       ].join('\n');
 
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'MarkdownV2'
-        })
+      const apiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+      
+      console.log('Debug - Request details:', {
+        url: apiUrl.replace(TELEGRAM_BOT_TOKEN, '***'),
+        chatId: TELEGRAM_CHAT_ID,
+        messagePreview: message.slice(0, 100) + '...'
       });
 
-      const responseData = await response.json();
+      // Usando AbortController para timeout
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
 
-      if (!response.ok) {
-        throw new Error(responseData.description || 'Failed to send message to Telegram');
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'MarkdownV2'
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        const responseData = await response.json();
+        console.log('Debug - Full Telegram API response:', responseData);
+
+        if (!response.ok || !responseData.ok) {
+          throw new Error(responseData.description || `HTTP error! status: ${response.status}`);
+        }
+
+        setUniqueCode(code);
+        toast.success('Form submitted successfully!');
+        setFormData(initialFormData);
+
+      } catch (error: unknown) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          throw new Error('Request timed out. Please try again.');
+        }
+        throw error;
+      } finally {
+        clearTimeout(timeout);
       }
-
-      if (!responseData.ok) {
-        throw new Error('Message was not delivered to Telegram');
-      }
-
-      setUniqueCode(code);
-      toast.success('Form submitted successfully!');
-      setFormData(initialFormData);
 
     } catch (error) {
       console.error('Form submission error:', error);
@@ -342,8 +371,8 @@ export default function Contact() {
               </DashboardCard>
 
               <Button 
-                type="submit"
                 variant="primary"
+                type="submit"
                 className="w-full text-lg font-mono inline-flex items-center justify-center gap-2"
                 disabled={isSubmitting}
               >
