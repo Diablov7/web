@@ -1,0 +1,10 @@
+{
+  "name": "w3-website-wrapper",
+  "version": "1.0.0",
+  "description": "Wrapper para facilitar a execução do projeto W3 Website",
+  "scripts": {
+    "dev": "cd project && npm run dev -- --port 5174",
+    "build": "cd project && npm run build",
+    "preview": "cd project && npm run preview"
+  }
+} 

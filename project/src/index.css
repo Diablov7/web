@@ -1,0 +1,81 @@
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/orbitron/400.css';
+@import '@fontsource/orbitron/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-space-dark text-white overflow-x-hidden font-mono;
+    background: linear-gradient(165deg, #030305, #08080F);
+  }
+
+  input, textarea, button {
+    @apply font-mono;
+  }
+}
+
+@layer components {
+  .cosmic-gradient {
+    background: linear-gradient(165deg, 
+      rgba(3, 3, 5, 0.98), 
+      rgba(8, 8, 15, 0.98)
+    );
+  }
+
+  .cosmic-card {
+    @apply relative rounded-2xl backdrop-blur-xl;
+    background: linear-gradient(165deg, 
+      rgba(8, 8, 12, 0.98), 
+      rgba(12, 12, 20, 0.99)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.3),
+      0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .cosmic-button {
+    @apply relative px-6 py-3 rounded-lg font-bold transition-all duration-300;
+    background: linear-gradient(145deg, 
+      rgba(0, 255, 225, 0.1), 
+      rgba(112, 0, 255, 0.05)
+    );
+    border: 1px solid rgba(0, 255, 225, 0.15);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.3),
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      0 0 12px rgba(0, 255, 225, 0.05);
+  }
+
+  .cosmic-button:hover {
+    background: linear-gradient(145deg, 
+      rgba(0, 255, 225, 0.15), 
+      rgba(112, 0, 255, 0.1)
+    );
+    border-color: rgba(0, 255, 225, 0.2);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.3),
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(0, 255, 225, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .cosmic-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, 
+      #00FFE1, 
+      #7000FF
+    );
+  }
+
+  .cosmic-border {
+    border: 1px solid rgba(0, 255, 225, 0.15);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.3),
+      0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
