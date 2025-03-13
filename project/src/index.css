@@ -7,6 +7,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 3s ease infinite;
+  background-size: 200% auto;
+}
+
+:root {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
 @layer base {
   body {
     @apply bg-space-dark text-white overflow-x-hidden font-mono;
@@ -32,7 +54,7 @@
       rgba(8, 8, 12, 0.98), 
       rgba(12, 12, 20, 0.99)
     );
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 225, 0.05);
     box-shadow: 
       0 4px 6px rgba(0, 0, 0, 0.3),
       0 8px 24px rgba(0, 0, 0, 0.5);
@@ -42,7 +64,7 @@
     @apply relative px-6 py-3 rounded-lg font-bold transition-all duration-300;
     background: linear-gradient(145deg, 
       rgba(0, 255, 225, 0.1), 
-      rgba(112, 0, 255, 0.05)
+      rgba(0, 255, 225, 0.05)
     );
     border: 1px solid rgba(0, 255, 225, 0.15);
     box-shadow: 
@@ -54,7 +76,7 @@
   .cosmic-button:hover {
     background: linear-gradient(145deg, 
       rgba(0, 255, 225, 0.15), 
-      rgba(112, 0, 255, 0.1)
+      rgba(0, 255, 225, 0.1)
     );
     border-color: rgba(0, 255, 225, 0.2);
     box-shadow: 
@@ -67,8 +89,8 @@
   .cosmic-text {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, 
-      #00FFE1, 
-      #7000FF
+      #00FFE1,
+      rgba(0, 255, 225, 0.8)
     );
   }
 

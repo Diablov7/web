@@ -2,10 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
-import RetroGrid from './components/RetroGrid';
-import PixelBackground from './components/PixelArt';
-import FloatingCubes from './components/FloatingCubes';
-import CircuitLines from './components/CircuitLines';
+import BackgroundCubes from './components/BackgroundCubes';
 import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
@@ -26,10 +23,7 @@ function App() {
         <LoadingScreen isLoading={isLoading} />
         
         {/* Background Elements */}
-        <RetroGrid />
-        <PixelBackground />
-        <FloatingCubes />
-        <CircuitLines />
+        <BackgroundCubes />
         
         {/* Content */}
         <div className="relative z-10">

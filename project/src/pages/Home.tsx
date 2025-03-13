@@ -12,7 +12,6 @@ import Button from '../components/Button';
 import DashboardCard from '../components/DashboardCard';
 import GlitchText from '../components/GlitchText';
 import { ShimmerButton } from '../components/ui/shimmer-button';
-import { BrandGradientAnimation } from '../components/ui/brand-gradient-animation';
 
 const achievements = [
   {
@@ -53,28 +52,28 @@ const workflowSteps = [
     icon: Crosshair,
     title: "Deep Dive & Disruption",
     description: "We don't just analyze your project—we break it down to its core, identifying hidden opportunities and untapped angles. Our team deciphers trends, audience behaviors, and market gaps to craft an unbeatable strategy.",
-    image: "https://images.unsplash.com/photo-1614064642639-e398cf05badb?auto=format&fit=crop&w=800&q=80",
+    image: "/images/1.png",
     color: "#00FFE1"
   },
   {
     icon: Cpu,
     title: "Tactical Growth Engineering",
     description: "We architect high-impact, data-driven growth tactics designed for virality, adoption, and market domination. From guerrilla marketing to on-chain trend hacking, we align our approach with your project's strengths for exponential traction.",
-    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80",
+    image: "/images/2.png",
     color: "#7000FF"
   },
   {
     icon: Radar,
     title: "Execution & Market Infiltration",
     description: "We deploy disruptive campaigns with surgical precision. Leveraging AI-powered analytics, strategic influencer activations, and algorithmic dominance, we drive rapid adoption, build hype, and maximize engagement.",
-    image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80",
+    image: "/images/3.png",
     color: "#00FFE1"
   },
   {
     icon: Infinity,
     title: "Adaptive Dominance",
     description: "Continuous iteration is key. We track on-chain data, social sentiment, and campaign analytics in real-time, constantly refining our strategy to ensure sustained market relevance, engagement growth, and viral traction.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+    image: "/images/4.png",
     color: "#7000FF"
   }
 ];
@@ -82,7 +81,6 @@ const workflowSteps = [
 export default function Home() {
   return (
     <>
-      <BrandGradientAnimation />
       <div className="min-h-screen pt-20 sm:pt-32 px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -160,7 +158,7 @@ export default function Home() {
               <div className="mb-8">
                 <p className="text-lg sm:text-xl text-white/80 font-mono leading-relaxed mb-8">
                   Wevolv3: The Premier Web3 Marketing Agency Powering Explosive Growth Since 2020.
-                  We're a dynamic team of blockchain strategists, guerrilla marketers, visionary designers, KOL experts, and growth engineers, delivering high-impact, data-driven strategies that propel Web3 startups to the forefront. Our algorithm-powered campaigns are engineered to dominate markets, amplify adoption, and position your brand as the next big thing in the decentralized revolution.
+                  We're a dynamic team of blockchain strategists, guerrilla marketers, visionary designers, KOL experts, and growth engineers, delivering high-impact, data-driven strategies that propel Web3 startups to the forefront.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
@@ -242,10 +240,10 @@ export default function Home() {
                       <img 
                         src={step.image} 
                         alt={step.title}
-                        className="w-full h-48 object-cover rounded-lg mb-4"
+                        className="w-full aspect-video object-contain rounded-lg mb-4 bg-space-dark"
                       />
                       <div 
-                        className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-lg"
+                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg"
                       />
                     </div>
                     

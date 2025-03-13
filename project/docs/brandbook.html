@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wevolv3 Brand Guidelines</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@500;700&display=swap');
+
+        :root {
+            --primary: #00FFFF;
+            --secondary: #0066FF;
+            --teal: #008080;
+            --dark: #0A0A0A;
+            --darker: #050505;
+            --text: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --gradient: linear-gradient(135deg, var(--primary), var(--teal));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--dark);
+        }
+
+        *::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--darker);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--dark);
+            padding: 2rem;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            padding-left: calc(260px + 2rem);
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .frame {
+            display: none;  /* Hide all frames by default */
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .frame.active {
+            display: block;  /* Show only active frame */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text);
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-item:hover {
+            background: rgba(0,128,128,0.2);
+            border-color: var(--teal);
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: var(--teal);
+            color: var(--text);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0,255,255,0.2);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding-left: 1rem;
+        }
+
+        .dropdown.open .dropdown-content {
+            display: block;
+        }
+
+        .sub-item {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.3rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text);
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .sub-item:hover {
+            background: rgba(0,128,128,0.2);
+            border-color: var(--teal);
+            color: var(--primary);
+        }
+
+        .sub-item.active {
+            background: rgba(0,128,128,0.3);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 10px rgba(0,255,255,0.1);
+        }
+
+        .rule-card {
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .rule-card.active {
+            background: rgba(255,255,255,0.05);
+            border-left-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0,255,255,0.1);
+        }
+
+        .rule-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .rule-list {
+            list-style: none;
+        }
+
+        .rule-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .rule-list li::before {
+            content: "→";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--text);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .color-box {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+            font-size: 0.8rem;
+            background: var(--gradient);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .typography-sample {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        .component {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        .button {
+            padding: 12px 24px;
+            border-radius: 4px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,102,255,0.2);
+        }
+
+        .code {
+            background: var(--darker);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .grid-item {
+            background: var(--gradient);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Wevolv3</h1>
+                <p>Brand Guidelines</p>
+            </div>
+            <div class="nav-item dropdown active" data-target="team">
+                Team Guidelines
+                <div class="dropdown-content">
+                    <div class="sub-item" data-target="workflow">Workflow</div>
+                    <div class="sub-item" data-target="ethics">Ethics & Values</div>
+                    <div class="sub-item" data-target="hierarchy">Hierarchy</div>
+                    <div class="sub-item" data-target="communication">Communication</div>
+                    <div class="sub-item" data-target="conduct">Conduct</div>
+                </div>
+            </div>
+            <div class="nav-item" data-target="brand-essence">Brand Essence</div>
+            <div class="nav-item" data-target="colors">Color System</div>
+            <div class="nav-item" data-target="typography">Typography</div>
+            <div class="nav-item" data-target="components">Components</div>
+            <div class="nav-item" data-target="grid">Grid System</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Frame: Team Guidelines -->
+            <div class="frame active" id="team">
+                <h2>Team Guidelines</h2>
+                
+                <div id="workflow" class="rule-card">
+                    <h4>Workflow & Reports</h4>
+                    <ul class="rule-list">
+                        <li>Strictly follow the agency's established workflow</li>
+                        <li>Daily record of all activities in the dashboard</li>
+                        <li>Complete action reports with specific task details</li>
+                        <li>Real-time project status updates</li>
+                        <li>Document challenges and solutions found</li>
+                        <li>Keep timesheet updated with worked hours</li>
+                        <li>Participate in daily follow-up meetings</li>
+                        <li>Follow standardized documentation templates</li>
+                    </ul>
+                </div>
+
+                <div id="ethics" class="rule-card">
+                    <h4>Ethics & Values</h4>
+                    <ul class="rule-list">
+                        <li>Integrity and honesty in all interactions</li>
+                        <li>Respect for diversity and inclusion</li>
+                        <li>Confidentiality with sensitive data</li>
+                        <li>Commitment to technical excellence</li>
+                    </ul>
+                </div>
+
+                <div id="hierarchy" class="rule-card">
+                    <h4>Hierarchy & Leadership</h4>
+                    <ul class="rule-list">
+                        <li>Respect for established hierarchical structure</li>
+                        <li>Clear communication with superiors about challenges</li>
+                        <li>Follow defined approval workflow</li>
+                        <li>Recognize and respect leadership experience</li>
+                    </ul>
+                </div>
+
+                <div id="communication" class="rule-card">
+                    <h4>Effective Communication</h4>
+                    <ul class="rule-list">
+                        <li>Maintain professional and respectful communication</li>
+                        <li>Document important decisions and changes</li>
+                        <li>Regular progress reporting</li>
+                        <li>Use official communication channels</li>
+                    </ul>
+                </div>
+
+                <div id="conduct" class="rule-card">
+                    <h4>Code of Conduct</h4>
+                    <ul class="rule-list">
+                        <li>Punctuality in meetings and deliveries</li>
+                        <li>Maintain professional work environment</li>
+                        <li>Follow security protocols</li>
+                        <li>Uphold company reputation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Frame 1: Brand Essence -->
+            <div class="frame" id="brand-essence">
+                <h2>Brand Essence</h2>
+                <div class="value-card">
+                    <h3>Mission</h3>
+                    <p>Transform ideas into innovative digital solutions.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Vision</h3>
+                    <p>To be a reference in web development excellence.</p>
+                </div>
+            </div>
+
+            <!-- Frame 2: Colors -->
+            <div class="frame" id="colors">
+                <h2>Color Palette</h2>
+                <div class="color-grid">
+                    <div class="color-box" style="background: var(--primary)">
+                        <strong>Primary</strong>
+                        #00FFFF
+                    </div>
+                    <div class="color-box" style="background: var(--secondary)">
+                        <strong>Secondary</strong>
+                        #0066FF
+                    </div>
+                    <div class="color-box" style="background: var(--teal)">
+                        <strong>Teal</strong>
+                        #008080
+                    </div>
+                    <div class="color-box" style="background: var(--gradient)">
+                        <strong>Gradient</strong>
+                        Cyan to Teal
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frame 3: Typography -->
+            <div class="frame" id="typography">
+                <h2>Typography</h2>
+                <div class="typography-sample">
+                    <p style="font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 1rem;">
+                        Orbitron
+                        <br>
+                        <span style="color: var(--text-secondary)">Headings</span>
+                    </p>
+                    <p style="font-family: 'JetBrains Mono';">
+                        JetBrains Mono
+                        <br>
+                        <span style="color: var(--text-secondary)">Body Text</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Frame 4: Components -->
+            <div class="frame" id="components">
+                <h2>Components</h2>
+                <div class="component">
+                    <h3>Buttons</h3>
+                    <button class="button">Primary</button>
+                    <button class="button" style="background: var(--dark)">Secondary</button>
+                </div>
+                <div class="component">
+                    <h3>Cards</h3>
+                    <div class="value-card">
+                        Sample Card
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frame 5: Grid -->
+            <div class="frame" id="grid">
+                <h2>Grid System</h2>
+                <div class="grid-demo">
+                    <div class="grid-item">8px</div>
+                    <div class="grid-item">16px</div>
+                    <div class="grid-item">24px</div>
+                    <div class="grid-item">32px</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const frames = document.querySelectorAll('.frame');
+            const mainContent = document.querySelector('.main-content');
+            const subItems = document.querySelectorAll('.sub-item');
+            const ruleCards = document.querySelectorAll('.rule-card');
+
+            // Função para mostrar frame específico
+            function showFrame(targetId) {
+                frames.forEach(frame => {
+                    frame.classList.remove('active');
+                    if (frame.id === targetId) {
+                        frame.classList.add('active');
+                        window.history.pushState(null, '', `#${targetId}`);
+                    }
+                });
+            }
+
+            // Função para ativar item do menu
+            function setActiveNavItem(targetId) {
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.target === targetId) {
+                        item.classList.add('active');
+                        // Se for o Team Guidelines, mantenha o dropdown aberto
+                        if (item.classList.contains('dropdown')) {
+                            item.classList.add('open');
+                        }
+                    }
+                });
+            }
+
+            // Função para ativar sub-item
+            function setActiveSubItem(targetId) {
+                subItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.target === targetId) {
+                        item.classList.add('active');
+                    }
+                });
+
+                // Ativar rule card correspondente
+                ruleCards.forEach(card => {
+                    card.classList.remove('active');
+                    if (card.id === targetId) {
+                        card.classList.add('active');
+                    }
+                });
+            }
+
+            // Adicionar evento de clique aos itens do menu
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (!item.classList.contains('dropdown') || e.target !== item) {
+                        const targetId = item.dataset.target;
+                        setActiveNavItem(targetId);
+                        showFrame(targetId);
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+
+            // Adicionar funcionalidade dropdown
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', (e) => {
+                    if (e.target === dropdown) {
+                        dropdown.classList.toggle('open');
+                    }
+                });
+            });
+
+            // Adicionar navegação para sub-items
+            subItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.dataset.target;
+                    const section = document.getElementById(targetId);
+                    if (section) {
+                        const parentFrame = section.closest('.frame');
+                        if (parentFrame) {
+                            setActiveNavItem(parentFrame.id);
+                            showFrame(parentFrame.id);
+                            setActiveSubItem(targetId);
+                            setTimeout(() => {
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        }
+                    }
+                });
+            });
+
+            // Observar scroll para atualizar sub-items ativos
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                        const targetId = entry.target.id;
+                        setActiveSubItem(targetId);
+                    }
+                });
+            }, {
+                root: mainContent,
+                threshold: [0.5],
+                rootMargin: '0px'
+            });
+
+            ruleCards.forEach(card => observer.observe(card));
+
+            // Lidar com navegação pelo histórico
+            window.addEventListener('popstate', () => {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const targetSection = document.getElementById(hash);
+                    if (targetSection) {
+                        const parentFrame = targetSection.closest('.frame');
+                        if (parentFrame) {
+                            setActiveNavItem(parentFrame.id);
+                            showFrame(parentFrame.id);
+                            setActiveSubItem(hash);
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                } else {
+                    setActiveNavItem('team');
+                    showFrame('team');
+                }
+            });
+
+            // Mostrar frame inicial ou baseado no hash da URL
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                const targetSection = document.getElementById(initialHash);
+                if (targetSection) {
+                    const parentFrame = targetSection.closest('.frame');
+                    if (parentFrame) {
+                        setActiveNavItem(parentFrame.id);
+                        showFrame(parentFrame.id);
+                        setActiveSubItem(initialHash);
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            } else {
+                setActiveNavItem('team');
+                showFrame('team');
+            }
+        });
+    </script>
+</body>
+</html> 
