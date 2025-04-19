@@ -2,12 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import BackgroundCubes from './components/BackgroundCubes';
 import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -19,26 +21,29 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-space-dark text-white overflow-x-hidden">
+      <div className="min-h-screen bg-space-dark text-white overflow-x-hidden flex flex-col">
         <LoadingScreen isLoading={isLoading} />
         
         {/* Background Elements */}
         <BackgroundCubes />
         
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10 flex-grow flex flex-col">
           <Header />
           
-          <main>
+          <main className="flex-grow">
             <AnimatePresence mode="wait">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/solutions" element={<Solutions />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               </Routes>
             </AnimatePresence>
           </main>
+          
+          <Footer />
         </div>
       </div>
     </Router>

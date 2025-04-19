@@ -1,0 +1,36 @@
+<svg
+  width="32"
+  height="32"
+  viewBox="0 0 32 32"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- W Shape -->
+  <path 
+    d="M4 6L8 22H10L12 12L14 22H16L20 6H18L15 18L13 8H11L9 18L6 6H4Z" 
+    fill="url(#gradient-text)" 
+  />
+  
+  <!-- 3 Shape -->
+  <path 
+    d="M22 6H28C29.1 6 30 6.9 30 8V10C30 11.1 29.1 12 28 12C29.1 12 30 12.9 30 14V16C30 17.1 29.1 18 28 18H22V16H28V14H24V12H28V8H22V6Z" 
+    fill="url(#gradient-text)" 
+  />
+  
+  <!-- Accent Line -->
+  <rect x="4" y="24" width="24" height="2" fill="#00FFE1" />
+  
+  <defs>
+    <linearGradient
+      id="gradient-text"
+      x1="4"
+      y1="6"
+      x2="30"
+      y2="18"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stopColor="#00FFE1" />
+      <stop offset="1" stopColor="#7000FF" />
+    </linearGradient>
+  </defs>
+</svg> 
