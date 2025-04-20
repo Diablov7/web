@@ -8,8 +8,11 @@ import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
 import Contact from './pages/Contact';
-import Blog from './pages/Blog';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import ExternalRedirect from './components/ExternalRedirect';
+
+// Blog external URL
+const BLOG_URL = 'https://blogwevolv3.wordpress.com/';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -37,7 +40,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/solutions" element={<Solutions />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog" element={<ExternalRedirect to={BLOG_URL} />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               </Routes>
             </AnimatePresence>

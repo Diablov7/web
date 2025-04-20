@@ -1,13 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, ExternalLink } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import CustomLogo from './CustomLogo';
 
 const navItems = [
   { path: '/', label: 'Home' },
   { path: '/solutions', label: 'Solutions' },
-  { path: '/blog', label: 'Blog' },
   { path: '/contact', label: 'Contact' }
+];
+
+// External link for blog
+const externalLinks = [
+  { url: 'https://blogwevolv3.wordpress.com/', label: 'Blog', icon: ExternalLink }
 ];
 
 export default function Header() {
@@ -134,6 +138,20 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            
+            {/* External Links */}
+            {externalLinks.map((item) => (
+              <a
+                key={item.url}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1"
+              >
+                {item.label}
+                <item.icon size={12} className="ml-1 opacity-70" />
+              </a>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -163,6 +181,21 @@ export default function Header() {
               >
                 {item.label}
               </Link>
+            ))}
+            
+            {/* External Links for Mobile */}
+            {externalLinks.map((item) => (
+              <a
+                key={item.url}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all flex items-center"
+              >
+                {item.label}
+                <item.icon size={12} className="ml-1 opacity-70" />
+              </a>
             ))}
           </div>
         )}
