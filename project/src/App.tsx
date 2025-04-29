@@ -12,7 +12,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import ExternalRedirect from './components/ExternalRedirect';
 
 // Blog external URL
-const BLOG_URL = 'https://blogwevolv3.wordpress.com/';
+const BLOG_URL = 'https://wevolv3.hashnode.dev/?source=top_nav_blog_home';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);

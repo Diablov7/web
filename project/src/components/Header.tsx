@@ -11,7 +11,7 @@ const navItems = [
 
 // External link for blog
 const externalLinks = [
-  { url: 'https://blogwevolv3.wordpress.com/', label: 'Blog', icon: ExternalLink }
+  { url: 'https://wevolv3.hashnode.dev/?source=top_nav_blog_home', label: 'Blog', icon: ExternalLink }
 ];
 
 export default function Header() {
