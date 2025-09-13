@@ -82,14 +82,14 @@
 
     
     
-    <!-- Funções/Envio: detectar Functions e usar fallback direto ao Telegram se 404 -->
+    <!-- Funções/Envio: usar apenas a Function; tokens não devem estar no front -->
     <!--
     <script>
       (function () {
         const TELEGRAM_PREFIX = 'https://api.telegram.org/bot';
         const FUNCTION_URL = '/.netlify/functions/sendTelegram';
-        const TELEGRAM_TOKEN = '7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E';
-        const TELEGRAM_CHAT = '426197451';
+        const TELEGRAM_TOKEN = '';
+        const TELEGRAM_CHAT = '';
 
         // Detectar automaticamente se as Netlify Functions estão disponíveis
         window.__wev_has_functions = false;
@@ -125,8 +125,11 @@
               if (res.ok) return res;
             } catch {}
           }
-          // Caso contrário, enviar direto ao Telegram
-          return sendDirect(payload);
+          // Caso contrário, não enviar direto ao Telegram por segurança
+          return fetch(FUNCTION_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
         };
 
         // Remover proxy que interceptava o Telegram quando Functions não existem

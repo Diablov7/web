@@ -16,9 +16,12 @@ export const handler = async (event) => {
     const payload = JSON.parse(event.body || "{}");
     const { name, email, telegram, message, text, chat_id } = payload;
 
-    // Usar env vars ou fallback hardcoded para garantir funcionamento
-    const token = process.env.TELEGRAM_BOT_TOKEN || '7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E';
-    const chatId = process.env.TELEGRAM_CHAT_ID || '426197451';
+    // Usar somente env vars (sem fallback hardcoded)
+    const token = process.env.TELEGRAM_BOT_TOKEN || '';
+    const chatId = process.env.TELEGRAM_CHAT_ID || '';
+
+    // Bypass em desenvolvimento: não chamar Telegram com token fake
+    const isDevBypass = !token || token === 'test' || process.env.NODE_ENV === 'development';
 
     // Suporta dois formatos:
     // 1) { text, chat_id? } (proxy direto do front/bundle)
@@ -34,6 +37,14 @@ export const handler = async (event) => {
           "",
           `Message: ${message || ""}`,
         ].join("\n");
+
+    if (isDevBypass) {
+      return { statusCode: 200, headers: corsHeaders, body: JSON.stringify({ ok: true, devBypass: true }) };
+    }
+
+    if (!token || !chatId) {
+      return { statusCode: 500, headers: corsHeaders, body: JSON.stringify({ error: 'Missing Telegram credentials' }) };
+    }
 
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
