@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Marketing Arsenal Images</title>
+    <style>
+        body {
+            font-family: 'Orbitron', monospace;
+            background: #0a0a0a;
+            color: #10b981;
+            padding: 20px;
+            margin: 0;
+        }
+        .debug-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .image-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .image-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+        }
+        .image-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .log {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+        .warning { color: #f59e0b; }
+        .info { color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔍 Debug - Marketing Arsenal Images</h1>
+        
+        <div class="section">
+            <h2>📁 Verificação de Pasta</h2>
+            <div id="folderCheck">Verificando...</div>
+        </div>
+
+        <div class="section">
+            <h2>🖼️ Teste de Imagens Individuais</h2>
+            <div class="image-test" id="imageTest">
+                <!-- Imagens serão inseridas aqui -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Simulação do Marketing Arsenal</h2>
+            <p>Testando como as imagens apareceriam na seção "Build your marketing arsenal":</p>
+            <div id="arsenalSimulation" style="
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 12px;
+                margin: 20px 0;
+            ">
+                <!-- Arsenal simulation -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Log de Debug</h2>
+            <div class="log" id="debugLog"></div>
+        </div>
+    </div>
+
+    <script>
+        const debugLog = document.getElementById('debugLog');
+        const folderCheck = document.getElementById('folderCheck');
+        const imageTest = document.getElementById('imageTest');
+        const arsenalSimulation = document.getElementById('arsenalSimulation');
+
+        // Função para adicionar log
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}\n`;
+            debugLog.innerHTML += `<span class="${type}">${logEntry}</span>`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Lista das imagens
+        const images = [
+            { name: 'ADsPaidTraffic.png', label: 'Ads & Paid Traffic' },
+            { name: 'Communitybuilding.png', label: 'Community Building' },
+            { name: 'design.png', label: 'Design' },
+            { name: 'growthhacking.png', label: 'Growth Hacking' },
+            { name: 'guerrillamarketing.png', label: 'Guerrilla Marketing' },
+            { name: 'influencemarketing.png', label: 'Influence Marketing' },
+            { name: 'listings.png', label: 'Listings' },
+            { name: 'PRandcrossmarketing.png', label: 'PR & Cross Marketing' }
+        ];
+
+        addLog('🚀 Iniciando debug do Marketing Arsenal...', 'info');
+
+        // 1. Verificar se a pasta existe
+        addLog('📁 Verificando pasta image-ring...', 'info');
+        fetch('/image-ring/')
+            .then(response => {
+                if (response.ok) {
+                    addLog('✅ Pasta image-ring acessível', 'success');
+                    folderCheck.innerHTML = '<span class="success">✅ Pasta image-ring encontrada e acessível</span>';
+                } else {
+                    addLog(`❌ Erro ao acessar pasta: ${response.status}`, 'error');
+                    folderCheck.innerHTML = `<span class="error">❌ Erro ${response.status} ao acessar pasta</span>`;
+                }
+            })
+            .catch(error => {
+                addLog(`❌ Erro de rede ao acessar pasta: ${error.message}`, 'error');
+                folderCheck.innerHTML = `<span class="error">❌ Erro de rede: ${error.message}</span>`;
+            });
+
+        // 2. Testar cada imagem individualmente
+        addLog('🖼️ Testando carregamento individual das imagens...', 'info');
+        
+        images.forEach((imageInfo, index) => {
+            const imagePath = `/image-ring/${imageInfo.name}`;
+            
+            // Criar elemento de teste
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-item';
+            
+            const img = document.createElement('img');
+            const label = document.createElement('div');
+            const status = document.createElement('div');
+            
+            label.textContent = imageInfo.label;
+            status.textContent = 'Carregando...';
+            status.style.fontSize = '10px';
+            
+            img.onload = function() {
+                addLog(`✅ ${imageInfo.name} carregada com sucesso`, 'success');
+                status.textContent = '✅ OK';
+                status.className = 'success';
+                
+                // Adicionar à simulação do arsenal
+                createArsenalItem(imageInfo, imagePath);
+            };
+            
+            img.onerror = function() {
+                addLog(`❌ Erro ao carregar ${imageInfo.name}`, 'error');
+                status.textContent = '❌ Erro';
+                status.className = 'error';
+                
+                // Tentar caminhos alternativos
+                tryAlternativePaths(imageInfo);
+            };
+            
+            img.src = imagePath;
+            img.alt = imageInfo.label;
+            
+            imageItem.appendChild(img);
+            imageItem.appendChild(label);
+            imageItem.appendChild(status);
+            imageTest.appendChild(imageItem);
+        });
+
+        // 3. Função para criar item do arsenal
+        function createArsenalItem(imageInfo, imagePath) {
+            const arsenalItem = document.createElement('div');
+            arsenalItem.style.cssText = `
+                position: relative;
+                background: rgba(0, 0, 0, 0.8);
+                border: 1px solid rgba(16, 185, 129, 0.3);
+                border-radius: 12px;
+                padding: 15px;
+                text-align: center;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            `;
+            
+            arsenalItem.onmouseenter = function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.borderColor = '#10b981';
+            };
+            
+            arsenalItem.onmouseleave = function() {
+                this.style.transform = 'scale(1)';
+                this.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+            };
+            
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = imageInfo.label;
+            img.style.cssText = `
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            `;
+            
+            const label = document.createElement('div');
+            label.textContent = imageInfo.label;
+            label.style.cssText = `
+                font-size: 12px;
+                font-weight: bold;
+                color: #10b981;
+            `;
+            
+            arsenalItem.appendChild(img);
+            arsenalItem.appendChild(label);
+            arsenalSimulation.appendChild(arsenalItem);
+        }
+
+        // 4. Tentar caminhos alternativos
+        function tryAlternativePaths(imageInfo) {
+            const alternatives = [
+                `/image ring/${imageInfo.name}`, // Pasta com espaço (caso ainda exista)
+                `./image-ring/${imageInfo.name}`, // Caminho relativo
+                `image-ring/${imageInfo.name}`, // Sem barra inicial
+            ];
+            
+            addLog(`🔍 Tentando caminhos alternativos para ${imageInfo.name}...`, 'warning');
+            
+            alternatives.forEach((altPath, index) => {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    addLog(`✅ Encontrada em caminho alternativo: ${altPath}`, 'success');
+                };
+                testImg.onerror = function() {
+                    addLog(`❌ Não encontrada em: ${altPath}`, 'error');
+                };
+                testImg.src = altPath;
+            });
+        }
+
+        // 5. Verificar se há problemas de CORS ou cache
+        addLog('🔍 Verificando possíveis problemas...', 'info');
+        
+        // Verificar cache do Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                if (registrations.length > 0) {
+                    addLog(`🔧 Service Worker ativo encontrado (${registrations.length} registrations)`, 'info');
+                    addLog('💡 Dica: Limpe o cache se as imagens não carregarem', 'warning');
+                } else {
+                    addLog('ℹ️ Nenhum Service Worker ativo', 'info');
+                }
+            });
+        }
+
+        // Verificar se estamos em localhost ou file://
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        addLog(`🌐 Protocolo: ${protocol}, Host: ${hostname || 'file system'}`, 'info');
+        
+        if (protocol === 'file:') {
+            addLog('⚠️ Executando via file://, algumas funcionalidades podem não funcionar', 'warning');
+            addLog('💡 Recomendado: usar um servidor local (http://)', 'warning');
+        }
+
+        addLog('✅ Debug iniciado. Aguarde os resultados...', 'success');
+    </script>
+</body>
+</html>

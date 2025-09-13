@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- VIEWPORT RESPONSIVO PADRÃO -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=yes" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#10b981" />
+    <meta name="msapplication-navbutton-color" content="#10b981" />
+    <meta name="apple-mobile-web-app-title" content="Wevolv3" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Wevolv3 - Digital Reality | Soluções Digitais Inovadoras</title>
+    <meta name="description" content="Soluções digitais inovadoras para seu negócio. Desenvolvimento web, aplicativos móveis e consultoria estratégica focada em resultados reais." />
+    <meta name="keywords" content="desenvolvimento web, aplicativos móveis, consultoria digital, soluções inovadoras, tecnologia, Wevolv3" />
+    <meta name="author" content="Wevolv3" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="pt-BR" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Wevolv3 - Digital Reality" />
+    <meta property="og:description" content="Soluções digitais inovadoras para seu negócio. Desenvolvimento web, aplicativos móveis e consultoria estratégica." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wevolv3.com" />
+    <meta property="og:image" content="https://wevolv3.com/og-image.jpg" />
+    <meta property="og:site_name" content="Wevolv3" />
+    <meta property="og:locale" content="pt_BR" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Wevolv3 - Digital Reality" />
+    <meta name="twitter:description" content="Soluções digitais inovadoras para seu negócio." />
+    <meta name="twitter:image" content="https://wevolv3.com/twitter-image.jpg" />
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Wevolv3",
+      "description": "Soluções digitais inovadoras para seu negócio",
+      "url": "https://wevolv3.com",
+      "logo": "https://wevolv3.com/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": ["Portuguese", "English"]
+      }
+    }
+    </script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" as="style" />
+    <link rel="preload" href="/assets/index-c7x3__kb.js" as="script" />
+    <link rel="preload" href="/assets/index-dfpjdz_-.css" as="style" />
+    
+    <!-- Module Preloads -->
+    <link rel="modulepreload" crossorigin href="/assets/vendor-dneogk0_.js">
+    <link rel="modulepreload" crossorigin href="/assets/ui-cpgtgy3w.js">
+    <link rel="modulepreload" crossorigin href="/assets/query-bjq4iwul.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-blhvet4b.js">
+    <link rel="modulepreload" crossorigin href="/assets/animations-skniuzcd.js">
+    <link rel="modulepreload" crossorigin href="/assets/HeroMainSection-j67JXlO5.js?v=1694607000">
+    <link rel="modulepreload" crossorigin href="/assets/servicesscrollsection-crcayves.js">
+    <link rel="modulepreload" crossorigin href="/assets/FloatingContactBar-Cg0zhJTx.js?v=1694607001">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" crossorigin href="/assets/index-dfpjdz_-.css">
+    
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    
+    
+    <!-- Funções/Envio: detectar Functions e usar fallback direto ao Telegram se 404 -->
+    <!--
+    <script>
+      (function () {
+        const TELEGRAM_PREFIX = 'https://api.telegram.org/bot';
+        const FUNCTION_URL = '/.netlify/functions/sendTelegram';
+        const TELEGRAM_TOKEN = '7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E';
+        const TELEGRAM_CHAT = '426197451';
+
+        // Detectar automaticamente se as Netlify Functions estão disponíveis
+        window.__wev_has_functions = false;
+        (async () => {
+          try {
+            const ping = await fetch(FUNCTION_URL, { method: 'OPTIONS' });
+            window.__wev_has_functions = ping && ping.status !== 404;
+          } catch {
+            window.__wev_has_functions = false;
+          }
+          console.log('🔎 Netlify Functions disponíveis?', window.__wev_has_functions);
+        })();
+
+        // Helper único de envio (função quando existir; direto se não existir)
+        window.sendTelegramSmart = async function sendTelegramSmart(payload) {
+          const buildText = (p) => (
+            `🚀 New message from Wevolv3!\n\nName: ${p.name || 'N/A'}\nEmail: ${p.email || 'N/A'}\nTelegram: ${p.telegram || 'N/A'}\n\nMessage:\n${p.message || ''}`
+          );
+          const sendDirect = async (p) => {
+            const text = p.text || buildText(p);
+            return fetch(`${TELEGRAM_PREFIX}${TELEGRAM_TOKEN}/sendMessage`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: p.chat_id || TELEGRAM_CHAT, text })
+            });
+          };
+          // Se Functions estiverem ativas, tentar primeiro
+          if (window.__wev_has_functions) {
+            try {
+              const res = await fetch(FUNCTION_URL, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              if (res.ok) return res;
+            } catch {}
+          }
+          // Caso contrário, enviar direto ao Telegram
+          return sendDirect(payload);
+        };
+
+        // Remover proxy que interceptava o Telegram quando Functions não existem
+        // Mantemos fetch original para evitar loops
+        const originalFetch = window.fetch.bind(window);
+        window.fetch = async function (input, init) {
+          // Se Functions não estão disponíveis, não interceptar nada
+          if (!window.__wev_has_functions) return originalFetch(input, init);
+          const url = typeof input === 'string' ? input : (input && input.url) || '';
+          if (url && url.startsWith(TELEGRAM_PREFIX) && url.includes('/sendMessage')) {
+            try {
+              let bodyObj = {};
+              if (init && typeof init.body === 'string') { try { bodyObj = JSON.parse(init.body); } catch {} }
+              return await originalFetch(FUNCTION_URL, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bodyObj)
+              });
+            } catch {}
+          }
+          return originalFetch(input, init);
+        };
+      })();
+    </script>
+    -->
+
+    <!-- Service Worker Registration - TEMPORARILY DISABLED -->
+    <script>
+      // Service Worker temporarily disabled for debugging
+      console.log('🚫 Service Worker disabled for debugging');
+    </script>
+
+    <!-- Main Application Script -->
+    <script type="module" crossorigin src="/assets/index-c7x3__kb.js"></script>
+    
+    <!-- Debug Console -->
+    <script>
+      // Debug info
+      console.log('🖥️📱 Wevolv3 Website - Versão Responsiva');
+      console.log('Viewport:', window.innerWidth + 'x' + window.innerHeight);
+      console.log('Document Width:', document.documentElement.scrollWidth);
+      console.log('User Agent:', navigator.userAgent);
+      
+      // Função de debug global
+      window.debugResponsive = function() {
+        console.log('Modo Responsivo Ativo');
+        console.log('Viewport:', window.innerWidth + 'x' + window.innerHeight);
+        console.log('Device Pixel Ratio:', window.devicePixelRatio);
+      };
+      
+      // Monitor de mudanças de viewport
+      window.addEventListener('resize', function() {
+        console.log('📐 Viewport alterado:', window.innerWidth + 'x' + window.innerHeight);
+      });
+      
+      // Monitor de orientação
+      window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+          console.log('🔄 Orientação alterada:', window.orientation);
+          console.log('Nova viewport:', window.innerWidth + 'x' + window.innerHeight);
+        }, 100);
+      });
+
+      // Aplicar correções de layout mobile para hero section
+      function applyMobileHeroFixes() {
+        const heroSection = document.querySelector('section[class*="h-screen"]');
+        if (heroSection) {
+          heroSection.classList.add('hero-section-mobile');
+          
+          // Adicionar classe ao container principal
+          const mainContainer = heroSection.querySelector('.container');
+          if (mainContainer) {
+            mainContainer.classList.add('hero-main-container');
+          }
+
+          // Corrigir elementos com margens negativas problemáticas
+          const negativeMarginElements = heroSection.querySelectorAll('[class*="-ml-32"], [class*="-mr-32"], [class*="-mt-"]');
+          negativeMarginElements.forEach(element => {
+            element.style.marginLeft = '0';
+            element.style.marginRight = '0';
+            element.style.marginTop = '0';
+          });
+
+          // Forçar layout responsivo no flex container principal
+          const flexContainer = heroSection.querySelector('.flex.items-start.justify-between');
+          if (flexContainer && window.innerWidth <= 768) {
+            flexContainer.style.flexDirection = 'column';
+            flexContainer.style.alignItems = 'center';
+            flexContainer.style.gap = '2rem';
+            flexContainer.style.width = '100%';
+            flexContainer.style.margin = '0';
+            flexContainer.style.padding = '0 1rem';
+          }
+          
+          console.log('✅ Mobile hero fixes aplicadas');
+        }
+      }
+
+      // Aplicar quando o DOM estiver carregado
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(applyMobileHeroFixes, 100);
+      });
+
+      // Aplicar também quando o React carregar (fallback)
+      window.addEventListener('load', function() {
+        setTimeout(applyMobileHeroFixes, 500);
+        setTimeout(addMarketingArsenalScrollHint, 1000);
+      });
+
+      // Adicionar instrução de scroll para Marketing Arsenal
+      function addMarketingArsenalScrollHint() {
+        if (window.innerWidth > 768) return; // Só no mobile
+
+        // Verificar se já existe
+        if (document.querySelector('.marketing-arsenal-scroll-hint')) {
+          return;
+        }
+
+        let arsenalSection = null;
+
+        // Estratégia 1: Procurar por texto específico
+        const textElements = document.querySelectorAll('*');
+        for (let element of textElements) {
+          const text = element.textContent || '';
+          if (text.includes('Build Your Marketing Arsenal') || 
+              text.includes('Marketing Arsenal') ||
+              text.includes('Assemble the perfect combination')) {
+            arsenalSection = element.closest('section') || 
+                            element.closest('div[class*="py-"]') ||
+                            element.closest('div[class*="px-"]') ||
+                            element.parentElement;
+            if (arsenalSection) break;
+          }
+        }
+
+        // Estratégia 2: Procurar por elementos com imagens de serviços
+        if (!arsenalSection) {
+          const images = document.querySelectorAll('img[src*="image-ring"], img[alt*="Marketing"], img[alt*="PR"], img[alt*="Listings"]');
+          for (let img of images) {
+            arsenalSection = img.closest('section') || img.closest('div[class*="py-"]');
+            if (arsenalSection) break;
+          }
+        }
+
+        // Estratégia 3: Procurar por seções após o hero
+        if (!arsenalSection) {
+          const sections = document.querySelectorAll('section');
+          for (let i = 1; i < sections.length; i++) { // Pular a primeira (hero)
+            const section = sections[i];
+            if (section.textContent.includes('Arsenal') || 
+                section.textContent.includes('Build') ||
+                section.textContent.includes('perfect combination')) {
+              arsenalSection = section;
+              break;
+            }
+          }
+        }
+
+        // Estratégia 4: Procurar por elementos com classes relacionadas a carrossel ou ring
+        if (!arsenalSection) {
+          const carouselElements = document.querySelectorAll('[class*="carousel"], [class*="ring"], [class*="swipe"], [class*="scroll"]');
+          for (let element of carouselElements) {
+            arsenalSection = element.closest('section') || element.closest('div[class*="py-"]');
+            if (arsenalSection) break;
+          }
+        }
+
+        // Estratégia 5: Fallback - segunda seção do site
+        if (!arsenalSection) {
+          const allSections = document.querySelectorAll('section, div[class*="py-16"], div[class*="py-20"]');
+          if (allSections.length > 1) {
+            arsenalSection = allSections[1]; // Segunda seção
+          }
+        }
+
+        if (arsenalSection) {
+          // Procurar especificamente pela imagem dentro da seção
+          const imageContainer = arsenalSection.querySelector('img[src*="image-ring"]') || 
+                                arsenalSection.querySelector('img[alt*="Listings"]') ||
+                                arsenalSection.querySelector('img[alt*="Marketing"]') ||
+                                arsenalSection.querySelector('img');
+          
+          const scrollHint = document.createElement('div');
+          scrollHint.className = 'marketing-arsenal-scroll-hint';
+          scrollHint.innerHTML = '';
+          
+          if (imageContainer) {
+            // Inserir logo após a imagem ou seu container pai
+            const imageParent = imageContainer.parentElement;
+            if (imageParent && imageParent !== arsenalSection) {
+              // Inserir após o container da imagem
+              imageParent.insertAdjacentElement('afterend', scrollHint);
+            } else {
+              // Inserir após a imagem diretamente
+              imageContainer.insertAdjacentElement('afterend', scrollHint);
+            }
+            console.log('✅ Marketing Arsenal scroll hint adicionada após a imagem');
+          } else {
+            // Fallback: adicionar no final da seção
+            arsenalSection.appendChild(scrollHint);
+            console.log('✅ Marketing Arsenal scroll hint adicionada no final da seção');
+          }
+        } else {
+          console.log('⚠️ Seção Marketing Arsenal não encontrada ainda');
+        }
+      }
+
+      // Overlay de formulário para o balão do herói
+      function ensureHeroContactOverlay() {
+        if (document.getElementById('wev-hero-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'wev-hero-overlay';
+        overlay.style.cssText = [
+          'position:fixed',
+          'inset:0',
+          'display:none',
+          'align-items:center',
+          'justify-content:center',
+          'z-index:99999',
+          'background: radial-gradient(circle at 30% 10%, rgba(16,185,129,0.14), transparent 40%), rgba(0,0,0,0.78)',
+          'backdrop-filter: blur(10px)',
+          '-webkit-backdrop-filter: blur(10px)',
+          'padding:16px'
+        ].join(';');
+
+        // Card
+        const card = document.createElement('div');
+        card.style.cssText = [
+          'width:100%',
+          'max-width:36rem',
+          'border-radius:20px',
+          'border:1px solid rgba(255,255,255,0.1)',
+          'background:rgba(10,10,10,0.92)',
+          'box-shadow:0 25px 80px rgba(0,0,0,0.85), 0 15px 40px rgba(16,185,129,0.22), 0 0 0 1px rgba(255,255,255,0.05)',
+          'color:#fff',
+          'padding:24px 22px 18px',
+          'position:relative'
+        ].join(';');
+
+        // Header
+        const header = document.createElement('div');
+        header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px';
+        const title = document.createElement('div');
+        title.textContent = 'What are you building today?';
+        title.style.cssText = [
+          "font-family: Orbitron, monospace",
+          'font-weight:800',
+          'letter-spacing:.02em',
+          'font-size:1.15rem',
+          'background:linear-gradient(135deg,#40ffaa,#8b5cf6,#40ffaa)',
+          '-webkit-background-clip:text',
+          'background-clip:text',
+          '-webkit-text-fill-color:transparent'
+        ].join(';');
+        const subtitle = document.createElement('div');
+        subtitle.textContent = 'Tell us in a few words and we will get back to you.';
+        subtitle.style.cssText = 'font-size:.85rem;color:rgba(255,255,255,.7);margin:2px 0 8px';
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Fechar');
+        close.textContent = '✕';
+        close.style.cssText = [
+          'position:absolute','right:.75rem','top:.75rem','width:2rem','height:2rem',
+          'display:flex','align-items:center','justify-content:center','border-radius:9999px',
+          'border:1px solid rgba(255,255,255,0.12)','background:rgba(255,255,255,0.03)','color:#fff','cursor:pointer',
+          'transition:transform .15s ease, background .15s ease, border-color .15s ease'
+        ].join(';');
+        close.addEventListener('mouseenter', function(){ this.style.background='rgba(255,255,255,.06)'; this.style.transform='scale(1.06)'; this.style.borderColor='rgba(255,255,255,.18)'; });
+        close.addEventListener('mouseleave', function(){ this.style.background='rgba(255,255,255,.03)'; this.style.transform=''; this.style.borderColor='rgba(255,255,255,.12)'; });
+        close.addEventListener('click', closeHeroOverlay);
+        header.appendChild(title);
+        card.appendChild(header);
+        card.appendChild(subtitle);
+        card.appendChild(close);
+
+        // Formulário
+        const form = document.createElement('form');
+        form.addEventListener('submit', submitHeroForm);
+
+        const mkInput = (tag, attrs, css) => {
+          const el = document.createElement(tag);
+          Object.entries(attrs||{}).forEach(([k,v])=> el.setAttribute(k, v));
+          el.style.cssText = css;
+          // realce simples onfocus/onblur
+          el.addEventListener('focus', function(){ this.style.boxShadow='0 0 0 3px rgba(16,185,129,.18)'; this.style.borderColor='rgba(16,185,129,.45)'; this.style.background='rgba(255,255,255,.055)'; });
+          el.addEventListener('blur', function(){ this.style.boxShadow=''; this.style.borderColor='rgba(255,255,255,.12)'; this.style.background='rgba(255,255,255,.045)'; });
+          return el;
+        };
+        const baseInputCss = 'width:100%;border-radius:14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.045);color:#fff;padding:.7rem .95rem;outline:none;';
+        const baseAreaCss  = baseInputCss + 'min-height:120px;resize:vertical;';
+
+        const name = mkInput('input', { name:'name', type:'text', placeholder:'Your name', required:'true' }, baseInputCss);
+        const email = mkInput('input', { name:'email', type:'email', placeholder:'Your email', required:'true' }, baseInputCss);
+        const telegram = mkInput('input', { name:'telegram', type:'text', placeholder:'Your Telegram @handle', required:'true' }, baseInputCss);
+        const message = mkInput('textarea', { name:'message', placeholder:'Briefly describe what you want to build...', required:'true' }, baseAreaCss);
+
+        const grid = (child)=>{ const wrap=document.createElement('div'); wrap.style.cssText='display:grid;gap:10px;margin-bottom:12px'; wrap.appendChild(child); return wrap; };
+        form.appendChild(grid(name));
+        form.appendChild(grid(email));
+        form.appendChild(grid(telegram));
+        form.appendChild(grid(message));
+
+        const actions = document.createElement('div');
+        actions.style.cssText = 'display:flex;gap:8px;margin-top:4px;align-items:center';
+        const submit = mkInput('button', { type:'submit' }, 'flex:1;background:linear-gradient(135deg,#10b981,#3b82f6);color:#fff;border:none;border-radius:14px;padding:.7rem 1rem;cursor:pointer;transition:filter .15s ease');
+        submit.addEventListener('mouseenter', function(){ this.style.filter='brightness(1.05)'; });
+        submit.addEventListener('mouseleave', function(){ this.style.filter=''; });
+        submit.textContent = 'Send';
+        const cancel = mkInput('button', { type:'button' }, 'padding:.7rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#fff;cursor:pointer;transition:background .15s ease,border-color .15s ease');
+        cancel.addEventListener('mouseenter', function(){ this.style.background='rgba(255,255,255,.06)'; this.style.borderColor='rgba(255,255,255,.25)'; });
+        cancel.addEventListener('mouseleave', function(){ this.style.background='transparent'; this.style.borderColor='rgba(255,255,255,.15)'; });
+        cancel.textContent = 'Cancel';
+        cancel.addEventListener('click', closeHeroOverlay);
+        actions.appendChild(submit); actions.appendChild(cancel);
+        form.appendChild(actions);
+
+        // Fechar ao clicar fora
+        overlay.addEventListener('click', (ev)=>{ if (ev.target === overlay) closeHeroOverlay(); });
+
+        card.appendChild(form);
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+      }
+
+      function openHeroOverlay() {
+        ensureHeroContactOverlay();
+        const overlay = document.getElementById('wev-hero-overlay');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        const first = overlay.querySelector("input[name='name']");
+        first && first.focus();
+        const onKey = (ev)=>{ if (ev.key === 'Escape') closeHeroOverlay(); };
+        overlay.__escHandler = onKey;
+        document.addEventListener('keydown', onKey, { passive: true });
+      }
+
+      function closeHeroOverlay() {
+        const overlay = document.getElementById('wev-hero-overlay');
+        if (!overlay) return;
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        if (overlay.__escHandler) {
+          document.removeEventListener('keydown', overlay.__escHandler);
+          overlay.__escHandler = null;
+        }
+      }
+
+      async function submitHeroForm(ev) {
+        ev.preventDefault();
+        const form = ev.currentTarget;
+        const name = form.querySelector("input[name='name']").value.trim();
+        const email = form.querySelector("input[name='email']").value.trim();
+        const telegram = form.querySelector("input[name='telegram']").value.trim();
+        const message = form.querySelector("textarea[name='message']").value.trim();
+        if (!name || !email || !telegram || !message) { alert('Please fill in all fields.'); return; }
+        const submitBtn = form.querySelector("button[type='submit']");
+        const prevText = submitBtn.textContent;
+        submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+        try {
+          const res = await fetch('/.netlify/functions/sendTelegram', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, telegram, message })
+          });
+          if (res.ok) {
+            alert('Thanks! Someone from our team will reach out.');
+            closeHeroOverlay();
+          } else {
+            alert('Sending failed. Please try again.');
+          }
+        } catch (e) {
+          alert('Sending failed. Please try again.');
+        }
+        finally { submitBtn.disabled = false; submitBtn.textContent = prevText; }
+      }
+
+      // Tentar adicionar a instrução periodicamente até encontrar a seção
+      let arsenalHintAttempts = 0;
+      const arsenalHintInterval = setInterval(() => {
+        arsenalHintAttempts++;
+        addMarketingArsenalScrollHint();
+        
+        if (arsenalHintAttempts >= 20 || document.querySelector('.marketing-arsenal-scroll-hint')) {
+          clearInterval(arsenalHintInterval);
+        }
+      }, 800);
+
+      // Tentar também quando a página carregar completamente
+      setTimeout(() => {
+        addMarketingArsenalScrollHint();
+      }, 3000);
+
+      // E quando houver interação do usuário
+      document.addEventListener('click', () => {
+        setTimeout(addMarketingArsenalScrollHint, 500);
+      }, { once: true });
+
+      // Estilos do dropdown do herói (injetados uma vez)
+      function ensureContactFormDropdownStyles() {
+        if (document.getElementById('contact-form-dropdown-styles')) return;
+        const style = document.createElement('style');
+        style.id = 'contact-form-dropdown-styles';
+        style.textContent = `
+        .contact-form-dropdown{width:100%;max-width:560px;margin:0 auto;}
+        .contact-form-header{
+          display:flex;align-items:center;justify-content:center;gap:.5rem;text-align:center;
+          padding:14px 18px;border-radius:16px;
+          border:1px solid rgba(255,255,255,0.08);
+          background: linear-gradient(180deg, rgba(17,17,17,0.65), rgba(10,10,10,0.55));
+          backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+          cursor:pointer
+        }
+        .contact-form-header .dropdown-title{line-height:1.2;letter-spacing:.02em}
+        .contact-form-header .dropdown-icon{color:#cbd5e1;font-size:.9rem}
+        .contact-form-header:hover{
+          border-color: rgba(16,185,129,0.45);
+          box-shadow: 0 0 0 3px rgba(16,185,129,0.15), 0 12px 40px rgba(16,185,129,0.2), inset 0 1px 0 rgba(255,255,255,0.1)
+        }
+        .contact-form-content{display:none;opacity:0;transform:translateY(-2px) scale(.98);transition:opacity .2s ease, transform .2s ease}
+        .contact-form-header.active + .contact-form-content,.contact-form-content.active{display:block;opacity:1;transform:translateY(0) scale(1);margin-top:12px}
+        .contact-form-inner{position:relative;padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,0.06);background:rgba(12,12,12,0.85);backdrop-filter: blur(8px)}
+        `;
+        document.head.appendChild(style);
+      }
+
+      // Utilitário: padronizar e conectar submissão ao Telegram
+      function wireContactFormSubmission(form) {
+        if (!form || form.__wev_wired === '1') return;
+        const name = form.querySelector("input[name='name']");
+        const email = form.querySelector("input[name='email']");
+        const telegram = form.querySelector("input[name='telegram']");
+        const message = form.querySelector("textarea[name='message']");
+
+        // Tornar todos obrigatórios e em inglês
+        name && (name.required = true, name.placeholder = 'Your name');
+        email && (email.required = true, email.placeholder = 'Your email');
+        telegram && (telegram.required = true, telegram.placeholder = 'Your Telegram @handle');
+        message && (message.required = true, message.placeholder = 'Briefly describe what you want to build...');
+
+        // Capturar antes do React (fase de captura) e impedir propagação
+        form.addEventListener('submit', async (ev) => {
+          ev.preventDefault();
+          if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+          ev.stopPropagation();
+          const btn = form.querySelector("button[type='submit']");
+          const restore = btn ? btn.textContent : '';
+          btn && (btn.disabled = true, btn.textContent = 'Sending...');
+          const payload = {
+            name: name?.value?.trim() || '',
+            email: email?.value?.trim() || '',
+            telegram: telegram?.value?.trim() || '',
+            message: message?.value?.trim() || ''
+          };
+          try {
+             const res = await fetch('/.netlify/functions/sendTelegram', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(payload)
+             });
+             if (res.ok) {
+               alert('Thanks! Someone from our team will reach out.');
+               try { form.reset(); } catch {}
+             } else {
+               alert('Sending failed. Please try again.');
+             }
+           } catch (e) {
+             alert('Sending failed. Please try again.');
+           } finally {
+             btn && (btn.disabled = false, btn.textContent = restore || 'Send');
+           }
+        }, true);
+
+        // Defesa adicional contra onSubmit do React já ligado
+        try {
+          form.onsubmit = (e) => { e.preventDefault(); e.stopPropagation(); return false; };
+        } catch {}
+
+        form.__wev_wired = '1';
+      }
+
+      // Implementar dropdown no formulário de contato
+      function implementContactFormDropdown() {
+        const contactCard = document.querySelector('.wevolv3-contact-card');
+        if (!contactCard) {
+          return; // Não encontrou o card
+        }
+
+        // Garantir estilos e centralização do texto
+        ensureContactFormDropdownStyles();
+
+        // Se já existe dropdown, remover para recriar (útil para navegação)
+        const existingDropdown = contactCard.querySelector('.contact-form-dropdown');
+        if (existingDropdown) {
+          return; // Já foi implementado
+        }
+
+        // Encontrar o título atual
+        const cardTitle = contactCard.querySelector('.card-title');
+        if (!cardTitle) return;
+
+        // Criar estrutura do dropdown
+        const dropdownContainer = document.createElement('div');
+        dropdownContainer.className = 'contact-form-dropdown';
+
+        // Criar header do dropdown
+        const dropdownHeader = document.createElement('div');
+        dropdownHeader.className = 'contact-form-header';
+        dropdownHeader.innerHTML = `
+          <span class="dropdown-title" style="background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Orbitron', monospace; font-weight: 800; font-size: 1.2rem;">What are you building today?</span>
+          <span class="dropdown-icon">▼</span>
+        `;
+
+        // Criar conteúdo do dropdown
+        const dropdownContent = document.createElement('div');
+        dropdownContent.className = 'contact-form-content';
+
+        const dropdownInner = document.createElement('div');
+        dropdownInner.className = 'contact-form-inner';
+
+        // Mover todo o conteúdo atual (exceto o título) para dentro do dropdown
+        const cardHeader = contactCard.querySelector('.card-header');
+        const divider = contactCard.querySelector('.divider');
+        const form = contactCard.querySelector('form');
+
+        if (cardHeader && divider && form) {
+          // Remover o título original e o subtítulo
+          cardTitle.remove();
+          contactCard.querySelector('.card-subtitle')?.remove();
+          
+          // Criar botão de fechar
+          const closeButton = document.createElement('button');
+          closeButton.type = 'button';
+          closeButton.className = 'contact-form-close';
+          closeButton.innerHTML = '✕';
+          closeButton.style.cssText = `
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #10b981;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+          `;
+          
+          // Mover elementos para o dropdown
+          dropdownInner.appendChild(closeButton);
+          dropdownInner.appendChild(divider);
+          dropdownInner.appendChild(form);
+
+          dropdownContent.appendChild(dropdownInner);
+          
+          // Montar estrutura final
+          dropdownContainer.appendChild(dropdownHeader);
+          dropdownContainer.appendChild(dropdownContent);
+          
+          // Limpar o card e adicionar o dropdown
+          contactCard.innerHTML = '';
+          contactCard.appendChild(dropdownContainer);
+
+          // Adicionar funcionalidade de click
+          function toggleDropdown() {
+            const isActive = dropdownContent.classList.contains('active');
+            
+            if (isActive) {
+              dropdownContent.classList.remove('active');
+              dropdownHeader.classList.remove('active');
+            } else {
+              dropdownContent.classList.add('active');
+              dropdownHeader.classList.add('active');
+            }
+          }
+          
+          // Abrir overlay modal ao clicar no balão do herói
+          dropdownHeader.addEventListener('click', function(ev){
+            ev.preventDefault();
+            openHeroOverlay();
+          });
+          
+          // Funcionalidade do botão de fechar
+          closeButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.remove('active');
+            dropdownHeader.classList.remove('active');
+          });
+          
+          // Hover effect para o botão de fechar
+          closeButton.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+            this.style.transform = 'scale(1.1)';
+          });
+          
+          closeButton.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = 'transparent';
+            this.style.transform = 'scale(1)';
+          });
+
+          // Padronizar e conectar submissão
+          wireContactFormSubmission(form);
+          console.log('✅ Dropdown do formulário implementado');
+        }
+      }
+
+      // Função para reinicializar dropdown após navegação
+      function reinitializeDropdown() {
+        // Aguardar um pouco para o React Router terminar de renderizar
+        setTimeout(() => {
+          implementContactFormDropdown();
+        }, 100);
+      }
+
+      // Observar mudanças na página (navegação do React Router)
+      let lastUrl = location.href;
+      new MutationObserver(() => {
+        const url = location.href;
+        if (url !== lastUrl) {
+          lastUrl = url;
+          console.log('🔄 Navegação detectada, reinicializando dropdown...');
+          reinitializeDropdown();
+        }
+      }).observe(document, { subtree: true, childList: true });
+
+      // Observar mudanças específicas no container do formulário
+      const targetNode = document.body;
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          // Verificar se um formulário foi adicionado/removido
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1 && (
+              node.querySelector?.('.wevolv3-contact-card') || 
+              node.classList?.contains('wevolv3-contact-card')
+            )) {
+              console.log('📝 Formulário detectado, implementando dropdown...');
+              setTimeout(implementContactFormDropdown, 50);
+              // Caso já exista um form visível, garantir submissão correta
+              const maybeForm = node.querySelector?.('.wevolv3-contact-card form');
+              if (maybeForm) setTimeout(()=>wireContactFormSubmission(maybeForm), 80);
+            }
+          });
+        });
+      });
+
+      observer.observe(targetNode, {
+        childList: true,
+        subtree: true
+      });
+
+      // Tentar implementar o dropdown periodicamente (fallback)
+      let dropdownAttempts = 0;
+      const dropdownInterval = setInterval(() => {
+        dropdownAttempts++;
+        implementContactFormDropdown();
+        
+        if (dropdownAttempts >= 15 || document.querySelector('.contact-form-dropdown')) {
+          clearInterval(dropdownInterval);
+        }
+      }, 500);
+
+      // Implementar também quando a hash muda (navegação por âncora)
+      window.addEventListener('hashchange', reinitializeDropdown);
+      
+      // Implementar quando volta/avança no histórico
+      window.addEventListener('popstate', reinitializeDropdown);
+    </script>
+
+    <!-- Mobile video fixes: garantir autoplay/playsinline/muted e play após interação -->
+    <script>
+      (function () {
+        function prepareVideo(v) {
+          if (!v || v.__wev_prepared === '1') return;
+          try {
+            v.setAttribute('playsinline', '');
+            v.setAttribute('webkit-playsinline', '');
+            v.muted = true; v.defaultMuted = true; v.setAttribute('muted','');
+            if (!v.hasAttribute('loop')) v.setAttribute('loop','');
+            if (!v.hasAttribute('preload')) v.setAttribute('preload','metadata');
+            const tryPlay = () => v.play().catch(()=>{});
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              // Tentar tocar imediatamente e nos eventos de interação
+              v.addEventListener('canplay', tryPlay, { once: true });
+              tryPlay();
+              ['touchstart','pointerdown','click'].forEach(ev => {
+                window.addEventListener(ev, tryPlay, { once: true, passive: true });
+              });
+              document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') tryPlay();
+              });
+            }
+          } catch {}
+          v.__wev_prepared = '1';
+        }
+        function scanVideos(root) {
+          (root.querySelectorAll ? root.querySelectorAll('video') : []).forEach(prepareVideo);
+        }
+        // Rodar agora e observar mudanças do React Router
+        document.addEventListener('DOMContentLoaded', () => scanVideos(document));
+        window.addEventListener('load', () => scanVideos(document));
+        new MutationObserver(muts => {
+          muts.forEach(m => {
+            m.addedNodes && m.addedNodes.forEach(n => {
+              if (n.nodeType === 1) {
+                if (n.tagName === 'VIDEO') prepareVideo(n);
+                else scanVideos(n);
+              }
+            });
+          });
+        }).observe(document, { childList: true, subtree: true });
+        // CSS leve para evitar esticar incorreto
+        try {
+          const st = document.createElement('style');
+          st.textContent = 'video[playsinline]{max-width:100%;height:auto;display:block}';
+          document.head.appendChild(st);
+        } catch {}
+        console.log('✅ Mobile video fixes ativos');
+      })();
+    </script>
+    
+    <!-- Mobile fixes CSS - carregado por último para sobrescrever tudo -->
+    <link rel="stylesheet" href="/mobile-hero-fixes.css">
+  </body>
+</html>
