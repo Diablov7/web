@@ -20,8 +20,9 @@ export const handler = async (event) => {
     const token = process.env.TELEGRAM_BOT_TOKEN || '';
     const chatId = process.env.TELEGRAM_CHAT_ID || '';
 
-    // Bypass em desenvolvimento: não chamar Telegram com token fake
-    const isDevBypass = !token || token === 'test' || process.env.NODE_ENV === 'development';
+    const isDev = (process.env.NODE_ENV || '').toLowerCase() !== 'production';
+    // Em desenvolvimento, permitir bypass apenas se o token estiver vazio/test
+    const isDevBypass = isDev && (!token || token === 'test');
 
     // Suporta dois formatos:
     // 1) { text, chat_id? } (proxy direto do front/bundle)
@@ -39,11 +40,11 @@ export const handler = async (event) => {
         ].join("\n");
 
     if (isDevBypass) {
-      return { statusCode: 200, headers: corsHeaders, body: JSON.stringify({ ok: true, devBypass: true }) };
+      return { statusCode: 200, headers: corsHeaders, body: JSON.stringify({ ok: true, devBypass: true, env: 'development' }) };
     }
 
     if (!token || !chatId) {
-      return { statusCode: 500, headers: corsHeaders, body: JSON.stringify({ error: 'Missing Telegram credentials' }) };
+      return { statusCode: 500, headers: corsHeaders, body: JSON.stringify({ error: 'Missing Telegram credentials', details: { hasToken: !!token, hasChatId: !!chatId, env: process.env.NODE_ENV || 'production' } }) };
     }
 
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -64,7 +65,7 @@ export const handler = async (event) => {
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: JSON.stringify({ ok: true }),
+      body: JSON.stringify({ ok: true, devBypass: false }),
     };
   } catch (err) {
     return {
