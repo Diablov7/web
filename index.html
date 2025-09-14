@@ -82,6 +82,34 @@
 
     
     
+    <!-- Interceptor: redireciona qualquer chamada direta ao Telegram para a Netlify Function -->
+    <script>
+      (function () {
+        const FUNCTION_URL = '/.netlify/functions/sendTelegram';
+        const originalFetch = window.fetch ? window.fetch.bind(window) : null;
+        if (!originalFetch) return;
+        window.fetch = function (input, init) {
+          try {
+            const url = typeof input === 'string' ? input : (input && input.url) || '';
+            if (url.startsWith('https://api.telegram.org/bot') && url.includes('/sendMessage')) {
+              let bodyObj = {};
+              try { if (init && typeof init.body === 'string') bodyObj = JSON.parse(init.body || '{}'); } catch {}
+              const payload = {
+                chat_id: bodyObj.chat_id,
+                text: bodyObj.text
+              };
+              return originalFetch(FUNCTION_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+            }
+          } catch {}
+          return originalFetch(input, init);
+        };
+      })();
+    </script>
+
     <!-- Funções/Envio: usar apenas a Function; tokens não devem estar no front -->
     <!--
     <script>
