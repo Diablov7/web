@@ -39,6 +39,14 @@ export const handler = async (event) => {
           `Message: ${message || ""}`,
         ].join("\n");
 
+    // Server-side diagnostics (aparece nos Function Logs do Netlify)
+    try {
+      const masked = token ? `${token.slice(0,6)}…` : "<empty>";
+      console.log("[sendTelegram] env:", { hasToken: !!token, maskedToken: masked, hasChatId: !!chatId, nodeEnv: process.env.NODE_ENV });
+      console.log("[sendTelegram] payload:", { hasText: !!text, hasName: !!name, hasEmail: !!email, hasMessage: !!message, overrideChatId: !!chat_id });
+      console.log("[sendTelegram] finalTextLen:", finalText.length);
+    } catch {}
+
     if (isDevBypass) {
       return { statusCode: 200, headers: corsHeaders, body: JSON.stringify({ ok: true, devBypass: true, env: 'development' }) };
     }
@@ -47,6 +55,7 @@ export const handler = async (event) => {
       return { statusCode: 500, headers: corsHeaders, body: JSON.stringify({ error: 'Missing Telegram credentials', details: { hasToken: !!token, hasChatId: !!chatId, env: process.env.NODE_ENV || 'production' } }) };
     }
 
+    console.log("[sendTelegram] sending to chat:", chat_id || chatId);
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,6 +64,7 @@ export const handler = async (event) => {
 
     if (!tgRes.ok) {
       const errText = await tgRes.text();
+      console.error("[sendTelegram] Telegram error:", { status: tgRes.status, errText });
       return {
         statusCode: 502,
         headers: corsHeaders,
