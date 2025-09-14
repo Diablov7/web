@@ -14,8 +14,8 @@ O projeto está **100% pronto** para deploy no Netlify com os formulários funci
 ### 2. Variáveis de Ambiente (Opcional)
 No painel do Netlify (Site Settings > Environment Variables), adicione:
 ```
-TELEGRAM_BOT_TOKEN=7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E
-TELEGRAM_CHAT_ID=426197451
+TELEGRAM_BOT_TOKEN=<seu_token_do_BotFather>
+TELEGRAM_CHAT_ID=<seu_chat_id_ou_-100...>
 ```
 
 **⚠️ IMPORTANTE**: Se você **NÃO** configurar as variáveis de ambiente, **não há problema!** O sistema tem fallbacks hardcoded que garantem o funcionamento.

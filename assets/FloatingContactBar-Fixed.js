@@ -41,13 +41,14 @@ const FloatingContactBar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("https://api.telegram.org/bot7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E/sendMessage", {
+      const response = await fetch("/.netlify/functions/sendTelegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: "426197451",
-          text: `🚀 New message from Wevolv3!\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
-          parse_mode: "Markdown"
+          name: formData.name,
+          email: formData.email,
+          telegram: "",
+          message: formData.message
         })
       });
 
