@@ -890,18 +890,22 @@
 
     <!-- Footer Social: X/Twitter, LinkedIn, Instagram -->
     <footer id="wev-footer" style="position:relative;z-index:10">
+      <style id="wev-footer-styles">
+        .wev-social-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border-radius:9999px;text-decoration:none;color:#e2e8f0;position:relative;isolation:isolate;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(255,255,255,.06),0 0 0 1px rgba(255,255,255,.06);overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+        .wev-social-btn::before{content:"";position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.18) 100%);opacity:.18;pointer-events:none;mix-blend-mode:screen;transform:translateY(0);transition:transform .5s ease,opacity .5s ease}
+        .wev-social-btn:hover{border-color:rgba(255,255,255,.32);box-shadow:0 16px 52px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.12);transform:translateY(-1px)}
+        .wev-social-btn:hover::before{transform:translateY(-6px);opacity:.28}
+        .wev-social-btn:active{transform:translateY(0)}
+      </style>
       <div style="max-width:1200px;margin:2rem auto;padding:0 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap">
         <span style="font-family:Orbitron,monospace;font-weight:800;letter-spacing:.06em;color:#e2e8f0;opacity:.9;margin-right:.25rem">FOLLOW US</span>
-        <a href="https://x.com/wevolv3_media" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on X/Twitter"
-           style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.12);color:#e2e8f0;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);text-decoration:none">
+        <a href="https://x.com/wevolv3_media" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on X/Twitter" class="wev-social-btn">
           <span style="font-family:Orbitron,monospace;font-weight:700;letter-spacing:.02em">X</span>
         </a>
-        <a href="https://www.linkedin.com/company/wevol3-web3-marketing/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on LinkedIn"
-           style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.12);color:#e2e8f0;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);text-decoration:none">
+        <a href="https://www.linkedin.com/company/wevol3-web3-marketing/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on LinkedIn" class="wev-social-btn">
           <span style="font-family:Orbitron,monospace;font-weight:700;letter-spacing:.02em">LinkedIn</span>
         </a>
-        <a href="https://www.instagram.com/wevolv3.growth/" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on Instagram"
-           style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.12);color:#e2e8f0;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);text-decoration:none">
+        <a href="https://www.instagram.com/wevolv3.growth/" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on Instagram" class="wev-social-btn">
           <span style="font-family:Orbitron,monospace;font-weight:700;letter-spacing:.02em">Instagram</span>
         </a>
       </div>
