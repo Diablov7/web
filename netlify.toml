@@ -39,13 +39,15 @@
   to = "/singleblog.html"
   status = 200
 
-# Sanity Studio - Editor do blog (hospedado em sanity.io)
+# Sanity Studio - Editor do blog (redirect to Sanity Studio)
 [[redirects]]
   from = "/studio"
-  to = "/studio.html"
-  status = 200
+  to = "https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/studio/*"
-  to = "/studio.html"
-  status = 200
+  to = "https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
+  status = 301
+  force = true

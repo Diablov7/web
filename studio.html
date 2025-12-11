@@ -3,119 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanity Studio - Wevolv3 Blog Editor</title>
+    <title>Redirecting to Blog Editor...</title>
     <link href="images/FAVICON.png" rel="shortcut icon" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             background: #000;
-            min-height: 100vh;
+            color: #10b981;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #fff;
+            min-height: 100vh;
+            margin: 0;
         }
-        
-        .container {
+        .loading {
             text-align: center;
-            padding: 40px;
-            max-width: 600px;
         }
-        
-        .logo {
-            width: 200px;
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            color: #10b981;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        p {
-            font-size: 18px;
-            color: #999;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 16px 40px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            margin: 10px;
-        }
-        
-        .btn-primary {
-            background: #10b981;
-            color: #000;
-        }
-        
-        .btn-primary:hover {
-            background: #0d9668;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: #10b981;
-            border: 2px solid #10b981;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(16, 185, 129, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .info-box {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 40px;
-            text-align: left;
-        }
-        
-        .info-box h3 {
-            color: #10b981;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        
-        .info-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .info-box li {
-            color: #ccc;
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .info-box li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #10b981;
-        }
-        
         .spinner {
             width: 40px;
             height: 40px;
@@ -125,59 +28,19 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
-        
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-        
-        .redirect-text {
-            color: #10b981;
-            font-size: 14px;
-            margin-top: 20px;
-        }
-        
-        .buttons {
-            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="images/LOGO.PNG" alt="Wevolv3" class="logo">
-        
-        <h1>Blog Editor</h1>
-        
-        <p>Manage your blog content through the Sanity Content Management System.</p>
-        
+    <div class="loading">
         <div class="spinner"></div>
-        <p class="redirect-text">Redirecting to Sanity Studio...</p>
-        
-        <div class="buttons">
-            <a href="https://www.sanity.io/manage/project/sszuldy6" class="btn btn-primary" target="_blank">
-                Open Sanity Dashboard
-            </a>
-            <a href="/" class="btn btn-secondary">
-                Back to Website
-            </a>
-        </div>
-        
-        <div class="info-box">
-            <h3>How to Edit Blog Posts</h3>
-            <ul>
-                <li>Click "Open Sanity Dashboard" above</li>
-                <li>Log in with your Sanity account</li>
-                <li>Navigate to "Posts" in the sidebar</li>
-                <li>Create, edit, or delete blog posts</li>
-                <li>Click "Publish" to make changes live</li>
-            </ul>
-        </div>
+        <p>Redirecting to Blog Editor...</p>
     </div>
-    
     <script>
-        // Auto-redirect after 3 seconds
-        setTimeout(() => {
-            window.open('https://www.sanity.io/manage/project/sszuldy6', '_blank');
-        }, 2500);
+        // Redirect to Sanity Studio
+        window.location.replace('https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default');
     </script>
 </body>
 </html>
