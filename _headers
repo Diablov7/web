@@ -3,6 +3,13 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
 
+# Sanity Studio - Permitir iframe para /studio.html
+/studio.html
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self' https://*.sanity.io;
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=0
+
 /assets/*.js
   Content-Type: application/javascript; charset=utf-8
   Cache-Control: public, max-age=31536000
@@ -22,6 +29,7 @@
 /*.html
   Content-Type: text/html; charset=utf-8
   Cache-Control: public, max-age=0
+  X-Frame-Options: DENY
 
 /mobile-optimizations.css
   Content-Type: text/css; charset=utf-8
