@@ -232,6 +232,57 @@
                 font-size: 14px;
                 color: #888;
             }
+            
+            /* Mobile Fix: Prevenir corte de texto na esquerda */
+            @media screen and (max-width: 767px) {
+                .main-container {
+                    padding-left: 20px !important;
+                    padding-right: 20px !important;
+                }
+                .single-post-text-cell {
+                    padding-left: 20px !important;
+                    padding-right: 20px !important;
+                    padding-top: 20px !important;
+                    padding-bottom: 20px !important;
+                }
+                .single-post-text-cell .w-richtext {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    overflow-x: visible !important;
+                    word-wrap: break-word !important;
+                }
+                .single-post-text-cell .w-richtext p,
+                .single-post-text-cell .w-richtext h1,
+                .single-post-text-cell .w-richtext h2,
+                .single-post-text-cell .w-richtext h3,
+                .single-post-text-cell .w-richtext h4,
+                .single-post-text-cell .w-richtext ul,
+                .single-post-text-cell .w-richtext ol,
+                .single-post-text-cell .w-richtext blockquote {
+                    padding-left: 0 !important;
+                    margin-left: 0 !important;
+                }
+                .single-post-text-cell .w-richtext blockquote {
+                    padding-left: 15px !important;
+                }
+                .single-post-text-cell .w-richtext ul,
+                .single-post-text-cell .w-richtext ol {
+                    padding-left: 20px !important;
+                }
+            }
+            
+            @media screen and (max-width: 479px) {
+                .main-container {
+                    padding-left: 15px !important;
+                    padding-right: 15px !important;
+                }
+                .single-post-text-cell {
+                    padding-left: 15px !important;
+                    padding-right: 15px !important;
+                    padding-top: 15px !important;
+                    padding-bottom: 15px !important;
+                }
+            }
         </style>
 
     </head>
