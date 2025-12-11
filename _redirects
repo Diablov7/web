@@ -10,8 +10,8 @@
 /blog-post.html    /singleblog.html    301
 
 # Sanity Studio - Editor do blog (redirect to Sanity Studio)
-/studio    https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default    301
-/studio/*    https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default    301
+/studio    https://sszuldy6.sanity.studio    301
+/studio/*    https://sszuldy6.sanity.studio    301
 
 # SPA fallback (deve ser o último)
 # Exclui arquivos estáticos automaticamente

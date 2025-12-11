@@ -42,12 +42,12 @@
 # Sanity Studio - Editor do blog (redirect to Sanity Studio)
 [[redirects]]
   from = "/studio"
-  to = "https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
+  to = "https://sszuldy6.sanity.studio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/studio/*"
-  to = "https://sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
+  to = "https://sszuldy6.sanity.studio"
   status = 301
   force = true
