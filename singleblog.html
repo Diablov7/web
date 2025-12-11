@@ -502,7 +502,7 @@
                             inList = false;
                         }
                         const imageUrl = sanityImageUrl(block);
-                        html += `<img src="${imageUrl}" alt="${block.alt || ''}" loading="lazy" style="max-width: 100%; border-radius: 10px; margin: 30px 0;" />`;
+                        html += `<img src="${imageUrl}" alt="${block.alt || ''}" loading="lazy" decoding="async" style="max-width: 100%; border-radius: 10px; margin: 30px 0;" />`;
                         return;
                     }
                     
@@ -597,7 +597,10 @@
                 const description = post.excerpt || 'Read this article about Web3 marketing and growth strategies.';
                 const imageUrl = sanityImageUrl(post.mainImage);
                 const slug = post.slug?.current || post.slug;
-                const url = `https://wevolv3.com/blog/${slug}`;
+                const url = `https://wevolv3.com/singleblog?slug=${slug}`;
+                const publishedDate = post.publishedAt || post._createdAt || new Date().toISOString();
+                const modifiedDate = post._updatedAt || publishedDate;
+                const authorName = post.author?.name || 'Wevolv3 Team';
                 
                 document.title = `${title} | Wevolv3 Blog`;
                 
@@ -614,6 +617,59 @@
                 document.getElementById('tw-image').content = imageUrl;
                 
                 document.getElementById('canonical-url').href = url;
+                
+                // Add Schema.org JSON-LD for Article
+                updateSchemaOrg(post, title, description, imageUrl, url, publishedDate, modifiedDate, authorName);
+            }
+            
+            // Helper: Update Schema.org structured data
+            function updateSchemaOrg(post, title, description, imageUrl, url, publishedDate, modifiedDate, authorName) {
+                // Remove existing schema if any
+                const existingSchema = document.getElementById('article-schema');
+                if (existingSchema) {
+                    existingSchema.remove();
+                }
+                
+                // Create Article schema
+                const schema = {
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "headline": title,
+                    "description": description,
+                    "image": imageUrl,
+                    "url": url,
+                    "datePublished": publishedDate,
+                    "dateModified": modifiedDate,
+                    "author": {
+                        "@type": "Organization",
+                        "name": authorName,
+                        "url": "https://wevolv3.com"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Wevolv3",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://wevolv3.com/images/LOGO.PNG"
+                        }
+                    },
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": url
+                    }
+                };
+                
+                // Add category if available
+                if (post.categories && post.categories.length > 0) {
+                    schema.articleSection = post.categories[0].title || 'Web3 Marketing';
+                }
+                
+                // Inject schema into page
+                const script = document.createElement('script');
+                script.id = 'article-schema';
+                script.type = 'application/ld+json';
+                script.textContent = JSON.stringify(schema);
+                document.head.appendChild(script);
             }
             
             // Check if we're in preview mode (from Sanity Studio)
@@ -707,8 +763,22 @@
                     // Populate content
                     document.getElementById('post-title').textContent = post.title || 'No title';
                     document.getElementById('post-category').textContent = post.categories?.[0]?.title || 'Web3';
-                    document.getElementById('post-image').src = sanityImageUrl(post.mainImage);
-                    document.getElementById('post-image').alt = post.title || '';
+                    
+                    // Optimize main image loading
+                    const mainImageUrl = sanityImageUrl(post.mainImage);
+                    const postImageEl = document.getElementById('post-image');
+                    postImageEl.src = mainImageUrl;
+                    postImageEl.alt = post.title || '';
+                    postImageEl.loading = 'eager';
+                    postImageEl.fetchPriority = 'high';
+                    
+                    // Preload main image for better performance
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = mainImageUrl;
+                    document.head.appendChild(link);
+                    
                     document.getElementById('post-body').innerHTML = portableTextToHtml(post.body);
                     
                     // Hide loading, show content

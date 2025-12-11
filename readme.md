@@ -44,6 +44,33 @@ Site oficial da Wevolv3 com foco em marketing Web3 e publicidade modular.
 └── netlify.toml        # Configuração Netlify
 ```
 
+## 🔍 SEO e Indexação
+
+### Sitemap Dinâmico
+O sitemap é gerado dinamicamente a partir dos posts do Sanity. Para atualizar:
+
+```bash
+node generate-sitemap.js
+```
+
+Isso irá:
+- Buscar todos os posts publicados do Sanity
+- Gerar um `sitemap.xml` atualizado
+- Incluir todas as páginas estáticas e posts do blog
+
+**Recomendação**: Execute este script após publicar novos artigos ou configure um cron job para executar automaticamente.
+
+### Schema.org
+- ✅ Schema.org JSON-LD implementado para artigos (BlogPosting)
+- ✅ Meta tags Open Graph e Twitter Cards dinâmicas
+- ✅ Canonical URLs configuradas
+
+### Performance
+- ✅ Lazy loading de imagens
+- ✅ Preload da imagem principal do artigo
+- ✅ FetchPriority otimizado
+- ✅ Decoding assíncrono de imagens
+
 ## 🛠️ Deploy
 
 ### Netlify (Recomendado)
