@@ -46,18 +46,21 @@
   status = 200
 
 # Sanity Studio - Servir localmente como SPA
-# Arquivos estáticos têm prioridade
+# Arquivos estáticos têm prioridade (force = true)
 [[redirects]]
   from = "/studio/static/*"
   to = "/studio/static/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/studio/*"
   to = "/studio/index.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/studio"
   to = "/studio/index.html"
   status = 200
+  force = true

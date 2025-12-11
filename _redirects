@@ -10,10 +10,10 @@
 /blog-post.html    /singleblog.html    301
 
 # Sanity Studio - Servir localmente
-# Arquivos estáticos do Studio têm prioridade
+# Arquivos estáticos do Studio têm prioridade (! = force)
 /studio/static/*  /studio/static/:splat  200!
-/studio/*         /studio/index.html     200
-/studio           /studio/index.html     200
+/studio/*         /studio/index.html     200!
+/studio           /studio/index.html     200!
 
 # SPA fallback (deve ser o último)
 # Exclui arquivos estáticos automaticamente
