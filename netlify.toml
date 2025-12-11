@@ -15,12 +15,13 @@
   [headers.values]
     X-Frame-Options = "DENY"
 
-# Headers para Sanity Studio - permitir carregamento
+# Headers para Sanity Studio - permitir embedding no Dashboard
+# Removemos X-Frame-Options e usamos apenas Content-Security-Policy
+# conforme documentação: https://www.sanity.io/docs/dashboard/dashboard-configure
 [[headers]]
   for = "/studio/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
-    Content-Security-Policy = "frame-ancestors 'self' https://*.sanity.io;"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.sanity.io https://www.sanity.io;"
 
 # Sanity Studio JS - Force content type
 [[headers]]

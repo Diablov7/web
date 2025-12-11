@@ -3,10 +3,11 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
 
-# Sanity Studio - Permitir carregamento
+# Sanity Studio - Permitir embedding no Dashboard do Sanity
+# Removemos X-Frame-Options e usamos apenas Content-Security-Policy
+# conforme documentação: https://www.sanity.io/docs/dashboard/dashboard-configure
 /studio/*
-  X-Frame-Options: SAMEORIGIN
-  Content-Security-Policy: frame-ancestors 'self' https://*.sanity.io;
+  Content-Security-Policy: frame-ancestors 'self' https://*.sanity.io https://www.sanity.io;
 
 # Sanity Studio JS - Force content type
 /studio/static/*.js
