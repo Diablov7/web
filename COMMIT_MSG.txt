@@ -1,0 +1,10 @@
+✨ Add: Migrar Sanity Studio do projeto antigo para servir localmente
+
+- Copiar estrutura completa do Studio (index.html, static files)
+- Configurar netlify.toml para servir Studio em /studio
+- Atualizar _redirects para servir Studio como SPA local
+- Atualizar _headers para permitir iframe do Studio
+- Remover studio.html (não mais necessário)
+- Studio agora serve localmente em vez de redirect externo
+- Baseado na estrutura do projeto antigo que funcionava
+

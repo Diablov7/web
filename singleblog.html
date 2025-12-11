@@ -365,7 +365,7 @@
                             <img
                                 id="post-image"
                                 src="images/post1.jpg"
-                                alt=""
+                                alt="Article image"
                                 class="single-post-img"
                             />
                         </div>
@@ -373,6 +373,16 @@
                     <div class="w-layout-cell single-post-text-cell">
                         <div id="post-body" class="w-richtext">
                             <!-- Post content will be rendered here -->
+                        </div>
+                        <!-- Links internos estratégicos adicionados dinamicamente -->
+                        <div id="internal-links" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; display: none;">
+                            <p style="color: #999; font-size: 14px; margin-bottom: 15px;">Explore mais conteúdo:</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><a href="blog.html" style="color: #ff6b35; text-decoration: underline;">← Voltar para o Blog</a></li>
+                                <li style="margin-bottom: 10px;"><a href="works.html" style="color: #ff6b35; text-decoration: underline;">Ver nossos projetos</a></li>
+                                <li style="margin-bottom: 10px;"><a href="about.html" style="color: #ff6b35; text-decoration: underline;">Sobre a Wevolv3</a></li>
+                                <li><a href="contact.html" style="color: #ff6b35; text-decoration: underline;">Entre em contato</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -398,19 +408,19 @@
                     <div data-w-id="darkyn04" class="socials">
                         <a href="https://x.com/wevolv3" target="_blank" class="social-link w-inline-block">
                             <div class="social-text">X</div>
-                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                            <img src="images/arrow-down-right.png" alt="Arrow icon" class="social-arrow" />
                         </a>
                         <a href="https://www.linkedin.com/company/wevol3-web3-marketing" target="_blank" class="social-link w-inline-block">
                             <div class="social-text">linkedin</div>
-                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                            <img src="images/arrow-down-right.png" alt="Arrow icon" class="social-arrow" />
                         </a>
                         <a href="https://t.me/wevolv3" target="_blank" class="social-link w-inline-block">
                             <div class="social-text">telegram</div>
-                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                            <img src="images/arrow-down-right.png" alt="Arrow icon" class="social-arrow" />
                         </a>
                         <a href="blog.html" class="social-link last-social w-inline-block">
                             <div class="social-text">blog</div>
-                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                            <img src="images/arrow-down-right.png" alt="Arrow icon" class="social-arrow" />
                         </a>
                     </div>
                 </div>
@@ -419,7 +429,7 @@
                         2025 Wevolv3. All rights reserved.
                     </div>
                     <div data-w-id="darkyn06" class="right-copyright">
-                        <a href="#home" class="backtotop w-inline-block"><img src="images/back-top_1back-top.png" alt="" /></a>
+                        <a href="#home" class="backtotop w-inline-block"><img src="images/back-top_1back-top.png" alt="Back to top" /></a>
                     </div>
                 </div>
             </div>
@@ -502,7 +512,10 @@
                             inList = false;
                         }
                         const imageUrl = sanityImageUrl(block);
-                        html += `<img src="${imageUrl}" alt="${block.alt || ''}" loading="lazy" decoding="async" style="max-width: 100%; border-radius: 10px; margin: 30px 0;" />`;
+                        // Usar alt do bloco ou título do post como fallback para SEO
+                        const postTitle = document.getElementById('post-title')?.textContent || 'Article image';
+                        const imageAlt = block.alt || postTitle;
+                        html += `<img src="${imageUrl}" alt="${imageAlt}" loading="lazy" decoding="async" style="max-width: 100%; border-radius: 10px; margin: 30px 0;" />`;
                         return;
                     }
                     
@@ -556,16 +569,16 @@
                         inList = false;
                     }
                     
-                    // Handle different block styles
+                    // Handle different block styles - Corrigir hierarquia de cabeçalhos
                     switch (block.style) {
                         case 'h1':
                             html += `<h1>${text}</h1>`;
                             break;
                         case 'h2':
-                            html += `<h4>${text}</h4>`;
+                            html += `<h2>${text}</h2>`;
                             break;
                         case 'h3':
-                            html += `<h4>${text}</h4>`;
+                            html += `<h3>${text}</h3>`;
                             break;
                         case 'h4':
                             html += `<h4>${text}</h4>`;
@@ -780,6 +793,18 @@
                     document.head.appendChild(link);
                     
                     document.getElementById('post-body').innerHTML = portableTextToHtml(post.body);
+                    
+                    // Atualizar alt text da imagem principal para SEO
+                    const postImage = document.getElementById('post-image');
+                    if (postImage && post.title) {
+                        postImage.alt = post.title;
+                    }
+                    
+                    // Mostrar links internos estratégicos
+                    const internalLinks = document.getElementById('internal-links');
+                    if (internalLinks) {
+                        internalLinks.style.display = 'block';
+                    }
                     
                     // Hide loading, show content
                     loadingEl.style.display = 'none';
