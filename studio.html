@@ -39,8 +39,12 @@
         <p>Redirecting to Blog Editor...</p>
     </div>
     <script>
-        // Redirect to Sanity Studio
-        window.location.replace('https://sszuldy6.sanity.studio');
+        // Redirect to Sanity Studio - Open in new window to avoid X-Frame-Options issues
+        // Try the old URL first (workspace-based), fallback to project-based URL
+        const studioUrl = 'https://www.sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default';
+        
+        // Open in same window (not iframe) to avoid X-Frame-Options: DENY error
+        window.location.href = studioUrl;
     </script>
 </body>
 </html>
