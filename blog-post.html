@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="meta-title">Wevolv3 Blog | Web3 & Crypto Marketing</title>
+  <meta id="meta-description" name="description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/logo.png" type="image/png">
+  
+  <!-- Open Graph / Facebook -->
+  <meta id="og-type" property="og:type" content="article">
+  <meta id="og-title" property="og:title" content="Wevolv3 Blog | Web3 & Crypto Marketing">
+  <meta id="og-description" property="og:description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta id="og-image" property="og:image" content="https://wevolv3.com/logo.png">
+  <meta id="og-url" property="og:url" content="https://wevolv3.com/blog">
+  <meta property="og:site_name" content="Wevolv3">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta id="twitter-title" name="twitter:title" content="Wevolv3 Blog | Web3 & Crypto Marketing">
+  <meta id="twitter-description" name="twitter:description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta id="twitter-image" name="twitter:image" content="https://wevolv3.com/logo.png">
+  
+  <!-- Canonical URL -->
+  <link id="canonical" rel="canonical" href="https://wevolv3.com/blog">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7E4GJ0QP9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E7E4GJ0QP9');
+  </script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#000000',
+            surface: '#050505',
+            primary: '#10b981',
+            secondary: '#3b82f6',
+            accent: '#8b5cf6',
+            text: '#ffffff',
+            textDim: '#a0a0a0',
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'monospace'],
+          },
+          typography: (theme) => ({
+            DEFAULT: {
+              css: {
+                color: theme('colors.gray.300'),
+                h1: { color: theme('colors.white'), fontFamily: 'Orbitron' },
+                h2: { color: theme('colors.white'), fontFamily: 'Orbitron' },
+                h3: { color: theme('colors.white'), fontFamily: 'Orbitron' },
+                strong: { color: theme('colors.primary') },
+                a: { color: theme('colors.primary'), '&:hover': { color: theme('colors.secondary') } },
+                blockquote: { borderLeftColor: theme('colors.primary'), color: theme('colors.gray.400') },
+                code: { color: theme('colors.secondary') },
+              },
+            },
+          }),
+        }
+      },
+      plugins: [
+        function({ addBase, theme }) {
+          addBase({
+            'h1': { fontSize: theme('fontSize.2xl') },
+            'h2': { fontSize: theme('fontSize.xl') },
+            'h3': { fontSize: theme('fontSize.lg') },
+          })
+        }
+      ]
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Orbitron', monospace;
+    }
+    
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Medium-style Typography - Clean and Minimalist */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .prose p {
+      margin-bottom: 0.75em;
+      line-height: 1.7;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      letter-spacing: -0.003em;
+    }
+    
+    /* Override inline margins to prevent double spacing */
+    .prose p.mb-3 {
+      margin-bottom: 0.75em !important;
+    }
+    
+    /* Remove drop cap and hover effects for Medium style */
+    .prose > p:first-of-type::first-letter {
+      font-size: inherit;
+      float: none;
+      margin: 0;
+      padding: 0;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      background-clip: unset;
+      font-weight: inherit;
+    }
+    
+    .prose > p:first-of-type {
+      overflow: visible;
+    }
+    
+    .prose > p:first-of-type::after {
+      display: none;
+    }
+    
+    .prose h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 0.8em;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    .prose h2 {
+      font-size: 1.875rem;
+      line-height: 1.3;
+      margin-top: 1.5em;
+      margin-bottom: 0.75em;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    
+    .prose h2::after {
+      display: none;
+    }
+    
+    .prose h3 {
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-top: 1.25em;
+      margin-bottom: 0.6em;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    
+    .prose h4 {
+      font-size: 1.25rem;
+      line-height: 1.4;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+    
+    .prose ul, .prose ol {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1em;
+      margin-top: 0.75em;
+    }
+    
+    .prose ul li, .prose ol li {
+      margin-bottom: 0.5em;
+      padding-left: 1.5em;
+      position: relative;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .prose ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0.5em;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: normal;
+      font-size: 1em;
+    }
+    
+    .prose ol {
+      counter-reset: list-counter;
+    }
+    
+    .prose ol li {
+      counter-increment: list-counter;
+    }
+    
+    .prose ol li::before {
+      content: counter(list-counter) '.';
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: normal;
+      background: transparent;
+      width: auto;
+      height: auto;
+      display: inline;
+      border-radius: 0;
+      font-size: 1em;
+    }
+    
+    /* Medium-style Blockquotes - Simple and Clean */
+    .prose blockquote {
+      border-left: 3px solid rgba(255, 255, 255, 0.3);
+      padding-left: 1.5em;
+      margin: 1.25em 0;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.8);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+      position: relative;
+      box-shadow: none;
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+    
+    .prose blockquote::before {
+      display: none;
+    }
+    
+    /* Medium-style Code - Simple and Clean */
+    .prose code {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      border: none;
+    }
+    
+    .prose pre {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 1.25em;
+      margin: 2em 0;
+      overflow-x: auto;
+      position: relative;
+      box-shadow: none;
+    }
+    
+    .prose pre code {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+    
+    .code-block-wrapper {
+      position: relative;
+    }
+    
+    .copy-code-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #10b981;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8em;
+      font-family: 'Orbitron', monospace;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+    
+    .code-block-wrapper:hover .copy-code-btn {
+      opacity: 1;
+    }
+    
+    .copy-code-btn:hover {
+      background: rgba(16, 185, 129, 0.3);
+      border-color: #10b981;
+    }
+    
+    /* Animated Links */
+    .prose a {
+      color: #10b981;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .prose a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981, #3b82f6);
+      transition: width 0.3s ease;
+    }
+    
+    .prose a:hover {
+      color: #3b82f6;
+    }
+    
+    .prose a:hover::after {
+      width: 100%;
+    }
+    
+    /* Text Selection */
+    ::selection {
+      background: rgba(16, 185, 129, 0.3);
+      color: #fff;
+    }
+    
+    ::-moz-selection {
+      background: rgba(16, 185, 129, 0.3);
+      color: #fff;
+    }
+    
+    /* Section Dividers */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+      margin: 3em 0;
+      position: relative;
+    }
+    
+    .section-divider::before {
+      content: '◆';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #000;
+      padding: 0 1em;
+      color: #10b981;
+      font-size: 0.8em;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6, #10b981);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-move 10s ease infinite;
+    }
+    
+    @keyframes gradient-move {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    /* Animated gradient background effects */
+    .gradient-bg-animated {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15), transparent 50%),
+                  radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.15), transparent 50%);
+      background-size: 200% 200%;
+      animation: gradient-bg-move 15s ease infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes gradient-bg-move {
+      0% {
+        background-position: 0% 0%, 100% 100%;
+      }
+      50% {
+        background-position: 100% 100%, 0% 0%;
+      }
+      100% {
+        background-position: 0% 0%, 100% 100%;
+      }
+    }
+    
+    /* Reading Progress Bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+      z-index: 9999;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .fade-in-delay-1 { animation-delay: 0.1s; }
+    .fade-in-delay-2 { animation-delay: 0.2s; }
+    .fade-in-delay-3 { animation-delay: 0.3s; }
+    
+    /* Featured Image Enhancements */
+    .featured-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-height: 500px;
+      margin-bottom: 3rem;
+      clear: both; /* Prevent float issues */
+    }
+    
+    .featured-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    .featured-image-border {
+      position: relative;
+      border: 2px solid transparent;
+    }
+    
+    .featured-image-border::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      z-index: -1;
+      animation: gradient-border-move 8s ease infinite;
+      background-size: 300% 300%;
+    }
+    
+    @keyframes gradient-border-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .featured-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    
+    .featured-image-wrapper:hover .featured-image-overlay {
+      opacity: 1;
+    }
+    
+    .featured-image-wrapper > img {
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: cover;
+      position: relative;
+      display: block;
+    }
+    
+    .featured-image-wrapper:hover > img {
+      transform: scale(1.05);
+    }
+    
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(59, 130, 246, 0.4));
+      border-color: #10b981;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* Enhanced Share Buttons */
+    .share-button {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .share-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .share-button:hover::before {
+      opacity: 1;
+    }
+    
+    .share-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    }
+    
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      margin-bottom: 1.5em;
+      font-size: 0.9em;
+    }
+    
+    .breadcrumbs a {
+      color: #10b981;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumbs a:hover {
+      color: #3b82f6;
+    }
+    
+    .breadcrumbs span {
+      color: #666;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted #10b981;
+    }
+    
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-size: 0.85em;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 1000;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .tooltip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-5px);
+    }
+    
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Image Caption */
+    .image-caption {
+      text-align: center;
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="bg-black min-h-screen flex flex-col relative">
+  
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%"></div>
+  
+  <!-- Animated Gradient Background -->
+  <div class="gradient-bg-animated"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+    <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3">
+        <img src="/logo.png" alt="Wevolv3" class="h-8 w-auto">
+        <div class="flex flex-col">
+          <span class="font-orbitron font-bold text-xl tracking-wider text-white">Wevolv3</span>
+          <span class="text-[10px] text-gray-400 tracking-widest uppercase">Web3 & Crypto Marketing</span>
+        </div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="/" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-wider">Home</a>
+        <a href="/blog" class="text-sm font-bold text-primary uppercase tracking-wider">Blog</a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="/contact" class="px-5 py-2 border border-white/20 rounded hover:border-primary hover:text-primary transition-all text-sm font-medium uppercase tracking-wide">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow pt-32 pb-20 px-6 relative z-10 min-h-screen">
+    <div id="content-container" class="container mx-auto max-w-[95%] lg:max-w-[1400px]">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs mb-8">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/blog">Blog</a>
+        <span id="breadcrumb-slug" class="hidden">
+          <span>/</span>
+          <span class="text-gray-400">Article</span>
+        </span>
+      </nav>
+
+      <!-- Loading State -->
+      <div id="loading" class="text-center py-20">
+        <div class="inline-block w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+        <p class="text-gray-400 text-lg animate-pulse">Loading article...</p>
+      </div>
+
+      <!-- Article Content (Injected) -->
+      <article id="article" class="hidden relative z-10">
+        <!-- Header -->
+        <header class="mb-12 text-center px-4">
+          <div id="categories" class="flex justify-center gap-2 mb-6">
+            <!-- Categories injected here -->
+          </div>
+          
+          <h1 id="post-title" class="font-orbitron font-black text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight gradient-text">
+            <!-- Title -->
+          </h1>
+
+          <div class="flex items-center justify-center gap-8 text-gray-400 text-sm md:text-base border-y border-white/10 py-4 max-w-2xl mx-auto">
+            <span id="post-date" class="flex items-center gap-2">
+              <!-- Date -->
+            </span>
+            <span id="read-time" class="flex items-center gap-2">
+              <!-- Read Time -->
+            </span>
+          </div>
+        </header>
+
+        <!-- Featured Image -->
+        <div class="featured-image-wrapper relative aspect-video w-full rounded-[20px] overflow-hidden mb-12 shadow-2xl shadow-primary/10 featured-image-border">
+          <img id="post-image" src="" alt="" class="w-full h-full object-cover">
+          <div class="featured-image-overlay"></div>
+          <div id="image-caption" class="image-caption hidden"></div>
+        </div>
+
+        <!-- Content Body -->
+        <div id="post-body" class="prose prose-invert max-w-none px-4">
+          <!-- Portable Text Content -->
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+        
+        <!-- Share / Footer -->
+        <div class="mt-16 pt-8 border-t border-white/10 text-center px-4">
+          <p class="text-gray-400 mb-6 font-orbitron text-lg">Enjoyed this article?</p>
+          <div class="flex justify-center gap-4 mb-8">
+            <button id="share-facebook" class="share-button w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" aria-label="Share on Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </button>
+            <button id="share-twitter" class="share-button w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" aria-label="Share on Twitter">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+            </button>
+            <button id="share-linkedin" class="share-button w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" aria-label="Share on LinkedIn">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </button>
+            <button id="share-copy" class="share-button w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" aria-label="Copy link">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </button>
+          </div>
+          <a href="/blog" class="inline-block px-8 py-3 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-all font-orbitron font-bold uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+            View All Articles
+          </a>
+        </div>
+        
+        <!-- Related Articles -->
+        <div id="related-articles" class="mt-16 pt-8 border-t border-white/10 px-4">
+          <h2 class="font-orbitron font-bold text-2xl text-white mb-8 text-center">
+            Related <span class="gradient-text">Articles</span>
+          </h2>
+          <div id="related-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Related articles will be injected here -->
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-white/10 py-16 mt-auto relative z-10">
+    <div class="container mx-auto px-6">
+      <!-- CTAs Section -->
+      <div class="text-center mb-12">
+        <h2 class="font-orbitron font-bold text-2xl md:text-3xl text-white mb-8">
+          Ready to <span class="gradient-text">Transform</span> Your Business?
+        </h2>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a href="/affiliate" class="px-8 py-3 border border-white/20 rounded-[14px] hover:border-primary hover:text-primary transition-all text-sm font-medium uppercase tracking-wide font-orbitron">
+            Become an Affiliate
+          </a>
+          <a href="/contact" class="px-8 py-3 border border-white/20 rounded-[14px] hover:bg-white hover:text-black transition-all text-sm font-medium uppercase tracking-wide font-orbitron">
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex justify-center gap-6 mb-8">
+        <a href="https://x.com/wevolv3_media" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on X/Twitter" class="wev-social-btn">
+          <span style="font-family:Orbitron,monospace;font-weight:800;letter-spacing:.06em;color:#e2e8f0;opacity:.9;margin-right:.25rem">X/Twitter</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/company/wevol3-web3-marketing/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on LinkedIn" class="wev-social-btn">
+          <span style="font-family:Orbitron,monospace;font-weight:800;letter-spacing:.06em;color:#e2e8f0;opacity:.9;margin-right:.25rem">LinkedIn</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            <circle cx="8" cy="10" r="1.2" fill="currentColor"/>
+            <rect x="7" y="12.5" width="2" height="6" rx="1" fill="currentColor"/>
+            <path d="M12 12.5h1.8a2.7 2.7 0 0 1 2.7 2.7V18.5h-2v-3.1c0-.7-.6-1.3-1.3-1.3H12v4.4h-2v-6Z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/wevolv3.growth/" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on Instagram" class="wev-social-btn">
+          <span style="font-family:Orbitron,monospace;font-weight:800;letter-spacing:.06em;color:#e2e8f0;opacity:.9;margin-right:.25rem">Instagram</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Legal Links -->
+      <div class="text-center mb-4">
+        <div class="flex justify-center gap-6 flex-wrap text-sm">
+          <a href="/privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+          <a href="/terms" class="text-gray-400 hover:text-primary transition-colors">Terms</a>
+          <a href="/about" class="text-gray-400 hover:text-primary transition-colors">About</a>
+          <a href="/contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center text-gray-500 font-orbitron">
+        &copy; 2024 Wevolv3. All rights reserved.
+      </div>
+      </div>
+    </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+
+  <style>
+    /* Glass morphism social buttons */
+    .wev-social-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border-radius:9999px;text-decoration:none;color:#e2e8f0;position:relative;isolation:isolate;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(255,255,255,.06),0 0 0 1px rgba(255,255,255,.06);overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+    .wev-social-btn::before{content:"";position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.18) 100%);opacity:.18;pointer-events:none;mix-blend-mode:screen;transform:translateY(0);transition:transform .5s ease,opacity .5s ease}
+    .wev-social-btn:hover{border-color:rgba(255,255,255,.32);box-shadow:0 16px 52px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.12);transform:translateY(-1px)}
+    .wev-social-btn:hover::before{transform:translateY(-6px);opacity:.28}
+    .wev-social-btn:active{transform:translateY(0)}
+  </style>
+
+  <script>
+    // Configuração
+    const PROJECT_ID = 'sszuldy6';
+    const DATASET = 'production';
+    const API_VERSION = '2024-01-01';
+    
+    // Helpers
+    function urlFor(source) {
+      if (!source || !source.asset) return null;
+      const ref = source.asset._ref;
+      const [, id, dimensions, format] = ref.split('-');
+      return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dimensions}.${format}`;
+    }
+
+    function formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    // Enhanced Portable Text to HTML Converter with List Support
+    function portableTextToHtml(blocks) {
+      if (!blocks || !Array.isArray(blocks)) return '';
+      
+      let html = '';
+      let currentListType = null;
+      let currentListLevel = 0;
+      
+      // Helper function to process block children (text content)
+      function processChildren(block) {
+        if (!block.children || block.children.length === 0) return '';
+        
+        const processed = block.children.map((child, index) => {
+          let text = child.text || '';
+          
+          // Skip completely empty children (no text, no marks)
+          if (!text && (!child.marks || child.marks.length === 0)) return null;
+          
+          // Preserve whitespace but don't render empty strings
+          if (!text.trim() && (!child.marks || child.marks.length === 0)) {
+            // Preserve single spaces between words
+            return index > 0 && index < block.children.length - 1 ? ' ' : '';
+          }
+          
+          // Escape HTML entities but preserve intentional formatting
+          text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          
+          // Apply marks in correct order (process from inner to outer)
+          if (child.marks && child.marks.length > 0) {
+            // Process marks - handle both string marks and object marks (annotations)
+            child.marks.forEach(mark => {
+              if (typeof mark === 'string') {
+                if (mark === 'strong') text = `<strong>${text}</strong>`;
+                else if (mark === 'em') text = `<em>${text}</em>`;
+                else if (mark === 'code') text = `<code class="bg-gray-800 px-1.5 py-0.5 rounded text-sm">${text}</code>`;
+                else if (mark === 'underline') text = `<u>${text}</u>`;
+                else if (mark === 'strike-through') text = `<s>${text}</s>`;
+                else {
+                  // Handle annotations (links) - mark is a string key that references markDefs
+                  const def = block.markDefs?.find(d => d._key === mark);
+                  if (def?._type === 'link') {
+                    text = `<a href="${def.href || ''}" target="${def.blank ? '_blank' : '_self'}" rel="noopener noreferrer" class="text-primary hover:underline">${text}</a>`;
+                  }
+                }
+              }
+            });
+          }
+          return text;
+        }).filter(item => item !== null && item !== undefined);
+        
+        return processed.join('');
+      }
+      
+      // Helper to close open lists
+      function closeLists(targetLevel = 0) {
+        let closeHtml = '';
+        while (currentListLevel > targetLevel) {
+          closeHtml += currentListType === 'number' ? '</ol>' : '</ul>';
+          currentListLevel--;
+        }
+        if (targetLevel === 0) {
+          currentListType = null;
+        }
+        return closeHtml;
+      }
+      
+      blocks.forEach((block, index) => {
+        if (block._type === 'block') {
+          const style = block.style || 'normal';
+          const listItem = block.listItem;
+          const level = block.level || 1;
+          const content = processChildren(block);
+          
+          // Handle list items
+          if (listItem) {
+            const listType = listItem === 'number' ? 'number' : 'bullet';
+            const listTag = listType === 'number' ? 'ol' : 'ul';
+            const listClass = listType === 'number' ? 'list-decimal' : 'list-disc';
+            
+            // Close previous list if type changed
+            if (currentListType && currentListType !== listType) {
+              html += closeLists(0);
+            }
+            
+            // Open new list if needed
+            if (!currentListType || currentListLevel < level) {
+              while (currentListLevel < level) {
+                html += `<${listTag} class="${listClass} pl-6 my-3 space-y-1">`;
+                currentListLevel++;
+                currentListType = listType;
+              }
+            } else if (currentListLevel > level) {
+              html += closeLists(level);
+            }
+            
+            // Add list item - only if content exists
+            const trimmedContent = content.trim();
+            if (trimmedContent) {
+              html += `<li class="text-gray-200 leading-relaxed mb-1">${trimmedContent}</li>`;
+            }
+          } else {
+            // Close any open lists before non-list content
+            if (currentListType) {
+              html += closeLists(0);
+            }
+            
+            // Handle regular blocks - only render if content exists
+            const trimmedContent = content.trim();
+            if (!trimmedContent) return; // Skip empty blocks
+            
+            switch(style) {
+              case 'h1': 
+                html += `<h1 class="text-4xl font-bold mt-8 mb-4 gradient-text">${trimmedContent}</h1>`;
+                break;
+              case 'h2': 
+                html += `<h2 class="text-3xl font-bold mt-6 mb-3 text-white">${trimmedContent}</h2>`;
+                break;
+              case 'h3': 
+                html += `<h3 class="text-2xl font-semibold mt-5 mb-2 text-white">${trimmedContent}</h3>`;
+                break;
+              case 'h4': 
+                html += `<h4 class="text-xl font-semibold mt-4 mb-2 text-white">${trimmedContent}</h4>`;
+                break;
+              case 'blockquote': 
+                html += `<blockquote class="border-l-4 border-primary pl-6 py-3 my-6 bg-white/5 rounded-r-lg italic text-gray-300">${trimmedContent}</blockquote>`;
+                break;
+              case 'normal': 
+                html += `<p class="text-gray-200 leading-relaxed">${trimmedContent}</p>`;
+                break;
+              default: 
+                html += `<p class="text-gray-200 leading-relaxed">${trimmedContent}</p>`;
+            }
+          }
+        } 
+        else if (block._type === 'image') {
+          // Close any open lists before image
+          if (currentListType) {
+            html += closeLists(0);
+          }
+          
+          const imageUrl = urlFor(block);
+          const alt = block.alt || 'Article Image';
+          const caption = block.caption || '';
+          html += `
+            <figure class="my-6">
+              <img src="${imageUrl}" alt="${alt}" class="rounded-[20px] w-full shadow-2xl" loading="lazy">
+              ${caption ? `<figcaption class="text-center text-sm text-gray-400 mt-2 italic">${caption}</figcaption>` : ''}
+            </figure>`;
+        }
+        // Handle code blocks
+        else if (block._type === 'code') {
+          // Close any open lists before code block
+          if (currentListType) {
+            html += closeLists(0);
+          }
+          
+          const code = block.code || '';
+          const language = block.language || 'text';
+          const escapedCode = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          html += `
+            <div class="fade-in my-8 relative">
+              <div class="absolute top-0 left-0 px-3 py-1 bg-gray-700 text-xs text-gray-300 rounded-tl-lg rounded-br-lg">${language}</div>
+              <pre class="bg-gray-900 rounded-lg p-6 pt-10 overflow-x-auto border border-white/10"><code class="text-sm text-gray-200">${escapedCode}</code></pre>
+              <button onclick="copyCode(this)" data-code="${code.replace(/"/g, '&quot;')}" class="absolute top-2 right-2 px-3 py-1 bg-gray-700 text-xs text-gray-300 rounded hover:bg-gray-600 transition-colors">Copy</button>
+            </div>`;
+        }
+      });
+      
+      // Close any remaining open lists
+      if (currentListType) {
+        html += closeLists(0);
+      }
+      
+      return html;
+    }
+    
+    // Copy code function
+    window.copyCode = function(button) {
+      const code = button.getAttribute('data-code');
+      navigator.clipboard.writeText(code).then(() => {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = 'Copied!';
+        button.style.background = 'rgba(16, 185, 129, 0.4)';
+        setTimeout(() => {
+          button.innerHTML = originalHTML;
+          button.style.background = '';
+        }, 2000);
+      });
+    }
+
+    // Load Article
+    async function loadArticle() {
+      // Obter slug da query string ou do pathname
+      const urlParams = new URLSearchParams(window.location.search);
+      let slug = urlParams.get('slug');
+      
+      // Se não tiver slug na query, tentar obter do pathname
+      if (!slug) {
+        const path = window.location.pathname;
+        if (path.startsWith('/blog/') && path !== '/blog' && path !== '/blog/') {
+          slug = path.replace('/blog/', '').split('/')[0];
+        }
+      }
+
+      if (!slug) {
+        console.error('❌ No slug found in URL');
+        window.location.href = '/blog';
+        return;
+      }
+      
+      // Garantir que a URL seja /blog/slug (sem .html) apenas se estiver em blog-post.html
+      // Mas não fazer isso se já estiver na URL correta para evitar loops
+      if (window.history && window.history.replaceState) {
+        const currentPath = window.location.pathname;
+        const expectedPath = `/blog/${slug}`;
+        
+        // Só fazer replace se estiver em blog-post.html E não estiver já na URL correta
+        if (currentPath.includes('blog-post.html') && currentPath !== expectedPath) {
+          window.history.replaceState(null, '', expectedPath);
+        }
+      }
+
+      // Sanitizar slug para evitar injection
+      const sanitizedSlug = slug.replace(/[^a-z0-9-]/gi, '');
+      
+      // Verificar se é modo preview (pode ser 'true' ou um token)
+      const previewParam = urlParams.get('preview');
+      const isPreview = previewParam === 'true' || (previewParam && previewParam.length > 10);
+      
+      let post;
+      
+      try {
+        if (isPreview) {
+          // Obter o ID do documento da URL (passado pela função de preview)
+          const documentId = urlParams.get('id');
+          
+          // Usar Netlify Function para buscar posts (inclui autenticação para drafts)
+          const functionUrl = `/.netlify/functions/fetch-post?slug=${encodeURIComponent(sanitizedSlug)}&preview=true${documentId ? `&id=${encodeURIComponent(documentId)}` : ''}`;
+          console.log('🔍 Preview mode - Buscando via Netlify Function:', functionUrl);
+          
+          const res = await fetch(functionUrl);
+          
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error('Preview API error:', res.status, errorText);
+            throw new Error(`Preview API error: ${res.status} ${res.statusText}`);
+          }
+          
+          const json = await res.json();
+          
+          if (json.error) {
+            console.error('Preview API error:', json.error);
+            throw new Error(`Preview error: ${json.error}`);
+          }
+          
+          post = json.post;
+          
+          // Log para debug em preview mode
+          console.log('🔍 Preview mode - Post encontrado:', post ? 'Sim' : 'Não');
+          if (post) {
+            console.log('📄 É draft?', post._id?.startsWith('drafts.'));
+            console.log('📄 Publicado?', post.published);
+          }
+        } else {
+          // Modo normal: buscar diretamente da API pública do Sanity (só publicados)
+          const query = `*[_type == "post" && slug.current == "${sanitizedSlug}" && published == true][0] {
+            title,
+            mainImage,
+            publishedAt,
+            body,
+            excerpt,
+            slug,
+            categories[]->{title},
+            published
+          }`;
+          
+          const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${encodeURIComponent(query)}`;
+          const res = await fetch(url);
+          
+          if (!res.ok) {
+            throw new Error(`API error: ${res.status} ${res.statusText}`);
+          }
+          
+          const json = await res.json();
+          
+          if (json.error) {
+            console.error('Sanity query error:', json.error);
+            throw new Error(`Query error: ${JSON.stringify(json.error)}`);
+          }
+          
+          post = json.result;
+        }
+        
+        // Query for related posts (sempre só publicados)
+        const relatedQuery = `*[_type == "post" && published == true && slug.current != "${sanitizedSlug}"] | order(publishedAt desc) [0...3] {
+          title,
+          slug,
+          excerpt,
+          mainImage,
+          publishedAt
+        }`;
+
+        if (!post) {
+          console.warn(`⚠️ Post with slug "${sanitizedSlug}" not found or not published`);
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('article').classList.remove('hidden');
+          
+          // Mensagem diferente para preview mode
+          const isPreview = urlParams.get('preview') === 'true';
+          const errorMessage = isPreview 
+            ? 'This draft is not accessible. The preview function may not be deployed yet, or this draft requires authentication to view.'
+            : 'This post doesn\'t exist or isn\'t published yet.';
+          const errorTitle = isPreview 
+            ? 'Draft not accessible'
+            : 'Post not found';
+          
+          document.getElementById('article').innerHTML = `
+            <div class="text-center p-12">
+              <h1 class="text-3xl font-bold text-white mb-4">${errorTitle}</h1>
+              <p class="text-gray-400 mb-6">${errorMessage}</p>
+              ${isPreview ? `
+                <div class="mb-6 p-4 bg-yellow-500/20 border border-yellow-500/50 rounded-lg">
+                  <p class="text-yellow-400 text-sm">
+                    💡 <strong>Tip:</strong> Make sure the Netlify function is deployed and the SANITY_TOKEN is configured.
+                  </p>
+                </div>
+              ` : ''}
+              <div class="flex gap-4 justify-center">
+                <a href="/blog" class="inline-block px-6 py-3 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-colors">
+                  Back to Blog
+                </a>
+                ${isPreview ? `
+                  <a href="/studio" target="_blank" class="inline-block px-6 py-3 bg-secondary text-white rounded-[14px] hover:bg-secondary/80 transition-colors">
+                    Open Editor
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        // Mostrar banner de preview se for draft ou não publicado
+        const isDraft = post._id?.startsWith('drafts.');
+        const isUnpublished = !post.published;
+        
+        if (isPreview && (isDraft || isUnpublished)) {
+          const previewBanner = document.createElement('div');
+          previewBanner.id = 'preview-banner';
+          const bannerText = isDraft 
+            ? '⚠️ PREVIEW MODE - Visualizando RASCUNHO (não publicado)'
+            : '⚠️ PREVIEW MODE - Este artigo ainda não foi publicado';
+          previewBanner.innerHTML = `
+            <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(90deg, #f59e0b, #ef4444); color: white; text-align: center; padding: 12px 20px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+              <span>${bannerText}</span>
+              <a href="/studio" target="_blank" style="background: white; color: #ef4444; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                Voltar ao Editor
+              </a>
+            </div>
+          `;
+          document.body.prepend(previewBanner);
+          // Adicionar padding ao body para compensar o banner
+          document.body.style.paddingTop = '50px';
+        }
+
+        // Calculate read time
+        function calculateReadTime(blocks) {
+          if (!blocks) return 5;
+          const text = JSON.stringify(blocks);
+          const words = text.split(/\s+/).length;
+          return Math.ceil(words / 200);
+        }
+        
+        const readTime = calculateReadTime(post.body);
+        const postSlug = post.slug?.current || sanitizedSlug;
+        const postUrl = `https://wevolv3.com/blog/${postSlug}`;
+        const postImage = urlFor(post.mainImage) || 'https://wevolv3.com/logo.png';
+        const postExcerpt = post.excerpt || post.title || 'Read the latest insights from Wevolv3 about Web3 marketing and growth strategies.';
+        
+        // Update Meta Tags for SEO
+        document.getElementById('meta-title').textContent = `${post.title} | Wevolv3 Blog`;
+        document.getElementById('meta-description').setAttribute('content', postExcerpt);
+        document.getElementById('og-title').setAttribute('content', post.title);
+        document.getElementById('og-description').setAttribute('content', postExcerpt);
+        document.getElementById('og-image').setAttribute('content', postImage);
+        document.getElementById('og-url').setAttribute('content', postUrl);
+        document.getElementById('twitter-title').setAttribute('content', post.title);
+        document.getElementById('twitter-description').setAttribute('content', postExcerpt);
+        document.getElementById('twitter-image').setAttribute('content', postImage);
+        document.getElementById('canonical').setAttribute('href', postUrl);
+        
+        // Add Schema.org structured data
+        const schemaScript = document.createElement('script');
+        schemaScript.type = 'application/ld+json';
+        schemaScript.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": postExcerpt,
+          "image": postImage,
+          "datePublished": post.publishedAt,
+          "dateModified": post.publishedAt,
+          "author": {
+            "@type": "Organization",
+            "name": "Wevolv3",
+            "url": "https://wevolv3.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Wevolv3",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://wevolv3.com/logo.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": postUrl
+          }
+        });
+        document.head.appendChild(schemaScript);
+        
+        // Populate Content - Title already has gradient-text class applied
+        document.getElementById('post-title').innerText = post.title;
+        document.getElementById('post-image').src = postImage;
+        document.getElementById('post-image').alt = post.title;
+        document.getElementById('post-date').innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> ${formatDate(post.publishedAt)}`;
+        document.getElementById('read-time').innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${readTime} min read`;
+        
+        // Categories
+        if (post.categories && post.categories.length > 0) {
+          const cats = post.categories.map(c => `<span class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1 rounded-full">${c.title}</span>`).join('');
+          document.getElementById('categories').innerHTML = cats;
+        } else {
+          document.getElementById('categories').innerHTML = '';
+        }
+
+        // Body with enhanced formatting
+        const bodyHtml = portableTextToHtml(post.body);
+        document.getElementById('post-body').innerHTML = bodyHtml;
+        
+        // Update breadcrumb
+        const breadcrumbSlug = document.getElementById('breadcrumb-slug');
+        if (breadcrumbSlug) {
+          breadcrumbSlug.classList.remove('hidden');
+          breadcrumbSlug.querySelector('span:last-child').textContent = post.title.length > 30 ? post.title.substring(0, 30) + '...' : post.title;
+        }
+        
+        // Setup back to top button
+        setupBackToTop();
+
+        // Setup share buttons
+        setupShareButtons(post.title, postUrl, postExcerpt);
+        
+        // Setup reading progress
+        setupReadingProgress();
+        
+        // Load related articles
+        loadRelatedArticles(relatedQuery, sanitizedSlug);
+
+        // Show Content with fade-in animation
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('article').classList.remove('hidden');
+        document.getElementById('article').classList.add('fade-in');
+
+      } catch (err) {
+        console.error('❌ Error loading article:', err);
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('article').innerHTML = `
+          <div class="text-center p-12">
+            <h1 class="text-3xl font-bold text-red-400 mb-4">Error loading article</h1>
+            <p class="text-gray-400 mb-2">${err.message || 'Unknown error occurred'}</p>
+            <div class="mt-6 space-x-4">
+                 <button onclick="location.reload()" class="px-6 py-3 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-colors">
+                Retry
+              </button>
+              <a href="/blog" class="inline-block px-6 py-3 bg-gray-700 text-white rounded-[14px] hover:bg-gray-600 transition-colors">
+                Back to Blog
+              </a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Setup Share Buttons
+    function setupShareButtons(title, url, description) {
+      const encodedUrl = encodeURIComponent(url);
+      const encodedTitle = encodeURIComponent(title);
+      const encodedDescription = encodeURIComponent(description);
+      
+      document.getElementById('share-facebook').addEventListener('click', () => {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'width=600,height=400');
+      });
+      
+      document.getElementById('share-twitter').addEventListener('click', () => {
+        window.open(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, '_blank', 'width=600,height=400');
+      });
+      
+      document.getElementById('share-linkedin').addEventListener('click', () => {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, '_blank', 'width=600,height=400');
+      });
+      
+      document.getElementById('share-copy').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+          const btn = document.getElementById('share-copy');
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    }
+    
+    // Setup Reading Progress
+    function setupReadingProgress() {
+      const progressBar = document.getElementById('reading-progress');
+      const article = document.getElementById('article');
+      
+      function updateProgress() {
+        if (!article || article.classList.contains('hidden')) return;
+        
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        const articleBottom = articleTop + articleHeight;
+        const windowBottom = scrollTop + windowHeight;
+        
+        if (windowBottom > articleTop && scrollTop < articleBottom) {
+          const scrolled = windowBottom - articleTop;
+          const total = Math.min(articleHeight, windowHeight);
+          const progress = Math.min(100, (scrolled / total) * 100);
+          progressBar.style.width = progress + '%';
+        } else if (scrollTop >= articleBottom) {
+          progressBar.style.width = '100%';
+        } else {
+          progressBar.style.width = '0%';
+        }
+      }
+      
+      window.addEventListener('scroll', updateProgress);
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
+    }
+    
+    // Load Related Articles
+    async function loadRelatedArticles(query, currentSlug) {
+      try {
+        const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${encodeURIComponent(query)}`;
+        const res = await fetch(url);
+        const json = await res.json();
+        
+        if (json.error || !json.result || json.result.length === 0) {
+          document.getElementById('related-articles').classList.add('hidden');
+          return;
+        }
+        
+        const relatedGrid = document.getElementById('related-grid');
+        relatedGrid.innerHTML = json.result.map((related, index) => {
+          const relatedSlug = related.slug?.current || related.slug || 'no-slug';
+          return `
+            <a href="/blog/${relatedSlug}" class="group bg-surface border border-white/10 rounded-[20px] overflow-hidden hover:border-primary/50 transition-all duration-300 card-hover flex flex-col h-full fade-in fade-in-delay-${index + 1}">
+              <div class="relative h-48 overflow-hidden">
+                <img src="${urlFor(related.mainImage) || 'https://placehold.co/600x400/101010/FFF?text=Wevolv3'}" 
+                     alt="${related.title}" 
+                     loading="lazy"
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              </div>
+              <div class="p-6 flex flex-col flex-grow">
+                <h3 class="font-orbitron font-bold text-lg text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  ${related.title || 'Untitled Post'}
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+                  ${related.excerpt || 'No excerpt available.'}
+                </p>
+                <div class="text-xs text-gray-500 uppercase tracking-wider">
+                  ${related.publishedAt ? formatDate(related.publishedAt) : 'No date'}
+                </div>
+              </div>
+            </a>
+          `;
+        }).join('');
+        
+      } catch (err) {
+        console.error('Error loading related articles:', err);
+        document.getElementById('related-articles').classList.add('hidden');
+      }
+    }
+
+    // Setup Back to Top Button
+    function setupBackToTop() {
+      const button = document.getElementById('back-to-top');
+      if (!button) return;
+      
+      function toggleButton() {
+        if (window.pageYOffset > 300) {
+          button.classList.add('visible');
+        } else {
+          button.classList.remove('visible');
+        }
+      }
+      
+      window.addEventListener('scroll', toggleButton);
+      toggleButton();
+      
+      button.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Add section dividers between major sections
+    function addSectionDividers() {
+      const body = document.getElementById('post-body');
+      if (!body) return;
+      
+      const h2Elements = body.querySelectorAll('h2');
+      h2Elements.forEach((h2, index) => {
+        if (index > 0) {
+          const divider = document.createElement('div');
+          divider.className = 'section-divider';
+          h2.parentNode.insertBefore(divider, h2);
+        }
+      });
+    }
+
+    loadArticle();
+  </script>
+</body>
+</html>

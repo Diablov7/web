@@ -1,0 +1,13 @@
+# Wevolv3 Website Redirects
+# Static HTML site with Sanity blog integration
+
+# Blog redirects
+/blog.html    /blog.html    200
+/singleblog   /singleblog.html    200
+
+# Legacy redirects (if any old URLs exist)
+/blog-post    /singleblog.html    301
+/blog-post.html    /singleblog.html    301
+
+# SPA fallback
+/*    /index.html   200

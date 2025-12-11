@@ -1,0 +1,24 @@
+{
+  "name": "wevolv3-sanity-studio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity dev",
+    "build": "sanity build -y && node fix-paths.js && rm -rf ../studio && mkdir -p ../studio && cp -r dist/* ../studio/",
+    "deploy": "sanity deploy"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/presentation": "^2.0.0",
+    "@sanity/preview-url-secret": "^3.0.0",
+    "@sanity/vision": "^3.0.0",
+    "marked": "^17.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "sanity": "^3.0.0",
+    "styled-components": "^6.1.19"
+  }
+}

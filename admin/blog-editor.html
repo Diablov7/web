@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Blog | Wevolv3 Admin</title>
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      min-height: 100vh;
+      color: #e2e8f0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    .page-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .page-subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    textarea {
+      min-height: 300px;
+      resize: vertical;
+      font-family: monospace;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .checkbox-group input {
+      width: auto;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .message.success {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10b981;
+    }
+    
+    .message.error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+    
+    .login-form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #10b981;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+    
+    .back-link:hover {
+      color: #34d399;
+    }
+    
+    .help-text {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+    }
+    
+    .preview-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .preview-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #10b981;
+    }
+    
+    .preview-content {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .preview-content h1, .preview-content h2, .preview-content h3 {
+      margin: 1rem 0 0.5rem;
+      color: #fff;
+    }
+    
+    .preview-content p {
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← Voltar para o Site</a>
+    
+    <h1 class="page-title">Editor de Blog</h1>
+    <p class="page-subtitle">Crie e publique artigos no Sanity CMS</p>
+    
+    <!-- Login Form -->
+    <div id="login-section" class="card login-form">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="password">Senha de Administrador</label>
+          <input type="password" id="password" placeholder="Digite a senha" required>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+    </div>
+    
+    <!-- Editor Form -->
+    <div id="editor-section" class="card hidden">
+      <div id="message"></div>
+      
+      <form id="post-form">
+        <div class="form-group">
+          <label for="title">Título do Post *</label>
+          <input type="text" id="title" placeholder="Digite o título do post" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="excerpt">Resumo (opcional)</label>
+          <input type="text" id="excerpt" placeholder="Um breve resumo do conteúdo">
+          <p class="help-text">Aparece na listagem do blog</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="content">Conteúdo HTML *</label>
+          <textarea id="content" placeholder="Cole seu conteúdo HTML aqui...
+
+Exemplo:
+<h2>Subtítulo</h2>
+<p>Parágrafo de texto...</p>
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>" required></textarea>
+          <p class="help-text">Use tags HTML: &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;strong&gt;, &lt;em&gt;, etc.</p>
+        </div>
+        
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="published" checked>
+            <label for="published" style="margin-bottom: 0;">Publicar imediatamente</label>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn" id="submit-btn">Publicar Post</button>
+      </form>
+      
+      <div class="preview-section">
+        <h3 class="preview-title">Preview do Conteúdo</h3>
+        <div id="preview" class="preview-content">
+          <p style="color: #64748b;">O preview aparecerá aqui enquanto você digita...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuração - Project ID é público, mas dataset e API version podem ser configurados
+    // Nota: Credenciais sensíveis (senha e token) são tratadas server-side via Netlify Functions
+    const SANITY_PROJECT_ID = 'sszuldy6'; // Project ID é público no Sanity
+    const SANITY_DATASET = 'production';
+    const SANITY_API_VERSION = '2024-01-01';
+    
+    // Elementos
+    const loginSection = document.getElementById('login-section');
+    const editorSection = document.getElementById('editor-section');
+    const loginForm = document.getElementById('login-form');
+    const postForm = document.getElementById('post-form');
+    const messageDiv = document.getElementById('message');
+    const contentTextarea = document.getElementById('content');
+    const previewDiv = document.getElementById('preview');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    // Verificar se já está logado
+    if (sessionStorage.getItem('blog_admin_logged') === 'true') {
+      showEditor();
+    }
+    
+    // Login - Autenticação server-side via Netlify Function
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await fetch('/.netlify/functions/blog-auth', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          sessionStorage.setItem('blog_admin_logged', 'true');
+          showEditor();
+        } else {
+          alert('Senha incorreta!');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Erro ao fazer login. Tente novamente.');
+      }
+    });
+    
+    function showEditor() {
+      loginSection.classList.add('hidden');
+      editorSection.classList.remove('hidden');
+    }
+    
+    // Preview em tempo real
+    contentTextarea.addEventListener('input', () => {
+      const html = contentTextarea.value;
+      if (html.trim()) {
+        previewDiv.innerHTML = html;
+      } else {
+        previewDiv.innerHTML = '<p style="color: #64748b;">O preview aparecerá aqui enquanto você digita...</p>';
+      }
+    });
+    
+    // Converter HTML para Portable Text (formato do Sanity)
+    function htmlToPortableText(html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const blocks = [];
+      
+      function processNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent.trim();
+          if (text) {
+            return [{ _type: 'span', text, marks: [] }];
+          }
+          return [];
+        }
+        
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const tag = node.tagName.toLowerCase();
+          
+          // Headers
+          if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)) {
+            blocks.push({
+              _type: 'block',
+              _key: generateKey(),
+              style: tag,
+              children: [{ _type: 'span', _key: generateKey(), text: node.textContent, marks: [] }]
+            });
+            return [];
+          }
+          
+          // Paragraphs
+          if (tag === 'p') {
+            const children = [];
+            node.childNodes.forEach(child => {
+              if (child.nodeType === Node.TEXT_NODE) {
+                const text = child.textContent;
+                if (text) {
+                  children.push({ _type: 'span', _key: generateKey(), text, marks: [] });
+                }
+              } else if (child.nodeType === Node.ELEMENT_NODE) {
+                const childTag = child.tagName.toLowerCase();
+                const marks = [];
+                if (childTag === 'strong' || childTag === 'b') marks.push('strong');
+                if (childTag === 'em' || childTag === 'i') marks.push('em');
+                if (childTag === 'code') marks.push('code');
+                children.push({ _type: 'span', _key: generateKey(), text: child.textContent, marks });
+              }
+            });
+            if (children.length > 0) {
+              blocks.push({
+                _type: 'block',
+                _key: generateKey(),
+                style: 'normal',
+                children
+              });
+            }
+            return [];
+          }
+          
+          // Lists
+          if (tag === 'ul' || tag === 'ol') {
+            const listType = tag === 'ul' ? 'bullet' : 'number';
+            node.querySelectorAll('li').forEach(li => {
+              blocks.push({
+                _type: 'block',
+                _key: generateKey(),
+                style: 'normal',
+                listItem: listType,
+                children: [{ _type: 'span', _key: generateKey(), text: li.textContent, marks: [] }]
+              });
+            });
+            return [];
+          }
+          
+          // Blockquote
+          if (tag === 'blockquote') {
+            blocks.push({
+              _type: 'block',
+              _key: generateKey(),
+              style: 'blockquote',
+              children: [{ _type: 'span', _key: generateKey(), text: node.textContent, marks: [] }]
+            });
+            return [];
+          }
+          
+          // Processar filhos
+          node.childNodes.forEach(child => processNode(child));
+        }
+        
+        return [];
+      }
+      
+      doc.body.childNodes.forEach(node => processNode(node));
+      
+      // Se não conseguiu parsear, criar um bloco simples com o texto
+      if (blocks.length === 0) {
+        blocks.push({
+          _type: 'block',
+          _key: generateKey(),
+          style: 'normal',
+          children: [{ _type: 'span', _key: generateKey(), text: html.replace(/<[^>]*>/g, ''), marks: [] }]
+        });
+      }
+      
+      return blocks;
+    }
+    
+    function generateKey() {
+      return Math.random().toString(36).substr(2, 9);
+    }
+    
+    function generateSlug(title) {
+      return title
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+    
+    // Publicar post
+    postForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const title = document.getElementById('title').value.trim();
+      const excerpt = document.getElementById('excerpt').value.trim();
+      const content = document.getElementById('content').value.trim();
+      const published = document.getElementById('published').checked;
+      
+      if (!title || !content) {
+        showMessage('Preencha o título e o conteúdo.', 'error');
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Publicando...';
+      
+      try {
+        const body = htmlToPortableText(content);
+        const slug = generateSlug(title);
+        
+        // Criar post via Netlify Function (server-side) para proteger token
+        const response = await fetch('/.netlify/functions/create-post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title,
+            slug,
+            excerpt: excerpt || title,
+            body,
+            published
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+          showMessage(`Post "${title}" publicado com sucesso! Slug: ${slug}`, 'success');
+          postForm.reset();
+          previewDiv.innerHTML = '<p style="color: #64748b;">O preview aparecerá aqui enquanto você digita...</p>';
+        } else {
+          throw new Error(result.error || 'Erro ao publicar');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        showMessage('Erro ao publicar: ' + error.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Publicar Post';
+      }
+    });
+    
+    function showMessage(text, type) {
+      messageDiv.className = `message ${type}`;
+      messageDiv.textContent = text;
+      messageDiv.style.display = 'block';
+      
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
+

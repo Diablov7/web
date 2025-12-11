@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wevolv3 Blog | Web3 & Crypto Marketing</title>
+  <meta name="description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="canonical" href="https://wevolv3.com/blog">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Wevolv3 Blog | Web3 & Crypto Marketing">
+  <meta property="og:description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta property="og:url" content="https://wevolv3.com/blog">
+  <meta property="og:image" content="https://wevolv3.com/logo.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wevolv3 Blog | Web3 & Crypto Marketing">
+  <meta name="twitter:description" content="Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.">
+  <meta name="twitter:image" content="https://wevolv3.com/logo.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS (via CDN for simplicity in static file) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7E4GJ0QP9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E7E4GJ0QP9');
+  </script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#000000',
+            surface: '#050505',
+            primary: '#10b981',
+            secondary: '#3b82f6',
+            accent: '#8b5cf6',
+            text: '#ffffff',
+            textDim: '#a0a0a0',
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      height: auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Orbitron', monospace;
+    }
+    
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .text-glow {
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    
+    .border-glow {
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6, #10b981);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-move 10s ease infinite;
+    }
+    
+    @keyframes gradient-move {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    /* Animated gradient background effects */
+    .gradient-bg-animated {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15), transparent 50%),
+                  radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.15), transparent 50%);
+      background-size: 200% 200%;
+      animation: gradient-bg-move 15s ease infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes gradient-bg-move {
+      0% {
+        background-position: 0% 0%, 100% 100%;
+      }
+      50% {
+        background-position: 100% 100%, 0% 0%;
+      }
+      100% {
+        background-position: 0% 0%, 100% 100%;
+      }
+    }
+    
+    /* Animated border gradient */
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      background-size: 200% 200%;
+      animation: gradient-border-move 8s ease infinite;
+    }
+    
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: gradient-border-move 8s ease infinite;
+    }
+    
+    @keyframes gradient-border-move {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #10b981;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0e9f73;
+    }
+    
+    /* Text Selection */
+    ::selection {
+      background: rgba(16, 185, 129, 0.3);
+      color: #fff;
+    }
+    
+    ::-moz-selection {
+      background: rgba(16, 185, 129, 0.3);
+      color: #fff;
+    }
+    
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .fade-in-delay-1 { animation-delay: 0.1s; }
+    .fade-in-delay-2 { animation-delay: 0.2s; }
+    .fade-in-delay-3 { animation-delay: 0.3s; }
+    
+    /* Category filter active state */
+    .category-filter.active {
+      border-color: #10b981;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(59, 130, 246, 0.4));
+      border-color: #10b981;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* Enhanced Card Hover Effects */
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+    }
+    
+    /* Enhanced Search Input */
+    #search-input:focus {
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    /* Loading Animation Enhancement */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+      }
+    }
+    
+    #loading .animate-spin {
+      animation: spin 1s linear infinite, pulse-glow 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+      <body class="bg-black min-h-screen flex flex-col relative" style="overflow-x: hidden; overflow-y: auto;">
+  <!-- Animated Gradient Background -->
+  <div class="gradient-bg-animated"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+    <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3">
+        <img src="/logo.png" alt="Wevolv3" class="h-8 w-auto">
+        <div class="flex flex-col">
+          <span class="font-orbitron font-bold text-xl tracking-wider text-white">Wevolv3</span>
+          <span class="text-[10px] text-gray-400 tracking-widest uppercase">Web3 & Crypto Marketing</span>
+        </div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="/" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-wider">Home</a>
+        <a href="/#solutions" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-wider">Solutions</a>
+        <a href="/#packs" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-wider">Packs</a>
+        <a href="/blog" class="text-sm font-bold text-primary uppercase tracking-wider">Blog</a>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="/affiliate" class="px-5 py-2 border border-white/20 rounded hover:border-primary hover:text-primary transition-all text-sm font-medium uppercase tracking-wide">
+          Become an Affiliate
+        </a>
+        <a href="/contact" class="px-5 py-2 border border-white/20 rounded hover:bg-white hover:text-black transition-all text-sm font-medium uppercase tracking-wide">
+          Contact Us
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow pt-32 pb-20 px-6 relative z-10">
+    <div class="container mx-auto max-w-[95%] lg:max-w-[1600px]">
+      
+      <!-- Page Header -->
+      <div class="text-center mb-16 relative z-10">
+        <h1 class="font-orbitron font-black text-5xl md:text-6xl lg:text-7xl mb-6">
+          <span class="gradient-text">Wevolv3</span> <span class="text-white">Blog</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+          Insights, strategies, and cutting-edge knowledge from the world of Web3 marketing and growth.
+        </p>
+      </div>
+
+      <!-- Search and Filter Section -->
+      <div class="mb-12 relative z-10">
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
+          <!-- Search Bar -->
+          <div class="relative flex-1 max-w-md w-full">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Search articles..." 
+              class="w-full px-6 py-3 bg-surface border border-white/10 rounded-[14px] text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors font-orbitron"
+            >
+            <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          
+          <!-- Category Filter -->
+          <div class="flex gap-2 flex-wrap justify-center" id="category-filters">
+            <button class="category-filter px-4 py-2 bg-surface border border-white/10 rounded-[14px] text-white hover:border-primary hover:text-primary transition-all font-orbitron text-sm uppercase tracking-wide active" data-category="all">
+              All
+            </button>
+            <!-- Categories will be injected here -->
+          </div>
+        </div>
+        
+        <!-- Results Count -->
+        <div id="results-count" class="text-center text-gray-400 font-orbitron text-sm hidden">
+          <!-- Will show: "Showing X of Y articles" -->
+        </div>
+      </div>
+
+      <!-- Featured Article Label -->
+      <div class="text-center mb-8 relative z-10">
+        <h2 class="font-orbitron font-bold text-2xl text-primary tracking-wider uppercase">Featured Article</h2>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading" class="text-center py-20">
+        <div class="inline-block w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+        <p class="text-gray-400 text-lg animate-pulse">Loading blockchain data...</p>
+      </div>
+
+      <!-- Blog Grid -->
+      <div id="blog-grid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Featured Post (Spans Full Width) -->
+        <!-- Will be injected by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Social: X/Twitter, LinkedIn, Instagram -->
+  <footer id="wev-footer" style="position:relative;z-index:10">
+    <style id="wev-footer-styles">
+      .wev-social-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border-radius:9999px;text-decoration:none;color:#e2e8f0;position:relative;isolation:isolate;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(255,255,255,.06),0 0 0 1px rgba(255,255,255,.06);overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+      .wev-social-btn::before{content:"";position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.18) 100%);opacity:.18;pointer-events:none;mix-blend-mode:screen;transform:translateY(0);transition:transform .5s ease,opacity .5s ease}
+      .wev-social-btn:hover{border-color:rgba(255,255,255,.32);box-shadow:0 16px 52px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.12);transform:translateY(-1px)}
+      .wev-social-btn:hover::before{transform:translateY(-6px);opacity:.28}
+      .wev-social-btn:active{transform:translateY(0)}
+    </style>
+    <div style="max-width:1200px;margin:2rem auto;padding:0 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap">
+      <span style="font-family:Orbitron,monospace;font-weight:800;letter-spacing:.06em;color:#e2e8f0;opacity:.9;margin-right:.25rem">FOLLOW US</span>
+      <a href="https://x.com/wevolv3_media" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on X/Twitter" class="wev-social-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/company/wevol3-web3-marketing/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on LinkedIn" class="wev-social-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <circle cx="8" cy="10" r="1.2" fill="currentColor"/>
+          <rect x="7" y="12.5" width="2" height="6" rx="1" fill="currentColor"/>
+          <path d="M12 12.5h1.8a2.7 2.7 0 0 1 2.7 2.7V18.5h-2v-3.1c0-.7-.6-1.3-1.3-1.3H12v4.4h-2v-6Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/wevolv3.growth/" target="_blank" rel="noopener noreferrer" aria-label="Wevolv3 on Instagram" class="wev-social-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;padding:1.5rem 1rem 0;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;gap:1rem">
+      <p style="color:#6b7280;font-size:0.875rem;margin:0">&copy; 2024 Wevolv3. All rights reserved.</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center">
+        <a href="/privacy" style="color:#9ca3af;font-size:0.875rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">Privacy Policy</a>
+        <a href="/terms" style="color:#9ca3af;font-size:0.875rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">Terms</a>
+        <a href="/about" style="color:#9ca3af;font-size:0.875rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">About</a>
+        <a href="/contact" style="color:#9ca3af;font-size:0.875rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+
+  <script>
+    // Sanity Configuration
+    const PROJECT_ID = 'sszuldy6';
+    const DATASET = 'production';
+    const API_VERSION = '2024-01-01';
+    
+    const client = {
+      fetch: async (query) => {
+        try {
+          const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${encodeURIComponent(query)}`;
+          const res = await fetch(url);
+          
+          if (!res.ok) {
+            console.error('❌ Sanity API error:', res.status, res.statusText);
+            throw new Error(`Sanity API error: ${res.status} ${res.statusText}`);
+          }
+          
+          const json = await res.json();
+          
+          if (json.error) {
+            console.error('❌ Sanity query error:', json.error);
+            throw new Error(`Sanity query error: ${JSON.stringify(json.error)}`);
+          }
+          
+          return json.result || [];
+        } catch (error) {
+          console.error('❌ Error fetching from Sanity:', error);
+          throw error;
+        }
+      }
+    };
+
+    function urlFor(source) {
+      if (!source || !source.asset) return null;
+      const ref = source.asset._ref;
+      const [, id, dimensions, format] = ref.split('-');
+      return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dimensions}.${format}`;
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function estimateReadTime(blocks) {
+      if (!blocks) return 5;
+      const text = JSON.stringify(blocks);
+      const words = text.split(' ').length;
+      return Math.ceil(words / 200);
+    }
+
+    // Store all posts globally for filtering
+    window.allPosts = [];
+    
+    async function loadPosts() {
+      // First, check all posts (for debugging)
+      const debugQuery = `*[_type == "post"] {
+        title,
+        slug,
+        published,
+        publishedAt,
+        _id
+      }`;
+      
+      let allPosts = [];
+      try {
+        allPosts = await client.fetch(debugQuery);
+        console.log('📝 All posts in Sanity:', allPosts);
+        console.log('📊 Published posts:', allPosts.filter(p => p.published));
+        console.log('📊 Unpublished posts:', allPosts.filter(p => !p.published));
+      } catch (debugError) {
+        console.warn('⚠️ Debug query failed (this is OK):', debugError);
+      }
+
+      // Try multiple query variations to find posts
+      const query1 = `*[_type == "post" && published == true] | order(publishedAt desc) {
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        body,
+        "views": 120 + count(title) * 3,
+        categories[]->{title, _id}
+      }`;
+      
+      // Alternative query in case published field has different value
+      const query2 = `*[_type == "post" && defined(published) && published == true] | order(publishedAt desc) {
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        body,
+        "views": 120 + count(title) * 3,
+        categories[]->{title, _id}
+      }`;
+      
+      // Fallback: get all posts and filter in JS
+      const query3 = `*[_type == "post"] | order(publishedAt desc) {
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        body,
+        published,
+        "views": 120 + count(title) * 3,
+        categories[]->{title, _id}
+      }`;
+
+      try {
+        let posts = [];
+        
+        // Try first query
+        try {
+          posts = await client.fetch(query1);
+          console.log('✅ Query 1 result:', posts.length, 'posts');
+        } catch (e) {
+          console.warn('⚠️ Query 1 failed, trying query 2:', e);
+          try {
+            posts = await client.fetch(query2);
+            console.log('✅ Query 2 result:', posts.length, 'posts');
+          } catch (e2) {
+            console.warn('⚠️ Query 2 failed, trying query 3:', e2);
+            const allPosts = await client.fetch(query3);
+            // Filter in JavaScript
+            posts = allPosts.filter(p => p.published === true);
+            console.log('✅ Query 3 result:', posts.length, 'posts (filtered from', allPosts.length, 'total)');
+          }
+        }
+        
+        console.log('✅ Published posts found:', posts.length);
+        console.log('📄 Posts data:', posts);
+        
+        // Debug: log each post's published status
+        if (posts.length === 0 && allPosts.length > 0) {
+          console.log('🔍 Debugging published field:');
+          allPosts.forEach(p => {
+            console.log(`  - ${p.title}: published = ${p.published} (type: ${typeof p.published})`);
+          });
+        }
+        
+        const container = document.getElementById('blog-grid');
+        const loading = document.getElementById('loading');
+        
+        loading.classList.add('hidden');
+        container.classList.remove('hidden');
+
+        if (!posts || posts.length === 0) {
+          console.warn('⚠️ No published posts found, but allPosts has', allPosts.length);
+          
+          // If we have posts but they're not marked as published, show them anyway with a warning
+          if (allPosts.length > 0) {
+            console.log('⚠️ Showing unpublished posts as fallback');
+            const unpublishedPosts = await client.fetch(query3);
+            posts = unpublishedPosts.filter(p => p.published !== false); // Show if published is true or undefined
+            console.log('📄 Showing', posts.length, 'posts (including unpublished)');
+            
+            if (posts.length === 0) {
+              const debugInfo = `<p class="text-center col-span-3 text-gray-500 mb-4">No published articles found.</p>
+               <p class="text-center col-span-3 text-yellow-500 text-sm mb-4">Found ${allPosts.length} total post(s). Make sure to check the "Published" checkbox in Sanity Studio.</p>
+               <div class="text-center col-span-3">
+                 <a href="/studio" class="inline-block px-6 py-3 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-colors">
+                   Open Sanity Studio
+                 </a>
+               </div>`;
+              container.innerHTML = debugInfo;
+              return;
+            }
+          } else {
+            const debugInfo = '<p class="text-center col-span-3 text-gray-500">No articles found. Create your first post in <a href="/studio" class="text-primary hover:underline">Sanity Studio</a>.</p>';
+            container.innerHTML = debugInfo;
+            return;
+          }
+        }
+
+        // Store posts globally for filtering
+        window.allPosts = posts;
+        
+        // Render posts (will be called by filter function)
+        renderPosts(posts);
+        
+        console.log('✅ Blog rendered successfully with', posts.length, 'post(s)');
+
+      } catch (err) {
+        console.error('❌ Error loading posts:', err);
+        const container = document.getElementById('blog-grid');
+        const loading = document.getElementById('loading');
+        
+        loading.classList.add('hidden');
+        container.classList.remove('hidden');
+        
+        container.innerHTML = `
+          <div class="col-span-3 text-center p-8 bg-red-900/20 border border-red-500/50 rounded-[20px]">
+            <p class="text-red-400 font-bold mb-2">Error loading posts</p>
+            <p class="text-gray-400 text-sm mb-4">${err.message || 'Unknown error'}</p>
+            <button onclick="location.reload()" class="px-4 py-2 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-colors">
+              Retry
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Render Posts Function
+    function renderPosts(postsToRender, isFiltered = false) {
+      if (!postsToRender || postsToRender.length === 0) {
+        const container = document.getElementById('blog-grid');
+        container.innerHTML = `
+          <div class="col-span-3 text-center p-12">
+            <p class="text-gray-400 text-lg mb-4">No articles found.</p>
+            <button onclick="window.allPosts && renderPosts(window.allPosts)" class="px-6 py-3 bg-primary text-black rounded-[14px] hover:bg-primary/80 transition-colors">
+              Show All Articles
+            </button>
+          </div>
+        `;
+        document.getElementById('results-count').textContent = 'No articles found';
+        document.getElementById('results-count').classList.remove('hidden');
+        return;
+      }
+      
+      const container = document.getElementById('blog-grid');
+      const featured = postsToRender[0];
+      const otherPosts = postsToRender.slice(1);
+      
+      // Update results count
+      const totalPosts = window.allPosts ? window.allPosts.length : postsToRender.length;
+      document.getElementById('results-count').textContent = isFiltered 
+        ? `Showing ${postsToRender.length} of ${totalPosts} articles`
+        : `${totalPosts} articles`;
+      document.getElementById('results-count').classList.remove('hidden');
+      
+      const featuredSlug = featured.slug?.current || featured.slug || 'no-slug';
+      const featuredHtml = `
+        <div class="col-span-1 md:col-span-2 lg:col-span-3 mb-8 fade-in">
+          <a href="/blog/${featuredSlug}" class="group block relative bg-surface border border-white/10 rounded-[20px] overflow-hidden hover:border-primary/50 transition-all duration-300 card-hover">
+            <div class="relative h-[400px] w-full overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-80"></div>
+              <img src="${urlFor(featured.mainImage) || 'https://placehold.co/1200x600/101010/FFF?text=Wevolv3'}" 
+                   alt="${featured.title}" 
+                   loading="lazy"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+              <h3 class="font-orbitron font-bold text-3xl md:text-4xl text-white mb-4 group-hover:text-primary transition-colors">
+                ${featured.title || 'Untitled Post'}
+              </h3>
+              
+              <div class="flex items-center gap-6 text-gray-400 text-sm md:text-base">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  ${estimateReadTime(featured.body)} min read
+                </span>
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  ${featured.publishedAt ? formatDate(featured.publishedAt) : 'No date'}
+                </span>
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.168 2.943 9.542 7-1.374 4.057-5.164 7-9.542 7-4.477 0-8.168-2.943-9.542-7z"/></svg>
+                  ${featured.views || 0} views
+                </span>
+              </div>
+
+              <p class="mt-4 text-gray-300 line-clamp-2 max-w-3xl text-lg">
+                ${featured.excerpt || 'Read the latest insights from Wevolv3 about Web3 marketing and growth strategies.'}
+              </p>
+
+              <div class="mt-6 flex items-center text-primary font-bold uppercase tracking-wider text-sm group-hover:translate-x-2 transition-transform">
+                Read More <span class="ml-2">→</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      `;
+
+      const otherPostsHtml = otherPosts.map((post, index) => {
+        const postSlug = post.slug?.current || post.slug || 'no-slug';
+        return `
+          <a href="/blog/${postSlug}" class="group bg-surface border border-white/10 rounded-[20px] overflow-hidden hover:border-primary/50 transition-all duration-300 card-hover flex flex-col h-full fade-in fade-in-delay-${Math.min(index + 1, 3)}">
+            <div class="relative h-48 overflow-hidden">
+              <div class="absolute inset-0 bg-black/20 z-10 group-hover:bg-transparent transition-colors"></div>
+              <img src="${urlFor(post.mainImage) || 'https://placehold.co/600x400/101010/FFF?text=Wevolv3'}" 
+                   alt="${post.title}" 
+                   loading="lazy"
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-orbitron font-bold text-xl text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                ${post.title || 'Untitled Post'}
+              </h3>
+              
+              <p class="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+                ${post.excerpt || 'No excerpt available.'}
+              </p>
+              
+              <div class="flex items-center justify-between pt-4 border-t border-white/5 text-xs text-gray-500 uppercase tracking-wider">
+                <span>${post.publishedAt ? formatDate(post.publishedAt) : 'No date'}</span>
+                <span class="text-primary group-hover:translate-x-1 transition-transform">Read Article →</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      container.innerHTML = featuredHtml + otherPostsHtml;
+      
+      // Setup animations for newly rendered cards
+      if (window.setupCardAnimations) {
+        setTimeout(() => {
+          window.setupCardAnimations();
+        }, 100);
+      }
+    }
+    
+    // Setup Search and Filter
+    function setupSearchAndFilter() {
+      const searchInput = document.getElementById('search-input');
+      const categoryFilters = document.querySelectorAll('.category-filter');
+      
+      let currentCategory = 'all';
+      let currentSearch = '';
+      
+      // Search functionality
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentSearch = e.target.value.toLowerCase().trim();
+          filterPosts();
+        });
+      }
+      
+      // Category filter functionality
+      categoryFilters.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryFilters.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-category');
+          filterPosts();
+        });
+      });
+      
+      function filterPosts() {
+        if (!window.allPosts || window.allPosts.length === 0) return;
+        
+        let filtered = window.allPosts.filter(post => {
+          // Category filter
+          if (currentCategory !== 'all') {
+            const hasCategory = post.categories && post.categories.some(cat => 
+              cat && cat.title && cat.title.toLowerCase() === currentCategory.toLowerCase()
+            );
+            if (!hasCategory) return false;
+          }
+          
+          // Search filter
+          if (currentSearch) {
+            const searchText = currentSearch;
+            const matchesTitle = post.title && post.title.toLowerCase().includes(searchText);
+            const matchesExcerpt = post.excerpt && post.excerpt.toLowerCase().includes(searchText);
+            if (!matchesTitle && !matchesExcerpt) return false;
+          }
+          
+          return true;
+        });
+        
+        // Re-render with filtered posts
+        renderPosts(filtered, currentCategory !== 'all' || currentSearch !== '');
+        // Re-setup animations for new cards
+        setTimeout(setupCardAnimations, 100);
+      }
+      
+      // Make filterPosts available globally
+      window.filterPosts = filterPosts;
+    }
+
+    // Setup Back to Top Button
+    function setupBackToTop() {
+      const button = document.getElementById('back-to-top');
+      if (!button) return;
+      
+      function toggleButton() {
+        if (window.pageYOffset > 300) {
+          button.classList.add('visible');
+        } else {
+          button.classList.remove('visible');
+        }
+      }
+      
+      window.addEventListener('scroll', toggleButton);
+      toggleButton();
+      
+      button.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Enhanced fade-in for cards
+    function setupCardAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      
+      // Observe all cards
+      setTimeout(() => {
+        document.querySelectorAll('#blog-grid > *').forEach(card => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          observer.observe(card);
+        });
+      }, 100);
+    }
+    
+    // Make setupCardAnimations available globally
+    window.setupCardAnimations = setupCardAnimations;
+    
+    // Initialize everything
+    setupBackToTop();
+    setupSearchAndFilter();
+    
+    // Load posts and setup animations after
+    loadPosts();
+    
+    // Setup card animations after a delay to ensure posts are rendered
+    setTimeout(() => {
+      setupCardAnimations();
+    }, 1000);
+    
+    // Garantir que a URL seja /blog (sem .html)
+    (function() {
+      if (window.history && window.history.replaceState) {
+        if (window.location.pathname.includes('blog.html')) {
+          window.history.replaceState(null, '', '/blog');
+        }
+        if (window.location.pathname === '/blog/') {
+          window.history.replaceState(null, '', '/blog');
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
