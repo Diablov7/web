@@ -497,8 +497,8 @@
         <!-- Sanity Blog Integration -->
         <script>
             (function() {
-                const SANITY_PROJECT_ID = 'sszuldy6';
-                const SANITY_DATASET = 'production';
+                const projectId = 'sszuldy6';
+                const dataset = 'production';
                 const SANITY_API_VERSION = '2024-01-01';
                 
                 // Função para buscar posts do Sanity
@@ -518,7 +518,7 @@
                             "readTime": round(length(pt::text(body)) / 5 / 180)
                         }`;
                         
-                        const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+                        const url = `https://${projectId}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
                         const res = await fetch(url);
                         
                         if (!res.ok) {
@@ -538,7 +538,7 @@
                             const parts = ref.split('-');
                             if (parts.length < 4) return null;
                             const [, id, dimensions, format] = parts;
-                            return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${id}-${dimensions}.${format}`;
+                            return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
                         }
                         
                         // Transformar para o formato esperado
