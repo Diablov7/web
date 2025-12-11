@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html data-wf-page="667187163156a5df09557ed5" lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+        <!-- Dynamic meta tags will be updated by JavaScript -->
+        <title>Blog - Wevolv3 | Web3 Marketing & Modular Advertising Agency</title>
+        <meta name="description" content="Read this article about Web3 marketing and growth strategies for blockchain projects.">
+        <meta name="robots" content="index, follow">
+        
+        <!-- Open Graph (will be updated dynamically) -->
+        <meta property="og:type" content="article">
+        <meta property="og:title" id="og-title" content="Blog - Wevolv3">
+        <meta property="og:description" id="og-description" content="Read this article about Web3 marketing.">
+        <meta property="og:url" id="og-url" content="https://wevolv3.com/blog">
+        <meta property="og:image" id="og-image" content="images/LOGO.PNG">
+        
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" id="tw-title" content="Blog - Wevolv3">
+        <meta name="twitter:description" id="tw-description" content="Read this article about Web3 marketing.">
+        <meta name="twitter:image" id="tw-image" content="images/LOGO.PNG">
+        
+        <!-- Canonical URL (will be updated dynamically) -->
+        <link rel="canonical" id="canonical-url" href="https://wevolv3.com/blog">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css?v=force_update_4" rel="stylesheet" type="text/css" />
+
+        <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="images/webclip.png" rel="apple-touch-icon" />
+        
+        <style>
+            /* IMPORTANT: Disable hero video on single blog post page */
+            .hero-video-bg,
+            .hero-section::after,
+            .hero-section video {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+            
+            .hero-section {
+                background: transparent !important;
+                position: static !important;
+            }
+            
+            body {
+                background-color: #000000 !important;
+            }
+            
+            /* Loading State */
+            .post-loading {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 100px 20px;
+                text-align: center;
+            }
+            .post-loading .spinner {
+                width: 50px;
+                height: 50px;
+                border: 3px solid rgba(16, 185, 129, 0.2);
+                border-top-color: #10b981;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-bottom: 20px;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            .post-loading-text {
+                color: #888;
+                font-size: 16px;
+            }
+            
+            /* Error State */
+            .post-error {
+                text-align: center;
+                padding: 100px 20px;
+            }
+            .post-error h3 {
+                color: #ff6b6b;
+                margin-bottom: 15px;
+            }
+            .post-error p {
+                color: #888;
+                margin-bottom: 20px;
+            }
+            .post-error .back-link {
+                color: #10b981;
+                text-decoration: underline;
+            }
+            
+            /* Post Content Typography */
+            .single-post-text-cell .w-richtext {
+                font-size: 16px;
+                line-height: 1.8;
+                color: #ccc;
+            }
+            .single-post-text-cell .w-richtext p {
+                margin-bottom: 18px;
+                font-size: 16px;
+            }
+            .single-post-text-cell .w-richtext h1,
+            .single-post-text-cell .w-richtext h2,
+            .single-post-text-cell .w-richtext h3,
+            .single-post-text-cell .w-richtext h4 {
+                font-size: 20px;
+                margin-top: 35px;
+                margin-bottom: 15px;
+                color: #fff;
+                font-weight: 600;
+            }
+            .single-post-text-cell .w-richtext a {
+                color: #fff;
+                font-weight: 700;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(255,255,255,0.3);
+                transition: border-color 0.2s ease;
+            }
+            .single-post-text-cell .w-richtext a:hover {
+                border-bottom-color: #fff;
+            }
+            .single-post-text-cell .w-richtext blockquote {
+                border-left: 3px solid #10b981;
+                padding-left: 20px;
+                margin: 25px 0;
+                font-style: italic;
+                color: #aaa;
+                font-size: 15px;
+            }
+            .single-post-text-cell .w-richtext ul,
+            .single-post-text-cell .w-richtext ol {
+                margin-bottom: 18px;
+                padding-left: 25px;
+            }
+            .single-post-text-cell .w-richtext li {
+                margin-bottom: 8px;
+                font-size: 16px;
+                line-height: 1.7;
+            }
+            .single-post-text-cell .w-richtext strong {
+                color: #fff;
+                font-weight: 600;
+            }
+            .single-post-text-cell .w-richtext em {
+                font-style: italic;
+            }
+            .single-post-text-cell .w-richtext img {
+                max-width: 100%;
+                border-radius: 8px;
+                margin: 25px 0;
+            }
+            
+            /* Related Posts Section */
+            .related-posts-section {
+                padding: 60px 0;
+                background: #0a0a0a;
+            }
+            .related-posts-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+                color: #fff;
+                font-family: inherit;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .related-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+            .related-card {
+                background: #1a1a1a;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-decoration: none;
+            }
+            .related-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+            }
+            .related-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+            .related-card-content {
+                padding: 25px;
+            }
+            .related-card h4 {
+                font-size: 18px;
+                margin-bottom: 10px;
+                color: #fff;
+                line-height: 1.4;
+            }
+            .related-card p {
+                font-size: 14px;
+                color: #888;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="cursor-wrapp">
+            <div class="cursor-emmbed w-embed">
+                <style>
+                    .cursor-wrapp {
+                        pointer-events: none;
+                    }
+                </style>
+            </div>
+            <div data-w-id="darkyn-cursor" class="cursor">
+                <div class="project-cursor-text">
+                    View<br />
+                    Work
+                </div>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <div id="home" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="header-inner w-nav">
+                    <a href="index.html" class="logo w-inline-block">
+                        <img src="images/LOGO.PNG?v=4" alt="Wevolv3" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                        <span class="logo-text-fallback" style="display:none; color: white; font-family: 'Orbitron', monospace; font-weight: 900; font-size: 28px; text-transform: uppercase; letter-spacing: 0.1em;">WEVOLV3</span>
+                    </a>
+                    <nav role="navigation" class="main-menu w-nav-menu">
+                        <a href="index.html" class="menu-item w-nav-link">Home</a>
+                        <a href="about.html" class="menu-item w-nav-link">About</a>
+                        <a href="works.html" class="menu-item w-nav-link">work</a>
+                        <a href="blog.html" aria-current="page" class="menu-item w-nav-link w--current">blog</a>
+                        <a href="contact.html" class="menu-item w-nav-link">contact</a>
+                    </nav>
+                    <div class="menu-button w-nav-button">
+                        <div class="icon w-icon-nav-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="sitemap">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <div class="inner-sitemap">
+                    <h2 data-w-id="darkyn25" style="opacity: 0;" class="sitemap-heading">Blog</h2>
+                    <div data-w-id="darkyn26" style="opacity: 0;" class="stemap-text">Who We are and what we do</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Loading State -->
+        <div id="post-loading" class="post-loading">
+            <div class="spinner"></div>
+            <p class="post-loading-text">Loading article...</p>
+        </div>
+
+        <!-- Error State (hidden by default) -->
+        <div id="post-error" class="post-error" style="display: none;">
+            <h3>Article not found</h3>
+            <p id="error-message">Could not load article.</p>
+            <a href="blog.html" class="back-link">← Back to Blog</a>
+        </div>
+
+        <!-- Post Content (hidden by default) - Using original Darkyn template style -->
+        <div id="post-content" class="single-post-section" style="display: none;">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <div id="darkyn42" class="w-layout-layout single-stack wf-layout-layout">
+                    <div class="w-layout-cell signel-post-image-cell">
+                        <div class="single-img-wrapper">
+                            <div class="single-upper">
+                                <div class="blog-author-and-category">
+                                    <span id="post-category" class="blog-category-2 single-category w--current">Web3</span>
+                                </div>
+                                <h1 id="post-title" class="single-blog-heading">Loading...</h1>
+                            </div>
+                            <img
+                                id="post-image"
+                                src="images/post1.jpg"
+                                alt=""
+                                class="single-post-img"
+                            />
+                        </div>
+                    </div>
+                    <div class="w-layout-cell single-post-text-cell">
+                        <div id="post-body" class="w-richtext">
+                            <!-- Post content will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Posts Section -->
+        <div id="related-section" class="related-posts-section" style="display: none;">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <h3 class="related-posts-title" style="font-family: inherit; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Related Articles</h3>
+                <div id="related-grid" class="related-grid">
+                    <!-- Related posts will be rendered here -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <div class="inner-footer">
+                    <a data-w-id="darkyn02" href="mailto:contact@wevolv3.com" class="mail-link">contact@wevolv3.com</a>
+                    <a data-w-id="darkyn03" href="https://t.me/wevolv3" target="_blank" class="phone-link">@wevolv3</a>
+                    <div data-w-id="darkyn04" class="socials">
+                        <a href="https://x.com/wevolv3" target="_blank" class="social-link w-inline-block">
+                            <div class="social-text">X</div>
+                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                        </a>
+                        <a href="https://www.linkedin.com/company/wevol3-web3-marketing" target="_blank" class="social-link w-inline-block">
+                            <div class="social-text">linkedin</div>
+                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                        </a>
+                        <a href="https://t.me/wevolv3" target="_blank" class="social-link w-inline-block">
+                            <div class="social-text">telegram</div>
+                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                        </a>
+                        <a href="blog.html" class="social-link last-social w-inline-block">
+                            <div class="social-text">blog</div>
+                            <img src="images/arrow-down-right.png" alt="" class="social-arrow" />
+                        </a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <div data-w-id="darkyn05" class="copyright-text">
+                        2025 Wevolv3. All rights reserved.
+                    </div>
+                    <div data-w-id="darkyn06" class="right-copyright">
+                        <a href="#home" class="backtotop w-inline-block"><img src="images/back-top_1back-top.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/plugins.js" type="text/javascript"></script>
+
+        <script>
+            // ========================================
+            // SANITY SINGLE POST INTEGRATION
+            // ========================================
+            
+            // Sanity Configuration
+            // Updated: Using apicdn for better CORS handling
+            const projectId = 'sszuldy6';
+            const dataset = 'production';
+            const apiVersion = '2024-01-01';
+            
+            // Sanity Client
+            const sanityClient = {
+                fetch: async (query) => {
+                    // Use apicdn for better performance and CORS handling
+                    const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+                    console.log('Fetching single post from:', url);
+                    
+                    try {
+                        const response = await fetch(url);
+                        
+                        if (!response.ok) {
+                             if (response.status === 0 || response.status === 401 || response.status === 403) {
+                                throw new Error(`CORS/Permission Error. Add ${window.location.origin} to Sanity CORS Origins.`);
+                            }
+                            throw new Error(`Sanity API error: ${response.status}`);
+                        }
+                        
+                        const json = await response.json();
+                        return json.result;
+                    } catch (error) {
+                        console.error('❌ Fetch error:', error);
+                        // Show visible error to user
+                        const errorEl = document.getElementById('error-message');
+                        if (errorEl) errorEl.textContent = `Error: ${error.message}`;
+                        throw error;
+                    }
+                }
+            };
+            
+            // Helper: Generate image URL from Sanity image reference
+            function sanityImageUrl(source) {
+                if (!source || !source.asset) return 'images/post1.jpg';
+                const ref = source.asset._ref;
+                const [, id, dimensions, format] = ref.split('-');
+                return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+            }
+            
+            // Helper: Format date
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    day: '2-digit',
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+            }
+            
+            // Helper: Convert Portable Text to HTML
+            function portableTextToHtml(blocks) {
+                if (!blocks || !Array.isArray(blocks)) return '<p>Content not available.</p>';
+                
+                let html = '';
+                let inList = false;
+                let listType = '';
+                
+                blocks.forEach((block, index) => {
+                    // Handle images
+                    if (block._type === 'image') {
+                        if (inList) {
+                            html += listType === 'bullet' ? '</ul>' : '</ol>';
+                            inList = false;
+                        }
+                        const imageUrl = sanityImageUrl(block);
+                        html += `<img src="${imageUrl}" alt="${block.alt || ''}" loading="lazy" style="max-width: 100%; border-radius: 10px; margin: 30px 0;" />`;
+                        return;
+                    }
+                    
+                    if (block._type !== 'block') return;
+                    
+                    // Get text content with marks
+                    const text = (block.children || []).map(child => {
+                        let content = child.text || '';
+                        
+                        if (child.marks && child.marks.length > 0) {
+                            child.marks.forEach(mark => {
+                                if (mark === 'strong') {
+                                    content = `<strong>${content}</strong>`;
+                                } else if (mark === 'em') {
+                                    content = `<em>${content}</em>`;
+                                } else if (mark === 'code') {
+                                    content = `<code>${content}</code>`;
+                                } else if (mark === 'underline') {
+                                    content = `<u>${content}</u>`;
+                                }
+                            });
+                            
+                            // Handle links
+                            if (block.markDefs) {
+                                child.marks.forEach(markKey => {
+                                    const markDef = block.markDefs.find(m => m._key === markKey);
+                                    if (markDef && markDef._type === 'link') {
+                                        content = `<a href="${markDef.href}" target="_blank" rel="noopener">${content}</a>`;
+                                    }
+                                });
+                            }
+                        }
+                        
+                        return content;
+                    }).join('');
+                    
+                    // Handle lists
+                    if (block.listItem) {
+                        if (!inList || listType !== block.listItem) {
+                            if (inList) {
+                                html += listType === 'bullet' ? '</ul>' : '</ol>';
+                            }
+                            html += block.listItem === 'bullet' ? '<ul>' : '<ol>';
+                            inList = true;
+                            listType = block.listItem;
+                        }
+                        html += `<li>${text}</li>`;
+                        return;
+                    } else if (inList) {
+                        html += listType === 'bullet' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    
+                    // Handle different block styles
+                    switch (block.style) {
+                        case 'h1':
+                            html += `<h1>${text}</h1>`;
+                            break;
+                        case 'h2':
+                            html += `<h4>${text}</h4>`;
+                            break;
+                        case 'h3':
+                            html += `<h4>${text}</h4>`;
+                            break;
+                        case 'h4':
+                            html += `<h4>${text}</h4>`;
+                            break;
+                        case 'blockquote':
+                            html += `<blockquote>${text}</blockquote>`;
+                            break;
+                        case 'normal':
+                        default:
+                            if (text.trim()) {
+                                html += `<p>${text}</p>`;
+                            } else {
+                                html += '<p>&zwj;</p>';
+                            }
+                    }
+                });
+                
+                // Close any remaining list
+                if (inList) {
+                    html += listType === 'bullet' ? '</ul>' : '</ol>';
+                }
+                
+                return html;
+            }
+            
+            // Helper: Update meta tags for SEO
+            function updateMetaTags(post) {
+                const title = post.title || 'Blog - Wevolv3';
+                const description = post.excerpt || 'Read this article about Web3 marketing and growth strategies.';
+                const imageUrl = sanityImageUrl(post.mainImage);
+                const slug = post.slug?.current || post.slug;
+                const url = `https://wevolv3.com/blog/${slug}`;
+                
+                document.title = `${title} | Wevolv3 Blog`;
+                
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.content = description;
+                
+                document.getElementById('og-title').content = title;
+                document.getElementById('og-description').content = description;
+                document.getElementById('og-url').content = url;
+                document.getElementById('og-image').content = imageUrl;
+                
+                document.getElementById('tw-title').content = title;
+                document.getElementById('tw-description').content = description;
+                document.getElementById('tw-image').content = imageUrl;
+                
+                document.getElementById('canonical-url').href = url;
+            }
+            
+            // Main: Load single post
+            async function loadPost() {
+                const loadingEl = document.getElementById('post-loading');
+                const errorEl = document.getElementById('post-error');
+                const contentEl = document.getElementById('post-content');
+                const relatedEl = document.getElementById('related-section');
+                
+                // Get slug from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const slug = urlParams.get('slug');
+                
+                if (!slug) {
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'block';
+                    document.getElementById('error-message').textContent = 'No article specified.';
+                    return;
+                }
+                
+                // Sanitize slug
+                const sanitizedSlug = slug.replace(/['"<>]/g, '');
+                
+                try {
+                    // Query for the post
+                    const query = `*[_type == "post" && slug.current == "${sanitizedSlug}" && published == true][0] {
+                        title,
+                        slug,
+                        excerpt,
+                        mainImage,
+                        publishedAt,
+                        body,
+                        categories[]->{title, _id}
+                    }`;
+                    
+                    let post = await sanityClient.fetch(query);
+                    
+                    // Fallback: try without published filter
+                    if (!post) {
+                        const fallbackQuery = `*[_type == "post" && slug.current == "${sanitizedSlug}"][0] {
+                            title,
+                            slug,
+                            excerpt,
+                            mainImage,
+                            publishedAt,
+                            body,
+                            published,
+                            categories[]->{title, _id}
+                        }`;
+                        post = await sanityClient.fetch(fallbackQuery);
+                    }
+                    
+                    if (!post || !post.title) {
+                        throw new Error('Post not found');
+                    }
+                    
+                    // Update SEO meta tags
+                    updateMetaTags(post);
+                    
+                    // Populate content
+                    document.getElementById('post-title').textContent = post.title || 'No title';
+                    document.getElementById('post-category').textContent = post.categories?.[0]?.title || 'Web3';
+                    document.getElementById('post-image').src = sanityImageUrl(post.mainImage);
+                    document.getElementById('post-image').alt = post.title || '';
+                    document.getElementById('post-body').innerHTML = portableTextToHtml(post.body);
+                    
+                    // Hide loading, show content
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'none';
+                    contentEl.style.display = 'block';
+                    
+                    // Load related posts
+                    loadRelatedPosts(sanitizedSlug);
+                    
+                    console.log('✅ Post loaded:', post.title);
+                    
+                } catch (error) {
+                    console.error('❌ Error loading post:', error);
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'block';
+                    document.getElementById('error-message').textContent = 'Could not load article.';
+                }
+            }
+            
+            // Load related posts
+            async function loadRelatedPosts(currentSlug) {
+                try {
+                    const query = `*[_type == "post" && published == true && slug.current != "${currentSlug}"] | order(publishedAt desc) [0...3] {
+                        title,
+                        slug,
+                        excerpt,
+                        mainImage,
+                        publishedAt
+                    }`;
+                    
+                    const posts = await sanityClient.fetch(query);
+                    
+                    if (!posts || posts.length === 0) return;
+                    
+                    const relatedSection = document.getElementById('related-section');
+                    const relatedGrid = document.getElementById('related-grid');
+                    
+                    const html = posts.map(post => {
+                        const slug = post.slug?.current || post.slug;
+                        return `
+                            <a href="singleblog.html?slug=${encodeURIComponent(slug)}" class="related-card">
+                                <img src="${sanityImageUrl(post.mainImage)}" alt="${post.title || ''}" loading="lazy" />
+                                <div class="related-card-content">
+                                    <h4>${post.title || 'No title'}</h4>
+                                    <p>${formatDate(post.publishedAt)}</p>
+                                </div>
+                            </a>
+                        `;
+                    }).join('');
+                    
+                    relatedGrid.innerHTML = html;
+                    relatedSection.style.display = 'block';
+                    
+                } catch (error) {
+                    console.error('Error loading related posts:', error);
+                }
+            }
+            
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', loadPost);
+        </script>
+
+    </body>
+
+</html>
+
