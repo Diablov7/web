@@ -1,33 +1,55 @@
-# Wevolv3 Official Website
+# Wevolv3 - Web3 Marketing & Modular Advertising Agency
 
 ## 🚀 Digital Reality - Transforming Your Vision into Digital Reality
 
-Site oficial da Wevolv3 com foco em soluções digitais inovadoras e experiência Desktop Faithful Mobile.
+Site oficial da Wevolv3 com foco em marketing Web3 e publicidade modular.
 
 ## 📋 Sobre o Projeto
 
-- **Framework**: React + Vite
-- **Estilo**: TailwindCSS + Glass Morphism
-- **PWA**: Service Worker + Manifest
-- **Mobile**: Desktop Faithful Mobile Experience
-- **Deploy**: Otimizado para Netlify/Vercel/GitHub Pages
+- **Tipo**: Site estático HTML/CSS/JS
+- **Estilo**: Design moderno com animações suaves
+- **Blog**: Integrado com Sanity CMS
+- **Deploy**: Otimizado para Netlify
 
 ## 🎯 Características
 
-- ✅ PWA (Progressive Web App)
-- ✅ Desktop Faithful Mobile
-- ✅ Otimizações de Performance
-- ✅ SEO Otimizado
-- ✅ Carrossel Mobile/Tablet
-- ✅ Animações Suaves
-- ✅ Glass Morphism Design
+- ✅ Site estático de alta performance
+- ✅ Blog integrado com Sanity CMS
+- ✅ Design responsivo
+- ✅ SEO otimizado
+- ✅ Animações suaves
+- ✅ Vídeo de background no hero
+- ✅ Integração com Telegram e redes sociais
+
+## 📁 Estrutura
+
+```
+/
+├── index.html          # Página principal
+├── about.html          # Sobre nós
+├── works.html          # Portfólio
+├── blog.html           # Lista de artigos (Sanity)
+├── singleblog.html     # Artigo individual (Sanity)
+├── contact.html        # Contato
+├── singlework.html     # Projeto individual
+├── css/                # Estilos CSS
+│   ├── normalize.css
+│   ├── layout.css
+│   └── style.css
+├── js/                 # JavaScript
+│   ├── jquery.min.js
+│   └── plugins.js
+├── images/             # Imagens
+├── fonts/              # Fontes customizadas
+└── netlify.toml        # Configuração Netlify
+```
 
 ## 🛠️ Deploy
 
-### Netlify/Vercel
-1. Conecte este repositório
-2. Configure build command: `npm run build` (se usar fonte)
-3. Publish directory: `.` (este projeto já está buildado)
+### Netlify (Recomendado)
+1. Conecte este repositório ao Netlify
+2. Não é necessário comando de build (site estático)
+3. Publish directory: `.`
 
 ### GitHub Pages
 1. Vá em Settings > Pages
@@ -39,32 +61,30 @@ Site oficial da Wevolv3 com foco em soluções digitais inovadoras e experiênci
 - Configure como site estático
 - Aponte para `index.html`
 
-## 📁 Estrutura
-
-```
-/
-├── index.html              # Página principal
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service Worker
-├── assets/                 # JS/CSS compilados
-├── image-ring/             # Imagens dos serviços
-└── *.css                   # Estilos mobile
-```
-
 ## 🌐 Links
 
 - **Site**: [wevolv3.com](https://wevolv3.com)
-- **Contato**: contato@wevolv3.com
+- **Contato**: contact@wevolv3.com
+- **Telegram**: [@wevolv3](https://t.me/wevolv3)
+- **X (Twitter)**: [@wevolv3](https://x.com/wevolv3)
+- **LinkedIn**: [Wevolv3](https://www.linkedin.com/company/wevol3-web3-marketing)
 
-## 📱 Mobile Experience
+## 📱 Blog
 
-Este site utiliza a tecnologia **Desktop Faithful Mobile**, proporcionando uma experiência desktop completa em dispositivos móveis com:
+O blog é integrado com Sanity CMS. Os artigos são carregados dinamicamente via API.
 
-- Layout desktop preservado
-- Carrossel touch para navegação
-- Otimizações de performance
-- Scrolling horizontal inteligente
+### Configuração do Sanity
+- Project ID: `sszuldy6`
+- Dataset: `production`
+- CORS Origins: Adicione seu domínio em [sanity.io/manage](https://www.sanity.io/manage/project/sszuldy6)
 
----
+## 🎨 Cores do Projeto
 
-**© 2025 Wevolv3 - Digital Reality**
+- **Teal (Principal)**: `#10b981`
+- **Azul (Destaques)**: `#3b82f6`
+- **Preto (Background)**: `#000000`
+- **Cinza (Bordas)**: `#292929`
+
+## 📄 Licença
+
+© 2025 Wevolv3. All rights reserved.
