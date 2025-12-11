@@ -43,6 +43,13 @@ console.log('🔄 Buscando posts do Sanity...');
 https.get(url, (res) => {
   let data = '';
 
+  // Verificar status da resposta
+  if (res.statusCode !== 200) {
+    console.error(`❌ Erro HTTP: ${res.statusCode}`);
+    console.error(`   URL: ${url}`);
+    process.exit(1);
+  }
+
   res.on('data', (chunk) => {
     data += chunk;
   });
@@ -50,6 +57,13 @@ https.get(url, (res) => {
   res.on('end', () => {
     try {
       const result = JSON.parse(data);
+      
+      // Verificar se há erro na resposta
+      if (result.error) {
+        console.error('❌ Erro na API do Sanity:', result.error);
+        process.exit(1);
+      }
+      
       const posts = result.result || [];
 
       console.log(`✅ Encontrados ${posts.length} posts`);
