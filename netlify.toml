@@ -14,14 +14,19 @@
   for = "/*.html"
   [headers.values]
     X-Frame-Options = "DENY"
-  except = "/studio.html"
 
-# Headers para Sanity Studio (permitir iframe)
+# Headers para Sanity Studio - permitir carregamento
 [[headers]]
-  for = "/studio.html"
+  for = "/studio/*"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     Content-Security-Policy = "frame-ancestors 'self' https://*.sanity.io;"
+
+# Sanity Studio JS - Force content type
+[[headers]]
+  for = "/studio/static/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
 
 [[headers]]
   for = "/*.js"
@@ -39,16 +44,19 @@
   to = "/singleblog.html"
   status = 200
 
-# Sanity Studio - Editor do blog (redirect to Sanity Studio)
-# Using workspace URL to avoid X-Frame-Options issues
+# Sanity Studio - Servir localmente como SPA
+# Arquivos estáticos têm prioridade
 [[redirects]]
-  from = "/studio"
-  to = "https://www.sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
-  status = 301
-  force = true
+  from = "/studio/static/*"
+  to = "/studio/static/:splat"
+  status = 200
 
 [[redirects]]
   from = "/studio/*"
-  to = "https://www.sanity.io/@omH6dEUOk/studio/oz6fuqwi7pfb9q46syts438l/default"
-  status = 301
-  force = true
+  to = "/studio/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/studio"
+  to = "/studio/index.html"
+  status = 200
