@@ -1,0 +1,18 @@
+{
+  "name": "wevolv3-website",
+  "version": "1.0.0",
+  "description": "Wevolv3 Website - Web3 Marketing & Modular Advertising Agency",
+  "scripts": {
+    "generate-sitemap": "node generate-sitemap.js",
+    "build": "node generate-sitemap.js"
+  },
+  "keywords": [
+    "wevolv3",
+    "web3",
+    "marketing"
+  ],
+  "author": "Wevolv3",
+  "license": "UNLICENSED",
+  "private": true
+}
+

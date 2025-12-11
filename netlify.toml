@@ -1,7 +1,7 @@
-# Site estático - Sem build necessário
+# Site estático - Gera sitemap durante o build
 [build]
   publish = "."
-  command = "echo 'Site estático - nenhum build necessário'"
+  command = "node generate-sitemap.js || echo 'Sitemap generation skipped (Node.js not available)'"
 
 # Headers para arquivos
 [[headers]]

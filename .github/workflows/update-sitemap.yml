@@ -1,0 +1,53 @@
+name: Update Sitemap
+
+on:
+  # Executa manualmente
+  workflow_dispatch:
+  
+  # Executa diariamente às 2h da manhã UTC
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # Executa quando há push na branch main
+  push:
+    branches:
+      - main
+    paths:
+      - 'generate-sitemap.js'
+      - '.github/workflows/update-sitemap.yml'
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Generate sitemap
+        run: |
+          node generate-sitemap.js
+      
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain sitemap.xml)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push if changed
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add sitemap.xml
+          git commit -m "🤖 Auto-update sitemap [skip ci]" || exit 0
+          git push
+

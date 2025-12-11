@@ -47,18 +47,28 @@ Site oficial da Wevolv3 com foco em marketing Web3 e publicidade modular.
 ## 🔍 SEO e Indexação
 
 ### Sitemap Dinâmico
-O sitemap é gerado dinamicamente a partir dos posts do Sanity. Para atualizar:
+O sitemap é gerado automaticamente de 3 formas:
+
+#### 1. **Automático no Netlify** (Recomendado)
+O sitemap é gerado automaticamente a cada deploy no Netlify. Não é necessário fazer nada!
+
+#### 2. **GitHub Actions** (Automático)
+- Executa **diariamente às 2h UTC**
+- Executa quando há push na branch `main`
+- Pode ser executado manualmente em: Actions > Update Sitemap > Run workflow
+
+#### 3. **Manual** (Opcional)
+Se quiser gerar manualmente:
 
 ```bash
 node generate-sitemap.js
 ```
 
-Isso irá:
-- Buscar todos os posts publicados do Sanity
-- Gerar um `sitemap.xml` atualizado
-- Incluir todas as páginas estáticas e posts do blog
-
-**Recomendação**: Execute este script após publicar novos artigos ou configure um cron job para executar automaticamente.
+O script irá:
+- ✅ Buscar todos os posts publicados do Sanity
+- ✅ Gerar um `sitemap.xml` atualizado
+- ✅ Incluir todas as páginas estáticas e posts do blog
+- ✅ Commit automático via GitHub Actions (se houver mudanças)
 
 ### Schema.org
 - ✅ Schema.org JSON-LD implementado para artigos (BlogPosting)
