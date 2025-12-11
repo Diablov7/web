@@ -100,38 +100,64 @@
 
 
 
-        <div class="sigle-work-section">
+        <!-- Loading State -->
+        <div id="work-loading" class="work-loading" style="text-align: center; padding: 100px 20px;">
+            <div class="spinner" style="border: 4px solid #333; border-top: 4px solid #4A9EFF; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+            <p style="color: #999; font-size: 16px;">Loading project...</p>
+        </div>
+
+        <!-- Error State (hidden by default) -->
+        <div id="work-error" class="work-error" style="display: none; text-align: center; padding: 100px 20px;">
+            <h3 style="color: #fff; margin-bottom: 10px;">Project not found</h3>
+            <p id="work-error-message" style="color: #999; margin-bottom: 20px;">The project you're looking for doesn't exist.</p>
+            <a href="works.html" style="color: #4A9EFF; text-decoration: underline;">← Back to all projects</a>
+        </div>
+
+        <!-- Work Content (hidden by default) -->
+        <div id="work-content" class="sigle-work-section" style="display: none;">
             <div class="w-layout-blockcontainer main-container w-container">
                 <div class="single-work-grid">
                     <div class="single-work-left">
-                        <h4 class="single-main-title-heading">Web3 Campaign</h4>
+                        <h4 id="work-title" class="single-main-title-heading">Loading...</h4>
                         <div class="single-left-grid">
-                            <div class="single-left-item">
+                            <div id="work-type-item" class="single-left-item" style="display: none;">
                                 <h5 class="single-detail-heading">Type</h5>
-                                <div class="single-details-text">Web3 Marketing Campaign</div>
+                                <div id="work-type" class="single-details-text"></div>
                             </div>
-                            <div  class="single-left-item">
+                            <div class="single-left-item">
                                 <h5 class="single-detail-heading">description</h5>
-                                <div class="single-details-text">Comprehensive marketing strategy for a blockchain project, including community building, influencer partnerships, and growth hacking techniques.</div>
+                                <div id="work-description" class="single-details-text">Loading...</div>
                             </div>
                             <div class="single-left-item">
                                 <h5 class="single-detail-heading">year</h5>
-                                <div class="single-details-text">2024</div>
+                                <div id="work-year" class="single-details-text">-</div>
+                            </div>
+                            <div id="work-client-item" class="single-left-item" style="display: none;">
+                                <h5 class="single-detail-heading">client</h5>
+                                <div id="work-client" class="single-details-text"></div>
                             </div>
                         </div>
                         <a href="works.html" class="button w-button">view all projects</a>
                     </div>
                     <div class="single-work-right">
                         <img
+                            id="work-image"
                             src="images/work7.jpg"
-                            
                             alt=""
                             class="single-main-work-img"
+                            loading="lazy"
                         />
                     </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
 
 
         <div class="footer">
@@ -177,6 +203,220 @@
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/plugins.js" type="text/javascript"></script>
 
+        <script>
+            // ========================================
+            // SANITY SINGLE WORK INTEGRATION
+            // ========================================
+            
+            // Sanity Configuration
+            const projectId = 'sszuldy6';
+            const dataset = 'production';
+            const apiVersion = '2024-01-01';
+            
+            // Sanity Client
+            const sanityClient = {
+                fetch: async (query) => {
+                    const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+                    
+                    try {
+                        const response = await fetch(url);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        return data.result;
+                    } catch (error) {
+                        console.error('Sanity fetch error:', error);
+                        throw error;
+                    }
+                }
+            };
+            
+            // Helper: Get Sanity image URL
+            function sanityImageUrl(source) {
+                if (!source || !source.asset) return 'images/work7.jpg'; // Fallback
+                const ref = source.asset._ref || source.asset._id;
+                const imageId = ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp');
+                const dimensions = source.crop ? '' : 'w-1200';
+                return `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}${dimensions ? '?' + dimensions : ''}`;
+            }
+            
+            // Helper: Convert portable text to HTML
+            function portableTextToHtml(blocks) {
+                if (!blocks || !Array.isArray(blocks)) return '<p>No description available.</p>';
+                
+                let html = '';
+                let inList = false;
+                let listType = '';
+                
+                blocks.forEach(block => {
+                    // Handle images
+                    if (block._type === 'image') {
+                        if (inList) {
+                            html += listType === 'bullet' ? '</ul>' : '</ol>';
+                            inList = false;
+                        }
+                        const imageUrl = sanityImageUrl(block);
+                        const alt = block.alt || 'Project image';
+                        html += `<img src="${imageUrl}" alt="${alt}" loading="lazy" style="max-width: 100%; border-radius: 10px; margin: 20px 0;" />`;
+                        return;
+                    }
+                    
+                    if (block._type !== 'block') return;
+                    
+                    // Handle lists
+                    if (block.listItem) {
+                        if (!inList || listType !== block.listItem) {
+                            if (inList) {
+                                html += listType === 'bullet' ? '</ul>' : '</ol>';
+                            }
+                            html += block.listItem === 'bullet' ? '<ul>' : '<ol>';
+                            inList = true;
+                            listType = block.listItem;
+                        }
+                        const text = (block.children || []).map(child => child.text || '').join('');
+                        html += `<li>${text}</li>`;
+                        return;
+                    } else if (inList) {
+                        html += listType === 'bullet' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    
+                    // Get text content
+                    const text = (block.children || []).map(child => {
+                        let content = child.text || '';
+                        
+                        if (child.marks && child.marks.length > 0) {
+                            child.marks.forEach(mark => {
+                                if (mark === 'strong') {
+                                    content = `<strong>${content}</strong>`;
+                                } else if (mark === 'em') {
+                                    content = `<em>${content}</em>`;
+                                }
+                            });
+                        }
+                        
+                        return content;
+                    }).join('');
+                    
+                    // Handle different block styles
+                    switch (block.style) {
+                        case 'h2':
+                            html += `<h2>${text}</h2>`;
+                            break;
+                        case 'h3':
+                            html += `<h3>${text}</h3>`;
+                            break;
+                        case 'h4':
+                            html += `<h4>${text}</h4>`;
+                            break;
+                        case 'blockquote':
+                            html += `<blockquote>${text}</blockquote>`;
+                            break;
+                        case 'normal':
+                        default:
+                            if (text.trim()) {
+                                html += `<p>${text}</p>`;
+                            }
+                    }
+                });
+                
+                if (inList) {
+                    html += listType === 'bullet' ? '</ul>' : '</ol>';
+                }
+                
+                return html || '<p>No description available.</p>';
+            }
+            
+            // Load single work
+            async function loadWork() {
+                const loadingEl = document.getElementById('work-loading');
+                const errorEl = document.getElementById('work-error');
+                const errorMessageEl = document.getElementById('work-error-message');
+                const contentEl = document.getElementById('work-content');
+                
+                try {
+                    // Get slug from URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const slug = urlParams.get('slug');
+                    
+                    if (!slug) {
+                        throw new Error('No slug provided');
+                    }
+                    
+                    // Query: Get work by slug
+                    const query = `
+                        *[_type == "work" && slug.current == $slug && published == true][0] {
+                            _id,
+                            title,
+                            slug,
+                            mainImage,
+                            shortDescription,
+                            description,
+                            category,
+                            projectType,
+                            year,
+                            client,
+                            results
+                        }
+                    `;
+                    
+                    const work = await sanityClient.fetch(query, {slug});
+                    
+                    if (!work) {
+                        throw new Error('Work not found');
+                    }
+                    
+                    // Update page title
+                    document.title = `${work.title} | Wevolv3 Portfolio`;
+                    
+                    // Update meta tags
+                    const metaDesc = document.querySelector('meta[name="description"]');
+                    if (metaDesc) {
+                        metaDesc.content = work.shortDescription || work.title;
+                    }
+                    
+                    // Update content
+                    document.getElementById('work-title').textContent = work.title || 'Untitled Project';
+                    document.getElementById('work-year').textContent = work.year || '-';
+                    document.getElementById('work-description').innerHTML = work.description 
+                        ? portableTextToHtml(work.description) 
+                        : (work.shortDescription || 'No description available.');
+                    
+                    // Update image
+                    const imageUrl = sanityImageUrl(work.mainImage);
+                    const workImage = document.getElementById('work-image');
+                    workImage.src = imageUrl;
+                    workImage.alt = work.title || 'Project image';
+                    
+                    // Update project type (if exists)
+                    if (work.projectType) {
+                        document.getElementById('work-type').textContent = work.projectType;
+                        document.getElementById('work-type-item').style.display = 'block';
+                    }
+                    
+                    // Update client (if exists)
+                    if (work.client) {
+                        document.getElementById('work-client').textContent = work.client;
+                        document.getElementById('work-client-item').style.display = 'block';
+                    }
+                    
+                    // Hide loading, show content
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'none';
+                    contentEl.style.display = 'block';
+                    
+                } catch (error) {
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'block';
+                    contentEl.style.display = 'none';
+                    errorMessageEl.textContent = error.message || 'Could not load project.';
+                }
+            }
+            
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', loadWork);
+        </script>
 
     </body>
 

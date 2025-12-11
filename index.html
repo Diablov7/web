@@ -346,43 +346,8 @@
                 </div>
 
                 <div class="work-wrapper w-dyn-list">
-                    <div role="list" class="work-list w-dyn-items">
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work7.jpg"  alt="Web3 Marketing Campaign - Crypto Marketing Services" class="work-img" /></div>
-                                <h4 class="heading">Web3 Campaign</h4>
-                                <div class="work-category">crypto marketing</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work8.jpg"  alt="DeFi Growth Marketing - Blockchain Marketing Solutions" class="work-img" /></div>
-                                <h4 class="heading">DeFi Growth</h4>
-                                <div class="work-category">blockchain</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work9.jpg"  alt="Token Launch Marketing - Web3 Token Marketing Services" class="work-img" /></div>
-                                <h4 class="heading">Token Launch</h4>
-                                <div class="work-category">web3</div>
-                            </a>
-                        </div>
+                    <div id="home-work-list" role="list" class="work-list w-dyn-items">
+                        <!-- Featured projects will be dynamically inserted here -->
                     </div>
                 </div>
 
@@ -711,6 +676,104 @@
                 document.addEventListener('DOMContentLoaded', () => scanVideos(document));
                 window.addEventListener('load', () => scanVideos(document));
             })();
+        </script>
+
+        <script>
+            // ========================================
+            // SANITY FEATURED WORK INTEGRATION
+            // ========================================
+            
+            // Sanity Configuration
+            const sanityProjectId = 'sszuldy6';
+            const sanityDataset = 'production';
+            const sanityApiVersion = '2024-01-01';
+            
+            // Sanity Client
+            const sanityClient = {
+                fetch: async (query) => {
+                    const url = `https://${sanityProjectId}.apicdn.sanity.io/v${sanityApiVersion}/data/query/${sanityDataset}?query=${encodeURIComponent(query)}`;
+                    
+                    try {
+                        const response = await fetch(url);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        return data.result;
+                    } catch (error) {
+                        console.error('Sanity fetch error:', error);
+                        return []; // Return empty array on error to not break the page
+                    }
+                }
+            };
+            
+            // Helper: Get Sanity image URL
+            function sanityImageUrl(source) {
+                if (!source || !source.asset) return 'images/work7.jpg'; // Fallback
+                const ref = source.asset._ref || source.asset._id;
+                const imageId = ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp');
+                const dimensions = source.crop ? '' : 'w-1200';
+                return `https://cdn.sanity.io/images/${sanityProjectId}/${sanityDataset}/${imageId}${dimensions ? '?' + dimensions : ''}`;
+            }
+            
+            // Load featured works (max 3)
+            async function loadFeaturedWorks() {
+                const workListEl = document.getElementById('home-work-list');
+                if (!workListEl) return;
+                
+                try {
+                    // Query: Get featured works, ordered by order field, limit 3
+                    const query = `
+                        *[_type == "work" && published == true && featured == true] | order(order asc, year desc) [0...3] {
+                            _id,
+                            title,
+                            slug,
+                            mainImage,
+                            category,
+                            "slugValue": slug.current
+                        }
+                    `;
+                    
+                    const works = await sanityClient.fetch(query);
+                    
+                    if (!works || works.length === 0) {
+                        // If no featured works, show nothing (or fallback to regular works)
+                        return;
+                    }
+                    
+                    // Render works
+                    workListEl.innerHTML = works.map(work => {
+                        const imageUrl = sanityImageUrl(work.mainImage);
+                        const slug = work.slugValue || work.slug?.current || '';
+                        const title = work.title || 'Untitled Project';
+                        const category = work.category || 'web3';
+                        
+                        return `
+                            <div role="listitem" class="w-dyn-item">
+                                <a
+                                    data-w-id="darkyn08"
+                                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                    href="singlework.html?slug=${encodeURIComponent(slug)}"
+                                    class="work-item w-inline-block"
+                                >
+                                    <div class="work-img-wrapp">
+                                        <img src="${imageUrl}" alt="${title} - ${category}" class="work-img" loading="lazy" />
+                                    </div>
+                                    <h4 class="heading">${title}</h4>
+                                    <div class="work-category">${category}</div>
+                                </a>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                } catch (error) {
+                    console.error('Error loading featured works:', error);
+                    // Silently fail - don't break the page
+                }
+            }
+            
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', loadFeaturedWorks);
         </script>
 
     </body>

@@ -112,85 +112,34 @@
         <div class="work-section work-page-section">
             <div class="w-layout-blockcontainer main-container w-container">
 
+                <!-- Loading State -->
+                <div id="work-loading" class="work-loading" style="text-align: center; padding: 60px 20px;">
+                    <div class="spinner" style="border: 4px solid #333; border-top: 4px solid #4A9EFF; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                    <p style="color: #999; font-size: 16px;">Loading projects...</p>
+                </div>
+
+                <!-- Error State (hidden by default) -->
+                <div id="work-error" class="work-error" style="display: none; text-align: center; padding: 60px 20px;">
+                    <h3 style="color: #fff; margin-bottom: 10px;">Error loading projects</h3>
+                    <p id="work-error-message" style="color: #999;">Please try again later.</p>
+                </div>
+
+                <!-- Work List -->
                 <div class="work-wrapper w-dyn-list">
-                    <div role="list" class="work-list w-dyn-items">
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work7.jpg"  alt="Web3 Marketing Campaign - Crypto Marketing Services" class="work-img" /></div>
-                                <h4 class="heading">Web3 Campaign</h4>
-                                <div class="work-category">crypto marketing</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work8.jpg"  alt="DeFi Growth Marketing - Blockchain Marketing Solutions" class="work-img" /></div>
-                                <h4 class="heading">DeFi Growth</h4>
-                                <div class="work-category">blockchain</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/work9.jpg"  alt="Token Launch Marketing - Web3 Token Marketing Services" class="work-img" /></div>
-                                <h4 class="heading">Token Launch</h4>
-                                <div class="work-category">web3</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/post7.jpg"  alt="Web3 Marketing Campaign Portfolio" class="work-img" /></div>
-                                <h4 class="heading">Web3 Campaign</h4>
-                                <div class="work-category">crypto marketing</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/post8.jpg"  alt="DeFi Growth Marketing Portfolio" class="work-img" /></div>
-                                <h4 class="heading">DeFi Growth</h4>
-                                <div class="work-category">blockchain</div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="darkyn08"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singlework.html"
-                                class="work-item w-inline-block"
-                            >
-                                <div class="work-img-wrapp"><img src="images/post9.jpg"  alt="Token Launch Marketing Portfolio" class="work-img" /></div>
-                                <h4 class="heading">Token Launch</h4>
-                                <div class="work-category">web3</div>
-                            </a>
-                        </div>
+                    <div id="work-list" role="list" class="work-list w-dyn-items">
+                        <!-- Projects will be dynamically inserted here -->
                     </div>
                 </div>
 
             </div>
         </div>
+
+        <style>
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
 
 
         <div class="footer">
@@ -236,6 +185,118 @@
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/plugins.js" type="text/javascript"></script>
 
+        <script>
+            // ========================================
+            // SANITY WORK/PROJECT INTEGRATION
+            // ========================================
+            
+            // Sanity Configuration
+            const projectId = 'sszuldy6';
+            const dataset = 'production';
+            const apiVersion = '2024-01-01';
+            
+            // Sanity Client
+            const sanityClient = {
+                fetch: async (query) => {
+                    const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+                    
+                    try {
+                        const response = await fetch(url);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        return data.result;
+                    } catch (error) {
+                        console.error('Sanity fetch error:', error);
+                        throw error;
+                    }
+                }
+            };
+            
+            // Helper: Get Sanity image URL
+            function sanityImageUrl(source) {
+                if (!source || !source.asset) return 'images/work7.jpg'; // Fallback
+                const ref = source.asset._ref || source.asset._id;
+                const imageId = ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp');
+                const dimensions = source.crop ? '' : 'w-1200';
+                return `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}${dimensions ? '?' + dimensions : ''}`;
+            }
+            
+            // Load all published works
+            async function loadWorks() {
+                const loadingEl = document.getElementById('work-loading');
+                const errorEl = document.getElementById('work-error');
+                const errorMessageEl = document.getElementById('work-error-message');
+                const workListEl = document.getElementById('work-list');
+                
+                try {
+                    // Query: Get all published works, ordered by order field, then by year
+                    const query = `
+                        *[_type == "work" && published == true] | order(order asc, year desc) {
+                            _id,
+                            title,
+                            slug,
+                            mainImage,
+                            shortDescription,
+                            category,
+                            year,
+                            "slugValue": slug.current
+                        }
+                    `;
+                    
+                    const works = await sanityClient.fetch(query);
+                    
+                    // Hide loading
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'none';
+                    
+                    if (!works || works.length === 0) {
+                        workListEl.innerHTML = `
+                            <div style="text-align: center; padding: 60px 20px; color: #999;">
+                                <h3 style="color: #fff; margin-bottom: 10px;">No projects found</h3>
+                                <p>Check back soon for our latest work!</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    // Render works
+                    workListEl.innerHTML = works.map(work => {
+                        const imageUrl = sanityImageUrl(work.mainImage);
+                        const slug = work.slugValue || work.slug?.current || '';
+                        const title = work.title || 'Untitled Project';
+                        const category = work.category || 'web3';
+                        const shortDesc = work.shortDescription || '';
+                        
+                        return `
+                            <div role="listitem" class="w-dyn-item">
+                                <a
+                                    data-w-id="darkyn08"
+                                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                    href="singlework.html?slug=${encodeURIComponent(slug)}"
+                                    class="work-item w-inline-block"
+                                >
+                                    <div class="work-img-wrapp">
+                                        <img src="${imageUrl}" alt="${title} - ${category}" class="work-img" loading="lazy" />
+                                    </div>
+                                    <h4 class="heading">${title}</h4>
+                                    <div class="work-category">${category}</div>
+                                </a>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                } catch (error) {
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'block';
+                    errorMessageEl.textContent = error.message || 'Could not load projects.';
+                }
+            }
+            
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', loadWorks);
+        </script>
 
     </body>
 
