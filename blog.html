@@ -49,8 +49,8 @@
         <link href="css/layout.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css?v=force_update_4" rel="stylesheet" type="text/css" />
 
-        <link href="images/FAVICON.png" rel="shortcut icon" type="image/png" />
-        <link href="images/FAVICON.png" rel="apple-touch-icon" />
+        <link href="images/favicon.png" rel="shortcut icon" type="image/png" />
+        <link href="images/favicon.png" rel="apple-touch-icon" />
         
         <style>
             /* Remove custom cursor on all pages */
@@ -245,12 +245,8 @@
                     // Use apicdn for better performance and CORS handling
                     const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
                     
-                    console.log('🔍 Fetching from Sanity:', url);
-                    
                     try {
                         const response = await fetch(url);
-                        
-                        console.log('📡 Response status:', response.status);
                         
                         if (!response.ok) {
                             if (response.status === 0 || response.status === 401 || response.status === 403) {
@@ -260,10 +256,8 @@
                         }
                         
                         const json = await response.json();
-                        console.log('📦 Response data:', json);
                         return json.result || [];
                     } catch (error) {
-                        console.error('❌ Fetch error:', error);
                         throw error;
                     }
                 }
@@ -357,7 +351,6 @@
                             categories[]->{title, _id}
                         }`;
                         posts = await sanityClient.fetch(query);
-                        console.log('📊 Preview mode: Posts found (including drafts):', posts?.length || 0);
                         
                         // Show preview banner
                         const previewBanner = document.createElement('div');
@@ -375,7 +368,6 @@
                             categories[]->{title, _id}
                         }`;
                         posts = await sanityClient.fetch(query);
-                        console.log('📊 Posts found (published only):', posts?.length || 0);
                         
                         // Fallback: if no published posts, try getting all posts
                         if (!posts || posts.length === 0) {
@@ -389,17 +381,13 @@
                                 categories[]->{title, _id}
                             }`;
                             posts = await sanityClient.fetch(fallbackQuery);
-                            console.log('📊 Posts found (fallback):', posts?.length || 0);
                             // Filter posts that are not explicitly unpublished
                             posts = posts.filter(p => p.published !== false);
-                            console.log('📊 Posts after filter:', posts?.length || 0);
                         }
                     }
                     
                     // Hide loading
                     loadingEl.style.display = 'none';
-                    
-                    console.log('📊 Total posts to render:', posts?.length || 0);
                     
                     if (!posts || posts.length === 0) {
                         // Show empty state
@@ -413,17 +401,12 @@
                     }
                     
                     // Render posts
-                    console.log('🎨 Rendering', posts.length, 'posts...');
                     const postsHTML = posts.map((post, index) => {
-                        console.log(`  - Post ${index + 1}: ${post.title} (published: ${post.published})`);
                         return createPostHTML(post, index, previewMode);
                     }).join('');
                     blogListEl.innerHTML = postsHTML;
                     
-                    console.log(`✅ Blog loaded: ${posts.length} posts rendered`);
-                    
                 } catch (error) {
-                    console.error('❌ Error loading blog:', error);
                     loadingEl.style.display = 'none';
                     errorEl.style.display = 'block';
                     document.getElementById('error-message').textContent = error.message;

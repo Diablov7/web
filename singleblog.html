@@ -46,8 +46,8 @@
         <link href="css/layout.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css?v=force_update_4" rel="stylesheet" type="text/css" />
 
-        <link href="images/FAVICON.png" rel="shortcut icon" type="image/png" />
-        <link href="images/FAVICON.png" rel="apple-touch-icon" />
+        <link href="images/favicon.png" rel="shortcut icon" type="image/png" />
+        <link href="images/favicon.png" rel="apple-touch-icon" />
         
         <style>
             /* Remove custom cursor on all pages */
@@ -394,7 +394,6 @@
                 fetch: async (query) => {
                     // Use apicdn for better performance and CORS handling
                     const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
-                    console.log('Fetching single post from:', url);
                     
                     try {
                         const response = await fetch(url);
@@ -409,7 +408,6 @@
                         const json = await response.json();
                         return json.result;
                     } catch (error) {
-                        console.error('❌ Fetch error:', error);
                         // Show visible error to user
                         const errorEl = document.getElementById('error-message');
                         if (errorEl) errorEl.textContent = `Error: ${error.message}`;
@@ -672,10 +670,7 @@
                         loadRelatedPosts(sanitizedSlug);
                     }
                     
-                    console.log('✅ Post loaded:', post.title);
-                    
                 } catch (error) {
-                    console.error('❌ Error loading post:', error);
                     loadingEl.style.display = 'none';
                     errorEl.style.display = 'block';
                     document.getElementById('error-message').textContent = 'Could not load article.';
@@ -718,7 +713,7 @@
                     relatedSection.style.display = 'block';
                     
                 } catch (error) {
-                    console.error('Error loading related posts:', error);
+                    // Silently fail - related posts are not critical
                 }
             }
             
