@@ -53,6 +53,17 @@
         <link href="images/FAVICON.png" rel="apple-touch-icon" />
         
         <style>
+            /* Remove custom cursor on all pages */
+            .cursor-wrapp, .cursor {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+            body {
+                cursor: auto !important;
+            }
+            
+            /* Loading State */
             /* Loading State */
             .blog-loading {
                 display: flex;
@@ -278,22 +289,24 @@
             }
             
             // Helper: Create blog post HTML
-            function createPostHTML(post, index) {
+            function createPostHTML(post, index, previewMode = false) {
                 const slug = post.slug?.current || post.slug || 'no-slug';
                 const title = post.title || 'Untitled';
                 const category = post.categories?.[0]?.title || 'Web3';
                 const imageUrl = sanityImageUrl(post.mainImage);
+                const isDraft = previewMode && (!post.published || post.published === false);
+                const previewParam = previewMode ? '&preview=true' : '';
                 
                 return `
                     <div role="listitem" class="w-dyn-item">
                         <a
                             data-w-id="darkyn01"
                             style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            href="singleblog.html?slug=${encodeURIComponent(slug)}"
+                            href="singleblog.html?slug=${encodeURIComponent(slug)}${previewParam}"
                             class="blog-item w-inline-block"
                         >
                             <div class="blog-left">
-                                <div class="blog-category">${category}</div>
+                                <div class="blog-category">${isDraft ? '🔒 DRAFT - ' : ''}${category}</div>
                                 <h2 class="blog-heading">${title}</h2>
                                 <div class="blog-author-and-arrow">
                                     <img src="images/author1.png" alt="" class="blog-author" />
@@ -315,30 +328,26 @@
                 `;
             }
             
+            // Check if we're in preview mode (from Sanity Studio)
+            function isPreviewMode() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.has('preview') || urlParams.has('secret') || urlParams.has('draft');
+            }
+            
             // Main: Load blog posts
             async function loadBlogPosts() {
                 const loadingEl = document.getElementById('blog-loading');
                 const errorEl = document.getElementById('blog-error');
                 const blogListEl = document.getElementById('blog-list');
+                const previewMode = isPreviewMode();
                 
                 try {
-                    // Query for published posts
-                    const query = `*[_type == "post" && published == true] | order(publishedAt desc) {
-                        title,
-                        slug,
-                        excerpt,
-                        mainImage,
-                        publishedAt,
-                        categories[]->{title, _id}
-                    }`;
+                    let query;
+                    let posts;
                     
-                    let posts = await sanityClient.fetch(query);
-                    
-                    console.log('📊 Posts found (query 1):', posts?.length || 0);
-                    
-                    // Fallback: if no published posts, try getting all posts
-                    if (!posts || posts.length === 0) {
-                        const fallbackQuery = `*[_type == "post"] | order(publishedAt desc) {
+                    if (previewMode) {
+                        // Preview mode: show all posts including drafts
+                        query = `*[_type == "post"] | order(publishedAt desc) {
                             title,
                             slug,
                             excerpt,
@@ -347,11 +356,44 @@
                             published,
                             categories[]->{title, _id}
                         }`;
-                        posts = await sanityClient.fetch(fallbackQuery);
-                        console.log('📊 Posts found (fallback):', posts?.length || 0);
-                        // Filter posts that are not explicitly unpublished
-                        posts = posts.filter(p => p.published !== false);
-                        console.log('📊 Posts after filter:', posts?.length || 0);
+                        posts = await sanityClient.fetch(query);
+                        console.log('📊 Preview mode: Posts found (including drafts):', posts?.length || 0);
+                        
+                        // Show preview banner
+                        const previewBanner = document.createElement('div');
+                        previewBanner.style.cssText = 'background: #f59e0b; color: #000; padding: 15px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; right: 0; z-index: 10000;';
+                        previewBanner.textContent = '👁️ PREVIEW MODE - Showing all posts including drafts';
+                        document.body.insertBefore(previewBanner, document.body.firstChild);
+                    } else {
+                        // Normal mode: only published posts
+                        query = `*[_type == "post" && published == true] | order(publishedAt desc) {
+                            title,
+                            slug,
+                            excerpt,
+                            mainImage,
+                            publishedAt,
+                            categories[]->{title, _id}
+                        }`;
+                        posts = await sanityClient.fetch(query);
+                        console.log('📊 Posts found (published only):', posts?.length || 0);
+                        
+                        // Fallback: if no published posts, try getting all posts
+                        if (!posts || posts.length === 0) {
+                            const fallbackQuery = `*[_type == "post"] | order(publishedAt desc) {
+                                title,
+                                slug,
+                                excerpt,
+                                mainImage,
+                                publishedAt,
+                                published,
+                                categories[]->{title, _id}
+                            }`;
+                            posts = await sanityClient.fetch(fallbackQuery);
+                            console.log('📊 Posts found (fallback):', posts?.length || 0);
+                            // Filter posts that are not explicitly unpublished
+                            posts = posts.filter(p => p.published !== false);
+                            console.log('📊 Posts after filter:', posts?.length || 0);
+                        }
                     }
                     
                     // Hide loading
@@ -373,8 +415,8 @@
                     // Render posts
                     console.log('🎨 Rendering', posts.length, 'posts...');
                     const postsHTML = posts.map((post, index) => {
-                        console.log(`  - Post ${index + 1}: ${post.title}`);
-                        return createPostHTML(post, index);
+                        console.log(`  - Post ${index + 1}: ${post.title} (published: ${post.published})`);
+                        return createPostHTML(post, index, previewMode);
                     }).join('');
                     blogListEl.innerHTML = postsHTML;
                     

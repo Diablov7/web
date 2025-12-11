@@ -50,6 +50,17 @@
         <link href="images/FAVICON.png" rel="apple-touch-icon" />
         
         <style>
+            /* Remove custom cursor on all pages */
+            .cursor-wrapp, .cursor {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+            body {
+                cursor: auto !important;
+            }
+            
+            /* IMPORTANT: Disable hero video on single blog post page */
             /* IMPORTANT: Disable hero video on single blog post page */
             .hero-video-bg,
             .hero-section::after,
@@ -556,6 +567,12 @@
                 document.getElementById('canonical-url').href = url;
             }
             
+            // Check if we're in preview mode (from Sanity Studio)
+            function isPreviewMode() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.has('preview') || urlParams.has('secret') || urlParams.has('draft');
+            }
+            
             // Main: Load single post
             async function loadPost() {
                 const loadingEl = document.getElementById('post-loading');
@@ -566,6 +583,7 @@
                 // Get slug from URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const slug = urlParams.get('slug');
+                const previewMode = isPreviewMode();
                 
                 if (!slug) {
                     loadingEl.style.display = 'none';
@@ -578,21 +596,37 @@
                 const sanitizedSlug = slug.replace(/['"<>]/g, '');
                 
                 try {
-                    // Query for the post
-                    const query = `*[_type == "post" && slug.current == "${sanitizedSlug}" && published == true][0] {
-                        title,
-                        slug,
-                        excerpt,
-                        mainImage,
-                        publishedAt,
-                        body,
-                        categories[]->{title, _id}
-                    }`;
+                    // In preview mode, fetch draft posts too
+                    let query;
+                    if (previewMode) {
+                        // Preview mode: fetch even if not published
+                        query = `*[_type == "post" && slug.current == "${sanitizedSlug}"][0] {
+                            title,
+                            slug,
+                            excerpt,
+                            mainImage,
+                            publishedAt,
+                            body,
+                            published,
+                            categories[]->{title, _id}
+                        }`;
+                    } else {
+                        // Normal mode: only published posts
+                        query = `*[_type == "post" && slug.current == "${sanitizedSlug}" && published == true][0] {
+                            title,
+                            slug,
+                            excerpt,
+                            mainImage,
+                            publishedAt,
+                            body,
+                            categories[]->{title, _id}
+                        }`;
+                    }
                     
                     let post = await sanityClient.fetch(query);
                     
-                    // Fallback: try without published filter
-                    if (!post) {
+                    // Fallback: try without published filter if not in preview mode
+                    if (!post && !previewMode) {
                         const fallbackQuery = `*[_type == "post" && slug.current == "${sanitizedSlug}"][0] {
                             title,
                             slug,
@@ -610,6 +644,14 @@
                         throw new Error('Post not found');
                     }
                     
+                    // Show preview banner if in preview mode
+                    if (previewMode && (!post.published || post.published === false)) {
+                        const previewBanner = document.createElement('div');
+                        previewBanner.style.cssText = 'background: #f59e0b; color: #000; padding: 15px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; right: 0; z-index: 10000;';
+                        previewBanner.textContent = '👁️ PREVIEW MODE - This is a draft post';
+                        document.body.insertBefore(previewBanner, document.body.firstChild);
+                    }
+                    
                     // Update SEO meta tags
                     updateMetaTags(post);
                     
@@ -625,8 +667,10 @@
                     errorEl.style.display = 'none';
                     contentEl.style.display = 'block';
                     
-                    // Load related posts
-                    loadRelatedPosts(sanitizedSlug);
+                    // Load related posts (skip in preview mode to avoid confusion)
+                    if (!previewMode) {
+                        loadRelatedPosts(sanitizedSlug);
+                    }
                     
                     console.log('✅ Post loaded:', post.title);
                     
@@ -641,6 +685,7 @@
             // Load related posts
             async function loadRelatedPosts(currentSlug) {
                 try {
+                    // Only fetch published posts for related section
                     const query = `*[_type == "post" && published == true && slug.current != "${currentSlug}"] | order(publishedAt desc) [0...3] {
                         title,
                         slug,
