@@ -7,8 +7,21 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+
+# Headers específicos para páginas normais (bloquear iframe)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+  except = "/studio.html"
+
+# Headers para Sanity Studio (permitir iframe)
+[[headers]]
+  for = "/studio.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.sanity.io;"
 
 [[headers]]
   for = "/*.js"
@@ -24,4 +37,15 @@
 [[redirects]]
   from = "/singleblog"
   to = "/singleblog.html"
+  status = 200
+
+# Sanity Studio - Editor do blog (hospedado em sanity.io)
+[[redirects]]
+  from = "/studio"
+  to = "/studio.html"
+  status = 200
+
+[[redirects]]
+  from = "/studio/*"
+  to = "/studio.html"
   status = 200

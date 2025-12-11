@@ -9,5 +9,10 @@
 /blog-post    /singleblog.html    301
 /blog-post.html    /singleblog.html    301
 
-# SPA fallback
+# Sanity Studio - Editor do blog
+/studio    /studio.html    200
+/studio/*    /studio.html    200
+
+# SPA fallback (deve ser o último)
+# Exclui arquivos estáticos automaticamente
 /*    /index.html   200
