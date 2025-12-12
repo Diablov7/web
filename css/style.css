@@ -3602,6 +3602,7 @@ blockquote {
 
 .the-path-nav-prev {
   left: 10px;
+  display: none; /* Oculto por padrão, aparece quando houver scroll */
 }
 
 .the-path-nav-next {

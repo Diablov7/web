@@ -926,13 +926,16 @@
                     const scrollWidth = carousel.scrollWidth;
                     const clientWidth = carousel.clientWidth;
                     
-                    // Desabilitar botão anterior se estiver no início
-                    prevBtn.disabled = scrollLeft <= 10;
-                    prevBtn.classList.toggle('disabled', scrollLeft <= 10);
+                    // Ocultar botão anterior completamente se estiver no início
+                    const isAtStart = scrollLeft <= 10;
+                    prevBtn.style.display = isAtStart ? 'none' : 'flex';
+                    prevBtn.disabled = isAtStart;
+                    prevBtn.classList.toggle('disabled', isAtStart);
                     
                     // Desabilitar botão próximo se estiver no fim
-                    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 10;
-                    nextBtn.classList.toggle('disabled', scrollLeft + clientWidth >= scrollWidth - 10);
+                    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+                    nextBtn.disabled = isAtEnd;
+                    nextBtn.classList.toggle('disabled', isAtEnd);
                 }
 
                 function scrollToNext() {
