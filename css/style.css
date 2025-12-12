@@ -3721,15 +3721,29 @@ blockquote {
   }
   
   .the-path-nav-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(16, 185, 129, 0.9); /* Verde mais sólido e visível */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .the-path-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+  }
+  
+  .the-path-nav-btn:hover:not(.disabled) {
+    background-color: rgba(16, 185, 129, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
   
   .the-path-nav-prev {
-    left: 5px;
+    left: 8px;
   }
   
   .the-path-nav-next {
-    right: 5px;
+    right: 8px;
   }
 }
