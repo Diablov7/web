@@ -1377,8 +1377,8 @@ blockquote {
   position: relative;
   z-index: 1;
   background-color: var(--black);
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .hero-section::after {
@@ -1409,8 +1409,8 @@ blockquote {
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-columns: 1fr;
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 30px;
   display: grid;
 }
 
@@ -1553,15 +1553,15 @@ blockquote {
 }
 
 .services-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .main-title {
   border-bottom: 1px solid var(--default);
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   font-size: 80px;
   font-weight: 600;
   line-height: 50px;
@@ -1601,12 +1601,12 @@ blockquote {
 }
 
 .who-we-are-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .who-we-are-section.wo-we-are-about {
-  padding-top: 100px;
+  padding-top: 60px;
 }
 
 .mission-grid {
@@ -1669,13 +1669,13 @@ blockquote {
 }
 
 .mission-paragraph {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
   font-size: 22px;
   line-height: 28px;
 }
 
 .mission-paragraph.mission-paragraph-right {
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 0;
   margin-left: 20px;
 }
@@ -1707,8 +1707,8 @@ blockquote {
 }
 
 .work-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .work-section.work-page-section {
@@ -1768,8 +1768,8 @@ blockquote {
 }
 
 .testimonials-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .testimonials-grid {
@@ -1834,8 +1834,8 @@ blockquote {
 }
 
 .blog-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .blog-list-wrapper {
@@ -3263,8 +3263,187 @@ blockquote {
     width: 100%;
   }
 
+  .work-wrapper {
+    width: 100%;
+    overflow: visible;
+  }
+  
   .work-list {
     grid-template-columns: 1fr;
+    /* Converter para carousel horizontal no mobile */
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: 0;
+    padding-right: 20px;
+  }
+  
+  .work-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .work-item {
+    min-width: calc(100vw - 30px);
+    max-width: calc(100vw - 30px);
+    width: calc(100vw - 30px);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  
+  /* Work carousel wrapper */
+  .work-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin-left: -10px;
+    width: calc(100% + 20px);
+  }
+  
+  .work-carousel {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .work-carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Work navigation buttons */
+  .work-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(16, 185, 129, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+    pointer-events: auto !important;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .work-nav-btn[style*="display: none"],
+  .work-nav-btn.hidden {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+  }
+  
+  .work-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+  }
+  
+  .work-nav-btn:hover:not(.disabled) {
+    background-color: rgba(16, 185, 129, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .work-nav-btn:active:not(.disabled) {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  .work-nav-prev {
+    left: 8px;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .work-nav-next {
+    right: 8px;
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* Work hint (swipe indication) */
+  .work-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    animation: fadeInOut 2s ease-in-out infinite;
+  }
+  
+  .work-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+  }
+  
+  .work-hint-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .work-hint-icon {
+    color: var(--white);
+    opacity: 0.6;
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* Desktop: manter grid normal */
+  @media (min-width: 768px) {
+    .work-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      overflow-x: visible;
+      padding: 0;
+    }
+    
+    .work-item {
+      min-width: auto;
+      max-width: none;
+      width: auto;
+    }
+    
+    .work-carousel-wrapper {
+      margin-left: 0;
+      width: 100%;
+    }
+    
+    .work-hint {
+      display: none;
+    }
+    
+    .work-nav-btn {
+      display: none !important;
+    }
   }
 
   .blog-left {
@@ -3742,8 +3921,8 @@ blockquote {
 
 /* THE PATH SECTION - Carousel Horizontal */
 .the-path-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .the-path-subtitle {
@@ -3950,10 +4129,30 @@ blockquote {
 /* Mobile adjustments */
 @media screen and (max-width: 767px) {
   .the-path-section {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     /* Garantir que seção não corte conteúdo */
     overflow: visible;
+  }
+  
+  /* Reduzir espaçamento de outras seções no mobile também */
+  .work-section,
+  .blog-section,
+  .testimonials-section,
+  .services-section,
+  .who-we-are-section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .numbers-section {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  
+  .hero-grid {
+    padding-top: 30px;
+    padding-bottom: 25px;
   }
   
   .the-path-subtitle {
@@ -3977,9 +4176,9 @@ blockquote {
   }
   
   .the-path-card {
-    min-width: calc(100vw - 40px);
-    max-width: calc(100vw - 40px);
-    width: calc(100vw - 40px);
+    min-width: calc(100vw - 30px);
+    max-width: calc(100vw - 30px);
+    width: calc(100vw - 30px);
     margin-left: 0;
     margin-right: 0;
     box-sizing: border-box;
@@ -3997,8 +4196,8 @@ blockquote {
     overflow-x: auto;
     /* Garantir que cards não sejam cortados */
     overflow-y: visible;
-    /* Padding para alinhar com main-container (20px) */
-    padding-left: 20px;
+    /* Sem padding esquerdo para começar mais à esquerda */
+    padding-left: 0;
     padding-right: 20px;
     gap: 15px;
   }
@@ -4011,6 +4210,9 @@ blockquote {
     overflow-y: visible;
     /* Garantir que cards não sejam cortados */
     padding-bottom: 20px;
+    /* Compensar parcialmente o padding do main-container */
+    margin-left: -10px;
+    width: calc(100% + 20px);
   }
   
   .the-path-carousel {

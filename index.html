@@ -467,10 +467,37 @@
                     <a href="works.html" class="all-projects">MORE SUCCESS CASES</a>
                 </div>
 
-                <div class="work-wrapper w-dyn-list">
-                    <div id="home-work-list" role="list" class="work-list w-dyn-items">
-                        <!-- Featured projects will be dynamically inserted here -->
+                <!-- Indicação sutil para arrastar/navegar (mobile) -->
+                <div class="work-hint" id="work-hint">
+                    <span class="work-hint-text">
+                        <svg class="work-hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Swipe to explore
+                        <svg class="work-hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+                
+                <div class="work-carousel-wrapper">
+                    <button class="work-nav-btn work-nav-prev" aria-label="Previous work">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="work-carousel">
+                        <div class="work-wrapper w-dyn-list">
+                            <div id="home-work-list" role="list" class="work-list w-dyn-items">
+                                <!-- Featured projects will be dynamically inserted here -->
+                            </div>
+                        </div>
                     </div>
+                    <button class="work-nav-btn work-nav-next" aria-label="Next work">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
 
             </div>
@@ -1072,6 +1099,145 @@
                     document.addEventListener('DOMContentLoaded', initButtons);
                 } else {
                     initButtons();
+                }
+            })();
+        </script>
+
+        <!-- WORK SECTION - Navigation buttons (mobile only) -->
+        <script>
+            (function () {
+                const workCarousel = document.querySelector('.work-carousel');
+                const workPrevBtn = document.querySelector('.work-nav-prev');
+                const workNextBtn = document.querySelector('.work-nav-next');
+                
+                if (!workCarousel || !workPrevBtn || !workNextBtn) return;
+
+                function updateWorkButtons() {
+                    const scrollLeft = workCarousel.scrollLeft;
+                    const scrollWidth = workCarousel.scrollWidth;
+                    const clientWidth = workCarousel.clientWidth;
+                    
+                    // No mobile, usar cálculo mais tolerante
+                    const isMobile = window.innerWidth <= 767;
+                    if (!isMobile) {
+                        // Desktop: esconder botões
+                        workPrevBtn.style.display = 'none';
+                        workNextBtn.style.display = 'none';
+                        return;
+                    }
+                    
+                    const threshold = 5;
+                    const scrollThreshold = 1;
+                    
+                    // Verificar se há conteúdo para rolar
+                    const hasScrollableContent = scrollWidth > clientWidth + scrollThreshold;
+                    
+                    // Verificar quantidade de itens
+                    const itemCount = workCarousel.querySelectorAll('.work-item').length;
+                    const shouldShowButtons = itemCount > 1;
+                    
+                    // Ocultar botão anterior se estiver no início
+                    const isAtStart = scrollLeft <= threshold;
+                    const hidePrev = isAtStart || !shouldShowButtons;
+                    workPrevBtn.style.display = hidePrev ? 'none' : 'flex';
+                    workPrevBtn.style.visibility = hidePrev ? 'hidden' : 'visible';
+                    workPrevBtn.style.opacity = hidePrev ? '0' : '1';
+                    workPrevBtn.classList.toggle('hidden', hidePrev);
+                    workPrevBtn.disabled = isAtStart;
+                    workPrevBtn.classList.toggle('disabled', isAtStart);
+                    
+                    // Ocultar botão próximo se estiver no fim
+                    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
+                    const hideNext = isAtEnd || !shouldShowButtons;
+                    workNextBtn.style.display = hideNext ? 'none' : 'flex';
+                    workNextBtn.style.visibility = hideNext ? 'hidden' : 'visible';
+                    workNextBtn.style.opacity = hideNext ? '0' : '1';
+                    workNextBtn.classList.toggle('hidden', hideNext);
+                    workNextBtn.disabled = isAtEnd;
+                    workNextBtn.classList.toggle('disabled', isAtEnd);
+                }
+
+                function scrollWorkToNext() {
+                    const workItem = workCarousel.querySelector('.work-item');
+                    if (workItem) {
+                        const itemWidth = workItem.offsetWidth;
+                        const gap = 15;
+                        workCarousel.scrollBy({
+                            left: itemWidth + gap,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+
+                function scrollWorkToPrev() {
+                    const workItem = workCarousel.querySelector('.work-item');
+                    if (workItem) {
+                        const itemWidth = workItem.offsetWidth;
+                        const gap = 15;
+                        workCarousel.scrollBy({
+                            left: -(itemWidth + gap),
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+
+                // Event listeners
+                workNextBtn.addEventListener('click', scrollWorkToNext);
+                workPrevBtn.addEventListener('click', scrollWorkToPrev);
+                
+                // Esconder indicação após primeira interação
+                const workHint = document.getElementById('work-hint');
+                function hideWorkHint() {
+                    if (workHint) {
+                        workHint.classList.add('hidden');
+                    }
+                }
+                
+                workNextBtn.addEventListener('click', hideWorkHint);
+                workPrevBtn.addEventListener('click', hideWorkHint);
+                
+                // Esconder ao fazer scroll
+                let workScrollTimeout;
+                workCarousel.addEventListener('scroll', () => {
+                    updateWorkButtons();
+                    if (workHint && !workHint.classList.contains('hidden')) {
+                        clearTimeout(workScrollTimeout);
+                        workScrollTimeout = setTimeout(hideWorkHint, 500);
+                    }
+                });
+                
+                // Atualizar botões ao scroll
+                workCarousel.addEventListener('scroll', updateWorkButtons);
+                
+                // Atualizar botões ao redimensionar
+                window.addEventListener('resize', updateWorkButtons);
+                
+                // Inicializar
+                function initWorkButtons() {
+                    updateWorkButtons();
+                    requestAnimationFrame(() => {
+                        updateWorkButtons();
+                    });
+                    
+                    const isMobile = window.innerWidth <= 767;
+                    if (isMobile) {
+                        setTimeout(() => {
+                            updateWorkButtons();
+                        }, 100);
+                        
+                        setTimeout(() => {
+                            updateWorkButtons();
+                        }, 300);
+                    }
+                }
+                
+                // Inicializar quando DOM estiver pronto
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initWorkButtons);
+                } else {
+                    // Aguardar carregamento dinâmico dos works
+                    setTimeout(initWorkButtons, 500);
+                    setTimeout(initWorkButtons, 1000);
                 }
             })();
         </script>
