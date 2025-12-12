@@ -7,6 +7,17 @@
   --grey: #1e1e1e;
 }
 
+/* Prevent horizontal scroll on mobile */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .w-layout-blockcontainer {
   max-width: 940px;
   margin-left: auto;
@@ -1151,6 +1162,10 @@ body {
   font-family: Clashdisplay, sans-serif;
   font-size: 22px;
   line-height: 28px;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 h2 {
@@ -3129,6 +3144,49 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+  /* Force no horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    position: relative;
+  }
+  
+  .w-layout-blockcontainer,
+  .main-container,
+  .w-container {
+    max-width: 100vw !important;
+    width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  /* Prevent any element from causing horizontal scroll */
+  section, div, article, aside, header, footer, main, nav {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  * {
+    max-width: 100%;
+  }
+  
+  img, video, iframe {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Fix for carousel and scrollable elements */
+  .the-path-carousel-wrapper,
+  .the-path-carousel,
+  .the-path-track {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
   .logo-img {
     width: 220px;
   }
@@ -3733,14 +3791,29 @@ blockquote {
   }
   
   .the-path-card {
-    min-width: calc(100% - 40px);
+    min-width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
     margin-left: 20px;
     margin-right: 20px;
+    box-sizing: border-box;
   }
   
   .the-path-track {
     padding-left: 0;
     padding-right: 0;
+    max-width: 100vw;
+    overflow-x: auto;
+  }
+  
+  .the-path-carousel-wrapper {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  .the-path-carousel {
+    max-width: 100%;
+    overflow-x: auto;
   }
   
   .the-path-card-title {
