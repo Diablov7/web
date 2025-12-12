@@ -3805,6 +3805,8 @@ blockquote {
   .the-path-section {
     padding-top: 40px;
     padding-bottom: 40px;
+    /* Garantir que seção não corte conteúdo */
+    overflow: visible;
   }
   
   .the-path-subtitle {
@@ -3816,9 +3818,13 @@ blockquote {
   .the-path-card {
     min-width: calc(100vw - 40px);
     max-width: calc(100vw - 40px);
+    width: calc(100vw - 40px);
     margin-left: 20px;
     margin-right: 20px;
     box-sizing: border-box;
+    /* Garantir que conteúdo não seja cortado */
+    overflow: visible;
+    word-wrap: break-word;
   }
   
   .the-path-track {
@@ -3826,6 +3832,8 @@ blockquote {
     padding-right: 0;
     max-width: 100vw;
     overflow-x: auto;
+    /* Garantir que cards não sejam cortados */
+    overflow-y: visible;
   }
   
   .the-path-carousel-wrapper {
@@ -3834,16 +3842,30 @@ blockquote {
     position: relative;
     /* Garantir que botões fiquem visíveis mesmo com overflow-x hidden */
     overflow-y: visible;
+    /* Garantir que cards não sejam cortados */
+    padding-bottom: 20px;
   }
   
   .the-path-carousel {
     max-width: 100%;
     overflow-x: auto;
+    /* Garantir que conteúdo vertical não seja cortado */
+    overflow-y: visible;
   }
   
   .the-path-card-title {
     font-size: 30px;
     line-height: 28px;
+    /* Garantir que título não seja cortado */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .the-path-card-text {
+    /* Garantir que texto não seja cortado */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: visible;
   }
   
   .the-path-nav-btn {
