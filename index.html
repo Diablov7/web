@@ -136,22 +136,34 @@
             .mission-right {
                 opacity: 1 !important;
             }
+            .mission-content {
+                display: flex !important;
+            }
             .mission-img {
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
-                width: 240px;
-                height: auto;
-                object-fit: cover;
-                border-radius: 10px;
-                flex-shrink: 0;
+                width: 240px !important;
+                min-width: 240px !important;
+                height: auto !important;
+                max-height: none !important;
+                object-fit: cover !important;
+                border-radius: 10px !important;
+                flex-shrink: 0 !important;
+                margin-left: 40px !important;
+                background: transparent !important;
+            }
+            .mission-img.mission-img-right {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
             @media screen and (max-width: 767px) {
                 .mission-img {
-                    width: 100%;
-                    max-width: 100%;
-                    margin-top: 20px;
-                    margin-left: 0;
+                    width: 100% !important;
+                    min-width: unset !important;
+                    max-width: 100% !important;
+                    margin-top: 20px !important;
+                    margin-left: 0 !important;
                 }
             }
         </style>
@@ -361,7 +373,7 @@
                                 <p class="mission-paragraph">We understand, hands-on, where Web3 projects get stuck. A lack of truly qualified users, weak community engagement, unclear messaging, difficulty building trust, and marketing efforts that fail to convert into growth. Our focus is on acting precisely at these friction points, refining narrative, positioning, and execution to turn attention into real adoption and consistent results.</p>
                                 <div class="mission-orange-box"></div>
                             </div>
-                            <img src="images/ab1.png?v=4" alt="Wevolv3 Mission - Web3 Marketing Solutions" class="mission-img" loading="lazy" />
+                            <img src="images/ab1.png?v=6" alt="Wevolv3 Mission - Web3 Marketing Solutions" class="mission-img" style="display: block !important; visibility: visible !important; opacity: 1 !important; width: 240px !important; height: auto !important; min-height: 200px !important; background: #1a1a1a;" onerror="console.error('Erro ao carregar ab1.png - URL:', this.src, 'Status:', this.naturalWidth, this.naturalHeight); this.style.border='2px solid red'; this.style.backgroundColor='#ff000020';" onload="console.log('ab1.png carregada - Dimensões:', this.naturalWidth, 'x', this.naturalHeight);" />
                         </div>
                     </div>
                     <div data-w-id="darkyn24" style="opacity: 1;" class="mission-right">
@@ -373,7 +385,6 @@
                             <img src="images/plus.png"  alt="" class="mission-plus mission-plus-right" />
                         </div>
                         <div class="mission-content">
-                            <img src="images/ab2.png?v=4" alt="Wevolv3 Vision - Sustainable Growth and Adoption" class="mission-img mission-img-right" loading="lazy" />
                             <div class="mission-text-box">
                                 <div class="mission-orange-box mission-transparent"></div>
                                 <p class="mission-paragraph mission-paragraph-right">We start from the understanding that strong ideas are not enough when traction is missing, visibility does not translate into retention, and communities fail to evolve into active usage. We work to change this reality by helping projects overcome these challenges in a consistent and strategic way, building solid foundations for sustainable growth, ongoing adoption, and genuine connections with the right audience.</p>
