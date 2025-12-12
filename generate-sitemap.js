@@ -25,6 +25,7 @@ const staticPages = [
   { url: '/contact.html', priority: '0.7', changefreq: 'monthly', lastmod: new Date().toISOString().split('T')[0] },
   { url: '/privacy.html', priority: '0.3', changefreq: 'yearly', lastmod: new Date().toISOString().split('T')[0] },
   { url: '/terms.html', priority: '0.3', changefreq: 'yearly', lastmod: new Date().toISOString().split('T')[0] },
+  { url: '/disclaimer.html', priority: '0.3', changefreq: 'yearly', lastmod: new Date().toISOString().split('T')[0] },
 ];
 
 // Query GROQ para buscar posts publicados

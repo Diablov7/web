@@ -1954,6 +1954,33 @@ blockquote {
   padding-bottom: 110px;
 }
 
+/* Footer Legal Links */
+.footer-legal-links {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--border-color);
+  margin-top: 20px;
+}
+
+.footer-legal-links .legal-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  transition: color 0.3s ease;
+  margin: 0 5px;
+  font-family: Clashdisplay, sans-serif;
+}
+
+.footer-legal-links .legal-link:hover {
+  color: var(--default);
+}
+
+.footer-legal-links .legal-separator {
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+}
+
 .copyright {
   justify-content: space-between;
   align-items: center;
@@ -3745,5 +3772,21 @@ blockquote {
   
   .the-path-nav-next {
     right: 8px;
+  }
+  
+  /* Footer Legal Links Mobile */
+  .footer-legal-links {
+    padding: 15px 0;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer-legal-links .legal-link {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .footer-legal-links .legal-separator {
+    display: none;
   }
 }
