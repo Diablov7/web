@@ -400,6 +400,19 @@
                 <h2 class="main-title">the path</h2>
                 <p class="the-path-subtitle">A continuous growth cycle designed to deliver measurable, lasting results.</p>
                 
+                <!-- Indicação sutil para arrastar/navegar -->
+                <div class="the-path-hint" id="the-path-hint">
+                    <span class="the-path-hint-text">
+                        <svg class="the-path-hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Swipe to explore
+                        <svg class="the-path-hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+                
                 <div class="the-path-carousel-wrapper">
                     <button class="the-path-nav-btn the-path-nav-prev" aria-label="Previous card">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -983,20 +996,67 @@
                 nextBtn.addEventListener('click', scrollToNext);
                 prevBtn.addEventListener('click', scrollToPrev);
                 
+                // Esconder indicação após primeira interação
+                const hint = document.getElementById('the-path-hint');
+                function hideHint() {
+                    if (hint) {
+                        hint.classList.add('hidden');
+                    }
+                }
+                
+                // Esconder ao clicar nos botões
+                nextBtn.addEventListener('click', hideHint);
+                prevBtn.addEventListener('click', hideHint);
+                
+                // Esconder ao fazer scroll
+                let scrollTimeout;
+                carousel.addEventListener('scroll', () => {
+                    updateButtons();
+                    if (hint && !hint.classList.contains('hidden')) {
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(hideHint, 500);
+                    }
+                });
+                
                 // Atualizar botões ao scroll
                 carousel.addEventListener('scroll', updateButtons);
                 
                 // Atualizar botões ao redimensionar
                 window.addEventListener('resize', updateButtons);
                 
+                // Centralizar primeiro card no mobile
+                function centerFirstCard() {
+                    const isMobile = window.innerWidth <= 767;
+                    if (isMobile && carousel) {
+                        // Se ainda não foi feito scroll, centralizar o primeiro card
+                        if (carousel.scrollLeft === 0) {
+                            const firstCard = carousel.querySelector('.the-path-card');
+                            if (firstCard) {
+                                const cardWidth = firstCard.offsetWidth;
+                                const containerWidth = carousel.clientWidth;
+                                // Calcular posição para centralizar (considerando padding do track)
+                                const scrollPosition = Math.max(0, (cardWidth - containerWidth) / 2);
+                                carousel.scrollTo({
+                                    left: scrollPosition,
+                                    behavior: 'auto' // Sem animação na inicialização
+                                });
+                            }
+                        }
+                    }
+                }
+                
                 // Atualizar estado inicial (com múltiplos delays para garantir que layout esteja pronto)
                 function initButtons() {
                     // Primeira verificação imediata
                     updateButtons();
                     
+                    // Centralizar primeiro card no mobile
+                    centerFirstCard();
+                    
                     // Verificar após um frame
                     requestAnimationFrame(() => {
                         updateButtons();
+                        centerFirstCard();
                     });
                     
                     // No mobile, verificar novamente após um pequeno delay para garantir que scrollWidth esteja correto
@@ -1004,10 +1064,12 @@
                     if (isMobile) {
                         setTimeout(() => {
                             updateButtons();
+                            centerFirstCard();
                         }, 100);
                         
                         setTimeout(() => {
                             updateButtons();
+                            centerFirstCard();
                         }, 300);
                     }
                 }
