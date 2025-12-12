@@ -3257,7 +3257,12 @@ blockquote {
   }
 
   .mission-content {
-    display: block;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mission-right .mission-content {
+    flex-direction: column;
   }
 
   .mission-paragraph {
@@ -3265,7 +3270,7 @@ blockquote {
   }
 
   .mission-paragraph.mission-paragraph-right {
-    margin: 10px 0 0;
+    margin: 0 0 20px 0;
   }
 
   .mission-orange-box.mission-transparent {
@@ -3274,8 +3279,25 @@ blockquote {
 
   .mission-img {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
     margin-left: 0;
+    order: -1;
+  }
+
+  .mission-img.mission-img-right {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .mission-right .mission-img {
+    order: -1;
+    margin-bottom: 20px;
+  }
+
+  .mission-right .mission-text-box {
+    order: 1;
   }
 
   .all-projects {
