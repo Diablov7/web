@@ -961,27 +961,58 @@
                     nextBtn.classList.toggle('disabled', isAtEnd);
                 }
 
-                function scrollToNext() {
-                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
+                function scrollToNext(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    const firstCard = carousel.querySelector('.the-path-card');
+                    if (!firstCard) return;
+                    
+                    const isMobile = window.innerWidth <= 767;
+                    // No mobile, usar a largura completa do card + gap
+                    const cardWidth = isMobile ? firstCard.offsetWidth : firstCard.offsetWidth;
                     const gap = 20; // gap entre cards
+                    const scrollAmount = cardWidth + gap;
+                    
                     carousel.scrollBy({
-                        left: cardWidth + gap,
+                        left: scrollAmount,
                         behavior: 'smooth'
                     });
                 }
 
-                function scrollToPrev() {
-                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
+                function scrollToPrev(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    const firstCard = carousel.querySelector('.the-path-card');
+                    if (!firstCard) return;
+                    
+                    const isMobile = window.innerWidth <= 767;
+                    // No mobile, usar a largura completa do card + gap
+                    const cardWidth = isMobile ? firstCard.offsetWidth : firstCard.offsetWidth;
                     const gap = 20; // gap entre cards
+                    const scrollAmount = -(cardWidth + gap);
+                    
                     carousel.scrollBy({
-                        left: -(cardWidth + gap),
+                        left: scrollAmount,
                         behavior: 'smooth'
                     });
                 }
 
-                // Event listeners
+                // Event listeners - click e touch para mobile
                 nextBtn.addEventListener('click', scrollToNext);
+                nextBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    scrollToNext(e);
+                }, { passive: false });
+                
                 prevBtn.addEventListener('click', scrollToPrev);
+                prevBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    scrollToPrev(e);
+                }, { passive: false });
                 
                 // Atualizar botões ao scroll
                 carousel.addEventListener('scroll', updateButtons);

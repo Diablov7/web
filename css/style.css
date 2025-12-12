@@ -3832,6 +3832,10 @@ blockquote {
     /* Garantir que botões sejam sempre clicáveis */
     pointer-events: auto !important;
     z-index: 100 !important;
+    /* Melhorar área de toque no mobile */
+    -webkit-tap-highlight-color: rgba(16, 185, 129, 0.5);
+    touch-action: manipulation; /* Evitar delay de 300ms no mobile */
+    user-select: none; /* Evitar seleção de texto ao tocar */
   }
   
   .the-path-nav-btn svg {
