@@ -3809,6 +3809,8 @@ blockquote {
     max-width: 100vw;
     overflow-x: hidden;
     position: relative;
+    /* Garantir que botões fiquem visíveis mesmo com overflow-x hidden */
+    overflow-y: visible;
   }
   
   .the-path-carousel {
@@ -3827,6 +3829,9 @@ blockquote {
     background-color: rgba(16, 185, 129, 0.9); /* Verde mais sólido e visível */
     border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    /* Garantir que botões sejam sempre clicáveis */
+    pointer-events: auto !important;
+    z-index: 100 !important;
   }
   
   .the-path-nav-btn svg {
@@ -3838,6 +3843,10 @@ blockquote {
   .the-path-nav-btn:hover:not(.disabled) {
     background-color: rgba(16, 185, 129, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .the-path-nav-btn:active:not(.disabled) {
+    transform: translateY(-50%) scale(0.95);
   }
   
   .the-path-nav-prev {
