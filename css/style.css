@@ -3851,10 +3851,14 @@ blockquote {
   
   .the-path-nav-prev {
     left: 8px;
+    /* No mobile, garantir que botão seja visível se necessário */
+    display: none; /* Será controlado pelo JS */
   }
   
   .the-path-nav-next {
     right: 8px;
+    /* No mobile, garantir que botão seja visível se necessário */
+    display: flex; /* Será controlado pelo JS */
   }
   
   /* Footer Legal Links Mobile */
