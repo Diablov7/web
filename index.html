@@ -926,15 +926,20 @@
                     const scrollWidth = carousel.scrollWidth;
                     const clientWidth = carousel.clientWidth;
                     
+                    // Verificar se há conteúdo para rolar (se todos os cards cabem na tela, não precisa de setas)
+                    const hasScrollableContent = scrollWidth > clientWidth;
+                    
                     // Ocultar botão anterior se estiver no início (só aparece quando rolar para direita)
                     const isAtStart = scrollLeft <= 10;
-                    prevBtn.style.display = isAtStart ? 'none' : 'flex';
+                    prevBtn.style.display = (isAtStart || !hasScrollableContent) ? 'none' : 'flex';
                     prevBtn.disabled = isAtStart;
                     prevBtn.classList.toggle('disabled', isAtStart);
                     
-                    // Desabilitar botão próximo se estiver no fim
-                    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 10;
-                    nextBtn.classList.toggle('disabled', scrollLeft + clientWidth >= scrollWidth - 10);
+                    // Ocultar botão próximo se estiver no fim ou se não houver conteúdo para rolar
+                    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+                    nextBtn.style.display = (isAtEnd || !hasScrollableContent) ? 'none' : 'flex';
+                    nextBtn.disabled = isAtEnd;
+                    nextBtn.classList.toggle('disabled', isAtEnd);
                 }
 
                 function scrollToNext() {
@@ -965,8 +970,21 @@
                 // Atualizar botões ao redimensionar
                 window.addEventListener('resize', updateButtons);
                 
-                // Atualizar estado inicial
-                updateButtons();
+                // Atualizar estado inicial (com delay para garantir que layout esteja pronto)
+                function initButtons() {
+                    updateButtons();
+                    // Verificar novamente após um frame para garantir cálculo correto
+                    requestAnimationFrame(() => {
+                        updateButtons();
+                    });
+                }
+                
+                // Inicializar quando DOM estiver pronto
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initButtons);
+                } else {
+                    initButtons();
+                }
             })();
         </script>
 

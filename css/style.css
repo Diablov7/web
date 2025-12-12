@@ -3607,6 +3607,7 @@ blockquote {
 
 .the-path-nav-next {
   right: 10px;
+  display: flex; /* Visível por padrão, será ocultado pelo JS se não houver conteúdo */
 }
 
 .the-path-track {
