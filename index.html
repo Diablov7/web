@@ -395,6 +395,45 @@
             </div>
         </div>
 
+        <div class="the-path-section">
+            <div class="w-layout-blockcontainer main-container w-container">
+                <h2 class="main-title">the path</h2>
+                <p class="the-path-subtitle">A continuous growth cycle designed to deliver measurable, lasting results.</p>
+                
+                <div class="the-path-carousel">
+                    <div class="the-path-track">
+                        <!-- Card 1: Discovery and Audit -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">01</div>
+                            <h3 class="the-path-card-title">DISCOVERY AND AUDIT</h3>
+                            <p class="the-path-card-text">First, a real diagnosis of what is blocking adoption. Messaging, trust, community, funnel, and where users drop. Then a benchmark against strong players in your niche to spot the gaps and the fastest wins.</p>
+                        </div>
+                        
+                        <!-- Card 2: Strategic Planning -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">02</div>
+                            <h3 class="the-path-card-title">STRATEGIC PLANNING</h3>
+                            <p class="the-path-card-text">Next comes the blueprint. Clear positioning, a narrative that makes sense to your market, and a plan your team can actually run. The goal is alignment on priorities, channels, and KPIs that matter.</p>
+                        </div>
+                        
+                        <!-- Card 3: Execution and Measurement -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">03</div>
+                            <h3 class="the-path-card-title">EXECUTION AND MEASUREMENT</h3>
+                            <p class="the-path-card-text">Then it is time to ship. Campaigns go live, performance is tracked, and adjustments happen quickly. The focus stays on qualified users, retention, and conversion, not vanity metrics.</p>
+                        </div>
+                        
+                        <!-- Card 4: Results and Optimization -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">04</div>
+                            <h3 class="the-path-card-title">RESULTS AND OPTIMIZATION</h3>
+                            <p class="the-path-card-text">Finally, results get turned into a system. What worked, why it worked, and what to change next becomes a repeatable loop. Each cycle gets sharper, and momentum compounds instead of resetting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="work-section">
             <div class="w-layout-blockcontainer main-container w-container">
 
@@ -859,6 +898,81 @@
             
             // Initialize on page load
             document.addEventListener('DOMContentLoaded', loadFeaturedWorks);
+        </script>
+
+        <!-- THE PATH - drag to scroll (mouse + touch) -->
+        <script>
+            (function () {
+                const scroller = document.querySelector('.the-path-carousel');
+                if (!scroller) return;
+
+                let isDown = false;
+                let startX = 0;
+                let startY = 0;
+                let startScrollLeft = 0;
+                let isHorizontal = false;
+
+                function onPointerDown(e) {
+                    // Only react to primary button for mouse
+                    if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+                    isDown = true;
+                    isHorizontal = false;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    startScrollLeft = scroller.scrollLeft;
+                    scroller.classList.add('dragging');
+
+                    try {
+                        scroller.setPointerCapture(e.pointerId);
+                    } catch (_) {
+                        // ignore
+                    }
+                }
+
+                function onPointerMove(e) {
+                    if (!isDown) return;
+
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+
+                    // Decide intent once, then stick to it
+                    if (!isHorizontal) {
+                        if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) {
+                            isHorizontal = true;
+                        } else if (Math.abs(dy) > 6 && Math.abs(dy) > Math.abs(dx)) {
+                            // User is scrolling vertically; stop dragging
+                            onPointerUp(e);
+                            return;
+                        }
+                    }
+
+                    if (!isHorizontal) return;
+
+                    // Prevent the page from scrolling while dragging horizontally
+                    if (e.cancelable) e.preventDefault();
+                    scroller.scrollLeft = startScrollLeft - dx;
+                }
+
+                function onPointerUp(e) {
+                    if (!isDown) return;
+                    isDown = false;
+                    isHorizontal = false;
+                    scroller.classList.remove('dragging');
+
+                    try {
+                        scroller.releasePointerCapture(e.pointerId);
+                    } catch (_) {
+                        // ignore
+                    }
+                }
+
+                scroller.addEventListener('pointerdown', onPointerDown);
+                scroller.addEventListener('pointermove', onPointerMove, {passive: false});
+                scroller.addEventListener('pointerup', onPointerUp);
+                scroller.addEventListener('pointercancel', onPointerUp);
+                scroller.addEventListener('pointerleave', onPointerUp);
+            })();
         </script>
 
     </body>

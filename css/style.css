@@ -3525,3 +3525,147 @@ blockquote {
   font-style: normal;
   font-display: swap;
 }
+
+/* THE PATH SECTION - Carousel Horizontal */
+.the-path-section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.the-path-subtitle {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  margin-top: -30px;
+  margin-bottom: 50px;
+  text-align: left;
+  max-width: 800px;
+}
+
+.the-path-carousel {
+  overflow: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.the-path-carousel.dragging {
+  cursor: grabbing;
+}
+
+.the-path-track {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.the-path-card {
+  min-width: 300px;
+  max-width: 400px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border-radius: 5px;
+  flex-flow: column;
+  height: auto;
+  min-height: 320px;
+  padding: 20px;
+  display: flex;
+  background-color: #191919;
+}
+
+.the-path-card:nth-child(1) {
+  background-color: #4a4a4a;
+}
+
+.the-path-card:nth-child(2) {
+  background-color: #3b82f6;
+}
+
+.the-path-card:nth-child(3) {
+  background-color: #191919;
+}
+
+.the-path-card:nth-child(4) {
+  background-color: #10b981;
+}
+
+.the-path-number {
+  border: 1px solid var(--border-color);
+  background-color: #191919;
+  border-radius: 4px;
+  padding: 7px;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.the-path-card-title {
+  font-size: 40px;
+  font-weight: 200;
+  line-height: 30px;
+  margin-bottom: 20px;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.the-path-card-text {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--white);
+  font-weight: 300;
+  margin: 0;
+  margin-top: auto;
+}
+
+/* Desktop: mostra 2-3 cards */
+@media (min-width: 768px) {
+  .the-path-card {
+    min-width: calc(50% - 10px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .the-path-card {
+    min-width: calc(33.333% - 14px);
+  }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 767px) {
+  .the-path-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .the-path-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding: 0;
+  }
+  
+  .the-path-card {
+    min-width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .the-path-track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .the-path-card-title {
+    font-size: 30px;
+    line-height: 28px;
+  }
+}
