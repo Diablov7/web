@@ -280,6 +280,10 @@
                 const isDraft = previewMode && (!post.published || post.published === false);
                 const previewParam = previewMode ? '&preview=true' : '';
                 
+                // Seleciona aleatoriamente uma das 3 imagens de autor
+                const authorImages = ['images/author1.jpeg', 'images/author2.png', 'images/author3.jpeg'];
+                const randomAuthorImage = authorImages[Math.floor(Math.random() * authorImages.length)];
+                
                 return `
                     <div role="listitem" class="w-dyn-item">
                         <a
@@ -292,7 +296,7 @@
                                 <div class="blog-category">${isDraft ? '🔒 DRAFT - ' : ''}${category}</div>
                                 <h2 class="blog-heading">${title}</h2>
                                 <div class="blog-author-and-arrow">
-                                    <img src="images/author1.png" alt="Wevolv3 Author" class="blog-author" />
+                                    <img src="${randomAuthorImage}" alt="Wevolv3 Author" class="blog-author" />
                                     <div class="blog-arrow">
                                         <img src="images/bend-up-right-light.png" alt="Arrow icon" class="blog-arrow-icon" />
                                     </div>
