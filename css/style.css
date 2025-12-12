@@ -3977,9 +3977,9 @@ blockquote {
   }
   
   .the-path-card {
-    min-width: calc(100vw - 60px);
-    max-width: calc(100vw - 60px);
-    width: calc(100vw - 60px);
+    min-width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
+    width: calc(100vw - 40px);
     margin-left: 0;
     margin-right: 0;
     box-sizing: border-box;
@@ -3997,9 +3997,9 @@ blockquote {
     overflow-x: auto;
     /* Garantir que cards não sejam cortados */
     overflow-y: visible;
-    /* Padding para alinhar cards corretamente */
-    padding-left: 30px;
-    padding-right: 30px;
+    /* Padding para alinhar com main-container (20px) */
+    padding-left: 20px;
+    padding-right: 20px;
     gap: 15px;
   }
   
