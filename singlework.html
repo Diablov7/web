@@ -213,18 +213,39 @@
             const dataset = 'production';
             const apiVersion = '2024-01-01';
             
-            // Sanity Client
+            // Sanity Client (same as blog)
             const sanityClient = {
                 fetch: async (query) => {
-                    const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+                    // Use apicdn for better performance and CORS handling (same as blog)
+                    const encodedQuery = encodeURIComponent(query);
+                    const url = `https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodedQuery}`;
+                    
+                    // Debug: log query and URL (remove in production)
+                    console.log('GROQ Query:', query);
+                    console.log('Encoded Query:', encodedQuery);
+                    console.log('Full URL:', url.substring(0, 200) + '...');
                     
                     try {
                         const response = await fetch(url);
+                        
                         if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            // Try to get error message from response
+                            let errorText = '';
+                            try {
+                                errorText = await response.text();
+                                console.error('Error response:', errorText);
+                            } catch (e) {
+                                // Ignore
+                            }
+                            
+                            if (response.status === 0 || response.status === 401 || response.status === 403) {
+                                throw new Error(`CORS/Permission Error. Add ${window.location.origin} to Sanity CORS Origins.`);
+                            }
+                            throw new Error(`HTTP error! status: ${response.status}${errorText ? ': ' + errorText.substring(0, 100) : ''}`);
                         }
-                        const data = await response.json();
-                        return data.result;
+                        
+                        const json = await response.json();
+                        return json.result;
                     } catch (error) {
                         console.error('Sanity fetch error:', error);
                         throw error;
@@ -344,24 +365,27 @@
                         throw new Error('No slug provided');
                     }
                     
-                    // Query: Get work by slug
-                    const query = `
-                        *[_type == "work" && slug.current == $slug && published == true][0] {
-                            _id,
-                            title,
-                            slug,
-                            mainImage,
-                            shortDescription,
-                            description,
-                            category,
-                            projectType,
-                            year,
-                            client,
-                            results
-                        }
-                    `;
+                    // Sanitize slug (same as blog)
+                    const sanitizedSlug = slug.replace(/['"<>]/g, '');
                     
-                    const work = await sanityClient.fetch(query, {slug});
+                    // Query: Get work by slug (same format as blog)
+                    // Build query as a single line to avoid template literal issues
+                    const query = '*[_type == "work" && slug.current == "' + sanitizedSlug + '" && published == true][0] {_id,title,slug,mainImage,shortDescription,description,category,projectType,year,client,results}';
+                    
+                    let work = await sanityClient.fetch(query);
+                    
+                    // Fallback: try without published filter if not found
+                    if (!work) {
+                        const fallbackQuery = '*[_type == "work" && slug.current == "' + sanitizedSlug + '"][0] {_id,title,slug,mainImage,shortDescription,description,category,projectType,year,client,results,published}';
+                        const fallbackWork = await sanityClient.fetch(fallbackQuery);
+                        if (fallbackWork) {
+                            // Use fallback work but show warning if not published
+                            if (!fallbackWork.published) {
+                                console.warn('Work found but not published:', fallbackWork.title);
+                            }
+                            work = fallbackWork;
+                        }
+                    }
                     
                     if (!work) {
                         throw new Error('Work not found');
