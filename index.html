@@ -400,48 +400,36 @@
                 <h2 class="main-title">the path</h2>
                 <p class="the-path-subtitle">A continuous growth cycle designed to deliver measurable, lasting results.</p>
                 
-                <div class="the-path-carousel-wrapper">
-                    <button class="the-path-nav-btn the-path-nav-prev" aria-label="Previous card">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <div class="the-path-carousel">
-                        <div class="the-path-track">
-                            <!-- Card 1: Discovery and Audit -->
-                            <div class="the-path-card">
-                                <div class="the-path-number">01</div>
-                                <h3 class="the-path-card-title">DISCOVERY AND AUDIT</h3>
-                                <p class="the-path-card-text">First, a real diagnosis of what is blocking adoption. Messaging, trust, community, funnel, and where users drop. Then a benchmark against strong players in your niche to spot the gaps and the fastest wins.</p>
-                            </div>
-                            
-                            <!-- Card 2: Strategic Planning -->
-                            <div class="the-path-card">
-                                <div class="the-path-number">02</div>
-                                <h3 class="the-path-card-title">STRATEGIC PLANNING</h3>
-                                <p class="the-path-card-text">Next comes the blueprint. Clear positioning, a narrative that makes sense to your market, and a plan your team can actually run. The goal is alignment on priorities, channels, and KPIs that matter.</p>
-                            </div>
-                            
-                            <!-- Card 3: Execution and Measurement -->
-                            <div class="the-path-card">
-                                <div class="the-path-number">03</div>
-                                <h3 class="the-path-card-title">EXECUTION AND MEASUREMENT</h3>
-                                <p class="the-path-card-text">Then it is time to ship. Campaigns go live, performance is tracked, and adjustments happen quickly. The focus stays on qualified users, retention, and conversion, not vanity metrics.</p>
-                            </div>
-                            
-                            <!-- Card 4: Results and Optimization -->
-                            <div class="the-path-card">
-                                <div class="the-path-number">04</div>
-                                <h3 class="the-path-card-title">RESULTS AND OPTIMIZATION</h3>
-                                <p class="the-path-card-text">Finally, results get turned into a system. What worked, why it worked, and what to change next becomes a repeatable loop. Each cycle gets sharper, and momentum compounds instead of resetting.</p>
-                            </div>
+                <div class="the-path-carousel">
+                    <div class="the-path-track">
+                        <!-- Card 1: Discovery and Audit -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">01</div>
+                            <h3 class="the-path-card-title">DISCOVERY AND AUDIT</h3>
+                            <p class="the-path-card-text">First, a real diagnosis of what is blocking adoption. Messaging, trust, community, funnel, and where users drop. Then a benchmark against strong players in your niche to spot the gaps and the fastest wins.</p>
+                        </div>
+                        
+                        <!-- Card 2: Strategic Planning -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">02</div>
+                            <h3 class="the-path-card-title">STRATEGIC PLANNING</h3>
+                            <p class="the-path-card-text">Next comes the blueprint. Clear positioning, a narrative that makes sense to your market, and a plan your team can actually run. The goal is alignment on priorities, channels, and KPIs that matter.</p>
+                        </div>
+                        
+                        <!-- Card 3: Execution and Measurement -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">03</div>
+                            <h3 class="the-path-card-title">EXECUTION AND MEASUREMENT</h3>
+                            <p class="the-path-card-text">Then it is time to ship. Campaigns go live, performance is tracked, and adjustments happen quickly. The focus stays on qualified users, retention, and conversion, not vanity metrics.</p>
+                        </div>
+                        
+                        <!-- Card 4: Results and Optimization -->
+                        <div class="the-path-card">
+                            <div class="the-path-number">04</div>
+                            <h3 class="the-path-card-title">RESULTS AND OPTIMIZATION</h3>
+                            <p class="the-path-card-text">Finally, results get turned into a system. What worked, why it worked, and what to change next becomes a repeatable loop. Each cycle gets sharper, and momentum compounds instead of resetting.</p>
                         </div>
                     </div>
-                    <button class="the-path-nav-btn the-path-nav-next" aria-label="Next card">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
@@ -912,62 +900,79 @@
             document.addEventListener('DOMContentLoaded', loadFeaturedWorks);
         </script>
 
-        <!-- THE PATH - Navigation buttons -->
+        <!-- THE PATH - Drag to scroll -->
         <script>
             (function () {
                 const carousel = document.querySelector('.the-path-carousel');
-                const prevBtn = document.querySelector('.the-path-nav-prev');
-                const nextBtn = document.querySelector('.the-path-nav-next');
-                
-                if (!carousel || !prevBtn || !nextBtn) return;
+                if (!carousel) return;
 
-                function updateButtons() {
-                    const scrollLeft = carousel.scrollLeft;
-                    const scrollWidth = carousel.scrollWidth;
-                    const clientWidth = carousel.clientWidth;
+                // Desktop: Mouse events
+                let isDown = false;
+                let startX = 0;
+                let scrollLeft = 0;
+
+                carousel.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    carousel.style.cursor = 'grabbing';
+                    carousel.style.scrollBehavior = 'auto';
+                    startX = e.pageX - carousel.offsetLeft;
+                    scrollLeft = carousel.scrollLeft;
+                });
+
+                carousel.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    carousel.style.cursor = 'grab';
+                    carousel.style.scrollBehavior = 'smooth';
+                });
+
+                carousel.addEventListener('mouseup', () => {
+                    isDown = false;
+                    carousel.style.cursor = 'grab';
+                    carousel.style.scrollBehavior = 'smooth';
+                });
+
+                carousel.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - carousel.offsetLeft;
+                    const walk = (x - startX) * 1.5; // Sensibilidade do drag
+                    carousel.scrollLeft = scrollLeft - walk;
+                });
+
+                // Mobile: Touch events com detecção de direção
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let touchScrollLeft = 0;
+                let isScrolling = false;
+
+                carousel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].pageX - carousel.offsetLeft;
+                    touchStartY = e.touches[0].pageY;
+                    touchScrollLeft = carousel.scrollLeft;
+                    isScrolling = false;
+                }, { passive: true });
+
+                carousel.addEventListener('touchmove', (e) => {
+                    if (!isScrolling) {
+                        const deltaX = Math.abs(e.touches[0].pageX - touchStartX);
+                        const deltaY = Math.abs(e.touches[0].pageY - touchStartY);
+                        // Se movimento horizontal for maior que vertical, ativa scroll horizontal
+                        isScrolling = deltaX > deltaY && deltaX > 5;
+                    }
                     
-                    // Ocultar botão anterior completamente se estiver no início
-                    const isAtStart = scrollLeft <= 10;
-                    prevBtn.style.display = isAtStart ? 'none' : 'flex';
-                    prevBtn.disabled = isAtStart;
-                    prevBtn.classList.toggle('disabled', isAtStart);
-                    
-                    // Desabilitar botão próximo se estiver no fim
-                    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-                    nextBtn.disabled = isAtEnd;
-                    nextBtn.classList.toggle('disabled', isAtEnd);
-                }
+                    if (isScrolling) {
+                        const x = e.touches[0].pageX - carousel.offsetLeft;
+                        const walk = (x - touchStartX) * 1.5; // Sensibilidade do drag
+                        carousel.scrollLeft = touchScrollLeft - walk;
+                    }
+                }, { passive: true });
 
-                function scrollToNext() {
-                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
-                    const gap = 20; // gap entre cards
-                    carousel.scrollBy({
-                        left: cardWidth + gap,
-                        behavior: 'smooth'
-                    });
-                }
+                carousel.addEventListener('touchend', () => {
+                    isScrolling = false;
+                }, { passive: true });
 
-                function scrollToPrev() {
-                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
-                    const gap = 20; // gap entre cards
-                    carousel.scrollBy({
-                        left: -(cardWidth + gap),
-                        behavior: 'smooth'
-                    });
-                }
-
-                // Event listeners
-                nextBtn.addEventListener('click', scrollToNext);
-                prevBtn.addEventListener('click', scrollToPrev);
-                
-                // Atualizar botões ao scroll
-                carousel.addEventListener('scroll', updateButtons);
-                
-                // Atualizar botões ao redimensionar
-                window.addEventListener('resize', updateButtons);
-                
-                // Atualizar estado inicial
-                updateButtons();
+                // Cursor inicial
+                carousel.style.cursor = 'grab';
             })();
         </script>
 
