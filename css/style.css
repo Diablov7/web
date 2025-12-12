@@ -3803,8 +3803,6 @@ blockquote {
     padding-right: 0;
     max-width: 100vw;
     overflow-x: auto;
-    /* Prevenir drag direto no mobile - usar apenas botões */
-    touch-action: pan-y pinch-zoom;
   }
   
   .the-path-carousel-wrapper {
@@ -3817,19 +3815,7 @@ blockquote {
   
   .the-path-carousel {
     max-width: 100%;
-    /* No mobile: manter scroll mas prevenir drag direto */
     overflow-x: auto;
-    /* Desabilitar scroll suave nativo para evitar conflitos */
-    -webkit-overflow-scrolling: auto;
-    scroll-behavior: smooth;
-    /* Prevenir scroll direto do usuário, mas permitir programático */
-    touch-action: pan-y pinch-zoom; /* Permitir apenas scroll vertical */
-  }
-  
-  /* Garantir que wrapper permita botões visíveis */
-  .the-path-carousel-wrapper {
-    position: relative;
-    overflow: visible;
   }
   
   .the-path-card-title {

@@ -944,35 +944,21 @@
                     // Verificar se há conteúdo para rolar (se todos os cards cabem na tela, não precisa de setas)
                     const hasScrollableContent = scrollWidth > clientWidth + scrollThreshold;
                     
-                    // No mobile, se houver mais de um card, sempre mostrar botões
+                    // No mobile, se houver mais de um card, sempre mostrar botão próximo inicialmente
                     const cardCount = carousel.querySelectorAll('.the-path-card').length;
                     const shouldShowButtons = isMobile ? (cardCount > 1) : hasScrollableContent;
                     
-                    // No mobile, sempre mostrar botões se houver mais de um card
-                    if (isMobile && cardCount > 1) {
-                        // Ocultar botão anterior apenas se estiver no início
-                        const isAtStart = scrollLeft <= threshold;
-                        prevBtn.style.display = isAtStart ? 'none' : 'flex';
-                        prevBtn.disabled = isAtStart;
-                        prevBtn.classList.toggle('disabled', isAtStart);
-                        
-                        // Ocultar botão próximo apenas se estiver no fim
-                        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
-                        nextBtn.style.display = isAtEnd ? 'none' : 'flex';
-                        nextBtn.disabled = isAtEnd;
-                        nextBtn.classList.toggle('disabled', isAtEnd);
-                    } else {
-                        // Desktop: usar lógica original
-                        const isAtStart = scrollLeft <= threshold;
-                        prevBtn.style.display = (isAtStart || !shouldShowButtons) ? 'none' : 'flex';
-                        prevBtn.disabled = isAtStart;
-                        prevBtn.classList.toggle('disabled', isAtStart);
-                        
-                        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
-                        nextBtn.style.display = (isAtEnd || !shouldShowButtons) ? 'none' : 'flex';
-                        nextBtn.disabled = isAtEnd;
-                        nextBtn.classList.toggle('disabled', isAtEnd);
-                    }
+                    // Ocultar botão anterior se estiver no início (só aparece quando rolar para direita)
+                    const isAtStart = scrollLeft <= threshold;
+                    prevBtn.style.display = (isAtStart || !shouldShowButtons) ? 'none' : 'flex';
+                    prevBtn.disabled = isAtStart;
+                    prevBtn.classList.toggle('disabled', isAtStart);
+                    
+                    // Ocultar botão próximo se estiver no fim ou se não houver conteúdo para rolar
+                    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
+                    nextBtn.style.display = (isAtEnd || !shouldShowButtons) ? 'none' : 'flex';
+                    nextBtn.disabled = isAtEnd;
+                    nextBtn.classList.toggle('disabled', isAtEnd);
                 }
 
                 function scrollToNext(e) {
@@ -1030,30 +1016,6 @@
                 
                 // Atualizar botões ao scroll
                 carousel.addEventListener('scroll', updateButtons);
-                
-                // No mobile, prevenir scroll direto - apenas via botões
-                const isMobileDevice = window.innerWidth <= 767;
-                if (isMobileDevice) {
-                    let startX = 0;
-                    let startY = 0;
-                    
-                    carousel.addEventListener('touchstart', function(e) {
-                        startX = e.touches[0].clientX;
-                        startY = e.touches[0].clientY;
-                    }, { passive: true });
-                    
-                    carousel.addEventListener('touchmove', function(e) {
-                        if (!startX || !startY) return;
-                        
-                        const diffX = Math.abs(e.touches[0].clientX - startX);
-                        const diffY = Math.abs(e.touches[0].clientY - startY);
-                        
-                        // Se o movimento for principalmente horizontal, prevenir
-                        if (diffX > diffY && diffX > 10) {
-                            e.preventDefault();
-                        }
-                    }, { passive: false });
-                }
                 
                 // Atualizar botões ao redimensionar
                 window.addEventListener('resize', updateButtons);
