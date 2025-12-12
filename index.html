@@ -963,13 +963,21 @@
                     
                     // Ocultar botão anterior se estiver no início (só aparece quando rolar para direita)
                     const isAtStart = scrollLeft <= threshold;
-                    prevBtn.style.display = (isAtStart || !shouldShowButtons) ? 'none' : 'flex';
+                    const hidePrev = isAtStart || !shouldShowButtons;
+                    prevBtn.style.display = hidePrev ? 'none' : 'flex';
+                    prevBtn.style.visibility = hidePrev ? 'hidden' : 'visible';
+                    prevBtn.style.opacity = hidePrev ? '0' : '1';
+                    prevBtn.classList.toggle('hidden', hidePrev);
                     prevBtn.disabled = isAtStart;
                     prevBtn.classList.toggle('disabled', isAtStart);
                     
                     // Ocultar botão próximo se estiver no fim ou se não houver conteúdo para rolar
                     const isAtEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
-                    nextBtn.style.display = (isAtEnd || !shouldShowButtons) ? 'none' : 'flex';
+                    const hideNext = isAtEnd || !shouldShowButtons;
+                    nextBtn.style.display = hideNext ? 'none' : 'flex';
+                    nextBtn.style.visibility = hideNext ? 'hidden' : 'visible';
+                    nextBtn.style.opacity = hideNext ? '0' : '1';
+                    nextBtn.classList.toggle('hidden', hideNext);
                     nextBtn.disabled = isAtEnd;
                     nextBtn.classList.toggle('disabled', isAtEnd);
                 }
@@ -1024,25 +1032,10 @@
                 // Atualizar botões ao redimensionar
                 window.addEventListener('resize', updateButtons);
                 
-                // Centralizar primeiro card no mobile
+                // Centralizar primeiro card no mobile - remover função pois CSS já cuida disso
                 function centerFirstCard() {
-                    const isMobile = window.innerWidth <= 767;
-                    if (isMobile && carousel) {
-                        // Se ainda não foi feito scroll, centralizar o primeiro card
-                        if (carousel.scrollLeft === 0) {
-                            const firstCard = carousel.querySelector('.the-path-card');
-                            if (firstCard) {
-                                const cardWidth = firstCard.offsetWidth;
-                                const containerWidth = carousel.clientWidth;
-                                // Calcular posição para centralizar (considerando padding do track)
-                                const scrollPosition = Math.max(0, (cardWidth - containerWidth) / 2);
-                                carousel.scrollTo({
-                                    left: scrollPosition,
-                                    behavior: 'auto' // Sem animação na inicialização
-                                });
-                            }
-                        }
-                    }
+                    // Agora o CSS cuida do alinhamento com padding no track
+                    // Esta função está vazia mas mantida para compatibilidade
                 }
                 
                 // Atualizar estado inicial (com múltiplos delays para garantir que layout esteja pronto)

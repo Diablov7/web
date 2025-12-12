@@ -3977,15 +3977,19 @@ blockquote {
   }
   
   .the-path-card {
-    min-width: calc(100vw - 40px);
-    max-width: calc(100vw - 40px);
-    width: calc(100vw - 40px);
-    margin-left: 20px;
-    margin-right: 20px;
+    min-width: calc(100vw - 60px);
+    max-width: calc(100vw - 60px);
+    width: calc(100vw - 60px);
+    margin-left: 0;
+    margin-right: 0;
     box-sizing: border-box;
     /* Garantir que conteúdo não seja cortado */
     overflow: visible;
     word-wrap: break-word;
+  }
+  
+  .the-path-card:first-child {
+    margin-left: 0;
   }
   
   .the-path-track {
@@ -3993,9 +3997,10 @@ blockquote {
     overflow-x: auto;
     /* Garantir que cards não sejam cortados */
     overflow-y: visible;
-    /* Centralizar primeiro card no mobile - adicionar padding para centralizar */
-    padding-left: 20px;
-    padding-right: 20px;
+    /* Padding para alinhar cards corretamente */
+    padding-left: 30px;
+    padding-right: 30px;
+    gap: 15px;
   }
   
   .the-path-carousel-wrapper {
@@ -4039,6 +4044,18 @@ blockquote {
     /* Garantir que botões sejam sempre clicáveis */
     pointer-events: auto !important;
     z-index: 100 !important;
+    /* Esconder completamente quando display: none - evitar sombra fantasma */
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+  
+  .the-path-nav-btn[style*="display: none"],
+  .the-path-nav-btn.hidden {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
   }
   
   .the-path-nav-btn svg {
@@ -4058,14 +4075,18 @@ blockquote {
   
   .the-path-nav-prev {
     left: 8px;
-    /* No mobile, garantir que botão seja visível se necessário */
-    display: none; /* Será controlado pelo JS */
+    /* No mobile, ocultar completamente inicialmente */
+    display: none;
+    visibility: hidden;
+    opacity: 0;
   }
   
   .the-path-nav-next {
     right: 8px;
-    /* No mobile, garantir que botão seja visível se necessário */
-    display: flex; /* Será controlado pelo JS */
+    /* No mobile, visível inicialmente */
+    display: flex;
+    visibility: visible;
+    opacity: 1;
   }
   
   /* Footer Legal Links Mobile */
