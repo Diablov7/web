@@ -3543,6 +3543,11 @@ blockquote {
   max-width: 800px;
 }
 
+.the-path-carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .the-path-carousel {
   overflow-x: auto;
   overflow-y: hidden;
@@ -3550,11 +3555,6 @@ blockquote {
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   padding-bottom: 20px;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: pan-x pan-y; /* Permite scroll horizontal e vertical */
-  will-change: scroll-position; /* Otimização de performance */
   /* Esconder scrollbar mas manter funcionalidade */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
@@ -3564,8 +3564,48 @@ blockquote {
   display: none; /* Chrome/Safari */
 }
 
-.the-path-carousel.dragging {
-  cursor: grabbing;
+.the-path-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.the-path-nav-btn:hover:not(.disabled) {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.the-path-nav-btn:active:not(.disabled) {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.the-path-nav-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.the-path-nav-prev {
+  left: 10px;
+}
+
+.the-path-nav-next {
+  right: 10px;
 }
 
 .the-path-track {
@@ -3676,5 +3716,18 @@ blockquote {
   .the-path-card-title {
     font-size: 30px;
     line-height: 28px;
+  }
+  
+  .the-path-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .the-path-nav-prev {
+    left: 5px;
+  }
+  
+  .the-path-nav-next {
+    right: 5px;
   }
 }

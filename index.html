@@ -400,36 +400,48 @@
                 <h2 class="main-title">the path</h2>
                 <p class="the-path-subtitle">A continuous growth cycle designed to deliver measurable, lasting results.</p>
                 
-                <div class="the-path-carousel">
-                    <div class="the-path-track">
-                        <!-- Card 1: Discovery and Audit -->
-                        <div class="the-path-card">
-                            <div class="the-path-number">01</div>
-                            <h3 class="the-path-card-title">DISCOVERY AND AUDIT</h3>
-                            <p class="the-path-card-text">First, a real diagnosis of what is blocking adoption. Messaging, trust, community, funnel, and where users drop. Then a benchmark against strong players in your niche to spot the gaps and the fastest wins.</p>
-                        </div>
-                        
-                        <!-- Card 2: Strategic Planning -->
-                        <div class="the-path-card">
-                            <div class="the-path-number">02</div>
-                            <h3 class="the-path-card-title">STRATEGIC PLANNING</h3>
-                            <p class="the-path-card-text">Next comes the blueprint. Clear positioning, a narrative that makes sense to your market, and a plan your team can actually run. The goal is alignment on priorities, channels, and KPIs that matter.</p>
-                        </div>
-                        
-                        <!-- Card 3: Execution and Measurement -->
-                        <div class="the-path-card">
-                            <div class="the-path-number">03</div>
-                            <h3 class="the-path-card-title">EXECUTION AND MEASUREMENT</h3>
-                            <p class="the-path-card-text">Then it is time to ship. Campaigns go live, performance is tracked, and adjustments happen quickly. The focus stays on qualified users, retention, and conversion, not vanity metrics.</p>
-                        </div>
-                        
-                        <!-- Card 4: Results and Optimization -->
-                        <div class="the-path-card">
-                            <div class="the-path-number">04</div>
-                            <h3 class="the-path-card-title">RESULTS AND OPTIMIZATION</h3>
-                            <p class="the-path-card-text">Finally, results get turned into a system. What worked, why it worked, and what to change next becomes a repeatable loop. Each cycle gets sharper, and momentum compounds instead of resetting.</p>
+                <div class="the-path-carousel-wrapper">
+                    <button class="the-path-nav-btn the-path-nav-prev" aria-label="Previous card">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="the-path-carousel">
+                        <div class="the-path-track">
+                            <!-- Card 1: Discovery and Audit -->
+                            <div class="the-path-card">
+                                <div class="the-path-number">01</div>
+                                <h3 class="the-path-card-title">DISCOVERY AND AUDIT</h3>
+                                <p class="the-path-card-text">First, a real diagnosis of what is blocking adoption. Messaging, trust, community, funnel, and where users drop. Then a benchmark against strong players in your niche to spot the gaps and the fastest wins.</p>
+                            </div>
+                            
+                            <!-- Card 2: Strategic Planning -->
+                            <div class="the-path-card">
+                                <div class="the-path-number">02</div>
+                                <h3 class="the-path-card-title">STRATEGIC PLANNING</h3>
+                                <p class="the-path-card-text">Next comes the blueprint. Clear positioning, a narrative that makes sense to your market, and a plan your team can actually run. The goal is alignment on priorities, channels, and KPIs that matter.</p>
+                            </div>
+                            
+                            <!-- Card 3: Execution and Measurement -->
+                            <div class="the-path-card">
+                                <div class="the-path-number">03</div>
+                                <h3 class="the-path-card-title">EXECUTION AND MEASUREMENT</h3>
+                                <p class="the-path-card-text">Then it is time to ship. Campaigns go live, performance is tracked, and adjustments happen quickly. The focus stays on qualified users, retention, and conversion, not vanity metrics.</p>
+                            </div>
+                            
+                            <!-- Card 4: Results and Optimization -->
+                            <div class="the-path-card">
+                                <div class="the-path-number">04</div>
+                                <h3 class="the-path-card-title">RESULTS AND OPTIMIZATION</h3>
+                                <p class="the-path-card-text">Finally, results get turned into a system. What worked, why it worked, and what to change next becomes a repeatable loop. Each cycle gets sharper, and momentum compounds instead of resetting.</p>
+                            </div>
                         </div>
                     </div>
+                    <button class="the-path-nav-btn the-path-nav-next" aria-label="Next card">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -900,144 +912,59 @@
             document.addEventListener('DOMContentLoaded', loadFeaturedWorks);
         </script>
 
-        <!-- THE PATH - drag to scroll (mouse + touch) -->
+        <!-- THE PATH - Navigation buttons -->
         <script>
             (function () {
-                const scroller = document.querySelector('.the-path-carousel');
-                if (!scroller) return;
+                const carousel = document.querySelector('.the-path-carousel');
+                const prevBtn = document.querySelector('.the-path-nav-prev');
+                const nextBtn = document.querySelector('.the-path-nav-next');
+                
+                if (!carousel || !prevBtn || !nextBtn) return;
 
-                let isDown = false;
-                let startX = 0;
-                let startY = 0;
-                let startScrollLeft = 0;
-                let isHorizontal = false;
-                let velocity = 0;
-                let lastX = 0;
-                let lastTime = 0;
-                let momentumAnimation = null;
-
-                // Sensibilidade aumentada para melhor responsividade
-                const SENSITIVITY = 1.8;
-                const THRESHOLD = 3; // Reduzido de 6 para 3 para detectar movimento mais rápido
-
-                function onPointerDown(e) {
-                    // Only react to primary button for mouse
-                    if (e.pointerType === 'mouse' && e.button !== 0) return;
-
-                    // Cancelar momentum anterior se houver
-                    if (momentumAnimation) {
-                        cancelAnimationFrame(momentumAnimation);
-                        momentumAnimation = null;
-                    }
-
-                    isDown = true;
-                    isHorizontal = false;
-                    startX = e.clientX;
-                    startY = e.clientY;
-                    lastX = e.clientX;
-                    lastTime = Date.now();
-                    startScrollLeft = scroller.scrollLeft;
-                    velocity = 0;
-                    scroller.classList.add('dragging');
-                    scroller.style.scrollBehavior = 'auto'; // Desabilitar smooth scroll durante drag
-
-                    try {
-                        scroller.setPointerCapture(e.pointerId);
-                    } catch (_) {
-                        // ignore
-                    }
-                }
-
-                function onPointerMove(e) {
-                    if (!isDown) return;
-
-                    const dx = e.clientX - startX;
-                    const dy = e.clientY - startY;
-                    const now = Date.now();
-                    const timeDelta = now - lastTime;
-
-                    // Calcular velocidade para momentum
-                    if (timeDelta > 0) {
-                        const moveDelta = e.clientX - lastX;
-                        velocity = moveDelta / timeDelta;
-                    }
-                    lastX = e.clientX;
-                    lastTime = now;
-
-                    // Decide intent once, then stick to it
-                    if (!isHorizontal) {
-                        if (Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
-                            isHorizontal = true;
-                        } else if (Math.abs(dy) > THRESHOLD && Math.abs(dy) > Math.abs(dx)) {
-                            // User is scrolling vertically; stop dragging
-                            onPointerUp(e);
-                            return;
-                        }
-                    }
-
-                    if (!isHorizontal) return;
-
-                    // Prevent the page from scrolling while dragging horizontally
-                    if (e.cancelable) e.preventDefault();
+                function updateButtons() {
+                    const scrollLeft = carousel.scrollLeft;
+                    const scrollWidth = carousel.scrollWidth;
+                    const clientWidth = carousel.clientWidth;
                     
-                    // Aplicar scroll com sensibilidade aumentada
-                    scroller.scrollLeft = startScrollLeft - (dx * SENSITIVITY);
+                    // Desabilitar botão anterior se estiver no início
+                    prevBtn.disabled = scrollLeft <= 10;
+                    prevBtn.classList.toggle('disabled', scrollLeft <= 10);
+                    
+                    // Desabilitar botão próximo se estiver no fim
+                    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 10;
+                    nextBtn.classList.toggle('disabled', scrollLeft + clientWidth >= scrollWidth - 10);
                 }
 
-                function onPointerUp(e) {
-                    if (!isDown) return;
-                    isDown = false;
-                    scroller.classList.remove('dragging');
-                    scroller.style.scrollBehavior = 'smooth'; // Reabilitar smooth scroll
-
-                    try {
-                        scroller.releasePointerCapture(e.pointerId);
-                    } catch (_) {
-                        // ignore
-                    }
-
-                    // Aplicar momentum se houver velocidade suficiente
-                    if (Math.abs(velocity) > 0.1 && isHorizontal) {
-                        applyMomentum(velocity);
-                    } else {
-                        isHorizontal = false;
-                        velocity = 0;
-                    }
+                function scrollToNext() {
+                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
+                    const gap = 20; // gap entre cards
+                    carousel.scrollBy({
+                        left: cardWidth + gap,
+                        behavior: 'smooth'
+                    });
                 }
 
-                function applyMomentum(initialVelocity) {
-                    const friction = 0.92; // Fator de atrito
-                    let currentVelocity = initialVelocity * 15; // Multiplicador para momentum
-
-                    function animate() {
-                        if (Math.abs(currentVelocity) < 0.1) {
-                            momentumAnimation = null;
-                            isHorizontal = false;
-                            return;
-                        }
-
-                        scroller.scrollLeft -= currentVelocity;
-                        currentVelocity *= friction;
-
-                        momentumAnimation = requestAnimationFrame(animate);
-                    }
-
-                    momentumAnimation = requestAnimationFrame(animate);
+                function scrollToPrev() {
+                    const cardWidth = carousel.querySelector('.the-path-card').offsetWidth;
+                    const gap = 20; // gap entre cards
+                    carousel.scrollBy({
+                        left: -(cardWidth + gap),
+                        behavior: 'smooth'
+                    });
                 }
 
-                // Suporte para scroll com mouse wheel
-                scroller.addEventListener('wheel', (e) => {
-                    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                        e.preventDefault();
-                        scroller.scrollLeft += e.deltaX * 0.8; // Sensibilidade do wheel
-                    }
-                }, {passive: false});
-
-                scroller.addEventListener('pointerdown', onPointerDown);
-                scroller.addEventListener('pointermove', onPointerMove, {passive: false});
-                scroller.addEventListener('pointerup', onPointerUp);
-                scroller.addEventListener('pointercancel', onPointerUp);
-                scroller.addEventListener('pointerleave', onPointerUp);
+                // Event listeners
+                nextBtn.addEventListener('click', scrollToNext);
+                prevBtn.addEventListener('click', scrollToPrev);
+                
+                // Atualizar botões ao scroll
+                carousel.addEventListener('scroll', updateButtons);
+                
+                // Atualizar botões ao redimensionar
+                window.addEventListener('resize', updateButtons);
+                
+                // Atualizar estado inicial
+                updateButtons();
             })();
         </script>
 
