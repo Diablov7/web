@@ -47,8 +47,43 @@
         <link href="images/favicon.png" rel="apple-touch-icon" />
         
         <style>
+            /* Mobile Image in Header */
+            .work-image-mobile {
+                width: 100%;
+                margin-top: 20px;
+                padding: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .work-image-mobile img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                max-width: 100%;
+            }
+            .sitemap {
+                position: relative;
+            }
+            
+            /* Desktop: Hide mobile image, show desktop image */
+            .work-image-mobile {
+                display: none !important;
+            }
+            .single-work-right {
+                display: block;
+            }
+            
             /* Mobile Responsiveness - Fix text cutting on mobile */
             @media screen and (max-width: 767px) {
+                /* Show mobile image in header, hide desktop image */
+                .work-image-mobile {
+                    display: block !important;
+                }
+                .single-work-right {
+                    display: none !important;
+                }
+                
                 .main-container {
                     padding-left: 20px !important;
                     padding-right: 20px !important;
@@ -62,8 +97,7 @@
                     padding-right: 0 !important;
                     overflow-x: visible !important;
                 }
-                .single-work-left,
-                .single-work-right {
+                .single-work-left {
                     padding-left: 20px !important;
                     padding-right: 20px !important;
                     overflow-x: visible !important;
@@ -107,8 +141,7 @@
                     padding-left: 15px !important;
                     padding-right: 15px !important;
                 }
-                .single-work-left,
-                .single-work-right {
+                .single-work-left {
                     padding-left: 15px !important;
                     padding-right: 15px !important;
                 }
@@ -171,6 +204,16 @@
                     <h2 data-w-id="darkyn25" style="opacity: 0;" class="sitemap-heading">work</h2>
                     <div data-w-id="darkyn26" style="opacity: 0;" class="stemap-text">Who We are and what we do</div>
                 </div>
+            </div>
+            <!-- Mobile Image - Only visible on mobile -->
+            <div id="work-image-mobile" class="work-image-mobile" style="display: none;">
+                <img
+                    id="work-image-mobile-img"
+                    src="images/work7.jpg"
+                    alt=""
+                    class="single-main-work-img-mobile"
+                    loading="lazy"
+                />
             </div>
         </div>
 
@@ -484,11 +527,23 @@
                         ? portableTextToHtml(work.description) 
                         : (work.shortDescription || 'No description available.');
                     
-                    // Update image
+                    // Update image (both desktop and mobile)
                     const imageUrl = sanityImageUrl(work.mainImage);
                     const workImage = document.getElementById('work-image');
                     workImage.src = imageUrl;
                     workImage.alt = work.title || 'Project image';
+                    
+                    // Update mobile image in header
+                    const workImageMobile = document.getElementById('work-image-mobile-img');
+                    if (workImageMobile) {
+                        workImageMobile.src = imageUrl;
+                        workImageMobile.alt = work.title || 'Project image';
+                        // Show mobile image container
+                        const mobileImageContainer = document.getElementById('work-image-mobile');
+                        if (mobileImageContainer) {
+                            mobileImageContainer.style.display = 'block';
+                        }
+                    }
                     
                     // Update project type (if exists)
                     if (work.projectType) {
