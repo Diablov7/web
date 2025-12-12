@@ -53,10 +53,15 @@
         <link href="images/favicon.png" rel="apple-touch-icon" />
         
         <style>
-            /* Remove custom cursor on all pages */
-            .cursor-wrapp, .cursor {
+            /* Remove custom cursor completely - all devices */
+            .cursor-wrapp,
+            .cursor,
+            .cursor-emmbed,
+            [data-w-id="darkyn-cursor"],
+            .project-cursor-text {
                 display: none !important;
                 visibility: hidden !important;
+                opacity: 0 !important;
                 pointer-events: none !important;
             }
             body {
@@ -114,22 +119,6 @@
     </head>
 
     <body>
-
-        <div class="cursor-wrapp">
-            <div class="cursor-emmbed w-embed">
-                <style>
-                    .cursor-wrapp {
-                        pointer-events: none;
-                    }
-                </style>
-            </div>
-            <div data-w-id="darkyn-cursor" class="cursor">
-                <div class="project-cursor-text">
-                    View<br />
-                    Work
-                </div>
-            </div>
-        </div>
 
         <div class="header">
             <div class="w-layout-blockcontainer main-container w-container">
