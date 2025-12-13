@@ -158,6 +158,14 @@
                     max-width: 100% !important;
                     box-sizing: border-box !important;
                 }
+                #work-results {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    overflow-x: visible !important;
+                    word-wrap: break-word !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
                 .single-main-title-heading {
                     padding-left: 0 !important;
                     padding-right: 0 !important;
@@ -192,6 +200,48 @@
                 #work-description {
                     padding-left: 0 !important;
                     padding-right: 0 !important;
+                }
+                #work-results {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                }
+            }
+            
+            /* Estilos para métricas/results */
+            #work-results {
+                line-height: 1.6;
+            }
+            #work-results div {
+                margin-bottom: 12px;
+            }
+            #work-results strong {
+                color: #10b981;
+                display: block;
+                margin-bottom: 4px;
+                font-size: 16px;
+            }
+            #work-results span {
+                font-size: 20px;
+                font-weight: 500;
+                color: var(--white);
+            }
+            
+            /* Mobile: ajustar tamanho das métricas */
+            @media screen and (max-width: 767px) {
+                #work-results strong {
+                    font-size: 14px;
+                }
+                #work-results span {
+                    font-size: 18px;
+                }
+            }
+            
+            @media screen and (max-width: 479px) {
+                #work-results strong {
+                    font-size: 13px;
+                }
+                #work-results span {
+                    font-size: 16px;
                 }
             }
         </style>
@@ -280,6 +330,10 @@
                             <div id="work-client-item" class="single-left-item" style="display: none;">
                                 <h5 class="single-detail-heading">client</h5>
                                 <div id="work-client" class="single-details-text"></div>
+                            </div>
+                            <div id="work-results-item" class="single-left-item" style="display: none;">
+                                <h5 class="single-detail-heading">results</h5>
+                                <div id="work-results" class="single-details-text"></div>
                             </div>
                         </div>
                         <a href="works.html" class="button w-button">view all projects</a>
@@ -622,6 +676,17 @@
                     if (work.client) {
                         document.getElementById('work-client').textContent = work.client;
                         document.getElementById('work-client-item').style.display = 'block';
+                    }
+                    
+                    // Update results/metrics (if exists)
+                    if (work.results && Array.isArray(work.results) && work.results.length > 0) {
+                        const resultsHtml = work.results.map(result => {
+                            const metric = result.metric || '';
+                            const value = result.value || '';
+                            return `<div style="margin-bottom: 12px;"><strong style="color: #10b981;">${metric}:</strong> <span style="font-size: 20px; font-weight: 500;">${value}</span></div>`;
+                        }).join('');
+                        document.getElementById('work-results').innerHTML = resultsHtml;
+                        document.getElementById('work-results-item').style.display = 'block';
                     }
                     
                     // Hide loading, show content
