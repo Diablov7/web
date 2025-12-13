@@ -27,3 +27,4 @@ echo ""
 echo "Aguarde 1-2 minutos para o deploy no Netlify"
 echo "Teste em um dispositivo móvel: https://wevolv3.com/singleblog?slug=..."
 
+

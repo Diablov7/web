@@ -220,3 +220,4 @@ Agora você pode gerenciar todos os cases/projetos diretamente no Sanity CMS, se
 
 Qualquer dúvida, consulte `SANITY_WORK_SCHEMA.md` para detalhes técnicos do schema.
 
+

@@ -27,3 +27,4 @@ echo ""
 echo "Aguarde 1-2 minutos para o deploy no Netlify"
 echo "Depois teste: https://wevolv3.com/studio"
 
+

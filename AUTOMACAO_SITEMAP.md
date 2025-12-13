@@ -91,3 +91,4 @@ node generate-sitemap.js
 - O sitemap inclui todas as páginas estáticas + posts do blog
 - URLs dos posts: `https://wevolv3.com/singleblog?slug=...`
 
+

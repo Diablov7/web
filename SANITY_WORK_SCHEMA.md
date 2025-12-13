@@ -331,3 +331,4 @@ export const schemaTypes = [
 - Verifique se todos os campos obrigatórios estão preenchidos
 - Verifique se o slug é único
 
+

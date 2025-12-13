@@ -20,3 +20,4 @@ git push origin main
 echo ""
 echo "✅ Commit e push concluídos!"
 
+

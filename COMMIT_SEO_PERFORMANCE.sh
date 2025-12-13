@@ -46,3 +46,4 @@ echo "1. Execute 'node generate-sitemap.js' após publicar novos artigos"
 echo "2. Ou configure um cron job para executar automaticamente"
 echo "3. Verifique o sitemap em: https://wevolv3.com/sitemap.xml"
 
+

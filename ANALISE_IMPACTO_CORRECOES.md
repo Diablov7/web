@@ -138,3 +138,4 @@ Este arquivo provavelmente contém toda a lógica de animações e interações 
 
 **Recomendação:** Fazer as 5 correções seguras + corrigir ab2.jpg com fallback. Deixar plugins.js para depois.
 
+

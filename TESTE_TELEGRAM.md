@@ -118,3 +118,4 @@ Quando rodar `netlify dev`, os logs aparecerão no terminal. Procure por:
 - [ ] Formulário é resetado após envio
 - [ ] Mensagem de erro aparece se houver problema
 
+

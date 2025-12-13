@@ -177,3 +177,4 @@ A maioria dos problemas são fáceis de corrigir e não afetam a funcionalidade 
 3. Considerar refatoração de arquivos grandes
 4. Documentar scripts de commit
 
+

@@ -8,3 +8,4 @@
 - Studio agora serve localmente em vez de redirect externo
 - Baseado na estrutura do projeto antigo que funcionava
 
+
