@@ -35,6 +35,10 @@
 
 ## Passo 3: Configurar Variável de Ambiente no Netlify
 
+Você tem **duas opções** para configurar múltiplos destinos:
+
+### Opção 1: Usar uma única variável (recomendado)
+
 1. Acesse o **Netlify Dashboard**
 2. Vá em **Site settings** → **Environment variables**
 3. Encontre a variável `TELEGRAM_CHAT_ID`
@@ -50,8 +54,23 @@
    426197451,-1001234567890
    ```
 
+   **Nota:** Você também pode usar ponto e vírgula (`;`) ou quebra de linha como separador.
+
 5. Clique em **Save**
 6. **Redeploy** o site para aplicar as mudanças
+
+### Opção 2: Usar variável separada para grupos
+
+1. Acesse o **Netlify Dashboard**
+2. Vá em **Site settings** → **Environment variables**
+3. Mantenha `TELEGRAM_CHAT_ID` com o chat privado (ex: `426197451`)
+4. Crie uma **nova variável** chamada `TELEGRAM_CHAT_ID_GROUP`
+5. Defina o valor como o chat_id do grupo (ex: `-1001234567890`)
+6. Se tiver múltiplos grupos, separe por vírgula: `-1001234567890,-1009876543210`
+7. Clique em **Save**
+8. **Redeploy** o site para aplicar as mudanças
+
+**Vantagem da Opção 2:** Mais organizado e fácil de gerenciar grupos separadamente.
 
 ## Passo 4: Testar
 
@@ -83,15 +102,50 @@ Isso enviará as mensagens para:
 ## Troubleshooting
 
 ### Bot não recebe mensagens no grupo
-- Verifique se o bot está realmente adicionado ao grupo
-- Verifique se o bot tem permissões para enviar mensagens
-- Confirme que o chat_id está correto (pode ser negativo para grupos)
+
+1. **Verifique os logs do Netlify:**
+   - Acesse **Netlify Dashboard** → **Functions** → **sendTelegram**
+   - Veja os logs para identificar erros específicos
+   - Procure por mensagens como `[sendTelegram] Telegram API response`
+
+2. **Verifique se o bot está no grupo:**
+   - Abra o grupo no Telegram
+   - Verifique se o bot aparece na lista de membros
+   - Se não estiver, adicione novamente
+
+3. **Verifique permissões:**
+   - O bot precisa ter permissão para enviar mensagens
+   - Dê permissões de administrador ao bot (recomendado)
+
+4. **Verifique o chat_id:**
+   - Chat IDs de grupos geralmente começam com `-100`
+   - Certifique-se de copiar o ID completo (pode ser muito longo)
+   - Não adicione espaços extras
+
+5. **Teste o formato da variável:**
+   - Tente usar vírgula: `426197451,-1001234567890`
+   - Ou use a variável separada: `TELEGRAM_CHAT_ID_GROUP = -1001234567890`
+   - Evite espaços desnecessários
 
 ### Erro 403 (Forbidden)
 - O bot pode não ter permissões no grupo
 - Tente dar permissões de administrador ao bot
+- Verifique se o bot não foi removido do grupo
 
 ### Erro 400 (Bad Request)
-- Verifique se o chat_id está correto
+- Verifique se o chat_id está correto (pode ser negativo para grupos)
 - Certifique-se de que o bot está no grupo
+- Verifique se não há caracteres especiais ou espaços extras no chat_id
+
+### Mensagem vai para um destino mas não para outro
+- Verifique os logs do Netlify para ver qual chat_id falhou
+- Certifique-se de que ambos os chat_ids estão corretos
+- Verifique se o bot está adicionado em ambos os destinos
+
+### Como ver os logs detalhados
+1. Acesse **Netlify Dashboard** → Seu site
+2. Vá em **Functions** → Clique em **sendTelegram**
+3. Veja os logs em tempo real ou histórico
+4. Procure por mensagens que começam com `[sendTelegram]`
+5. Os logs mostram quais chat_ids foram tentados e os resultados
 
