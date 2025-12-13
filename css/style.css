@@ -1744,6 +1744,11 @@ blockquote {
   display: block;
 }
 
+.work-img-wrapp {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 .work-img {
   width: 100%;
 }
