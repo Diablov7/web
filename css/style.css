@@ -1234,6 +1234,15 @@ blockquote {
   object-fit: contain;
 }
 
+/* Garantir tamanho da logo no desktop (acima de 991px) */
+@media screen and (min-width: 992px) {
+  .logo-img {
+    width: 320px !important;
+    min-width: 320px;
+    max-width: 320px;
+  }
+}
+
 .logo,
 .logo-text-fallback {
   text-decoration: none !important;
