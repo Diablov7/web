@@ -1557,6 +1557,17 @@ blockquote {
   white-space: nowrap;
   word-break: normal;
   overflow-wrap: normal;
+  display: inline-flex;
+  animation: partnersScroll 60s linear infinite;
+}
+
+@keyframes partnersScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .hero-client-logo {
