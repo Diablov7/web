@@ -3838,6 +3838,48 @@ select.input-style option:checked {
     height: 14px;
   }
   
+  /* Team hint (swipe indication) */
+  .team-hint {
+    display: none; /* Oculto no desktop */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    animation: fadeInOut 2s ease-in-out infinite;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .team-hint {
+      display: flex; /* Mostrar apenas no mobile */
+    }
+  }
+
+  .team-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+  }
+
+  .team-hint-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .team-hint-icon {
+    color: var(--white);
+    opacity: 0.6;
+    width: 16px;
+    height: 16px;
+  }
+  
   /* Desktop: manter grid normal */
   @media (min-width: 768px) {
     .work-list {
