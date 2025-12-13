@@ -1235,6 +1235,9 @@ blockquote {
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+  order: 1;
+  flex: 0 0 auto;
+  margin-right: auto;
 }
 
 .logo-img {
@@ -1295,7 +1298,7 @@ blockquote {
   background-color: var(--grey);
   border: 1px solid #292929;
   border-radius: 5px;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 0;
   padding: 12px 30px; /* Restaurando padding elegante */
@@ -1307,6 +1310,13 @@ blockquote {
 
 .logo.w--current {
   flex: none;
+}
+
+.logo,
+.logo-wrapper {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+  margin-left: 0 !important;
 }
 
 .main-menu {
@@ -1337,11 +1347,13 @@ blockquote {
   justify-content: center;
   transition: all 0.3s ease;
   margin-right: 5px; /* Quase colado ao Home */
-  margin-left: 0;
+  margin-left: auto; /* Empurrar para direita após logo */
   border: 1px solid #14d9a3; /* Verde esmeralda */
   white-space: nowrap;
   font-family: Clashdisplay, sans-serif;
   border-bottom: 2px solid #14d9a3; /* Verde esmeralda */
+  order: 2;
+  flex: 0 0 auto;
 }
 
 .lets-talk-btn:hover {
