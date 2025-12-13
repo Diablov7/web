@@ -2224,25 +2224,11 @@ blockquote {
   height: 55px;
   margin-bottom: 5px;
   display: flex;
-  transition: all 0.3s ease;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.social-link-2:hover {
-  border-color: var(--default);
-  background-color: rgba(16, 185, 129, 0.1);
-  transform: scale(1.05);
 }
 
 .team-job {
   font-size: 16px;
   line-height: 20px;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s ease;
-}
-
-.team-item:hover .team-job {
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .team-image-wrapp {
@@ -2251,19 +2237,13 @@ blockquote {
   color: #1d1d1d;
   text-align: center;
   border-radius: 5px;
-  padding: 50px 20px 0;
+  padding: 60px 20px 0;
   position: relative;
-  transition: all 0.3s ease;
-}
-
-.team-item:hover .team-image-wrapp {
-  border-color: rgba(16, 185, 129, 0.3);
-  transform: translateY(-3px);
 }
 
 .team-grid {
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
   grid-auto-columns: 1fr;
@@ -2275,22 +2255,12 @@ blockquote {
   height: 20px;
   color: var(--white);
   display: block;
-  transition: color 0.3s ease;
-}
-
-.social-link-2:hover .social-image {
-  color: var(--default);
 }
 
 .team-img {
   object-fit: cover;
-  width: 100%;
-  height: 280px;
-  transition: transform 0.3s ease;
-}
-
-.team-item:hover .team-img {
-  transform: scale(1.02);
+  width: auto;
+  height: 247px;
 }
 
 .team-heading {
@@ -2298,29 +2268,11 @@ blockquote {
   font-size: 28px;
   font-weight: 500;
   line-height: 28px;
-  color: var(--white);
-  transition: color 0.3s ease;
-}
-
-.team-item:hover .team-heading {
-  color: var(--default);
 }
 
 .team-details {
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-/* Tablet breakpoint para team grid */
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .team-grid {
-    grid-column-gap: 25px;
-    grid-row-gap: 25px;
-  }
-  
-  .team-img {
-    height: 260px;
-  }
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .contact-section {
@@ -3493,12 +3445,7 @@ select.input-style option:checked {
   }
 
   .team-image-wrapp {
-    padding: 40px 20px 0;
-    border-radius: 8px;
-  }
-  
-  .team-item:hover .team-image-wrapp {
-    transform: none; /* Remover transform no mobile */
+    padding: 60px 60px 0;
   }
 
   .team-grid {
@@ -3507,7 +3454,7 @@ select.input-style option:checked {
     grid-template-columns: none;
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 15px;
     overflow-x: auto;
     overflow-y: visible;
     scroll-behavior: smooth;
@@ -3529,35 +3476,6 @@ select.input-style option:checked {
     width: calc(100vw - 40px);
     flex: 0 0 auto;
     scroll-snap-align: start;
-  }
-  
-  .team-img {
-    height: 300px; /* Altura maior no mobile para melhor visualização */
-  }
-  
-  .team-heading {
-    font-size: 24px;
-    line-height: 26px;
-  }
-  
-  .team-job {
-    font-size: 15px;
-    line-height: 19px;
-  }
-  
-  .team-details {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  
-  .social-link-2 {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .social-image {
-    width: 18px;
-    height: 18px;
   }
 
   .single-prod-grid {
@@ -4494,49 +4412,6 @@ select.input-style option:checked {
 }
 
 @media screen and (max-width: 479px) {
-  .team-image-wrapp {
-    padding: 35px 15px 0;
-  }
-  
-  .team-img {
-    height: 280px; /* Altura ajustada para telas muito pequenas */
-  }
-  
-  .team-heading {
-    font-size: 22px;
-    line-height: 24px;
-  }
-  
-  .team-job {
-    font-size: 14px;
-    line-height: 18px;
-  }
-  
-  .team-details {
-    padding-top: 18px;
-    padding-bottom: 18px;
-  }
-  
-  .social-link-2 {
-    width: 45px;
-    height: 45px;
-  }
-  
-  .social-image {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .team-grid {
-    gap: 15px;
-  }
-  
-  .team-item {
-    min-width: calc(100vw - 30px);
-    max-width: calc(100vw - 30px);
-    width: calc(100vw - 30px);
-  }
-
   #darkyn30 {
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr;
