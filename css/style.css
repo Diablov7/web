@@ -1211,6 +1211,7 @@ blockquote {
   padding: 0;
   font-size: 17px;
   font-weight: 300;
+  letter-spacing: 0.05em;
 }
 
 .menu-item:hover {
@@ -1229,6 +1230,13 @@ blockquote {
   color: var(--default);
 }
 
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
 .logo-img {
   width: 320px;
   object-fit: contain;
@@ -1241,6 +1249,17 @@ blockquote {
     min-width: 320px;
     max-width: 320px;
   }
+}
+
+.logo-tagline {
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: Clashdisplay, sans-serif;
+  line-height: 1.2;
+  margin-top: 2px;
 }
 
 .logo,
@@ -1281,6 +1300,8 @@ blockquote {
   margin-bottom: 0;
   padding: 12px 30px; /* Restaurando padding elegante */
   display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
   /* max-height removido para fluidez natural */
 }
 
@@ -1295,6 +1316,9 @@ blockquote {
   align-self: center;
   margin-left: 0; /* Removido auto para que o botão fique próximo ao menu */
   padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
 /* Botão LET'S TALK */
@@ -2256,6 +2280,22 @@ blockquote {
     padding-top: 20px; /* Reduzir padding-top drasticamente no mobile */
     padding-bottom: 40px;
   }
+  
+  /* Reordenar células no mobile: formulário primeiro, depois informações */
+  .contact-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .contact-form-cell {
+    order: 1;
+  }
+  
+  .contact-info-cell {
+    order: 2;
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -2270,6 +2310,22 @@ blockquote {
   .contact-section {
     padding-top: 15px; /* Ainda menos espaço em telas muito pequenas */
     padding-bottom: 30px;
+  }
+  
+  /* Garantir ordem no mobile muito pequeno também */
+  .contact-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .contact-form-cell {
+    order: 1;
+  }
+  
+  .contact-info-cell {
+    order: 2;
+    margin-top: 0;
   }
 }
 
@@ -3490,8 +3546,61 @@ select.input-style option:checked {
     width: 220px;
   }
 
+  .logo-tagline {
+    font-size: 9px;
+    margin-top: 1px;
+  }
+
+  /* Menu mobile - ajustes */
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+  
+  .logo-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    order: 1;
+  }
+  
+  .lets-talk-btn {
+    order: 2;
+    margin-right: 0;
+    flex-shrink: 0;
+  }
+  
   .menu-button {
-    margin-left: 10px;
+    order: 3;
+    margin-left: 0;
+  }
+  
+  .main-menu {
+    order: 4;
+    width: 100%;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    display: flex !important;
+  }
+  
+  .main-menu .menu-item {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .main-menu .menu-item:last-child {
+    border-bottom: none;
+  }
+  
+  .main-menu .menu-item.w--current {
+    border-bottom: 2px solid var(--default);
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .service-img {
@@ -3761,6 +3870,18 @@ select.input-style option:checked {
     grid-column-gap: 50px;
     grid-row-gap: 50px;
     margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Reordenar células no mobile: formulário primeiro, depois informações */
+  .contact-form-cell {
+    order: 1;
+  }
+  
+  .contact-info-cell {
+    order: 2;
+    margin-top: 40px;
   }
 
   .footer-socials {
@@ -3793,7 +3914,13 @@ select.input-style option:checked {
 
 @media screen and (max-width: 479px) {
   .logo-img {
-    width: 180px;
+    width: 150px; /* Logo ainda menor em telas muito pequenas */
+    max-width: 45%;
+  }
+  
+  .logo-tagline {
+    font-size: 8px;
+    margin-top: 1px;
   }
 
   .header-right-side {
@@ -3808,14 +3935,9 @@ select.input-style option:checked {
     justify-content: space-between;
     align-items: center;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     padding: 8px 12px; /* Padding ainda menor em telas muito pequenas */
     gap: 8px;
-  }
-
-  .logo-img {
-    width: 150px; /* Logo ainda menor em telas muito pequenas */
-    max-width: 45%;
   }
 
   .lets-talk-btn {
@@ -3823,6 +3945,24 @@ select.input-style option:checked {
     font-weight: 700; /* Negrito mantido */
     padding: 5px 10px;
     margin-right: 3px;
+    order: 2;
+  }
+  
+  .logo-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    order: 1;
+  }
+  
+  .menu-button {
+    order: 3;
+    margin-left: 5px;
+  }
+  
+  .main-menu {
+    order: 4;
+    width: 100%;
+    margin-top: 8px;
   }
 
   .icon {
