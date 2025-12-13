@@ -1294,7 +1294,7 @@ blockquote {
   color: var(--white);
   text-transform: uppercase;
   font-size: 17px; /* Mesmo tamanho dos menu-items */
-  font-weight: 300; /* Mesmo peso dos menu-items para consistência */
+  font-weight: 700; /* Negrito */
   letter-spacing: 0.05em; /* Similar ao estilo do projeto */
   padding: 8px 20px; /* Padding ajustado para parecer mais com menu-item */
   border-radius: 5px;
