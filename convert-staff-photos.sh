@@ -15,8 +15,9 @@ OUTPUT_DIR="images"
 OUTPUT_PREFIX="team"
 
 # Dimensões padrão baseadas nas imagens existentes
-# As imagens são verticais, altura fixa de 247px no CSS
-# Mas vamos manter proporção e criar imagens maiores para qualidade
+# As imagens existentes têm dimensões variadas: 696x728, 585x725, 551x727
+# Vamos padronizar para um formato vertical consistente
+# O CSS usa height: 247px, mas mantemos imagens maiores para qualidade
 TARGET_WIDTH=600
 TARGET_HEIGHT=750
 
