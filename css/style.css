@@ -1303,7 +1303,7 @@ blockquote {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  margin-right: 15px; /* Mesmo margin dos menu-items */
+  margin-right: 5px; /* Quase colado ao Home */
   margin-left: 0;
   border: 1px solid var(--default);
   white-space: nowrap;
@@ -3204,9 +3204,12 @@ select.input-style option:checked {
     padding: 15px;
   }
 
-  /* Botão LET'S TALK - Mobile: esconder no header, pode aparecer no menu mobile */
+  /* Botão LET'S TALK - Mobile: manter visível */
   .lets-talk-btn {
-    display: none;
+    display: inline-flex; /* Manter visível no mobile */
+    font-size: 16px; /* Ajustar tamanho para mobile */
+    padding: 6px 16px; /* Padding menor para mobile */
+    margin-right: 5px; /* Quase colado ao Home no mobile também */
   }
 
   .main-menu {
