@@ -383,8 +383,40 @@
                 </div>
             </div>
         </div>
-
   
+
+        <!-- TEAM SECTION - Swipe hint hide on scroll -->
+        <script>
+            (function () {
+                const teamGrid = document.querySelector('.team-grid');
+                const teamHint = document.getElementById('team-hint');
+                
+                if (!teamGrid || !teamHint) return;
+                
+                function hideTeamHint() {
+                    if (teamHint) {
+                        teamHint.classList.add('hidden');
+                    }
+                }
+                
+                // Esconder ao fazer scroll/swipe
+                let teamScrollTimeout;
+                teamGrid.addEventListener('scroll', () => {
+                    if (teamHint && !teamHint.classList.contains('hidden')) {
+                        clearTimeout(teamScrollTimeout);
+                        teamScrollTimeout = setTimeout(hideTeamHint, 500);
+                    }
+                });
+                
+                // Esconder ao tocar (touchstart)
+                teamGrid.addEventListener('touchstart', () => {
+                    if (teamHint && !teamHint.classList.contains('hidden')) {
+                        setTimeout(hideTeamHint, 300);
+                    }
+                }, { passive: true });
+            })();
+        </script>
+
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/plugins.js" type="text/javascript"></script>
 
