@@ -283,7 +283,7 @@
                         <div class="service-nunmber">01</div>
                         <div class="service-text">Community Management</div>
                         <img
-                            src="images/communitybuilding.png"
+                            src="images/communitybuilding.jpg"
                             
                             alt="Community Management"
                             class="service-img"
@@ -303,7 +303,7 @@
                         <div class="service-nunmber">03</div>
                         <div class="service-text">Growth Hacking</div>
                         <img
-                            src="images/growth.png"
+                            src="images/growth.jpg"
                             
                             alt="Growth Hacking"
                             class="service-img"
@@ -313,7 +313,7 @@
                         <div class="service-nunmber">04</div>
                         <div class="service-text">Influence Marketing (KOL)</div>
                         <img
-                            src="images/KOL.png"
+                            src="images/kol.jpg"
                             
                             alt="Influence Marketing (KOL)"
                             class="service-img"
@@ -333,7 +333,7 @@
                         <div class="service-nunmber">06</div>
                         <div class="service-text">Guerrilla Marketing</div>
                         <img
-                            src="images/guerrillamarketing.png"
+                            src="images/guerrillamarketing.jpg"
                             
                             alt="Guerrilla Marketing"
                             class="service-img"
@@ -343,7 +343,7 @@
                         <div class="service-nunmber">07</div>
                         <div class="service-text">Listing</div>
                         <img
-                            src="images/listing.png"
+                            src="images/listing.jpg"
                             
                             alt="Listing"
                             class="service-img"
@@ -353,7 +353,7 @@
                         <div class="service-nunmber">08</div>
                         <div class="service-text">PR (Press Office)</div>
                         <img
-                            src="images/PR.png"
+                            src="images/pr.jpg"
                             
                             alt="PR (Press Office)"
                             class="service-img"
@@ -523,7 +523,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/Mira.png" alt="Mira - CEO, Utility Project" class="testimonial-img" />
+                            <img src="images/mira.jpg" alt="Mira - CEO, Utility Project" class="testimonial-img" />
                             <p class="testimonials-txt">With Wevolv3 we have the smoothest and most consistent marketing we've ever had.</p>
                         </div>
                     </div>
@@ -568,7 +568,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/JAX.png" alt="Jax - Head of Growth, DeFi Aggregator" class="testimonial-img" />
+                            <img src="images/jax.jpg" alt="Jax - Head of Growth, DeFi Aggregator" class="testimonial-img" />
                             <p class="testimonials-txt">Their local presence in LATAM opened doors we didn't even know existed. We expanded our user base by 450% in the region and achieved 2.5M+ impressions in the first quarter. Essential for our global expansion.</p>
                         </div>
                     </div>
@@ -624,7 +624,7 @@
                                     <div class="blog-category">marketing</div>
                                     <h2 class="blog-heading">Blockchain Growth Strategies</h2>
                                     <div class="blog-author-and-arrow">
-                                        <img  src="images/author2.png" alt="Wevolv3 Author" class="blog-author" />
+                                        <img  src="images/author2.jpg" alt="Wevolv3 Author" class="blog-author" />
                                         <div class="blog-arrow"><img  src="images/bend-up-right-light.png" alt="Arrow icon" class="blog-arrow-icon" /></div>
                                     </div>
                                 </div>
@@ -829,7 +829,7 @@
                         const imageUrl = post.coverImage?.url || 'images/post1.jpg';
                         
                         // Seleciona aleatoriamente uma das 3 imagens de autor
-                        const authorImages = ['images/author1.jpeg', 'images/author2.png', 'images/author3.jpeg'];
+                        const authorImages = ['images/author1.jpeg', 'images/author2.jpg', 'images/author3.jpeg'];
                         const randomAuthorImage = authorImages[Math.floor(Math.random() * authorImages.length)];
                         
                         blogItem.innerHTML = `
@@ -866,10 +866,10 @@
                 
                 // Atualiza todas as imagens de autor estáticas na página
                 document.addEventListener('DOMContentLoaded', function() {
-                    const staticAuthorImages = document.querySelectorAll('.blog-author[src*="author1.png"], .blog-author[src*="author2.png"], .blog-author[src*="author3.png"]');
+                    const staticAuthorImages = document.querySelectorAll('.blog-author[src*="author1"], .blog-author[src*="author2"], .blog-author[src*="author3"]');
                     staticAuthorImages.forEach(function(img) {
                         // Só atualiza se não foi atualizado pelo script dinâmico
-                        if (img.src.includes('author1.png') || img.src.includes('author2.png') || img.src.includes('author3.png')) {
+                        if (img.src.includes('author1') || img.src.includes('author2') || img.src.includes('author3')) {
                             img.src = getRandomAuthorImage();
                         }
                     });
