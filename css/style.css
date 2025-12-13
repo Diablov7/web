@@ -3553,26 +3553,39 @@ select.input-style option:checked {
 
   /* Menu mobile - ajustes */
   .header-inner {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     padding: 10px 15px;
+    align-items: center;
   }
   
   .logo-wrapper {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-width: 0;
     order: 1;
+    max-width: calc(100% - 200px); /* Deixar espaço para botão e menu */
+  }
+  
+  .logo-img {
+    max-width: 100%;
+    height: auto;
   }
   
   .lets-talk-btn {
     order: 2;
     margin-right: 0;
+    margin-left: 5px;
     flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 13px;
+    white-space: nowrap;
   }
   
   .menu-button {
     order: 3;
-    margin-left: 0;
+    margin-left: 5px;
+    flex-shrink: 0;
+    padding: 6px;
   }
   
   .main-menu {
@@ -3947,22 +3960,37 @@ select.input-style option:checked {
   }
 
   .lets-talk-btn {
-    font-size: 12px; /* Fonte ainda menor */
+    font-size: 11px; /* Fonte ainda menor */
     font-weight: 700; /* Negrito mantido */
-    padding: 5px 10px;
-    margin-right: 3px;
+    padding: 5px 8px;
+    margin-right: 0;
+    margin-left: 4px;
     order: 2;
+    white-space: nowrap;
   }
   
   .logo-wrapper {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-width: 0;
     order: 1;
+    max-width: calc(100% - 180px); /* Deixar espaço para botão e menu em telas muito pequenas */
+  }
+  
+  .logo-img {
+    max-width: 100%;
+    height: auto;
   }
   
   .menu-button {
     order: 3;
-    margin-left: 5px;
+    margin-left: 4px;
+    flex-shrink: 0;
+    padding: 5px;
+  }
+  
+  .header-inner {
+    gap: 5px;
+    padding: 8px 12px;
   }
   
   .main-menu {
