@@ -2252,6 +2252,9 @@ blockquote {
 
 .social-image {
   width: 20px;
+  height: 20px;
+  color: var(--white);
+  display: block;
 }
 
 .team-img {
