@@ -1995,6 +1995,11 @@ blockquote {
   border-radius: 50%;
   width: 55px;
   height: 55px;
+  flex-shrink: 0;
+  min-width: 55px;
+  min-height: 55px;
+  max-width: 55px;
+  max-height: 55px;
 }
 
 .link-to-single {
@@ -3925,6 +3930,16 @@ select.input-style option:checked {
 
   .blog-heading, .blog-author-and-arrow {
     width: 100%;
+  }
+
+  .blog-author {
+    flex-shrink: 0 !important;
+    min-width: 55px !important;
+    min-height: 55px !important;
+    max-width: 55px !important;
+    max-height: 55px !important;
+    width: 55px !important;
+    height: 55px !important;
   }
 
   .phone-link {
