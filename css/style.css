@@ -1290,7 +1290,7 @@ blockquote {
 
 /* Botão LET'S TALK */
 .lets-talk-btn {
-  background-color: var(--default); /* #10b981 - teal/esmeralda da logo */
+  background-color: #14d9a3; /* Verde esmeralda mais vibrante */
   color: var(--white);
   text-transform: uppercase;
   font-size: 17px; /* Mesmo tamanho dos menu-items */
@@ -1305,16 +1305,16 @@ blockquote {
   transition: all 0.3s ease;
   margin-right: 5px; /* Quase colado ao Home */
   margin-left: 0;
-  border: 1px solid var(--default);
+  border: 1px solid #14d9a3; /* Verde esmeralda */
   white-space: nowrap;
   font-family: Clashdisplay, sans-serif;
-  border-bottom: 2px solid var(--default); /* Similar aos menu-items */
+  border-bottom: 2px solid #14d9a3; /* Verde esmeralda */
 }
 
 .lets-talk-btn:hover {
-  background-color: rgba(16, 185, 129, 0.9);
+  background-color: #12c994; /* Esmeralda um pouco mais escura no hover */
   color: var(--white);
-  border-color: var(--default);
+  border-color: #12c994;
   transform: none; /* Remover elevação para manter estilo do projeto */
   box-shadow: none; /* Remover sombra para manter estilo minimalista */
 }
