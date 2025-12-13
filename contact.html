@@ -91,8 +91,8 @@
         <div class="sitemap">
             <div class="w-layout-blockcontainer main-container w-container">
                 <div class="inner-sitemap">
-                    <h2 data-w-id="darkyn25" style="opacity: 0;" class="sitemap-heading">contact</h2>
-                    <div data-w-id="darkyn26" style="opacity: 0;" class="stemap-text">Who We are and what we do</div>
+                    <h2 data-w-id="darkyn25" style="opacity: 1;" class="sitemap-heading">contact</h2>
+                    <div data-w-id="darkyn26" style="opacity: 1;" class="stemap-text">Get in touch with us</div>
                 </div>
             </div>
         </div>
@@ -129,22 +129,73 @@
                     <div class="w-layout-cell single-cell">
                         <h2 class="comtact-main-title contact-title-with-border">drop us a line</h2>
                         <div class="contact-form-block w-form">
-                            <form  id="email-form2" method="post" action="#">
+                            <form id="email-form2" method="post" action="#">
                                 <div id="darkyn30" class="w-layout-layout form-stack wf-layout-layout">
+                                    <!-- Row 1: Name e Last Name -->
                                     <div id="darkyn31" class="w-layout-cell form-cell">
                                         <input class="input-style w-input" maxlength="256" name="name" data-name="Name" placeholder="Name *" type="text" id="name" required="" />
                                     </div>
                                     <div id="darkyn32" class="w-layout-cell form-cell">
                                         <input class="input-style w-input" maxlength="256" name="Last-Name" data-name="Last Name" placeholder="Last Name *" type="text" id="Last-Name" required="" />
                                     </div>
+                                    
+                                    <!-- Row 2: Email e Phone -->
                                     <div id="darkyn33" class="w-layout-cell form-cell">
                                         <input class="input-style w-input" maxlength="256" name="email" data-name="Email" placeholder="Email Address *" type="email" id="email" required="" />
                                     </div>
                                     <div id="darkyn34" class="w-layout-cell form-cell">
                                         <input class="input-style w-input" maxlength="256" name="Phone-Number" data-name="Phone Number" placeholder="Phone Number" type="tel" id="Phone-Number" />
                                     </div>
-                                    <div id="darkyn35" class="w-layout-cell form-cell">
-                                        <input class="input-style textarea w-input" maxlength="256" name="Message" data-name="Message" placeholder="Message *" type="text" id="Message" required="" />
+                                    
+                                    <!-- Row 3: Telegram e Project Type -->
+                                    <div id="darkyn34-telegram" class="w-layout-cell form-cell">
+                                        <input class="input-style w-input" maxlength="256" name="telegram" data-name="Telegram" placeholder="Telegram @handle (optional)" type="text" id="telegram" />
+                                    </div>
+                                    <div id="project-type-cell" class="w-layout-cell form-cell">
+                                        <select class="input-style w-input" name="project-type" id="project-type" required="">
+                                            <option value="" disabled selected>Project Type *</option>
+                                            <option value="Token Launch">Token Launch</option>
+                                            <option value="NFT Project">NFT Project</option>
+                                            <option value="DeFi Protocol">DeFi Protocol</option>
+                                            <option value="L1/L2 Blockchain">L1/L2 Blockchain</option>
+                                            <option value="Web3 Startup">Web3 Startup</option>
+                                            <option value="DAO/Community">DAO/Community</option>
+                                            <option value="Exchange/Platform">Exchange/Platform</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Row 4: Budget Range e Timeline -->
+                                    <div id="budget-range-cell" class="w-layout-cell form-cell">
+                                        <select class="input-style w-input" name="budget-range" id="budget-range" required="">
+                                            <option value="" disabled selected>Budget Range *</option>
+                                            <option value="Under $5K">Under $5K</option>
+                                            <option value="$5K - $15K">$5K - $15K</option>
+                                            <option value="$15K - $50K">$15K - $50K</option>
+                                            <option value="$50K - $100K">$50K - $100K</option>
+                                            <option value="$100K+">$100K+</option>
+                                            <option value="Custom">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div id="timeline-cell" class="w-layout-cell form-cell">
+                                        <select class="input-style w-input" name="timeline" id="timeline" required="">
+                                            <option value="" disabled selected>Timeline *</option>
+                                            <option value="ASAP / Urgent">ASAP / Urgent</option>
+                                            <option value="Within 1 month">Within 1 month</option>
+                                            <option value="1-3 months">1-3 months</option>
+                                            <option value="3-6 months">3-6 months</option>
+                                            <option value="Just exploring">Just exploring</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Row 5: Main Challenge/Goal (full width) -->
+                                    <div id="main-challenge-cell" class="w-layout-cell form-cell form-cell-full">
+                                        <textarea class="input-style textarea w-input" maxlength="500" name="main-challenge" data-name="Main Challenge" placeholder="Main Challenge/Goal * (What's blocking your growth? What's your main objective?)" id="main-challenge" required="" rows="3"></textarea>
+                                    </div>
+                                    
+                                    <!-- Row 6: Additional Message (full width) -->
+                                    <div id="darkyn35" class="w-layout-cell form-cell form-cell-full">
+                                        <textarea class="input-style textarea w-input" maxlength="1000" name="Message" data-name="Message" placeholder="Additional Details (optional)" id="Message" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <input type="submit" data-wait="Please wait..." data-w-id="d6b9384e-cf9a-93e8-1727-42d1ba9d2cf6" class="submit-button w-button" value="send" />
@@ -210,6 +261,105 @@
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/plugins.js" type="text/javascript"></script>
 
+        <!-- Telegram Form Submission -->
+        <script>
+            (function() {
+                const form = document.getElementById('email-form2');
+                if (!form) return;
+
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Get form values
+                    const name = document.getElementById('name')?.value?.trim() || '';
+                    const lastName = document.getElementById('Last-Name')?.value?.trim() || '';
+                    const email = document.getElementById('email')?.value?.trim() || '';
+                    const phone = document.getElementById('Phone-Number')?.value?.trim() || '';
+                    const telegram = document.getElementById('telegram')?.value?.trim() || '';
+                    const projectType = document.getElementById('project-type')?.value || '';
+                    const budgetRange = document.getElementById('budget-range')?.value || '';
+                    const timeline = document.getElementById('timeline')?.value || '';
+                    const mainChallenge = document.getElementById('main-challenge')?.value?.trim() || '';
+                    const message = document.getElementById('Message')?.value?.trim() || '';
+
+                    // Validate required fields
+                    if (!name || !email || !projectType || !budgetRange || !timeline || !mainChallenge) {
+                        alert('Please fill in all required fields (marked with *).');
+                        return;
+                    }
+
+                    // Get submit button
+                    const submitBtn = form.querySelector('input[type="submit"]');
+                    const originalText = submitBtn?.value || 'send';
+                    const originalWaitText = submitBtn?.getAttribute('data-wait') || 'Please wait...';
+
+                    // Disable button and show loading state
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.value = originalWaitText;
+                    }
+
+                    try {
+                        // Prepare payload
+                        const fullName = lastName ? `${name} ${lastName}` : name;
+
+                        const payload = {
+                            name: fullName,
+                            email: email,
+                            phone: phone || null,
+                            telegram: telegram || null,
+                            projectType: projectType,
+                            budgetRange: budgetRange,
+                            timeline: timeline,
+                            mainChallenge: mainChallenge,
+                            additionalMessage: message || null
+                        };
+
+                        // Send to Netlify Function
+                        const response = await fetch('/.netlify/functions/sendTelegram', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        let result;
+                        try {
+                            result = await response.json();
+                        } catch (e) {
+                            const text = await response.text();
+                            console.error('Failed to parse response:', text);
+                            throw new Error(`Server error: ${response.status} - ${text}`);
+                        }
+
+                        if (response.ok && result.ok) {
+                            alert('Thanks! Someone from our team will reach out soon.');
+                            form.reset();
+                        } else {
+                            console.error('Telegram error:', result);
+                            console.error('Response status:', response.status);
+                            alert('There was an error sending your message. Please try again or contact us directly at contact@wevolv3.com');
+                        }
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        console.error('Error details:', {
+                            message: error.message,
+                            stack: error.stack,
+                            name: error.name
+                        });
+                        alert('There was an error sending your message. Please check the console for details or contact us directly at contact@wevolv3.com');
+                    } finally {
+                        // Re-enable button
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.value = originalText;
+                        }
+                    }
+                });
+            })();
+        </script>
 
     </body>
 

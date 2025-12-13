@@ -2191,8 +2191,8 @@ blockquote {
 }
 
 .contact-section {
-  padding-top: 100px;
-  padding-bottom: 50px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .contact-text {
@@ -2211,9 +2211,14 @@ blockquote {
 .input-style {
   border: 1px solid var(--border-color);
   color: #fff;
-  background-color: #fff0;
+  background-color: rgba(255, 255, 255, 0.05);
   border-radius: 5px;
   flex: 1;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
   align-self: auto;
   min-height: 50px;
   margin-bottom: 0;
@@ -2227,9 +2232,12 @@ blockquote {
 
 .input-style:focus {
   color: #fff;
-  background-color: #fff0;
-  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.08);
+  font-size: 16px;
   font-weight: 400;
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
 .input-style:focus-visible {
@@ -2254,13 +2262,58 @@ blockquote {
 }
 
 .input-style.textarea {
-  min-height: auto;
-  padding-bottom: 100px;
+  min-height: 120px;
+  padding: 12px;
+  padding-bottom: 12px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Select styling - mantém o mesmo estilo dos inputs */
+select.input-style {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 45px;
+  cursor: pointer;
+}
+
+select.input-style option {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 10px;
+}
+
+select.input-style:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2310b981' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+select.input-style:invalid {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+select.input-style:valid {
+  color: #fff;
 }
 
 .form-stack {
   grid-row-gap: 20px;
+  grid-column-gap: 20px;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-stack .form-cell {
+  width: 100%;
+}
+
+.form-stack .form-cell:last-child,
+.form-stack .form-cell.form-cell-full {
+  grid-column: 1 / -1;
 }
 
 .contact-stack {
@@ -2338,10 +2391,19 @@ blockquote {
   border-radius: 5px;
   margin-top: 20px;
   margin-left: auto;
+  margin-right: 0;
   padding: 20px 40px;
   font-size: 20px;
   font-weight: 500;
   transition: all .3s;
+  display: block;
+  cursor: pointer;
+  width: auto;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .submit-button:hover {
@@ -2360,10 +2422,15 @@ blockquote {
 }
 
 .contact-form-block {
-  border: 5px #fff;
+  border: none;
   border-radius: 0;
   margin-bottom: 0;
   padding: 0;
+  width: 100%;
+}
+
+.contact-form-block form {
+  width: 100%;
 }
 
 .error-message {
@@ -3751,6 +3818,33 @@ blockquote {
 
   .contact-location {
     width: 80%;
+  }
+
+  .form-stack {
+    grid-template-columns: 1fr !important;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+  }
+
+  .form-stack .form-cell {
+    grid-column: 1 / -1 !important;
+  }
+
+  .input-style {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .input-style.textarea {
+    min-height: 100px;
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    padding: 15px 30px;
+    font-size: 18px;
   }
 
   .footer-socials {
