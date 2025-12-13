@@ -2231,6 +2231,39 @@ blockquote {
   padding-bottom: 60px;
 }
 
+/* Mobile: reduzir espaçamento entre título CONTACT e formulário */
+@media screen and (max-width: 767px) {
+  .sitemap {
+    margin-top: 10px; /* Reduzir margem superior */
+    margin-bottom: 0; /* Remover margem inferior */
+  }
+
+  .inner-sitemap {
+    padding: 30px 20px; /* Reduzir padding no mobile */
+    margin-bottom: 0;
+  }
+
+  .contact-section {
+    padding-top: 20px; /* Reduzir padding-top drasticamente no mobile */
+    padding-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .sitemap {
+    margin-top: 5px;
+  }
+
+  .inner-sitemap {
+    padding: 20px 15px; /* Padding ainda menor em telas muito pequenas */
+  }
+
+  .contact-section {
+    padding-top: 15px; /* Ainda menos espaço em telas muito pequenas */
+    padding-bottom: 30px;
+  }
+}
+
 .contact-text {
   border-bottom: 1px solid #fff;
   margin-bottom: 30px;
