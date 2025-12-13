@@ -3113,6 +3113,7 @@ select.input-style option:checked {
   .lets-talk-btn {
     display: inline-flex;
     font-size: 14px; /* Fonte menor no mobile */
+    font-weight: 700; /* Negrito mantido no mobile */
     padding: 6px 12px; /* Padding reduzido */
     margin-right: 5px;
     white-space: nowrap;
@@ -3264,6 +3265,7 @@ select.input-style option:checked {
   .lets-talk-btn {
     display: inline-flex; /* Manter visível no mobile */
     font-size: 16px; /* Ajustar tamanho para mobile */
+    font-weight: 700; /* Negrito mantido no mobile */
     padding: 6px 16px; /* Padding menor para mobile */
     margin-right: 5px; /* Quase colado ao Home no mobile também */
   }
@@ -3809,6 +3811,7 @@ select.input-style option:checked {
 
   .lets-talk-btn {
     font-size: 12px; /* Fonte ainda menor */
+    font-weight: 700; /* Negrito mantido */
     padding: 5px 10px;
     margin-right: 3px;
   }
