@@ -33,9 +33,13 @@ export const handler = async (event) => {
 
     // Usar env vars ou fallback hardcoded para garantir funcionamento
     const token = process.env.TELEGRAM_BOT_TOKEN || '7615783171:AAHjemZssJN-NOzIEb2jfitm0XEJ5YE2g9E';
-    const chatId = process.env.TELEGRAM_CHAT_ID || '426197451';
+    
+    // Suporta múltiplos chat_ids separados por vírgula
+    // Exemplo: "426197451,-1001234567890" ou apenas "426197451"
+    const chatIdsRaw = process.env.TELEGRAM_CHAT_ID || '426197451';
+    const chatIds = chatIdsRaw.split(',').map(id => id.trim()).filter(id => id.length > 0);
 
-    console.log('[sendTelegram] Using credentials', { hasToken: !!token, hasChatId: !!chatId });
+    console.log('[sendTelegram] Using credentials', { hasToken: !!token, chatIdsCount: chatIds.length });
 
     // Suporta três formatos:
     // 1) { text, chat_id? } (proxy direto do front/bundle)
@@ -89,33 +93,82 @@ export const handler = async (event) => {
         })();
 
     console.log('[sendTelegram] Sending to Telegram API');
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        chat_id: chat_id || chatId, 
-        text: finalText,
-        parse_mode: "Markdown" // Habilita formatação markdown (negritos, etc)
-      }),
+    
+    // Determinar quais chat_ids usar (prioridade: chat_id do payload, depois env vars)
+    const targetChatIds = chat_id ? [chat_id] : chatIds;
+    
+    // Enviar para todos os chat_ids especificados
+    const sendPromises = targetChatIds.map(async (targetChatId) => {
+      try {
+        const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            chat_id: targetChatId, 
+            text: finalText,
+            parse_mode: "Markdown" // Habilita formatação markdown (negritos, etc)
+          }),
+        });
+
+        console.log('[sendTelegram] Telegram API response', { 
+          chatId: targetChatId, 
+          status: tgRes.status, 
+          ok: tgRes.ok 
+        });
+
+        if (!tgRes.ok) {
+          const errText = await tgRes.text();
+          console.error('[sendTelegram] Telegram API error for chat', targetChatId, errText);
+          return { chatId: targetChatId, success: false, error: errText };
+        }
+
+        return { chatId: targetChatId, success: true };
+      } catch (err) {
+        console.error('[sendTelegram] Error sending to chat', targetChatId, err);
+        return { chatId: targetChatId, success: false, error: String(err) };
+      }
     });
 
-    console.log('[sendTelegram] Telegram API response', { status: tgRes.status, ok: tgRes.ok });
+    // Aguardar todos os envios
+    const results = await Promise.all(sendPromises);
+    
+    // Verificar se pelo menos um envio foi bem-sucedido
+    const successCount = results.filter(r => r.success).length;
+    const failedResults = results.filter(r => !r.success);
 
-    if (!tgRes.ok) {
-      const errText = await tgRes.text();
-      console.error('[sendTelegram] Telegram API error', errText);
+    if (successCount === 0) {
+      // Nenhum envio foi bem-sucedido
+      console.error('[sendTelegram] All sends failed', failedResults);
       return {
         statusCode: 502,
         headers: corsHeaders,
-        body: JSON.stringify({ error: "Telegram API error", details: errText }),
+        body: JSON.stringify({ 
+          error: "Telegram API error - all sends failed", 
+          details: failedResults 
+        }),
       };
     }
 
-    console.log('[sendTelegram] Success!');
+    // Pelo menos um envio foi bem-sucedido
+    if (failedResults.length > 0) {
+      console.warn('[sendTelegram] Some sends failed', failedResults);
+    }
+
+    console.log('[sendTelegram] Success!', { 
+      total: results.length, 
+      successful: successCount, 
+      failed: failedResults.length 
+    });
+    
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: JSON.stringify({ ok: true }),
+      body: JSON.stringify({ 
+        ok: true, 
+        sentTo: successCount,
+        total: results.length,
+        failed: failedResults.length > 0 ? failedResults : undefined
+      }),
     };
   } catch (err) {
     console.error('[sendTelegram] Unexpected error', err);
