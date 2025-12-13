@@ -3481,7 +3481,12 @@ select.input-style option:checked {
   }
 
   .team-image-wrapp {
-    padding: 60px 60px 0;
+    padding: 40px 20px 0;
+    border-radius: 8px;
+  }
+  
+  .team-item:hover .team-image-wrapp {
+    transform: none; /* Remover transform no mobile */
   }
 
   .team-grid {
@@ -3490,7 +3495,7 @@ select.input-style option:checked {
     grid-template-columns: none;
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 20px;
     overflow-x: auto;
     overflow-y: visible;
     scroll-behavior: smooth;
@@ -3512,6 +3517,35 @@ select.input-style option:checked {
     width: calc(100vw - 40px);
     flex: 0 0 auto;
     scroll-snap-align: start;
+  }
+  
+  .team-img {
+    height: 300px; /* Altura maior no mobile para melhor visualização */
+  }
+  
+  .team-heading {
+    font-size: 24px;
+    line-height: 26px;
+  }
+  
+  .team-job {
+    font-size: 15px;
+    line-height: 19px;
+  }
+  
+  .team-details {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .social-link-2 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .social-image {
+    width: 18px;
+    height: 18px;
   }
 
   .single-prod-grid {
@@ -4448,6 +4482,49 @@ select.input-style option:checked {
 }
 
 @media screen and (max-width: 479px) {
+  .team-image-wrapp {
+    padding: 35px 15px 0;
+  }
+  
+  .team-img {
+    height: 280px; /* Altura ajustada para telas muito pequenas */
+  }
+  
+  .team-heading {
+    font-size: 22px;
+    line-height: 24px;
+  }
+  
+  .team-job {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  
+  .team-details {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  
+  .social-link-2 {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .social-image {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .team-grid {
+    gap: 15px;
+  }
+  
+  .team-item {
+    min-width: calc(100vw - 30px);
+    max-width: calc(100vw - 30px);
+    width: calc(100vw - 30px);
+  }
+
   #darkyn30 {
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr;
