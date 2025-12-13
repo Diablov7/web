@@ -613,9 +613,19 @@
                     // Update content
                     document.getElementById('work-title').textContent = work.title || 'Untitled Project';
                     document.getElementById('work-year').textContent = work.year || '-';
-                    document.getElementById('work-description').innerHTML = work.description 
+                    
+                    // Get base description
+                    let descriptionHtml = work.description 
                         ? portableTextToHtml(work.description) 
                         : (work.shortDescription || 'No description available.');
+                    
+                    // Add specific information for MEME TOKEN (NDA) project
+                    if (work.title && work.title.toUpperCase().includes('MEME TOKEN')) {
+                        const additionalInfo = '<p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);"><strong style="color: #10b981;">Key Results:</strong><br />The project gained instant SEO traction through YouTube indexing, and the token surged over 100% during the campaign period.</p>';
+                        descriptionHtml += additionalInfo;
+                    }
+                    
+                    document.getElementById('work-description').innerHTML = descriptionHtml;
                     
                     // Update image (both desktop and mobile)
                     const imageUrl = sanityImageUrl(work.mainImage);
