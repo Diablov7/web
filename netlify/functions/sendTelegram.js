@@ -50,15 +50,15 @@ export const handler = async (event) => {
               "🚀 *NEW CONTACT FORM SUBMISSION*",
               "",
               "👤 *CONTACT INFO*",
-              `Name: ${name || "N/A"}`,
-              `Email: ${email || "N/A"}`,
-              ...(phone ? [`Phone: ${phone}`] : []),
-              ...(telegram ? [`Telegram: ${telegram}`] : []),
+              `*Name:* ${name || "N/A"}`,
+              `*Email:* ${email || "N/A"}`,
+              ...(phone ? [`*Phone:* ${phone}`] : []),
+              ...(telegram ? [`*Telegram:* ${telegram}`] : []),
               "",
               "📊 *PROJECT DETAILS*",
-              `Type: ${projectType || "N/A"}`,
-              `Budget: ${budgetRange || "N/A"}`,
-              `Timeline: ${timeline || "N/A"}`,
+              `*Type:* ${projectType || "N/A"}`,
+              `*Budget:* ${budgetRange || "N/A"}`,
+              `*Timeline:* ${timeline || "N/A"}`,
               "",
               "🎯 *MAIN CHALLENGE/GOAL*",
               mainChallenge || "N/A",
@@ -76,14 +76,15 @@ export const handler = async (event) => {
           
           // Formato antigo (fallback)
           return [
-            "🚀 New message from Wevolv3!",
+            "🚀 *New message from Wevolv3!*",
             "",
-            `Name: ${name || "N/A"}`,
-            `Email: ${email || "N/A"}`,
-            ...(phone ? [`Phone: ${phone}`] : []),
-            ...(telegram ? [`Telegram: ${telegram}`] : []),
+            `*Name:* ${name || "N/A"}`,
+            `*Email:* ${email || "N/A"}`,
+            ...(phone ? [`*Phone:* ${phone}`] : []),
+            ...(telegram ? [`*Telegram:* ${telegram}`] : []),
             "",
-            `Message: ${message || ""}`,
+            `*Message:*`,
+            message || "",
           ].join("\n");
         })();
 
@@ -91,7 +92,11 @@ export const handler = async (event) => {
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chat_id || chatId, text: finalText }),
+      body: JSON.stringify({ 
+        chat_id: chat_id || chatId, 
+        text: finalText,
+        parse_mode: "Markdown" // Habilita formatação markdown (negritos, etc)
+      }),
     });
 
     console.log('[sendTelegram] Telegram API response', { status: tgRes.status, ok: tgRes.ok });

@@ -149,7 +149,7 @@
                                     
                                     <!-- Row 3: Telegram e Project Type -->
                                     <div id="darkyn34-telegram" class="w-layout-cell form-cell">
-                                        <input class="input-style w-input" maxlength="256" name="telegram" data-name="Telegram" placeholder="Telegram @handle (optional)" type="text" id="telegram" />
+                                        <input class="input-style w-input" maxlength="256" name="telegram" data-name="Telegram" placeholder="Telegram @handle *" type="text" id="telegram" required="" />
                                     </div>
                                     <div id="project-type-cell" class="w-layout-cell form-cell">
                                         <select class="input-style w-input" name="project-type" id="project-type" required="">
@@ -284,7 +284,7 @@
                     const message = document.getElementById('Message')?.value?.trim() || '';
 
                     // Validate required fields
-                    if (!name || !email || !projectType || !budgetRange || !timeline || !mainChallenge) {
+                    if (!name || !email || !telegram || !projectType || !budgetRange || !timeline || !mainChallenge) {
                         alert('Please fill in all required fields (marked with *).');
                         return;
                     }
