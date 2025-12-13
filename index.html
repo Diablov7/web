@@ -84,7 +84,13 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.sanity.io">
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <!-- Preload critical resources -->
+        <link rel="preload" as="image" href="images/LOGO.PNG" />
+        <link rel="preload" as="image" href="images/hero-bg.jpg" />
         <link href="css/normalize.css" rel="stylesheet" type="text/css" />
         <link href="css/layout.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css?v=force_update_2" rel="stylesheet" type="text/css" />
@@ -177,7 +183,7 @@
                 <div id="home" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="header-inner w-nav">
                     <div class="logo-wrapper">
                         <a href="index.html" aria-current="page" class="logo w-inline-block w--current">
-                            <img src="images/LOGO.PNG?v=4" alt="Wevolv3" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                            <img src="images/LOGO.PNG?v=4" alt="Wevolv3" class="logo-img" fetchpriority="high" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
                             <span class="logo-text-fallback" style="display:none; color: white; font-family: 'Orbitron', monospace; font-weight: 900; font-size: 28px; text-transform: uppercase; letter-spacing: 0.1em;">WEVOLV3</span>
                         </a>
                     </div>
@@ -284,7 +290,7 @@
                         <div class="service-text">Community Management</div>
                         <img
                             src="images/communitybuilding.jpg"
-                            
+                            loading="lazy"
                             alt="Community Management"
                             class="service-img"
                         />
@@ -294,7 +300,7 @@
                         <div class="service-text">ADS PLACEMENT</div>
                         <img
                             src="images/ads.jpg"
-                            
+                            loading="lazy"
                             alt="ADS PLACEMENT"
                             class="service-img"
                         />
@@ -304,7 +310,7 @@
                         <div class="service-text">Growth Hacking</div>
                         <img
                             src="images/growth.jpg"
-                            
+                            loading="lazy"
                             alt="Growth Hacking"
                             class="service-img"
                         />
@@ -314,7 +320,7 @@
                         <div class="service-text">Influence Marketing (KOL)</div>
                         <img
                             src="images/kol.jpg"
-                            
+                            loading="lazy"
                             alt="Influence Marketing (KOL)"
                             class="service-img"
                         />
@@ -324,7 +330,7 @@
                         <div class="service-text">Design & Motion</div>
                         <img
                             src="images/design.png"
-                            
+                            loading="lazy"
                             alt="Design & Motion"
                             class="service-img"
                         />
@@ -334,7 +340,7 @@
                         <div class="service-text">Guerrilla Marketing</div>
                         <img
                             src="images/guerrillamarketing.jpg"
-                            
+                            loading="lazy"
                             alt="Guerrilla Marketing"
                             class="service-img"
                         />
@@ -344,7 +350,7 @@
                         <div class="service-text">Listing</div>
                         <img
                             src="images/listing.jpg"
-                            
+                            loading="lazy"
                             alt="Listing"
                             class="service-img"
                         />
@@ -354,7 +360,7 @@
                         <div class="service-text">PR (Press Office)</div>
                         <img
                             src="images/pr.jpg"
-                            
+                            loading="lazy"
                             alt="PR (Press Office)"
                             class="service-img"
                         />
@@ -523,7 +529,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/mira.jpg" alt="Mira - CEO, Utility Project" class="testimonial-img" />
+                            <img src="images/mira.jpg" alt="Mira - CEO, Utility Project" class="testimonial-img" loading="lazy" />
                             <p class="testimonials-txt">With Wevolv3 we have the smoothest and most consistent marketing we've ever had.</p>
                         </div>
                     </div>
@@ -538,7 +544,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/Alex.png" alt="Alex Luther - CMO, L1 Blockchain" class="testimonial-img" />
+                            <img src="images/Alex.png" alt="Alex Luther - CMO, L1 Blockchain" class="testimonial-img" loading="lazy" />
                             <p class="testimonials-txt">The team's ability to pivot strategies based on real-time market data saved our launch. We saw a 300% increase in qualified users and 85% retention rate in the first month. True strategic partners.</p>
                         </div>
                     </div>
@@ -553,7 +559,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/MAC.png" alt="MAC - Global KOL and Advisor" class="testimonial-img" />
+                            <img src="images/MAC.png" alt="MAC - Global KOL and Advisor" class="testimonial-img" loading="lazy" />
                             <p class="testimonials-txt">Amazing work, you are the best. LETS GOOO</p>
                         </div>
                     </div>
@@ -568,7 +574,7 @@
                             </div>
                         </div>
                         <div class="testimonials-img-txt">
-                            <img src="images/jax.jpg" alt="Jax - Head of Growth, DeFi Aggregator" class="testimonial-img" />
+                            <img src="images/jax.jpg" alt="Jax - Head of Growth, DeFi Aggregator" class="testimonial-img" loading="lazy" />
                             <p class="testimonials-txt">Their local presence in LATAM opened doors we didn't even know existed. We expanded our user base by 450% in the region and achieved 2.5M+ impressions in the first quarter. Essential for our global expansion.</p>
                         </div>
                     </div>
@@ -609,6 +615,7 @@
                                     alt="Web3 Marketing Insights - Wevolv3 Blog"
                                     src="images/post1.jpg"
                                     class="blog-image"
+                                    loading="lazy"
                                 />
                             </a>
                         </div>
@@ -634,6 +641,7 @@
                                     alt=""
                                     src="images/post2.jpg"
                                     class="blog-image"
+                                    loading="lazy"
                                 />
                             </a>
                         </div>
@@ -654,6 +662,7 @@
                                     alt=""
                                     src="images/post4.jpg"
                                     class="blog-image"
+                                    loading="lazy"
                                 />
                             </a>
                         </div>
@@ -674,6 +683,7 @@
                                     alt=""
                                     src="images/post3.jpg"
                                     class="blog-image"
+                                    loading="lazy"
                                 />
                             </a>
                         </div>
@@ -737,8 +747,8 @@
         </div>
 
   
-        <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/plugins.js" type="text/javascript"></script>
+        <script src="js/jquery.min.js" type="text/javascript" defer></script>
+        <script src="js/plugins.js" type="text/javascript" defer></script>
 
         <!-- Sanity Blog Integration -->
         <script>
@@ -844,7 +854,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <img src="${imageUrl}" alt="${post.title}" class="blog-image" />
+                                <img src="${imageUrl}" alt="${post.title}" class="blog-image" loading="lazy" />
                             </a>
                         `;
                         
