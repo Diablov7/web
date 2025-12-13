@@ -1324,11 +1324,12 @@ blockquote {
   border-radius: 0;
   flex: 0 auto;
   align-self: center;
-  margin-left: 0; /* Removido auto para que o botão fique próximo ao menu */
+  margin-left: auto; /* Empurrar menu para direita */
   padding: 0;
   display: flex;
   align-items: center;
   gap: 0;
+  order: 3;
 }
 
 /* Botão LET'S TALK */
