@@ -3764,6 +3764,20 @@ select.input-style option:checked {
     justify-content: space-between;
     align-items: center;
     display: flex;
+    flex-wrap: nowrap;
+    padding: 8px 12px; /* Padding ainda menor em telas muito pequenas */
+    gap: 8px;
+  }
+
+  .logo-img {
+    width: 150px; /* Logo ainda menor em telas muito pequenas */
+    max-width: 45%;
+  }
+
+  .lets-talk-btn {
+    font-size: 12px; /* Fonte ainda menor */
+    padding: 5px 10px;
+    margin-right: 3px;
   }
 
   .icon {
