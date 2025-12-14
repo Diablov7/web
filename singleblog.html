@@ -620,33 +620,55 @@
             
             // Helper: Update meta tags for SEO
             function updateMetaTags(post) {
-                const title = post.title || 'Blog - Wevolv3';
-                const description = post.excerpt || 'Read this article about Web3 marketing and growth strategies.';
-                const imageUrl = sanityImageUrl(post.mainImage, { social: true });
-                const slug = post.slug?.current || post.slug;
-                const url = `https://wevolv3.com/singleblog?slug=${slug}`;
-                const publishedDate = post.publishedAt || post._createdAt || new Date().toISOString();
-                const modifiedDate = post._updatedAt || publishedDate;
-                const authorName = post.author?.name || 'Wevolv3 Team';
-                
-                document.title = `${title} | Wevolv3 Blog`;
-                
-                const metaDesc = document.querySelector('meta[name="description"]');
-                if (metaDesc) metaDesc.content = description;
-                
-                document.getElementById('og-title').content = title;
-                document.getElementById('og-description').content = description;
-                document.getElementById('og-url').content = url;
-                document.getElementById('og-image').content = imageUrl;
-                
-                document.getElementById('tw-title').content = title;
-                document.getElementById('tw-description').content = description;
-                document.getElementById('tw-image').content = imageUrl;
-                
-                document.getElementById('canonical-url').href = url;
-                
-                // Add Schema.org JSON-LD for Article
-                updateSchemaOrg(post, title, description, imageUrl, url, publishedDate, modifiedDate, authorName);
+                try {
+                    const title = post.title || 'Blog - Wevolv3';
+                    const description = post.excerpt || 'Read this article about Web3 marketing and growth strategies.';
+                    const imageUrl = sanityImageUrl(post.mainImage, { social: true });
+                    const slug = post.slug?.current || post.slug;
+                    const url = `https://wevolv3.com/singleblog?slug=${slug}`;
+                    const publishedDate = post.publishedAt || post._createdAt || new Date().toISOString();
+                    const modifiedDate = post._updatedAt || publishedDate;
+                    const authorName = post.author?.name || 'Wevolv3 Team';
+                    
+                    document.title = `${title} | Wevolv3 Blog`;
+                    
+                    // Update meta description
+                    const metaDesc = document.querySelector('meta[name="description"]');
+                    if (metaDesc) metaDesc.content = description;
+                    
+                    // Update Open Graph tags (with null checks)
+                    const ogTitle = document.getElementById('og-title');
+                    if (ogTitle) ogTitle.content = title;
+                    
+                    const ogDescription = document.getElementById('og-description');
+                    if (ogDescription) ogDescription.content = description;
+                    
+                    const ogUrl = document.getElementById('og-url');
+                    if (ogUrl) ogUrl.content = url;
+                    
+                    const ogImage = document.getElementById('og-image');
+                    if (ogImage) ogImage.content = imageUrl;
+                    
+                    // Update Twitter Card tags (with null checks)
+                    const twTitle = document.getElementById('tw-title');
+                    if (twTitle) twTitle.content = title;
+                    
+                    const twDescription = document.getElementById('tw-description');
+                    if (twDescription) twDescription.content = description;
+                    
+                    const twImage = document.getElementById('tw-image');
+                    if (twImage) twImage.content = imageUrl;
+                    
+                    // Update canonical URL
+                    const canonicalUrl = document.getElementById('canonical-url');
+                    if (canonicalUrl) canonicalUrl.href = url;
+                    
+                    // Add Schema.org JSON-LD for Article
+                    updateSchemaOrg(post, title, description, imageUrl, url, publishedDate, modifiedDate, authorName);
+                } catch (error) {
+                    console.error('Error updating meta tags:', error);
+                    // Don't throw - allow page to continue loading even if meta tags fail
+                }
             }
             
             // Helper: Update Schema.org structured data
