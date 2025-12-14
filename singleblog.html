@@ -894,7 +894,12 @@
             }
             
             // Initialize on page load
-            document.addEventListener('DOMContentLoaded', loadPost);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadPost);
+            } else {
+                // DOM already loaded, execute immediately
+                loadPost();
+            }
         </script>
 
     </body>
