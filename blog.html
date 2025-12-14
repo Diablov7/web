@@ -268,8 +268,20 @@
             // Helper: Generate image URL from Sanity image reference
             function sanityImageUrl(source) {
                 if (!source || !source.asset) return 'images/post1.jpg'; // Fallback image
-                const ref = source.asset._ref;
-                const [, id, dimensions, format] = ref.split('-');
+                const ref = source.asset._ref || source.asset._id;
+                if (!ref) return 'images/post1.jpg';
+                
+                // Parse Sanity image reference: image-{id}-{width}x{height}-{format}
+                const parts = ref.split('-');
+                if (parts.length < 4) {
+                    console.warn('Invalid image ref format:', ref);
+                    return 'images/post1.jpg';
+                }
+                
+                const id = parts[1];
+                const dimensions = parts[2];
+                const format = parts.slice(3).join('-'); // Handle formats like 'webp' or 'jpg'
+                
                 return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
             }
             
@@ -336,12 +348,19 @@
             
             // Main: Load blog posts
             async function loadBlogPosts() {
+                console.log('loadBlogPosts called');
                 const loadingEl = document.getElementById('blog-loading');
                 const errorEl = document.getElementById('blog-error');
                 const blogListEl = document.getElementById('blog-list');
                 const previewMode = isPreviewMode();
                 
+                if (!loadingEl || !errorEl || !blogListEl) {
+                    console.error('Required elements not found:', { loadingEl, errorEl, blogListEl });
+                    return;
+                }
+                
                 try {
+                    console.log('Fetching posts from Sanity...');
                     let query;
                     let posts;
                     
@@ -351,7 +370,11 @@
                             title,
                             slug,
                             excerpt,
-                            mainImage,
+                            mainImage {
+                                asset {
+                                    _ref
+                                }
+                            },
                             publishedAt,
                             published,
                             categories[]->{title, _id}
@@ -369,19 +392,29 @@
                             title,
                             slug,
                             excerpt,
-                            mainImage,
+                            mainImage {
+                                asset {
+                                    _ref
+                                }
+                            },
                             publishedAt,
                             categories[]->{title, _id}
                         }`;
                         posts = await sanityClient.fetch(query);
+                        console.log('Posts fetched (normal mode):', posts?.length || 0);
                         
                         // Fallback: if no published posts, try getting all posts
                         if (!posts || posts.length === 0) {
+                            console.log('No published posts found, trying fallback query...');
                             const fallbackQuery = `*[_type == "post"] | order(publishedAt desc) {
                                 title,
                                 slug,
                                 excerpt,
-                                mainImage,
+                                mainImage {
+                                    asset {
+                                        _ref
+                                    }
+                                },
                                 publishedAt,
                                 published,
                                 categories[]->{title, _id}
@@ -407,20 +440,34 @@
                     }
                     
                     // Render posts
+                    console.log('Rendering', posts.length, 'posts');
                     const postsHTML = posts.map((post, index) => {
                         return createPostHTML(post, index, previewMode);
                     }).join('');
                     blogListEl.innerHTML = postsHTML;
+                    console.log('Posts rendered successfully');
                     
                 } catch (error) {
+                    console.error('Error loading blog posts:', error);
                     loadingEl.style.display = 'none';
                     errorEl.style.display = 'block';
-                    document.getElementById('error-message').textContent = error.message;
+                    const errorMsg = error.message || 'Failed to load articles. Please check your connection and try again.';
+                    document.getElementById('error-message').textContent = errorMsg;
+                    
+                    // Log detailed error for debugging
+                    if (error.stack) {
+                        console.error('Error stack:', error.stack);
+                    }
                 }
             }
             
             // Initialize on page load
-            document.addEventListener('DOMContentLoaded', loadBlogPosts);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadBlogPosts);
+            } else {
+                // DOM already loaded, execute immediately
+                loadBlogPosts();
+            }
         </script>
 
     </body>
