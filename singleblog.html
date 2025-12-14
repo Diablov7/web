@@ -467,6 +467,12 @@
                         }
                         
                         const json = await response.json();
+                        
+                        if (json.error) {
+                            console.error('Sanity API error:', json.error);
+                            throw new Error(`Sanity query error: ${json.error.description || JSON.stringify(json.error)}`);
+                        }
+                        
                         return json.result;
                     } catch (error) {
                         // Show visible error to user
