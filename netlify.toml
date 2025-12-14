@@ -70,3 +70,7 @@
 [[edge_functions]]
   function = "inject-og-tags"
   path = "/singleblog"
+
+[[edge_functions]]
+  function = "inject-og-tags"
+  path = "/singleblog.html"
