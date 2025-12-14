@@ -722,6 +722,7 @@
                 const sanitizedSlug = slug.replace(/['"<>]/g, '');
                 
                 try {
+                    console.log('Loading post with slug:', sanitizedSlug);
                     // In preview mode, fetch draft posts too
                     let query;
                     if (previewMode) {
@@ -734,7 +735,7 @@
                             publishedAt,
                             body,
                             published,
-                            categories[]->{title, _id}
+                            "categories": categories[]->{title, _id}
                         }`;
                     } else {
                         // Normal mode: only published posts
@@ -745,14 +746,17 @@
                             mainImage,
                             publishedAt,
                             body,
-                            categories[]->{title, _id}
+                            "categories": categories[]->{title, _id}
                         }`;
                     }
                     
+                    console.log('Fetching post from Sanity...');
                     let post = await sanityClient.fetch(query);
+                    console.log('Post fetched:', post ? 'Found' : 'Not found');
                     
                     // Fallback: try without published filter if not in preview mode
                     if (!post && !previewMode) {
+                        console.log('Trying fallback query without published filter...');
                         const fallbackQuery = `*[_type == "post" && slug.current == "${sanitizedSlug}"][0] {
                             title,
                             slug,
@@ -761,14 +765,19 @@
                             publishedAt,
                             body,
                             published,
-                            categories[]->{title, _id}
+                            "categories": categories[]->{title, _id}
                         }`;
                         post = await sanityClient.fetch(fallbackQuery);
+                        console.log('Fallback result:', post ? 'Found' : 'Not found');
                     }
                     
                     if (!post || !post.title) {
-                        throw new Error('Post not found');
+                        console.error('Post not found. Slug:', sanitizedSlug);
+                        console.error('Post data:', post);
+                        throw new Error(`Post not found with slug: ${sanitizedSlug}`);
                     }
+                    
+                    console.log('Post loaded successfully:', post.title);
                     
                     // Show preview banner if in preview mode
                     if (previewMode && (!post.published || post.published === false)) {
@@ -825,9 +834,16 @@
                     }
                     
                 } catch (error) {
+                    console.error('Error loading post:', error);
                     loadingEl.style.display = 'none';
                     errorEl.style.display = 'block';
-                    document.getElementById('error-message').textContent = 'Could not load article.';
+                    const errorMsg = error.message || 'Could not load article.';
+                    document.getElementById('error-message').textContent = errorMsg;
+                    
+                    // Log detailed error for debugging
+                    if (error.stack) {
+                        console.error('Error stack:', error.stack);
+                    }
                 }
             }
             
