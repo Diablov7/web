@@ -181,6 +181,14 @@
                     padding-left: 0 !important;
                     padding-right: 0 !important;
                     overflow-x: visible !important;
+                    border-left: 3px solid #10b981 !important;
+                    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+                    border-radius: 8px !important;
+                    background: rgba(255, 255, 255, 0.02) !important;
+                    padding: 20px !important;
+                    margin-bottom: 0 !important;
                 }
             }
             
@@ -281,28 +289,72 @@
                 word-break: break-word;
             }
             
-            /* Melhorar espaçamento e hierarquia */
+            /* Layout mais espaçado e respirável */
+            .single-left-grid {
+                display: flex !important;
+                flex-direction: column;
+                gap: 40px;
+            }
+            
             .single-left-item {
-                margin-bottom: 30px;
+                margin-bottom: 0;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                border-left: 3px solid #10b981;
+                transition: all 0.3s ease;
+            }
+            
+            .single-left-item:hover {
+                background: rgba(255, 255, 255, 0.04);
+                border-color: rgba(16, 185, 129, 0.3);
             }
             
             .single-left-item:last-child {
                 margin-bottom: 0;
             }
             
+            /* Descrição com mais espaço */
+            #work-description {
+                padding: 0;
+                line-height: 1.8;
+            }
+            
             .single-detail-heading {
-                color: rgba(255, 255, 255, 0.7);
-                font-size: 14px;
-                font-weight: 600;
+                color: #10b981;
+                font-size: 13px;
+                font-weight: 700;
                 text-transform: uppercase;
-                letter-spacing: 0.5px;
-                margin-bottom: 12px;
+                letter-spacing: 1px;
+                margin-bottom: 16px;
+                display: block;
             }
             
             .single-details-text {
                 color: #ffffff;
+                font-size: 17px;
+                line-height: 1.8;
+                padding: 0;
+            }
+            
+            /* Título principal com mais espaço */
+            .single-main-title-heading {
+                margin-bottom: 50px;
+                line-height: 1.2;
+            }
+            
+            /* Seção de resultados com mais destaque */
+            #work-results-item {
+                padding: 35px !important;
+                background: rgba(16, 185, 129, 0.05) !important;
+                border: 1px solid rgba(16, 185, 129, 0.2) !important;
+                border-left: 3px solid #10b981 !important;
+            }
+            
+            #work-results-item .single-detail-heading {
                 font-size: 16px;
-                line-height: 1.6;
+                margin-bottom: 24px;
             }
             
             /* Layout de métricas simples (fallback) */
@@ -332,8 +384,21 @@
                 color: #ffffff;
             }
             
-            /* Mobile: ajustar grid de métricas */
+            /* Mobile: ajustar espaçamento */
             @media screen and (max-width: 767px) {
+                .single-left-grid {
+                    gap: 30px;
+                }
+                
+                .single-left-item {
+                    padding: 20px;
+                }
+                
+                .single-main-title-heading {
+                    margin-bottom: 40px;
+                    font-size: 36px;
+                }
+                
                 .metrics-grid {
                     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                     gap: 12px;
@@ -358,9 +423,30 @@
                 #work-results .metric-simple .value {
                     font-size: 18px;
                 }
+                
+                #work-results-item {
+                    padding: 25px !important;
+                }
             }
             
             @media screen and (max-width: 479px) {
+                .single-left-grid {
+                    gap: 25px;
+                }
+                
+                .single-left-item {
+                    padding: 18px;
+                }
+                
+                .single-main-title-heading {
+                    font-size: 28px;
+                    margin-bottom: 30px;
+                }
+                
+                .single-details-text {
+                    font-size: 15px;
+                }
+                
                 .metrics-grid {
                     grid-template-columns: 1fr;
                     gap: 10px;
@@ -384,6 +470,10 @@
                 
                 #work-results .metric-simple .value {
                     font-size: 16px;
+                }
+                
+                #work-results-item {
+                    padding: 20px !important;
                 }
             }
         </style>
