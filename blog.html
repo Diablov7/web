@@ -370,14 +370,10 @@
                             title,
                             slug,
                             excerpt,
-                            mainImage {
-                                asset {
-                                    _ref
-                                }
-                            },
+                            mainImage,
                             publishedAt,
                             published,
-                            categories[]->{title, _id}
+                            "categories": categories[]->{title, _id}
                         }`;
                         posts = await sanityClient.fetch(query);
                         
@@ -392,13 +388,9 @@
                             title,
                             slug,
                             excerpt,
-                            mainImage {
-                                asset {
-                                    _ref
-                                }
-                            },
+                            mainImage,
                             publishedAt,
-                            categories[]->{title, _id}
+                            "categories": categories[]->{title, _id}
                         }`;
                         posts = await sanityClient.fetch(query);
                         console.log('Posts fetched (normal mode):', posts?.length || 0);
@@ -410,14 +402,10 @@
                                 title,
                                 slug,
                                 excerpt,
-                                mainImage {
-                                    asset {
-                                        _ref
-                                    }
-                                },
+                                mainImage,
                                 publishedAt,
                                 published,
-                                categories[]->{title, _id}
+                                "categories": categories[]->{title, _id}
                             }`;
                             posts = await sanityClient.fetch(fallbackQuery);
                             // Filter posts that are not explicitly unpublished
