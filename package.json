@@ -4,7 +4,9 @@
   "description": "Wevolv3 Website - Web3 Marketing & Modular Advertising Agency",
   "scripts": {
     "generate-sitemap": "node generate-sitemap.js",
-    "build": "node generate-sitemap.js"
+    "build": "node generate-sitemap.js",
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000"
   },
   "keywords": [
     "wevolv3",

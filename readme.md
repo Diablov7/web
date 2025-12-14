@@ -103,7 +103,7 @@ O script irá:
 - **Site**: [wevolv3.com](https://wevolv3.com)
 - **Contato**: contact@wevolv3.com
 - **Telegram**: [@wevolv3](https://t.me/wevolv3)
-- **X (Twitter)**: [@wevolv3](https://x.com/wevolv3)
+- **X (Twitter)**: [@wevolv3_media](https://x.com/wevolv3_media)
 - **LinkedIn**: [Wevolv3](https://www.linkedin.com/company/wevol3-web3-marketing)
 
 ## 📱 Blog
