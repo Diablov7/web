@@ -98,7 +98,7 @@
                 visibility: visible;
             }
             /* Hide images until JavaScript loads them */
-            .single-work-right img:not([src*="sanity.io"]):not([src*="data:image"]),
+            .single-main-work-img:not([src*="sanity.io"]):not([src*="data:image"]),
             .work-image-mobile img:not([src*="sanity.io"]):not([src*="data:image"]) {
                 display: none !important;
             }
@@ -110,18 +110,24 @@
             .work-image-mobile {
                 display: none !important;
             }
+            
+            /* Remover grid antigo - layout vertical agora */
+            .single-work-grid {
+                display: block !important;
+                grid-template-columns: 1fr !important;
+            }
+            
+            .single-work-left,
             .single-work-right {
-                display: block;
+                width: 100% !important;
+                max-width: 100% !important;
             }
             
             /* Mobile Responsiveness - Fix text cutting on mobile */
             @media screen and (max-width: 767px) {
-                /* Show mobile image in header, hide desktop image */
+                /* Show mobile image in header */
                 .work-image-mobile {
                     display: block !important;
-                }
-                .single-work-right {
-                    display: none !important;
                 }
                 
                 .main-container {
@@ -136,12 +142,6 @@
                     padding-left: 0 !important;
                     padding-right: 0 !important;
                     overflow-x: visible !important;
-                }
-                .single-work-left {
-                    padding-left: 20px !important;
-                    padding-right: 20px !important;
-                    overflow-x: visible !important;
-                    max-width: 100% !important;
                 }
                 .single-details-text {
                     padding-left: 0 !important;
@@ -172,32 +172,10 @@
                     word-wrap: break-word !important;
                     overflow-x: visible !important;
                 }
-                .single-left-grid {
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                    overflow-x: visible !important;
-                }
-                .single-left-item {
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                    overflow-x: visible !important;
-                    border-left: 3px solid #10b981 !important;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-                    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-                    border-radius: 8px !important;
-                    background: rgba(255, 255, 255, 0.02) !important;
-                    padding: 20px !important;
-                    margin-bottom: 0 !important;
-                }
             }
             
             @media screen and (max-width: 479px) {
                 .main-container {
-                    padding-left: 15px !important;
-                    padding-right: 15px !important;
-                }
-                .single-work-left {
                     padding-left: 15px !important;
                     padding-right: 15px !important;
                 }
@@ -289,36 +267,105 @@
                 word-break: break-word;
             }
             
-            /* Layout mais espaçado e respirável */
-            .single-left-grid {
-                display: flex !important;
+            /* Layout reorganizado: imagem primeiro, descrição abaixo */
+            .work-header-section {
+                margin-bottom: 40px;
+            }
+            
+            .work-meta-info {
+                display: flex;
+                gap: 30px;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .work-meta-item {
+                display: flex;
                 flex-direction: column;
-                gap: 40px;
+                gap: 8px;
             }
             
-            .single-left-item {
-                margin-bottom: 0;
-                padding: 30px;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+            .work-meta-label {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 600;
+            }
+            
+            .work-meta-value {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 500;
+            }
+            
+            /* Seção da imagem */
+            .work-image-section {
+                margin-bottom: 50px;
+                width: 100%;
+            }
+            
+            .single-main-work-img {
+                width: 100%;
+                height: auto;
                 border-radius: 8px;
-                border-left: 3px solid #10b981;
-                transition: all 0.3s ease;
+                border: 1px solid #10b981;
             }
             
-            .single-left-item:hover {
-                background: rgba(255, 255, 255, 0.04);
-                border-color: rgba(16, 185, 129, 0.3);
+            /* Seção de descrição abaixo da imagem */
+            .work-description-section {
+                margin-bottom: 50px;
+                max-width: 900px;
             }
             
-            .single-left-item:last-child {
+            .work-description-content {
+                color: #ffffff;
+                font-size: 18px;
+                line-height: 1.9;
+                padding: 0;
+            }
+            
+            .work-description-content p {
+                margin-bottom: 20px;
+            }
+            
+            .work-description-content p:last-child {
                 margin-bottom: 0;
             }
             
-            /* Descrição com mais espaço */
-            #work-description {
-                padding: 0;
-                line-height: 1.8;
+            .work-description-content h2,
+            .work-description-content h3,
+            .work-description-content h4 {
+                color: #10b981;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            
+            /* Seção de resultados */
+            .work-results-section {
+                margin-bottom: 50px;
+                padding: 40px;
+                background: rgba(16, 185, 129, 0.05);
+                border: 1px solid rgba(16, 185, 129, 0.2);
+                border-left: 3px solid #10b981;
+                border-radius: 8px;
+            }
+            
+            .work-results-section .single-detail-heading {
+                color: #10b981;
+                font-size: 16px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 24px;
+                display: block;
+            }
+            
+            /* Footer com botão */
+            .work-footer-section {
+                margin-top: 60px;
+                padding-top: 40px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
             
             .single-detail-heading {
@@ -338,23 +385,10 @@
                 padding: 0;
             }
             
-            /* Título principal com mais espaço */
+            /* Título principal */
             .single-main-title-heading {
-                margin-bottom: 50px;
+                margin-bottom: 0;
                 line-height: 1.2;
-            }
-            
-            /* Seção de resultados com mais destaque */
-            #work-results-item {
-                padding: 35px !important;
-                background: rgba(16, 185, 129, 0.05) !important;
-                border: 1px solid rgba(16, 185, 129, 0.2) !important;
-                border-left: 3px solid #10b981 !important;
-            }
-            
-            #work-results-item .single-detail-heading {
-                font-size: 16px;
-                margin-bottom: 24px;
             }
             
             /* Layout de métricas simples (fallback) */
@@ -386,16 +420,34 @@
             
             /* Mobile: ajustar espaçamento */
             @media screen and (max-width: 767px) {
-                .single-left-grid {
-                    gap: 30px;
+                .work-header-section {
+                    margin-bottom: 30px;
                 }
                 
-                .single-left-item {
-                    padding: 20px;
+                .work-meta-info {
+                    gap: 20px;
+                    margin-top: 15px;
+                }
+                
+                .work-image-section {
+                    margin-bottom: 40px;
+                }
+                
+                .work-description-section {
+                    margin-bottom: 40px;
+                }
+                
+                .work-description-content {
+                    font-size: 16px;
+                    line-height: 1.8;
+                }
+                
+                .work-results-section {
+                    padding: 25px;
+                    margin-bottom: 40px;
                 }
                 
                 .single-main-title-heading {
-                    margin-bottom: 40px;
                     font-size: 36px;
                 }
                 
@@ -430,17 +482,34 @@
             }
             
             @media screen and (max-width: 479px) {
-                .single-left-grid {
-                    gap: 25px;
+                .work-header-section {
+                    margin-bottom: 25px;
                 }
                 
-                .single-left-item {
-                    padding: 18px;
+                .work-meta-info {
+                    gap: 15px;
+                    flex-direction: column;
+                }
+                
+                .work-image-section {
+                    margin-bottom: 30px;
+                }
+                
+                .work-description-section {
+                    margin-bottom: 30px;
+                }
+                
+                .work-description-content {
+                    font-size: 15px;
+                    line-height: 1.7;
+                }
+                
+                .work-results-section {
+                    padding: 20px;
                 }
                 
                 .single-main-title-heading {
                     font-size: 28px;
-                    margin-bottom: 30px;
                 }
                 
                 .single-details-text {
@@ -543,48 +612,51 @@
         <!-- Work Content (hidden by default) -->
         <div id="work-content" class="sigle-work-section" style="display: none;">
             <div class="w-layout-blockcontainer main-container w-container">
-                <div class="single-work-grid">
-                    <div class="single-work-left">
-                        <h4 id="work-title" class="single-main-title-heading">Loading...</h4>
-                        <div class="single-left-grid">
-                            <div id="work-type-item" class="single-left-item" style="display: none;">
-                                <h5 class="single-detail-heading">Type</h5>
-                                <div id="work-type" class="single-details-text"></div>
-                            </div>
-                            <div class="single-left-item">
-                                <h5 class="single-detail-heading">description</h5>
-                                <div id="work-description" class="single-details-text">Loading...</div>
-                            </div>
-                            <div class="single-left-item">
-                                <h5 class="single-detail-heading">year</h5>
-                                <div id="work-year" class="single-details-text">-</div>
-                            </div>
-                            <div id="work-client-item" class="single-left-item" style="display: none;">
-                                <h5 class="single-detail-heading">client</h5>
-                                <div id="work-client" class="single-details-text"></div>
-                            </div>
-                            <div id="work-results-item" class="single-left-item" style="display: none;">
-                                <h5 class="single-detail-heading">results</h5>
-                                <div id="work-results" class="single-details-text"></div>
-                            </div>
+                <!-- Título e informações principais -->
+                <div class="work-header-section">
+                    <h4 id="work-title" class="single-main-title-heading">Loading...</h4>
+                    <div class="work-meta-info">
+                        <div id="work-type-item" class="work-meta-item" style="display: none;">
+                            <span class="work-meta-label">Type</span>
+                            <span id="work-type" class="work-meta-value"></span>
                         </div>
-                        <a href="works.html" class="button w-button">view all projects</a>
-                    </div>
-                    <div class="single-work-right">
-                        <img
-                            id="work-image"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"
-                            alt=""
-                            class="single-main-work-img"
-                            loading="lazy"
-                            style="opacity: 0;"
-                        />
+                        <div class="work-meta-item">
+                            <span class="work-meta-label">Year</span>
+                            <span id="work-year" class="work-meta-value">-</span>
+                        </div>
+                        <div id="work-client-item" class="work-meta-item" style="display: none;">
+                            <span class="work-meta-label">Client</span>
+                            <span id="work-client" class="work-meta-value"></span>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Seção de resultados destacada (abaixo do grid principal) -->
-                <div id="work-results-highlight" class="work-results-highlight" style="display: none;">
-                    <div id="work-results-highlight-content"></div>
+                <!-- Imagem principal -->
+                <div class="work-image-section">
+                    <img
+                        id="work-image"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"
+                        alt=""
+                        class="single-main-work-img"
+                        loading="lazy"
+                        style="opacity: 0;"
+                    />
+                </div>
+                
+                <!-- Descrição abaixo da imagem -->
+                <div class="work-description-section">
+                    <div id="work-description" class="work-description-content">Loading...</div>
+                </div>
+                
+                <!-- Resultados/Métricas -->
+                <div id="work-results-item" class="work-results-section" style="display: none;">
+                    <h5 class="single-detail-heading">results</h5>
+                    <div id="work-results" class="single-details-text"></div>
+                </div>
+                
+                <!-- Botão voltar -->
+                <div class="work-footer-section">
+                    <a href="works.html" class="button w-button">view all projects</a>
                 </div>
             </div>
         </div>
@@ -862,7 +934,11 @@
                         descriptionHtml += additionalInfo;
                     }
                     
-                    document.getElementById('work-description').innerHTML = descriptionHtml;
+                    // Update description (now in work-description-content class)
+                    const descriptionEl = document.getElementById('work-description');
+                    if (descriptionEl) {
+                        descriptionEl.innerHTML = descriptionHtml;
+                    }
                     
                     // Update image (both desktop and mobile)
                     const imageUrl = sanityImageUrl(work.mainImage);
@@ -915,14 +991,26 @@
                     
                     // Update project type (if exists)
                     if (work.projectType) {
-                        document.getElementById('work-type').textContent = work.projectType;
-                        document.getElementById('work-type-item').style.display = 'block';
+                        const typeEl = document.getElementById('work-type');
+                        if (typeEl) {
+                            typeEl.textContent = work.projectType;
+                        }
+                        const typeItemEl = document.getElementById('work-type-item');
+                        if (typeItemEl) {
+                            typeItemEl.style.display = 'flex';
+                        }
                     }
                     
                     // Update client (if exists)
                     if (work.client) {
-                        document.getElementById('work-client').textContent = work.client;
-                        document.getElementById('work-client-item').style.display = 'block';
+                        const clientEl = document.getElementById('work-client');
+                        if (clientEl) {
+                            clientEl.textContent = work.client;
+                        }
+                        const clientItemEl = document.getElementById('work-client-item');
+                        if (clientItemEl) {
+                            clientItemEl.style.display = 'flex';
+                        }
                     }
                     
                     // Update results/metrics (if exists) - Layout profissional
