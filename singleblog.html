@@ -478,11 +478,19 @@
             };
             
             // Helper: Generate image URL from Sanity image reference
-            function sanityImageUrl(source) {
-                if (!source || !source.asset) return 'images/post1.jpg';
+            // Optimized for social sharing (Twitter/Facebook require 1200x630px minimum)
+            function sanityImageUrl(source, options = {}) {
+                if (!source || !source.asset) return 'https://wevolv3.com/images/LOGO.PNG';
                 const ref = source.asset._ref;
                 const [, id, dimensions, format] = ref.split('-');
-                return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+                const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+                
+                // For social sharing, add optimal dimensions
+                if (options.social) {
+                    return `${baseUrl}?w=1200&h=630&fit=crop&auto=format`;
+                }
+                
+                return baseUrl;
             }
             
             // Helper: Format date
@@ -608,7 +616,7 @@
             function updateMetaTags(post) {
                 const title = post.title || 'Blog - Wevolv3';
                 const description = post.excerpt || 'Read this article about Web3 marketing and growth strategies.';
-                const imageUrl = sanityImageUrl(post.mainImage);
+                const imageUrl = sanityImageUrl(post.mainImage, { social: true });
                 const slug = post.slug?.current || post.slug;
                 const url = `https://wevolv3.com/singleblog?slug=${slug}`;
                 const publishedDate = post.publishedAt || post._createdAt || new Date().toISOString();
@@ -778,7 +786,7 @@
                     document.getElementById('post-category').textContent = post.categories?.[0]?.title || 'Web3';
                     
                     // Optimize main image loading
-                    const mainImageUrl = sanityImageUrl(post.mainImage);
+                    const mainImageUrl = sanityImageUrl(post.mainImage, { social: false });
                     const postImageEl = document.getElementById('post-image');
                     postImageEl.src = mainImageUrl;
                     postImageEl.alt = post.title || '';
