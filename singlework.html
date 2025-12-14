@@ -207,40 +207,182 @@
                 }
             }
             
-            /* Estilos para métricas/results */
-            #work-results {
-                line-height: 1.6;
-            }
-            #work-results div {
-                margin-bottom: 12px;
-            }
-            #work-results strong {
-                color: #10b981;
-                display: block;
-                margin-bottom: 4px;
-                font-size: 16px;
-            }
-            #work-results span {
-                font-size: 20px;
-                font-weight: 500;
-                color: var(--white);
+            /* Seção de resultados destacada */
+            .work-results-highlight {
+                margin-top: 40px;
+                padding-top: 40px;
+                border-top: 2px solid rgba(16, 185, 129, 0.3);
             }
             
-            /* Mobile: ajustar tamanho das métricas */
+            .work-results-highlight h5 {
+                color: #10b981;
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 24px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            /* Estilos profissionais para métricas/results */
+            #work-results {
+                line-height: 1.6;
+                margin-top: 20px;
+            }
+            
+            #work-results-item {
+                margin-top: 30px;
+            }
+            
+            #work-results-item .single-detail-heading {
+                margin-bottom: 20px;
+                font-size: 16px;
+                color: #10b981;
+            }
+            
+            /* Grid de métricas profissionais */
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+                margin-top: 20px;
+            }
+            
+            .metric-card {
+                background: rgba(16, 185, 129, 0.1);
+                border: 1px solid rgba(16, 185, 129, 0.3);
+                border-radius: 8px;
+                padding: 20px;
+                transition: all 0.3s ease;
+            }
+            
+            .metric-card:hover {
+                background: rgba(16, 185, 129, 0.15);
+                border-color: rgba(16, 185, 129, 0.5);
+                transform: translateY(-2px);
+            }
+            
+            .metric-label {
+                color: #10b981;
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                display: block;
+                margin-bottom: 8px;
+                opacity: 0.9;
+            }
+            
+            .metric-value {
+                font-size: 24px;
+                font-weight: 700;
+                color: #ffffff;
+                display: block;
+                line-height: 1.2;
+                word-break: break-word;
+            }
+            
+            /* Melhorar espaçamento e hierarquia */
+            .single-left-item {
+                margin-bottom: 30px;
+            }
+            
+            .single-left-item:last-child {
+                margin-bottom: 0;
+            }
+            
+            .single-detail-heading {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 12px;
+            }
+            
+            .single-details-text {
+                color: #ffffff;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            /* Layout de métricas simples (fallback) */
+            #work-results .metric-simple {
+                margin-bottom: 16px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            #work-results .metric-simple:last-child {
+                border-bottom: none;
+            }
+            
+            #work-results .metric-simple strong {
+                color: #10b981;
+                display: block;
+                margin-bottom: 6px;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                opacity: 0.9;
+            }
+            
+            #work-results .metric-simple .value {
+                font-size: 22px;
+                font-weight: 700;
+                color: #ffffff;
+            }
+            
+            /* Mobile: ajustar grid de métricas */
             @media screen and (max-width: 767px) {
-                #work-results strong {
-                    font-size: 14px;
+                .metrics-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    gap: 12px;
                 }
-                #work-results span {
+                
+                .metric-card {
+                    padding: 16px;
+                }
+                
+                .metric-label {
+                    font-size: 12px;
+                }
+                
+                .metric-value {
+                    font-size: 20px;
+                }
+                
+                #work-results .metric-simple strong {
+                    font-size: 13px;
+                }
+                
+                #work-results .metric-simple .value {
                     font-size: 18px;
                 }
             }
             
             @media screen and (max-width: 479px) {
-                #work-results strong {
-                    font-size: 13px;
+                .metrics-grid {
+                    grid-template-columns: 1fr;
+                    gap: 10px;
                 }
-                #work-results span {
+                
+                .metric-card {
+                    padding: 14px;
+                }
+                
+                .metric-label {
+                    font-size: 11px;
+                }
+                
+                .metric-value {
+                    font-size: 18px;
+                }
+                
+                #work-results .metric-simple strong {
+                    font-size: 12px;
+                }
+                
+                #work-results .metric-simple .value {
                     font-size: 16px;
                 }
             }
@@ -348,6 +490,11 @@
                             style="opacity: 0;"
                         />
                     </div>
+                </div>
+                
+                <!-- Seção de resultados destacada (abaixo do grid principal) -->
+                <div id="work-results-highlight" class="work-results-highlight" style="display: none;">
+                    <div id="work-results-highlight-content"></div>
                 </div>
             </div>
         </div>
@@ -688,13 +835,41 @@
                         document.getElementById('work-client-item').style.display = 'block';
                     }
                     
-                    // Update results/metrics (if exists)
+                    // Update results/metrics (if exists) - Layout profissional
                     if (work.results && Array.isArray(work.results) && work.results.length > 0) {
-                        const resultsHtml = work.results.map(result => {
-                            const metric = result.metric || '';
-                            const value = result.value || '';
-                            return `<div style="margin-bottom: 12px;"><strong style="color: #10b981;">${metric}:</strong> <span style="font-size: 20px; font-weight: 500;">${value}</span></div>`;
-                        }).join('');
+                        // Detectar se há múltiplas métricas para usar grid
+                        const hasMultipleMetrics = work.results.length > 2;
+                        
+                        let resultsHtml = '';
+                        
+                        if (hasMultipleMetrics) {
+                            // Layout em grid para múltiplas métricas
+                            resultsHtml = '<div class="metrics-grid">';
+                            resultsHtml += work.results.map(result => {
+                                const metric = result.metric || '';
+                                const value = result.value || '';
+                                return `
+                                    <div class="metric-card">
+                                        <span class="metric-label">${metric}</span>
+                                        <span class="metric-value">${value}</span>
+                                    </div>
+                                `;
+                            }).join('');
+                            resultsHtml += '</div>';
+                        } else {
+                            // Layout simples para poucas métricas
+                            resultsHtml = work.results.map(result => {
+                                const metric = result.metric || '';
+                                const value = result.value || '';
+                                return `
+                                    <div class="metric-simple">
+                                        <strong>${metric}</strong>
+                                        <span class="value">${value}</span>
+                                    </div>
+                                `;
+                            }).join('');
+                        }
+                        
                         document.getElementById('work-results').innerHTML = resultsHtml;
                         document.getElementById('work-results-item').style.display = 'block';
                     }
