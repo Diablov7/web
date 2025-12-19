@@ -118,6 +118,7 @@ export default async (request, context) => {
       
       <title>${title.replace(/</g, '&lt;').replace(/>/g, '&gt;')} | Wevolv3 Blog</title>
       <meta name="description" content="${description.replace(/"/g, '&quot;').substring(0, 160)}">
+      <link rel="canonical" href="${pageUrl}">
     `;
 
     // Replace existing meta tags (including those with IDs) or inject before </head>
@@ -132,6 +133,7 @@ export default async (request, context) => {
       .replace(/<meta\s+name=["']twitter:image["'][^>]*>/gi, '')
       .replace(/<title[^>]*>.*?<\/title>/gi, '')
       .replace(/<meta\s+name=["']description["'][^>]*>/gi, '')
+      .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, '')
       .replace('</head>', `${metaTags}</head>`);
 
     return new Response(updatedHtml, {

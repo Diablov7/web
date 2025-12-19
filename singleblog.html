@@ -29,6 +29,20 @@
         
         <!-- Canonical URL (will be updated dynamically) -->
         <link rel="canonical" id="canonical-url" href="https://wevolv3.com/blog">
+        <script>
+            // Set canonical URL immediately (before page load) for SEO
+            (function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const slug = urlParams.get('slug');
+                if (slug) {
+                    const canonicalUrl = `https://wevolv3.com/singleblog.html?slug=${encodeURIComponent(slug)}`;
+                    const canonicalEl = document.getElementById('canonical-url');
+                    if (canonicalEl) {
+                        canonicalEl.href = canonicalUrl;
+                    }
+                }
+            })();
+        </script>
         
         <!-- Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7E4GJ0QP9"></script>

@@ -11,7 +11,21 @@
         <meta name="keywords" content="Web3 marketing case study, crypto marketing portfolio, blockchain campaign example">
         <meta name="robots" content="index, follow">
         <meta name="google-site-verification" content="3efa773444cc309a" />
-        <link rel="canonical" href="https://wevolv3.com/singlework.html">
+        <link rel="canonical" id="canonical-url" href="https://wevolv3.com/singlework.html">
+        <script>
+            // Set canonical URL immediately (before page load) for SEO
+            (function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const slug = urlParams.get('slug');
+                if (slug) {
+                    const canonicalUrl = `https://wevolv3.com/singlework.html?slug=${encodeURIComponent(slug)}`;
+                    const canonicalEl = document.getElementById('canonical-url');
+                    if (canonicalEl) {
+                        canonicalEl.href = canonicalUrl;
+                    }
+                }
+            })();
+        </script>
         
         <!-- Open Graph -->
         <meta property="og:type" content="website">
@@ -759,6 +773,12 @@
                     const metaDesc = document.querySelector('meta[name="description"]');
                     if (metaDesc) {
                         metaDesc.content = work.shortDescription || work.title;
+                    }
+                    
+                    // Update canonical URL with slug
+                    const canonicalEl = document.getElementById('canonical-url');
+                    if (canonicalEl && slug) {
+                        canonicalEl.href = `https://wevolv3.com/singlework.html?slug=${encodeURIComponent(slug)}`;
                     }
                     
                     // Update content
