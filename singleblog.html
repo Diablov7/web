@@ -550,6 +550,120 @@
                 return processed;
             }
             
+            // Helper: Process markdown blocks (titles, lists, separators)
+            function processMarkdownBlocks(text) {
+                if (!text) return text;
+                
+                // Se já tem HTML, não processar
+                if (text.includes('<')) return text;
+                
+                let processed = text;
+                const lines = processed.split('\n');
+                const result = [];
+                let inList = false;
+                let listType = '';
+                
+                lines.forEach((line, index) => {
+                    const trimmed = line.trim();
+                    
+                    // Separador: --- ou ***
+                    if (/^---+$|^\*\*\*+$/.test(trimmed)) {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push('<hr style="margin: 30px 0; border: none; border-top: 1px solid #333;">');
+                        return;
+                    }
+                    
+                    // Títulos: #, ##, ###, ####
+                    const h1Match = trimmed.match(/^# (.+)$/);
+                    const h2Match = trimmed.match(/^## (.+)$/);
+                    const h3Match = trimmed.match(/^### (.+)$/);
+                    const h4Match = trimmed.match(/^#### (.+)$/);
+                    
+                    if (h1Match) {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push(`<h1>${processMarkdown(h1Match[1])}</h1>`);
+                        return;
+                    }
+                    if (h2Match) {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push(`<h2>${processMarkdown(h2Match[1])}</h2>`);
+                        return;
+                    }
+                    if (h3Match) {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push(`<h3>${processMarkdown(h3Match[1])}</h3>`);
+                        return;
+                    }
+                    if (h4Match) {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push(`<h4>${processMarkdown(h4Match[1])}</h4>`);
+                        return;
+                    }
+                    
+                    // Listas: - ou * (bullet) ou 1. (numbered)
+                    const bulletMatch = trimmed.match(/^[-*] (.+)$/);
+                    const numberedMatch = trimmed.match(/^\d+\. (.+)$/);
+                    
+                    if (bulletMatch || numberedMatch) {
+                        const isBullet = !!bulletMatch;
+                        const content = bulletMatch ? bulletMatch[1] : numberedMatch[1];
+                        
+                        if (!inList || listType !== (isBullet ? 'ul' : 'ol')) {
+                            if (inList) {
+                                result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            }
+                            result.push(isBullet ? '<ul>' : '<ol>');
+                            inList = true;
+                            listType = isBullet ? 'ul' : 'ol';
+                        }
+                        result.push(`<li>${processMarkdown(content)}</li>`);
+                        return;
+                    }
+                    
+                    // Linha vazia - fechar lista se estiver aberta
+                    if (trimmed === '') {
+                        if (inList) {
+                            result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                            inList = false;
+                        }
+                        result.push('');
+                        return;
+                    }
+                    
+                    // Texto normal
+                    if (inList) {
+                        result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                        inList = false;
+                    }
+                    
+                    // Processar markdown inline no texto
+                    const processedLine = processMarkdown(trimmed);
+                    result.push(processedLine);
+                });
+                
+                // Fechar lista se ainda estiver aberta
+                if (inList) {
+                    result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                }
+                
+                return result.join('\n');
+            }
+            
             // Helper: Convert Portable Text to HTML
             function portableTextToHtml(blocks) {
                 console.log('📝 portableTextToHtml() chamada');
@@ -662,20 +776,35 @@
                                 const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
                                 
                                 if (paragraphs.length > 1) {
-                                    // Múltiplos parágrafos - criar <p> para cada um
+                                    // Múltiplos parágrafos - processar markdown em cada um
                                     paragraphs.forEach(para => {
                                         const trimmed = para.trim();
                                         if (trimmed) {
-                                            // Preservar quebras de linha simples dentro do parágrafo
-                                            const withBreaks = trimmed.replace(/\n/g, '<br>');
-                                            html += `<p>${withBreaks}</p>`;
+                                            // Processar markdown completo (títulos, listas, etc)
+                                            const processed = processMarkdownBlocks(trimmed);
+                                            
+                                            // Se processou markdown e gerou HTML (h1, h2, ul, etc), usar diretamente
+                                            if (processed.includes('<h') || processed.includes('<ul') || processed.includes('<ol') || processed.includes('<hr')) {
+                                                html += processed;
+                                            } else {
+                                                // Senão, tratar como parágrafo normal
+                                                const withBreaks = trimmed.replace(/\n/g, '<br>');
+                                                html += `<p>${withBreaks}</p>`;
+                                            }
                                         }
                                     });
                                 } else {
-                                    // Um único parágrafo - comportamento normal
-                                    // Mas ainda processar quebras de linha simples
-                                    const withBreaks = text.trim().replace(/\n/g, '<br>');
-                                    html += `<p>${withBreaks}</p>`;
+                                    // Um único parágrafo - tentar processar markdown completo
+                                    const processed = processMarkdownBlocks(text.trim());
+                                    
+                                    // Se processou markdown e gerou HTML estruturado, usar diretamente
+                                    if (processed.includes('<h') || processed.includes('<ul') || processed.includes('<ol') || processed.includes('<hr')) {
+                                        html += processed;
+                                    } else {
+                                        // Senão, tratar como parágrafo normal
+                                        const withBreaks = text.trim().replace(/\n/g, '<br>');
+                                        html += `<p>${withBreaks}</p>`;
+                                    }
                                 }
                             } else {
                                 html += '<p>&zwj;</p>';
