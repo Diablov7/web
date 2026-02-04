@@ -627,7 +627,26 @@
                         case 'normal':
                         default:
                             if (text.trim()) {
-                                html += `<p>${text}</p>`;
+                                // CORREÇÃO: Quebrar texto em parágrafos quando houver \n\n
+                                // Isso acontece quando o Sanity cria um único bloco com todo o texto
+                                const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
+                                
+                                if (paragraphs.length > 1) {
+                                    // Múltiplos parágrafos - criar <p> para cada um
+                                    paragraphs.forEach(para => {
+                                        const trimmed = para.trim();
+                                        if (trimmed) {
+                                            // Preservar quebras de linha simples dentro do parágrafo
+                                            const withBreaks = trimmed.replace(/\n/g, '<br>');
+                                            html += `<p>${withBreaks}</p>`;
+                                        }
+                                    });
+                                } else {
+                                    // Um único parágrafo - comportamento normal
+                                    // Mas ainda processar quebras de linha simples
+                                    const withBreaks = text.trim().replace(/\n/g, '<br>');
+                                    html += `<p>${withBreaks}</p>`;
+                                }
                             } else {
                                 html += '<p>&zwj;</p>';
                             }
