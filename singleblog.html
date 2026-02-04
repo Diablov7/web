@@ -526,7 +526,15 @@
             
             // Helper: Convert Portable Text to HTML
             function portableTextToHtml(blocks) {
-                if (!blocks || !Array.isArray(blocks)) return '<p>Content not available.</p>';
+                console.log('📝 portableTextToHtml() chamada');
+                console.log('Input blocks:', blocks);
+                
+                if (!blocks || !Array.isArray(blocks)) {
+                    console.warn('⚠️ Blocks inválido ou não é array:', blocks);
+                    return '<p>Content not available.</p>';
+                }
+                
+                console.log('✅ Blocks válido. Total de blocos:', blocks.length);
                 
                 let html = '';
                 let inList = false;
@@ -554,6 +562,7 @@
                         let content = child.text || '';
                         
                         if (child.marks && child.marks.length > 0) {
+                            // Process marks (formatação) primeiro
                             child.marks.forEach(mark => {
                                 if (mark === 'strong') {
                                     content = `<strong>${content}</strong>`;
@@ -566,12 +575,13 @@
                                 }
                             });
                             
-                            // Handle links
-                            if (block.markDefs) {
+                            // Handle links DEPOIS das marks (corrigido)
+                            if (block.markDefs && block.markDefs.length > 0) {
                                 child.marks.forEach(markKey => {
                                     const markDef = block.markDefs.find(m => m._key === markKey);
                                     if (markDef && markDef._type === 'link') {
-                                        content = `<a href="${markDef.href}" target="_blank" rel="noopener">${content}</a>`;
+                                        const href = markDef.href || '#';
+                                        content = `<a href="${href}" target="_blank" rel="noopener noreferrer">${content}</a>`;
                                     }
                                 });
                             }
@@ -743,17 +753,32 @@
             
             // Main: Load single post
             async function loadPost() {
+                console.log('🚀 loadPost() chamada - início da função');
+                
                 const loadingEl = document.getElementById('post-loading');
                 const errorEl = document.getElementById('post-error');
                 const contentEl = document.getElementById('post-content');
                 const relatedEl = document.getElementById('related-section');
+                
+                console.log('📋 Elementos DOM:', {
+                    loadingEl: !!loadingEl,
+                    errorEl: !!errorEl,
+                    contentEl: !!contentEl
+                });
                 
                 // Get slug from URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const slug = urlParams.get('slug');
                 const previewMode = isPreviewMode();
                 
+                console.log('🔍 URL params:', {
+                    slug: slug,
+                    previewMode: previewMode,
+                    fullUrl: window.location.href
+                });
+                
                 if (!slug) {
+                    console.warn('⚠️ Nenhum slug encontrado na URL');
                     loadingEl.style.display = 'none';
                     errorEl.style.display = 'block';
                     document.getElementById('error-message').textContent = 'No article specified.';
@@ -762,9 +787,10 @@
                 
                 // Sanitize slug
                 const sanitizedSlug = slug.replace(/['"<>]/g, '');
+                console.log('✅ Slug sanitizado:', sanitizedSlug);
                 
                 try {
-                    console.log('Loading post with slug:', sanitizedSlug);
+                    console.log('📡 Buscando post do Sanity com slug:', sanitizedSlug);
                     // In preview mode, fetch draft posts too
                     let query;
                     if (previewMode) {
@@ -821,6 +847,27 @@
                     
                     console.log('Post loaded successfully:', post.title);
                     
+                    // DEBUG: Log estrutura do body para diagnóstico
+                    console.log('=== DEBUG: Post Body Structure ===');
+                    console.log('Body type:', typeof post.body);
+                    console.log('Body is array:', Array.isArray(post.body));
+                    console.log('Body length:', post.body ? post.body.length : 0);
+                    if (post.body && Array.isArray(post.body) && post.body.length > 0) {
+                        console.log('First block:', JSON.stringify(post.body[0], null, 2));
+                        console.log('Total blocks:', post.body.length);
+                        post.body.forEach((block, idx) => {
+                            console.log(`Block ${idx}:`, {
+                                _type: block._type,
+                                style: block.style,
+                                listItem: block.listItem,
+                                childrenCount: block.children ? block.children.length : 0,
+                                hasMarks: block.children ? block.children.some(c => c.marks && c.marks.length > 0) : false,
+                                hasMarkDefs: !!block.markDefs
+                            });
+                        });
+                    }
+                    console.log('=== END DEBUG ===');
+                    
                     // Show preview banner if in preview mode
                     if (previewMode && (!post.published || post.published === false)) {
                         const previewBanner = document.createElement('div');
@@ -851,7 +898,15 @@
                     link.href = mainImageUrl;
                     document.head.appendChild(link);
                     
-                    document.getElementById('post-body').innerHTML = portableTextToHtml(post.body);
+                    // DEBUG: Antes de converter
+                    console.log('🔄 Convertendo body para HTML...');
+                    console.log('Body antes da conversão:', post.body);
+                    
+                    const htmlResult = portableTextToHtml(post.body);
+                    console.log('✅ HTML gerado:', htmlResult.substring(0, 200) + '...');
+                    console.log('Tamanho do HTML:', htmlResult.length, 'caracteres');
+                    
+                    document.getElementById('post-body').innerHTML = htmlResult;
                     
                     // Atualizar alt text da imagem principal para SEO
                     const postImage = document.getElementById('post-image');
@@ -930,9 +985,16 @@
             }
             
             // Initialize on page load
+            console.log('🔧 Script carregado. Estado do documento:', document.readyState);
+            
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', loadPost);
+                console.log('⏳ Aguardando DOMContentLoaded...');
+                document.addEventListener('DOMContentLoaded', () => {
+                    console.log('✅ DOMContentLoaded disparado - chamando loadPost()');
+                    loadPost();
+                });
             } else {
+                console.log('✅ DOM já carregado - chamando loadPost() imediatamente');
                 // DOM already loaded, execute immediately
                 loadPost();
             }
