@@ -524,6 +524,32 @@
                 });
             }
             
+            // Helper: Process basic markdown in text (fallback when no marks)
+            function processMarkdown(text) {
+                if (!text) return text;
+                
+                // Só processa markdown se não houver HTML já presente
+                if (text.includes('<')) return text;
+                
+                let processed = text;
+                
+                // Negrito: **texto** ou __texto__ (processar primeiro para evitar conflito)
+                processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                processed = processed.replace(/__(.+?)__/g, '<strong>$1</strong>');
+                
+                // Itálico: *texto* (apenas se não for parte de **)
+                // Usar lookahead/lookbehind para evitar conflito com negrito
+                processed = processed.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
+                
+                // Código inline: `código`
+                processed = processed.replace(/`([^`]+?)`/g, '<code>$1</code>');
+                
+                // Links: [texto](url)
+                processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+                
+                return processed;
+            }
+            
             // Helper: Convert Portable Text to HTML
             function portableTextToHtml(blocks) {
                 console.log('📝 portableTextToHtml() chamada');
@@ -562,7 +588,7 @@
                         let content = child.text || '';
                         
                         if (child.marks && child.marks.length > 0) {
-                            // Process marks (formatação) primeiro
+                            // Process marks (formatação) primeiro - formatação do editor Sanity
                             child.marks.forEach(mark => {
                                 if (mark === 'strong') {
                                     content = `<strong>${content}</strong>`;
@@ -585,6 +611,10 @@
                                     }
                                 });
                             }
+                        } else {
+                            // Se não há marks, tentar processar markdown básico como fallback
+                            // Isso ajuda quando alguém cola markdown acidentalmente
+                            content = processMarkdown(content);
                         }
                         
                         return content;
