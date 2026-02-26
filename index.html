@@ -863,22 +863,22 @@
             <div class="w-layout-blockcontainer main-container w-container">
                 <h2 class="main-title">Frequently Asked Questions</h2>
                 <div class="faq-list">
-                    <details class="faq-item">
-                        <summary class="faq-question">What is a Web3 Marketing Agency?</summary>
-                        <p class="faq-answer">A Web3 marketing agency helps crypto and blockchain projects with the same kind of problems you might have: "nobody knows us," "our community is quiet," "we don't know where to advertise," or "we tried ads but didn't get real users." We focus on getting you known in the right places, bringing in people who care about your project, and turning that into real use and growth, not just numbers on a screen.</p>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">How can Wevolv3 help my crypto project grow?</summary>
-                        <p class="faq-answer">We help with the things that usually block growth: empty or disengaged communities, ads that don't bring the right users, lack of trust, and no clear plan. We can run your community, place ads where your audience actually is, work with influential people in the space, get you press coverage, and test what works so you get more real users and retention, not just traffic.</p>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">What are the key differences between Web2 and Web3 marketing?</summary>
-                        <p class="faq-answer">In "normal" marketing you often buy clicks and hope they convert. In Web3, your audience is on Telegram, Discord, and X, cares about the project and the token, and trusts the community as much as the product. So we focus on building that trust, showing up where they already are, and growing in a way that fits crypto, not just running the same playbook as a regular app.</p>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">How do I get started or contact Wevolv3?</summary>
-                        <p class="faq-answer">Tell us what's not working today (for example, "our community is dead," "we need more users," "nobody knows we exist"). You can reach us on Telegram at <a href="https://t.me/wevolv3" target="_blank">@wevolv3</a>, by email at <a href="mailto:contact@wevolv3.com">contact@wevolv3.com</a>, or via our <a href="contact.html">contact form</a>. We'll ask a few questions, understand your situation, and then propose concrete steps. No commitment until you're comfortable.</p>
-                    </details>
+                    <div class="faq-item">
+                        <div class="faq-question">What is a Web3 Marketing Agency?</div>
+                        <div class="faq-answer"><p>A Web3 marketing agency helps crypto and blockchain projects with the same kind of problems you might have: "nobody knows us," "our community is quiet," "we don't know where to advertise," or "we tried ads but didn't get real users." We focus on getting you known in the right places, bringing in people who care about your project, and turning that into real use and growth, not just numbers on a screen.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How can Wevolv3 help my crypto project grow?</div>
+                        <div class="faq-answer"><p>We help with the things that usually block growth: empty or disengaged communities, ads that don't bring the right users, lack of trust, and no clear plan. We can run your community, place ads where your audience actually is, work with influential people in the space, get you press coverage, and test what works so you get more real users and retention, not just traffic.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What are the key differences between Web2 and Web3 marketing?</div>
+                        <div class="faq-answer"><p>In "normal" marketing you often buy clicks and hope they convert. In Web3, your audience is on Telegram, Discord, and X, cares about the project and the token, and trusts the community as much as the product. So we focus on building that trust, showing up where they already are, and growing in a way that fits crypto, not just running the same playbook as a regular app.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I get started or contact Wevolv3?</div>
+                        <div class="faq-answer"><p>Tell us what's not working today (for example, "our community is dead," "we need more users," "nobody knows we exist"). You can reach us on Telegram at <a href="https://t.me/wevolv3" target="_blank">@wevolv3</a>, by email at <a href="mailto:contact@wevolv3.com">contact@wevolv3.com</a>, or via our <a href="contact.html">contact form</a>. We'll ask a few questions, understand your situation, and then propose concrete steps. No commitment until you're comfortable.</p></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1490,13 +1490,16 @@
             document.addEventListener('DOMContentLoaded', function() {
                 var faq = document.getElementById('faq');
                 if (!faq) return;
-                var items = faq.querySelectorAll('details.faq-item');
-                items.forEach(function(detail) {
-                    detail.addEventListener('toggle', function() {
-                        if (detail.open) {
-                            items.forEach(function(other) {
-                                if (other !== detail) other.removeAttribute('open');
-                            });
+                var questions = faq.querySelectorAll('.faq-question');
+                questions.forEach(function(q) {
+                    q.addEventListener('click', function() {
+                        var item = q.parentElement;
+                        var wasOpen = item.classList.contains('open');
+                        faq.querySelectorAll('.faq-item.open').forEach(function(el) {
+                            el.classList.remove('open');
+                        });
+                        if (!wasOpen) {
+                            item.classList.add('open');
                         }
                     });
                 });
