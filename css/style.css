@@ -4694,10 +4694,11 @@ select.input-style option:checked {
   }
 }
 
-/* FAQ Section */
+/* FAQ Section - paleta: black, dark gray cards, blue active */
 .faq-section {
   padding-top: 40px;
   padding-bottom: 40px;
+  background-color: #000000;
 }
 
 /* FAQ title: avoid overlapping lines (main-title has line-height 50px < font 80px) */
@@ -4716,21 +4717,23 @@ select.input-style option:checked {
 }
 
 .faq-item {
-  border: 1px solid var(--border-color);
+  background-color: #333333;
+  border: 1px solid #222222;
   border-radius: 10px;
-  transition: border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .faq-item:hover {
-  border-color: var(--default);
+  border-color: #444444;
 }
 
 .faq-item[open] {
-  border-color: var(--default);
+  background-color: #0066FF;
+  border-color: #0066FF;
 }
 
 .faq-question {
-  color: var(--white);
+  color: #FFFFFF;
   font-size: 18px;
   font-weight: 600;
   margin: 0;
@@ -4739,6 +4742,12 @@ select.input-style option:checked {
   list-style: none;
   cursor: pointer;
   position: relative;
+  border-left: 4px solid #222222;
+  transition: border-left-color 0.3s ease;
+}
+
+.faq-item[open] .faq-question {
+  border-left-color: rgba(255, 255, 255, 0.3);
 }
 
 .faq-question::-webkit-details-marker {
@@ -4750,11 +4759,10 @@ select.input-style option:checked {
   position: absolute;
   right: 30px;
   top: 50%;
-  transform: translateY(-50%);
   width: 12px;
   height: 12px;
-  border-right: 2px solid var(--white);
-  border-bottom: 2px solid var(--white);
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
   transform: translateY(-60%) rotate(45deg);
   transition: transform 0.25s ease;
 }
@@ -4764,21 +4772,30 @@ select.input-style option:checked {
 }
 
 .faq-answer {
-  color: #999;
+  color: #CCCCCC;
   font-size: 15px;
   line-height: 1.7;
   margin: 0;
   padding: 0 30px 30px 30px;
 }
 
+.faq-item[open] .faq-answer {
+  color: rgba(255, 255, 255, 0.95);
+}
+
 .faq-answer a {
-  color: var(--default);
-  text-decoration: none;
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 2px;
   transition: opacity 0.2s ease;
 }
 
 .faq-answer a:hover {
-  opacity: 0.8;
+  opacity: 0.85;
+}
+
+.faq-item[open] .faq-answer a {
+  color: #FFFFFF;
 }
 
 /* Mobile adjustments */
