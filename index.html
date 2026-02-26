@@ -1487,7 +1487,7 @@
         </script>
 
         <script>
-            (function() {
+            document.addEventListener('DOMContentLoaded', function() {
                 var faq = document.getElementById('faq');
                 if (!faq) return;
                 var items = faq.querySelectorAll('details.faq-item');
@@ -1500,7 +1500,7 @@
                         }
                     });
                 });
-            })();
+            });
         </script>
         <script>document.querySelectorAll('.copyright-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
     </body>
