@@ -4717,19 +4717,44 @@ select.input-style option:checked {
 }
 
 .faq-item {
-  background-color: #333333;
-  border: 1px solid #222222;
+  position: relative;
+  border: none;
   border-radius: 10px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
 }
 
-.faq-item:hover {
-  border-color: #444444;
+/* Bolinha no canto superior esquerdo de cada card */
+.faq-item::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 1;
 }
+
+/* Cores dos cards e da bolinha (iguais à seção numbers do projeto) */
+.faq-item:nth-child(1) { background-color: #3b82f6; }
+.faq-item:nth-child(1)::before { background-color: #0f0f0f; }
+
+.faq-item:nth-child(2) { background-color: #4a4a4a; }
+.faq-item:nth-child(2)::before { background-color: #242424; }
+
+.faq-item:nth-child(3) { background-color: #191919; }
+.faq-item:nth-child(3)::before { background-color: #3b82f6; }
+
+.faq-item:nth-child(4) { background-color: #939393; }
+.faq-item:nth-child(4)::before { background-color: #b7b7b7; }
 
 .faq-item[open] {
-  background-color: #0066FF;
-  border-color: #0066FF;
+  background-color: #3b82f6 !important;
+}
+
+.faq-item[open]::before {
+  background-color: #0f0f0f;
 }
 
 .faq-question {
@@ -4738,16 +4763,12 @@ select.input-style option:checked {
   font-weight: 600;
   margin: 0;
   padding: 30px 44px 30px 30px;
+  padding-top: 36px;
   line-height: 1.4;
   list-style: none;
   cursor: pointer;
   position: relative;
-  border-left: 4px solid #222222;
-  transition: border-left-color 0.3s ease;
-}
-
-.faq-item[open] .faq-question {
-  border-left-color: rgba(255, 255, 255, 0.3);
+  z-index: 1;
 }
 
 .faq-question::-webkit-details-marker {
@@ -4776,11 +4797,15 @@ select.input-style option:checked {
   font-size: 15px;
   line-height: 1.7;
   margin: 0;
-  padding: 0 30px 30px 30px;
+  padding: 24px 30px 30px 30px;
+  background: linear-gradient(180deg, #222222 0%, #000000 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .faq-item[open] .faq-answer {
   color: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(180deg, #222222 0%, #000000 100%);
+  border-top-color: rgba(255, 255, 255, 0.15);
 }
 
 .faq-answer a {
@@ -4825,7 +4850,7 @@ select.input-style option:checked {
 
   .faq-question {
     font-size: 16px;
-    padding: 20px 40px 20px 20px;
+    padding: 28px 40px 20px 20px;
   }
 
   .faq-question::after {
