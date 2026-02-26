@@ -1486,6 +1486,22 @@
             })();
         </script>
 
+        <script>
+            (function() {
+                var faq = document.getElementById('faq');
+                if (!faq) return;
+                var items = faq.querySelectorAll('details.faq-item');
+                items.forEach(function(detail) {
+                    detail.addEventListener('toggle', function() {
+                        if (detail.open) {
+                            items.forEach(function(other) {
+                                if (other !== detail) other.removeAttribute('open');
+                            });
+                        }
+                    });
+                });
+            })();
+        </script>
         <script>document.querySelectorAll('.copyright-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
     </body>
 
