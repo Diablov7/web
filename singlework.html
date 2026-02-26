@@ -565,7 +565,7 @@
                 
                 <div class="copyright">
                     <div data-w-id="darkyn05" class="copyright-text">
-                        2025 Wevolv3. All rights reserved.
+                        <span class="copyright-year">2026</span> Wevolv3. All rights reserved.
                     </div>
                     <div data-w-id="darkyn06" class="right-copyright">
                         <a href="#home" class="backtotop w-inline-block"><img  src="images/back-top_1back-top.png" alt="Back to top" /></a>
@@ -915,7 +915,7 @@
             // Initialize on page load
             document.addEventListener('DOMContentLoaded', loadWork);
         </script>
-
+        <script>document.querySelectorAll('.copyright-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
     </body>
 
 </html>

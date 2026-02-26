@@ -1502,6 +1502,7 @@ blockquote {
   margin-bottom: 0;
   font-size: 140px;
   line-height: 100px;
+  font-weight: 700;
 }
 
 .hero-paragraph {
@@ -4699,6 +4700,13 @@ select.input-style option:checked {
   padding-bottom: 40px;
 }
 
+/* FAQ title: avoid overlapping lines (main-title has line-height 50px < font 80px) */
+#faq .main-title,
+.faq-section .main-title {
+  line-height: 1.15;
+  font-size: 80px;
+}
+
 .faq-list {
   margin-top: 50px;
   display: grid;
@@ -4710,7 +4718,6 @@ select.input-style option:checked {
 .faq-item {
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 30px;
   transition: border-color 0.3s ease;
 }
 
@@ -4718,13 +4725,42 @@ select.input-style option:checked {
   border-color: var(--default);
 }
 
+.faq-item[open] {
+  border-color: var(--default);
+}
+
 .faq-question {
   color: var(--white);
   font-size: 18px;
   font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 15px;
+  margin: 0;
+  padding: 30px 44px 30px 30px;
   line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: "";
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  transform: translateY(-60%) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.faq-item[open] .faq-question::after {
+  transform: translateY(-40%) rotate(-135deg);
 }
 
 .faq-answer {
@@ -4732,6 +4768,7 @@ select.input-style option:checked {
   font-size: 15px;
   line-height: 1.7;
   margin: 0;
+  padding: 0 30px 30px 30px;
 }
 
 .faq-answer a {
@@ -4769,12 +4806,23 @@ select.input-style option:checked {
     margin-top: 30px;
   }
 
-  .faq-item {
-    padding: 20px;
-  }
-
   .faq-question {
     font-size: 16px;
+    padding: 20px 40px 20px 20px;
+  }
+
+  .faq-question::after {
+    right: 20px;
+  }
+
+  .faq-answer {
+    padding: 0 20px 20px 20px;
+  }
+
+  #faq .main-title,
+  .faq-section .main-title {
+    font-size: 30px;
+    line-height: 1.2;
   }
   
   .numbers-section {
