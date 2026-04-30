@@ -1,0 +1,56 @@
+# Wevolv3
+
+> Web3 Marketing & Modular Advertising Agency. We help crypto, DeFi, and blockchain projects turn attention into adoption through community building, KOL campaigns, PR, growth hacking, and exchange listings.
+
+Wevolv3 is a Web3-native marketing agency operating worldwide, with strong LATAM presence. Services are modular and combinable: clients can engage individual capabilities (e.g. only KOL campaigns) or combine them into integrated growth programs. The agency works with token launches, L1/L2 chains, DeFi protocols, meme tokens, and AI-infrastructure projects.
+
+## Core Pages
+
+- [Homepage](https://wevolv3.com/): Overview of services, value proposition, testimonials, and FAQ.
+- [About](https://wevolv3.com/about.html): Mission, team, values, and the Wevolv3 method (Discover → Plan → Ship & Track → Iterate & Scale).
+- [Works](https://wevolv3.com/works.html): Portfolio of crypto and Web3 marketing projects (several under NDA).
+- [Blog](https://wevolv3.com/blog.html): Articles on Web3 marketing, KOLs, communities, attribution, post-quantum crypto.
+- [Contact](https://wevolv3.com/contact.html): Email, Telegram, and contact form.
+- [KOL ROI Calculator](https://wevolv3.com/kol-roi-calculator.html): Free tool to estimate the ROI of a KOL marketing campaign.
+
+## Services
+
+- Web3 Community Management — Telegram, Discord, X community building and moderation.
+- Crypto Ad Placement — Targeted advertising on crypto-native ad networks and platforms.
+- Web3 Growth Hacking — User acquisition and retention strategies for tokens and dApps.
+- Influencer Marketing (KOL) — Key Opinion Leader campaigns across X, YouTube, Telegram.
+- Design & Motion — Branding, social creatives, and motion graphics for crypto projects.
+- Guerrilla Marketing — Unconventional, high-impact campaigns for token launches.
+- Token & Exchange Listing — Support for CEX/DEX listings.
+- Crypto PR & Media — Coverage on Forbes, Cointelegraph, CoinDesk, Bitcoin.com, Binance, CoinMarketCap.
+
+## Key Articles
+
+- [Web3 Marketing 2026](https://wevolv3.com/singleblog.html?slug=web3-marketing-2026): State of Web3 marketing for 2026.
+- [Web3 KOL Attribution 2026](https://wevolv3.com/singleblog.html?slug=web3-kol-attribution-2026): How to measure KOL campaign ROI.
+- [Post-Quantum Crypto Projects 2026](https://wevolv3.com/singleblog.html?slug=post-quantum-crypto-projects-2026): Marketing post-quantum blockchains.
+- [Web3 GTM Framework](https://wevolv3.com/singleblog.html?slug=web-three-gtm-framework): Go-to-market framework for Web3 projects.
+- [Web3 CRM](https://wevolv3.com/singleblog.html?slug=web-three-crm): CRM strategies for crypto projects.
+- [Building Crypto Communities](https://wevolv3.com/singleblog.html?slug=building-crypto-communities): Community-building playbook.
+- [Galxe vs Zealy ROI](https://wevolv3.com/singleblog.html?slug=galxe-vs-zealy-roi-platforms): Quest platforms comparison.
+- [Why Discord Support Works Better](https://wevolv3.com/singleblog.html?slug=why-discord-support-works-better): Telegram vs Discord for community ops.
+- [Crypto KOL Marketing Evolution](https://wevolv3.com/singleblog.html?slug=crypto-kol-marketing-evolution): How KOL marketing has evolved in crypto.
+- [Web3 Marketing Mistakes](https://wevolv3.com/singleblog.html?slug=web-three-marketing-mistakes): Common mistakes Web3 projects make.
+- [The Silent Collapse of Web3 Communities](https://wevolv3.com/singleblog.html?slug=the-silent-collapse-of-web3-communities): Why Web3 communities die.
+- [Web3 Community Playbook](https://wevolv3.com/singleblog.html?slug=web3-community-playbook-for-builders): Playbook for Web3 builders.
+- [Mitigating Post-Airdrop FUD](https://wevolv3.com/singleblog.html?slug=guide-mitigating-post-airdrop-fud): How to handle post-airdrop community pressure.
+- [Why Exchanges Need Marketing in 2026](https://wevolv3.com/singleblog.html?slug=why-exchanges-need-marketing-to-win-in-2026): Marketing for crypto exchanges.
+
+## Contact
+
+- Email: contact@wevolv3.com
+- Telegram: https://t.me/wevolv3
+- X: https://x.com/wevolv3_media
+- LinkedIn: https://www.linkedin.com/company/wevol3-web3-marketing
+
+## Optional
+
+- [Sitemap](https://wevolv3.com/sitemap.xml): Full URL index.
+- [Privacy Policy](https://wevolv3.com/privacy.html)
+- [Terms](https://wevolv3.com/terms.html)
+- [Disclaimer](https://wevolv3.com/disclaimer.html)

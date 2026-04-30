@@ -50,10 +50,39 @@
         {
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": "https://wevolv3.com/#organization",
           "name": "Wevolv3",
+          "alternateName": "Wevolv3 - Web3 Marketing Agency",
           "url": "https://wevolv3.com",
-          "logo": "https://wevolv3.com/images/LOGO.PNG",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://wevolv3.com/images/LOGO.PNG",
+            "width": 1200,
+            "height": 630
+          },
+          "image": "https://wevolv3.com/images/LOGO.PNG",
           "description": "Web3 Marketing & Modular Advertising Agency. Strategic, modular marketing. Attention into results.",
+          "slogan": "Strategic, modular marketing. Attention into results.",
+          "areaServed": { "@type": "Place", "name": "Worldwide" },
+          "knowsAbout": [
+            "Web3 Marketing",
+            "Crypto Marketing",
+            "Blockchain Marketing",
+            "Community Management",
+            "KOL Marketing",
+            "Influencer Marketing",
+            "Growth Hacking",
+            "Token Listings",
+            "Crypto PR",
+            "DeFi Marketing"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Strike",
+            "jobTitle": "Founder",
+            "worksFor": { "@id": "https://wevolv3.com/#organization" },
+            "sameAs": ["https://x.com/wevolv3_media"]
+          },
           "sameAs": [
             "https://x.com/wevolv3_media",
             "https://www.linkedin.com/company/wevol3-web3-marketing",
@@ -62,7 +91,9 @@
           "contactPoint": {
             "@type": "ContactPoint",
             "email": "contact@wevolv3.com",
-            "contactType": "Customer Service"
+            "contactType": "Customer Service",
+            "availableLanguage": ["English"],
+            "areaServed": "Worldwide"
           }
         }
         </script>

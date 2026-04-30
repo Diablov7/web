@@ -24,7 +24,90 @@
         <meta name="twitter:title" content="About Us - Wevolv3">
         <meta name="twitter:description" content="Learn about Wevolv3, a Web3 Marketing & Modular Advertising Agency.">
         <meta name="twitter:image" content="https://wevolv3.com/images/LOGO.PNG">
-        
+
+        <!-- Schema.org: AboutPage + BreadcrumbList -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "url": "https://wevolv3.com/about.html",
+          "name": "About Wevolv3 - Web3 Marketing Agency",
+          "description": "Learn about Wevolv3, a Web3 Marketing & Modular Advertising Agency specializing in crypto and blockchain marketing.",
+          "isPartOf": { "@type": "WebSite", "name": "Wevolv3", "url": "https://wevolv3.com" },
+          "about": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" }
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wevolv3.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://wevolv3.com/about.html" }
+          ]
+        }
+        </script>
+
+        <!-- Schema.org: Team (Person entities linked to Organization) -->
+        <script type="application/ld+json">
+        [
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Strike",
+            "jobTitle": "Founder",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team1.png",
+            "sameAs": ["https://x.com/wevolv3_media"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "David Oware",
+            "jobTitle": "KOL Manager",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team2.png",
+            "sameAs": ["https://x.com/ajibodav"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Jameel Al-Badrani",
+            "jobTitle": "Business Developer",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team6.png",
+            "sameAs": ["https://x.com/ISU_122S"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Harry",
+            "jobTitle": "Head of Marketing / Advisory",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team4.png",
+            "sameAs": ["https://x.com/harrydotharry"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Aryan_BTC",
+            "jobTitle": "Business Developer",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team3.png",
+            "sameAs": ["https://x.com/aryan__BTC"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Danilo Damaceno",
+            "jobTitle": "KOL Manager",
+            "worksFor": { "@type": "Organization", "name": "Wevolv3", "url": "https://wevolv3.com" },
+            "image": "https://wevolv3.com/images/team5.png",
+            "sameAs": ["https://x.com/DaniloCriptoVOX"]
+          }
+        ]
+        </script>
+
         <!-- Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7E4GJ0QP9"></script>
         <script>
